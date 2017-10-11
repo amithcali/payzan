@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">PayZan</string>
+    <string name="app_name">payzan</string>
+    <string name="facebook_app_id">267297907115951</string>
+    <string name="fb_login_protocol_scheme">fb267297907115951</string>
+    <string name="com_facebook_loginview_log_in_button">Connect</string>
+    <string name="com_facebook_loginview_log_out_button">Your Logout</string>
+    <string name="terms_and_conditions">By loging in,you accept our Term\'s  &amp; Conditions and Privacy Policy</string>
+
 </resources>
