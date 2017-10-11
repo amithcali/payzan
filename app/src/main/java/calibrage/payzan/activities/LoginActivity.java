@@ -57,25 +57,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
-import calibrage.easypay.MyAdapter;
-import calibrage.easypay.R;
-import calibrage.easypay.model.Contact;
-import calibrage.easypay.model.LoginModel;
-import calibrage.easypay.model.LoginResponseModel;
-import calibrage.easypay.model.ResponseModel;
-import calibrage.easypay.registration.signup;
-import networkservice.MyServices;
-import networkservice.ServiceFactory;
-import retrofit2.adapter.rxjava.HttpException;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import utils.CommonUtil;
-import utils.SmsListener;
-import utils.SmsReceiver;
+import calibrage.payzan.R;
+import calibrage.payzan.adapters.MyAdapter;
+import calibrage.payzan.utils.CommonUtil;
+import calibrage.payzan.utils.SmsListener;
+import calibrage.payzan.utils.SmsReceiver;
 
-import static utils.CommonUtil.isValidEmail;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,MyAdapter.AdapterOnClick {
 
@@ -88,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private Button fbBtn,btnLogin;
     private EditText txt_Email,txt_password;
     private AlertDialog alertDialog;
-    private Subscription mRegisterSubscription;
+
 
 
     private GoogleApiClient mGoogleApiClient;

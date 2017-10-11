@@ -43,7 +43,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import calibrage.easypay.R;
+import calibrage.payzan.R;
+
 
 public class CommonUtil {
     private static String LOG_TAG = "";

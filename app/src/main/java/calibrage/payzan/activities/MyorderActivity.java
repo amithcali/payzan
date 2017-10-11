@@ -26,9 +26,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import calibrage.easypay.R;
+import calibrage.payzan.R;
+import calibrage.payzan.fragments.MyOrderFragment;
 
-import static utils.CommonUtil.buildCounterDrawable;
+import static calibrage.payzan.utils.CommonUtil.buildCounterDrawable;
+
 
 /**
  * Created by Calibrage11 on 9/20/2017.

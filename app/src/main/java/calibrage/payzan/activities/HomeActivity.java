@@ -29,11 +29,9 @@ import android.widget.Toast;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import calibrage.easypay.AddMoneyToWallet;
-import calibrage.easypay.R;
-import calibrage.easypay.login.LoginActivity;
-import calibrage.easypay.user.MyorderActivity;
-import calibrage.easypay.user.ProfileActivity;
+import calibrage.payzan.R;
+import calibrage.payzan.fragments.HomeFragment;
+
 
 /**
  * Created by Calibrage11 on 9/22/2017.

@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import calibrage.payzan.R;
+
 /**
  * Created by Calibrage11 on 9/28/2017.
  */

@@ -11,8 +11,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import calibrage.easypay.R;
-import utils.CommonUtil;
+import calibrage.payzan.R;
+import calibrage.payzan.utils.CommonUtil;
+
 
 /**
  * Created by Calibrage11 on 9/11/2017.

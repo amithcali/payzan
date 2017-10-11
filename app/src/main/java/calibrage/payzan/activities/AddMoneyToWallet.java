@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import calibrage.payzan.R;
+
 /**
  * Created by Calibrage11 on 9/25/2017.
  */

@@ -2,6 +2,7 @@ package calibrage.payzan.utils;
 
 import android.content.Context;
 import android.graphics.ColorFilter;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.design.widget.TextInputLayout;
@@ -10,7 +11,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import calibrage.easypay.R;
+import calibrage.payzan.R;
+
 
 /**
  * Created by Calibrage11 on 10/4/2017.
@@ -66,11 +68,19 @@ public class NCBTextInputLayout extends TextInputLayout {
     private void updateBackgroundColorFilter(ColorFilter colorFilter,int state) {
         if (getEditText() != null && getEditText().getBackground() != null&& state==0) {
             getEditText().getBackground().setColorFilter(colorFilter);
-            getEditText().setBackground(getResources().getDrawable(R.drawable.border_accentcolor_button, null));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    getEditText().setBackground(getResources().getDrawable(R.drawable.border_accentcolor_button, null));
+                }
+            }
         }else if(getEditText() != null && getEditText().getBackground() != null&& state==1){
 
             getEditText().getBackground().setColorFilter(colorFilter);
-            getEditText().setBackground(getResources().getDrawable(R.drawable.roundededittext, null));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    getEditText().setBackground(getResources().getDrawable(R.drawable.roundededittext, null));
+                }
+            }
 
 //            getEditText().addTextChangedListener(new TextWatcher() {
 //                @Override

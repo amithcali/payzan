@@ -43,11 +43,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import calibrage.easypay.R;
-import utils.CommonUtil;
+import calibrage.payzan.R;
+import calibrage.payzan.utils.CommonUtil;
 
-import static android.view.View.VISIBLE;
-import static utils.CommonUtil.isValidEmail;
+import static calibrage.payzan.utils.CommonUtil.isValidEmail;
+
 
 /**
  * Created by Calibrage11 on 9/19/2017.
@@ -133,6 +133,8 @@ public class ProfileActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
 
 
     public String getPathFromURI(Uri contentUri) {

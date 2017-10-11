@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
@@ -27,7 +28,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-import calibrage.easypay.user.MyOrderAdapter;
+import calibrage.payzan.R;
+import calibrage.payzan.adapters.MyOrderAdapter;
+
 
 /**
  * Created by Calibrage11 on 9/25/2017.
@@ -92,10 +95,14 @@ public class SendMoney extends AppCompatActivity{
             public void onClick(View view) {
                 walletlayout.setVisibility(View.VISIBLE);
                 banklayout.setVisibility(View.GONE);
-                walletBtn.setBackground(ContextCompat.getDrawable(SendMoney.this,R.drawable.border_fillcompletely));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    walletBtn.setBackground(ContextCompat.getDrawable(SendMoney.this,R.drawable.border_fillcompletely));
+                }
                 walletBtn.setImageResource(R.drawable.wallet_icon_white);
                 BankBtn.setImageResource(R.drawable.bank_icon);
-                BankBtn.setBackground(ContextCompat.getDrawable(SendMoney.this,R.drawable.border_accentcolor_button));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    BankBtn.setBackground(ContextCompat.getDrawable(SendMoney.this,R.drawable.border_accentcolor_button));
+                }
 
             }
         });
@@ -104,10 +111,14 @@ public class SendMoney extends AppCompatActivity{
             public void onClick(View view) {
                 walletlayout.setVisibility(View.GONE);
                 banklayout.setVisibility(View.VISIBLE);
-                walletBtn.setBackground(ContextCompat.getDrawable(SendMoney.this,R.drawable.border_accentcolor_button));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    walletBtn.setBackground(ContextCompat.getDrawable(SendMoney.this,R.drawable.border_accentcolor_button));
+                }
                 walletBtn.setImageResource(R.drawable.wallet_icon);
                 BankBtn.setImageResource(R.drawable.bank_icon_white);
-                BankBtn.setBackground(ContextCompat.getDrawable(SendMoney.this,R.drawable.border_fillcompletely));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    BankBtn.setBackground(ContextCompat.getDrawable(SendMoney.this,R.drawable.border_fillcompletely));
+                }
             }
         });
         mobileNumber.setOnClickListener(new View.OnClickListener() {
