@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_new"
+    android:clickable="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="12dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/dth_icon"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="D T H"
+                    android:gravity="bottom"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    />
+            </LinearLayout>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/operator"
+                android:hint="Operator"
+                style="@style/EditTextStyle"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/customerId"
+                android:hint="Customer ID"
+                style="@style/EditTextStyle"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp"/>
+
+
+            <FrameLayout
+                android:id="@+id/first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:id="@+id/amount"
+                    android:hint="Amount"
+                    style="@style/EditTextStyle"
+                    android:textSize="16sp"
+                    android:inputType="numberDecimal"
+                    android:layout_marginBottom="12dp"/>
+                <TextView
+                    android:id="@+id/browsePlans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:text="browse Plans"
+                    android:textColor="@color/accent"
+                    android:textSize="10sp"
+                    android:fontFamily="sans-serif-condensed"
+                     />
+            </FrameLayout>
+
+
+            <Button
+              style="@style/ButtonStyle"
+                android:id="@+id/submit"
+                android:text="Proceed to Recharge"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

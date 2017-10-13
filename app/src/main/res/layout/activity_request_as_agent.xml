@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <utils.NoChangingBackgroundTextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/stateTIl"
+            >
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditTextStyle"
+            android:hint="Select State"
+            android:id="@+id/stateSpn"/>
+
+        </utils.NoChangingBackgroundTextInputLayout>
+
+        <utils.NoChangingBackgroundTextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/districtTIl">
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditTextStyle"
+            android:hint="Select District"
+            android:id="@+id/districtSpn"/>
+
+        </utils.NoChangingBackgroundTextInputLayout>
+
+        <utils.NoChangingBackgroundTextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:id="@+id/mandalTIl">
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditTextStyle"
+            android:hint="Select Mandal"
+            android:id="@+id/mandalSpn"/>
+
+    </utils.NoChangingBackgroundTextInputLayout>
+
+        <utils.NoChangingBackgroundTextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:id="@+id/villageTIl"
+            >
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditTextStyle"
+            android:hint="Select Village"
+            android:id="@+id/villageSpn"/>
+
+    </utils.NoChangingBackgroundTextInputLayout>
+        <utils.NoChangingBackgroundTextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:id="@+id/firstNameTIl">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditTextStyle"
+            android:hint="First Name"
+            android:inputType="textPersonName"
+            android:id="@+id/firstNameEdt"/>
+
+    </utils.NoChangingBackgroundTextInputLayout>
+        <utils.NoChangingBackgroundTextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:id="@+id/middleNameTIL">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditTextStyle"
+            android:inputType="textPersonName"
+            android:hint="Middle Name"
+            android:id="@+id/middleNameEdt"/>
+
+    </utils.NoChangingBackgroundTextInputLayout>
+        <utils.NoChangingBackgroundTextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:id="@+id/lastNameTIL">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditTextStyle"
+            android:hint="Last Name"
+            android:inputType="textPersonName"
+            android:id="@+id/lastNameEdt"/>
+
+    </utils.NoChangingBackgroundTextInputLayout>
+        <utils.NoChangingBackgroundTextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:id="@+id/mobileTIL">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditTextStyle"
+            android:hint="Mobile No."
+            android:inputType="phone"
+            android:id="@+id/mobileEdt"/>
+
+    </utils.NoChangingBackgroundTextInputLayout>
+        <utils.NoChangingBackgroundTextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:id="@+id/emailTIL">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditTextStyle"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:id="@+id/emailEdt"/>
+
+    </utils.NoChangingBackgroundTextInputLayout>
+        <utils.NoChangingBackgroundTextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:id="@+id/address1TIL" >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditTextStyle"
+            android:hint="Address1"
+            android:inputType="textMultiLine"
+            android:id="@+id/address1Edt"/>
+
+    </utils.NoChangingBackgroundTextInputLayout>
+        <utils.NoChangingBackgroundTextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:id="@+id/address2TIL">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditTextStyle"
+            android:hint="Address2"
+            android:inputType="textMultiLine"
+            android:id="@+id/address2Edt"/>
+
+    </utils.NoChangingBackgroundTextInputLayout>
+        <utils.NoChangingBackgroundTextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:id="@+id/landmarkTIL">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditTextStyle"
+            android:hint="LandMark"
+            android:inputType="text"
+            android:id="@+id/landmarkEdt"/>
+    </utils.NoChangingBackgroundTextInputLayout>
+        <utils.NoChangingBackgroundTextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:id="@+id/commentTIL">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            style="@style/EditTextStyle"
+            android:hint="Enter your comments"
+            android:inputType="text"
+            android:id="@+id/commentsEdt"/>
+    </utils.NoChangingBackgroundTextInputLayout>
+
+    </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
