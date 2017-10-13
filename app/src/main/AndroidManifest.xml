@@ -101,7 +101,8 @@
         <activity
             android:name=".activities.HomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/profileThem">
+            android:theme="@style/profileThem"
+            android:windowSoftInputMode="adjustNothing">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -129,15 +130,15 @@
 
 
         </activity>
-        <activity
-            android:name=".activities.PayDTHActivity"
-            android:label="DTH Bill Payment"
-            android:screenOrientation="portrait"
-            android:theme="@style/actionbarTheme"
-            android:windowSoftInputMode="stateVisible|adjustResize">
+        <!--<activity-->
+            <!--android:name=".activities.PayDTHFragment"-->
+            <!--android:label="DTH Bill Payment"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@style/actionbarTheme"-->
+            <!--android:windowSoftInputMode="stateVisible|adjustResize">-->
 
 
-        </activity>
+        <!--</activity>-->
         <activity
 
             android:name=".activities.PayElectrictyBillActivity"
@@ -157,14 +158,12 @@
 
 
         </activity>
-        <activity
-            android:name=".activities.MobileRecharge"
-            android:label="Mobile Recharge and Pay Bill"
-            android:screenOrientation="portrait"
-            android:theme="@style/actionbarTheme"
-            android:windowSoftInputMode="stateVisible|adjustResize">
+        <!--<activity-->
+            <!--android:name=".activities.MobileRecharge"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="stateVisible|adjustResize">-->
 
-        </activity>
+        <!--</activity>-->
         <activity
             android:name=".activities.RequestForAgent"
             android:label="Request For Agent"

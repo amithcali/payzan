@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "93535325814",
+    "project_id": "payzan-android"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93535325814:android:fc392bdfaafac8b6",
+        "android_client_info": {
+          "package_name": "calibrage.payzan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "93535325814-k1c5cd50svbbqgkn51hnd1jhrpp14041.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "93535325814-qukb6410phg90777u764lmudkmhks5c3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "calibrage.payzan",
+            "certificate_hash": "1c1c4d4dd59ef2a2c2b93650bdb4634193117f74"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKtCDtcUq3RrdwKzz8IED0M5EECgJHEDY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

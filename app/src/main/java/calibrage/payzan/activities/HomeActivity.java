@@ -10,17 +10,21 @@ import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -31,6 +35,9 @@ import java.util.ArrayList;
 
 import calibrage.payzan.R;
 import calibrage.payzan.fragments.HomeFragment;
+import calibrage.payzan.utils.CommonUtil;
+
+import static calibrage.payzan.utils.CommonUtil.buildCounterDrawable;
 
 
 /**
@@ -40,22 +47,24 @@ import calibrage.payzan.fragments.HomeFragment;
 public class HomeActivity extends AppCompatActivity  {
 
 
-    Toolbar toolbar;
+   public  static Toolbar toolbar;
 
     private FrameLayout content_frame;
     private FragmentManager fragmentManager;
+    private Menu Menu;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-      //  setupToolbar();
+        setupToolbar();
         fragmentManager = getSupportFragmentManager();
         content_frame = (FrameLayout) findViewById(R.id.content_frame);
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.content_frame, new HomeFragment())
+                .replace(R.id.content_frame, new HomeFragment())
                 .commit();
-
+        Toast.makeText(this, "testing in activity", Toast.LENGTH_SHORT).show();
+       // CommonUtil.printKeyHash(this);
 
 
 
@@ -107,17 +116,48 @@ public class HomeActivity extends AppCompatActivity  {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);//Menu Resource, Menu
+        MenuItem menuItem = menu.findItem(R.id.action_cart);
+        menuItem.setIcon(buildCounterDrawable(HomeActivity.this,2,  R.drawable.head_notification_icon));
+        return true;
     }
 
-    //    void setupToolbar() {
-//        toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//
-//        toolbar.setTitleTextColor(Color.WHITE);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_search) {
+            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
+
+        }else if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }else if(item.getItemId()==R.id.action_cart){
+            //   item.setIcon(buildCounterDrawable(this,20,  R.drawable.ic_birthday));
+            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
+        }
+        // handle arrow click here
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStackImmediate();
+        } else {
+            this.finish();
+        }
+       // super.onBackPressed();
+    }
+
+        void setupToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setTitleTextColor(ContextCompat.getColor(HomeActivity.this,R.color.new_accent));
+            toolbar.setTitle("f");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+    }
 
 
     public class BottomNavigationViewHelper {
@@ -144,4 +184,9 @@ public class HomeActivity extends AppCompatActivity  {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
 }
