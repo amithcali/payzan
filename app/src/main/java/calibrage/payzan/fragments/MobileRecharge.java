@@ -56,6 +56,8 @@ public class MobileRecharge extends Fragment {
         setHasOptionsMenu(true);
         ((AppCompatActivity)getActivity()).setSupportActionBar(HomeActivity.toolbar);
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
+        HomeActivity.toolbar.setTitle("Mobile recharge and Pay bill");
+        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
         HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,5 +159,6 @@ public class MobileRecharge extends Fragment {
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
 
         HomeActivity.toolbar.setNavigationIcon(null);
+        HomeActivity.toolbar.setTitle("");
     }
 }
