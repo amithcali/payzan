@@ -14,29 +14,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp">
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:layout_marginRight="@dimen/layout_marin_right"
+            android:layout_marginLeft="@dimen/layout_marin_left">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="@dimen/layout_marin_bottom">
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="@dimen/image_height"
+                    android:layout_height="@dimen/image_width"
                     app:srcCompat="@drawable/ic_dth"
                     android:layout_toLeftOf="@+id/header"
-                    android:layout_marginRight="8dp"/>
+                    android:layout_marginRight="@dimen/layout_marin_right"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="D T H"
                     android:gravity="center"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/text_header_size"
                     android:layout_centerInParent="true"
                    android:id="@+id/header"
                     />
@@ -47,15 +47,15 @@
                 android:id="@+id/operator"
                 android:hint="@string/subscriber_id"
                 style="@style/EditTextStyle"
-                android:textSize="16sp"
-                android:layout_marginBottom="12dp" />
+                android:textSize="@dimen/edittext_text_size"
+                android:layout_marginBottom="@dimen/main_layout_head_bottom_margin" />
             <EditText
                 android:layout_width="match_parent"
                 android:id="@+id/customerId"
                 android:hint="@string/select_operator"
                 style="@style/EditTextStyle"
-                android:textSize="16sp"
-                android:layout_marginBottom="12dp"/>
+                android:textSize="@dimen/edittext_text_size"
+                android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"/>
 
 
             <FrameLayout
@@ -68,9 +68,9 @@
                     android:id="@+id/amount"
                     android:hint="@string/amount"
                     style="@style/EditTextStyle"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/edittext_text_size"
                     android:inputType="numberDecimal"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"/>
                 <TextView
                     android:id="@+id/browsePlans"
                     android:layout_width="wrap_content"
