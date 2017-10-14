@@ -18,26 +18,52 @@
             android:layout_marginTop="8dp"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginBottom="12dp">
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                app:srcCompat="@drawable/ic_electricity"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Electricity Bill"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:fontFamily="serif"
-                />
-        </LinearLayout>
+                android:layout_marginBottom="12dp">
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    app:srcCompat="@drawable/ic_data_card"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Data Card"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:fontFamily="serif"
+                    />
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/prepaidRB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="prepaid"
+                    android:button="@drawable/radio_btn"
+                    android:textColor="@color/accent"/>
+
+                <RadioButton
+                    android:id="@+id/postpaidRB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="postpaid"
+                    android:button="@drawable/radio_btn"
+                    android:textColor="@color/accent"/>
+            </RadioGroup>
 
             <EditText
                 android:layout_width="match_parent"
@@ -50,29 +76,29 @@
             <EditText
                 android:layout_width="match_parent"
                 android:id="@+id/ElectrictyEdt"
-                android:hint="@string/select_district"
+                android:hint="Operator"
                 style="@style/EditTextStyle"
                 android:textSize="16sp"
                 android:layout_marginBottom="12dp"/>
             <EditText
                 android:layout_width="match_parent"
                 android:id="@+id/ServiceNEdt"
-                android:hint="@string/service_no"
+                android:hint="Data Card Number"
                 style="@style/EditTextStyle"
                 android:textSize="16sp"
                 android:layout_marginBottom="12dp"/>
             <EditText
                 android:layout_width="match_parent"
                 android:id="@+id/amountEdt"
-                android:hint="@string/amount"
+                android:hint="Amount"
                 style="@style/EditTextStyle"
                 android:textSize="16sp"
                 android:layout_marginBottom="12dp"
                 android:inputType="number"/>
             <Button
-              style="@style/ButtonStyle"
+                style="@style/ButtonStyle"
                 android:id="@+id/submit"
-                android:text="@string/proceed_to_pay_bill"
+                android:text="Proceed to Pay Bill"
                 android:layout_marginTop="16dp"
                 android:textColor="@color/white"/>
 

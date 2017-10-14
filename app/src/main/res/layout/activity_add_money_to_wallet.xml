@@ -1,65 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white_new"
+    android:clickable="true">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginLeft="@dimen/layout_marin_left"
+        android:layout_marginRight="@dimen/layout_marin_right"
+        android:layout_marginTop="@dimen/layout_margin_top"
         android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"
             android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/wallet_icon" />
+                android:layout_width="@dimen/image_width"
+                android:layout_height="@dimen/image_height"
+                app:srcCompat="@drawable/ic_addmoneytowallet" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="bottom"
-                android:text="Add money to wallet"
+                android:gravity="center"
+                android:text="@string/add_money_to_wallet"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="@dimen/text_header_size" />
         </LinearLayout>
 
         <EditText
             android:id="@+id/amount"
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
-            android:layout_marginBottom="12dp"
-            android:hint="Enter amount to be added in the wallet"
+            android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"
+            android:hint="@string/enter_amount_to_be_added_in_the_wallet"
             android:inputType="numberDecimal"
-            android:textSize="16sp" />
+            android:textSize="@dimen/edittext_text_size" />
 
         <EditText
             android:id="@+id/promocode"
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
-            android:hint="Enter promo code"
+            android:hint="@string/enter_promo_code"
             android:inputType="textCapCharacters"
-            android:textSize="16sp" />
+            android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"
+            android:textSize="@dimen/edittext_text_size" />
 
         <Button
             android:id="@+id/submit"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/border_fillcompletely"
-            android:text="Add money"
+            style="@style/ButtonStyle"
+            android:layout_marginTop="@dimen/main_layout_head_bottom_margin"
+            android:text="@string/add_money"
             android:textAllCaps="false"
             android:textColor="@color/white" />
     </LinearLayout>

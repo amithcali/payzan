@@ -37,9 +37,19 @@ import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 import calibrage.payzan.R;
 import calibrage.payzan.model.RegisterModel;
+import calibrage.payzan.model.ResponseModel;
+import calibrage.payzan.networkservice.MyServices;
+import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonUtil;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static calibrage.payzan.utils.CommonUtil.isValidEmail;
 
@@ -55,6 +65,8 @@ public class signup extends AppCompatActivity implements GoogleApiClient.OnConne
     private AlertDialog alertDialog;
    // private Subscription mRegisterSubscription;
     private TextInputLayout  reg_mobile_til;
+    private Subscription mRegisterSubscription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,7 +116,7 @@ public class signup extends AppCompatActivity implements GoogleApiClient.OnConne
             @Override
             public void onClick(View view) {
                if(isValidateUi()){
-                  // registerUser();
+                   registerUser();
                }
 
             }
@@ -155,44 +167,44 @@ public class signup extends AppCompatActivity implements GoogleApiClient.OnConne
         });
     }
 
-//    private void registerUser() {
-//        JsonObject object = getRegisterObject();
-//        MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
-//
-//      mRegisterSubscription = service.userRegister(object)
-//              .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<ResponseModel>() {
-//                    @Override
-//                    public void onCompleted() {
-//                        Toast.makeText(signup.this, "check", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        if(e instanceof HttpException){
-//                            ((HttpException) e).code();
-//                            ((HttpException) e).message();
-//                            ((HttpException) e).response().errorBody();
-//                            try {
-//                                ((HttpException) e).response().errorBody().string();
-//                            } catch (IOException e1) {
-//                                e1.printStackTrace();
-//                            }
-//                            e.printStackTrace();
-//                        }
-//                        Toast.makeText(signup.this, "fail", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onNext(ResponseModel registerResponseModel) {
-//                        Toast.makeText(signup.this, "sucess", Toast.LENGTH_SHORT).show();
-//                        finish();
-//                    }
-//                });
-//
-//
-//    }
+    private void registerUser() {
+        JsonObject object = getRegisterObject();
+        MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
+
+      mRegisterSubscription = service.userRegister(object)
+              .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ResponseModel>() {
+                    @Override
+                    public void onCompleted() {
+                        Toast.makeText(signup.this, "check", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if(e instanceof HttpException){
+                            ((HttpException) e).code();
+                            ((HttpException) e).message();
+                            ((HttpException) e).response().errorBody();
+                            try {
+                                ((HttpException) e).response().errorBody().string();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(signup.this, "fail", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNext(ResponseModel registerResponseModel) {
+                        Toast.makeText(signup.this, "sucess", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+
+
+    }
 
     private JsonObject getRegisterObject() {
         RegisterModel registerModel = new RegisterModel();

@@ -14,18 +14,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import calibrage.payzan.R;
-import calibrage.payzan.activities.PayDTHFragment;
-import calibrage.payzan.activities.PayElectrictyBillActivity;
-import calibrage.payzan.activities.PayLandLineBill;
+import calibrage.payzan.activities.RequestForAgent;
 import calibrage.payzan.activities.SendMoney;
 import calibrage.payzan.adapters.BannerAdapter;
 import calibrage.payzan.adapters.RechargeAdapter;
 import calibrage.payzan.interfaces.RechargeClickListiner;
+import calibrage.payzan.utils.CommonUtil;
 
 
 /**
@@ -37,6 +38,7 @@ public class HomeFragment extends Fragment implements RechargeClickListiner{
     private RecyclerView recharge_recylerview,recylerviewbanner,recylerviewbook;
     private ArrayList<Pair<Integer,String>> menuPairList = new ArrayList<>();
     private Context context;
+    public static TextView AgentRequestTxt,walletTxt;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class HomeFragment extends Fragment implements RechargeClickListiner{
         view = inflater.inflate(R.layout.fragment_home_screen,container,false);
         context =this.getActivity();
 
-        Toast.makeText(context, "testing in fragment", Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(context, "testing in fragment", Toast.LENGTH_SHORT).show();
 
 
 //        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
@@ -62,15 +64,20 @@ public class HomeFragment extends Fragment implements RechargeClickListiner{
         recharge_recylerview = (RecyclerView) view.findViewById(R.id.recylerview);
         recylerviewbanner = (RecyclerView) view.findViewById(R.id.recylerviewbanner);
         recylerviewbook = (RecyclerView) view.findViewById(R.id.recylerviewbook);
+        AgentRequestTxt = (TextView) view.findViewById(R.id.AgentRequestTxt);
+        walletTxt = (TextView) view.findViewById(R.id.walletTxt);
         //  pay_recylerview = (RecyclerView)findViewById(R.id.pay_recylerview);
         menuPairList.add(Pair.create(R.drawable.ic_mobile, "Mobile"));
-        menuPairList.add(Pair.create(R.drawable.ic_electricity, "Electricity"));
-        menuPairList.add(Pair.create(R.drawable.ic_event, "Events"));
-        menuPairList.add(Pair.create(R.drawable.ic_sport, "Sport"));
-        menuPairList.add(Pair.create(R.drawable.ic_television, "DTH"));
-        menuPairList.add(Pair.create(R.drawable.ic_internet, "Internet"));
         menuPairList.add(Pair.create(R.drawable.ic_landline, "Landline"));
+        menuPairList.add(Pair.create(R.drawable.ic_dth, "DTH"));
+        menuPairList.add(Pair.create(R.drawable.ic_internet, "Internet"));
+        menuPairList.add(Pair.create(R.drawable.ic_television, "Cable TV"));
+        menuPairList.add(Pair.create(R.drawable.ic_electricity, "Electricity"));
         menuPairList.add(Pair.create(R.drawable.ic_water_tap, "Water"));
+        menuPairList.add(Pair.create(R.drawable.ic_data_card, "Data Card"));
+
+
+
 
         RechargeAdapter rechargeAdapter = new RechargeAdapter(context,menuPairList);
          rechargeAdapter.setOnAdapterListener(HomeFragment.this);
@@ -80,9 +87,21 @@ public class HomeFragment extends Fragment implements RechargeClickListiner{
         recylerviewbook.setAdapter(rechargeAdapter);
         recylerviewbook.setLayoutManager(new GridLayoutManager(context,4));
          rechargeAdapter.setOnAdapterListener(HomeFragment.this);
-        BannerAdapter bannerAdapter = new BannerAdapter(context);
+        ArrayList<Integer> bannerArrayList = new ArrayList<>();
+        bannerArrayList.add(R.drawable.bant);
+        bannerArrayList.add(R.drawable.bans);
+        bannerArrayList.add(R.drawable.ban);
+        bannerArrayList.add(R.drawable.banf);
+        BannerAdapter bannerAdapter = new BannerAdapter(context,bannerArrayList);
         recylerviewbanner.setAdapter(bannerAdapter);
         recylerviewbanner.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
+
+        AgentRequestTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, RequestForAgent.class));
+            }
+        });
 
         return view;
     }
@@ -92,28 +111,51 @@ public class HomeFragment extends Fragment implements RechargeClickListiner{
     public void onAdapterClickListiner(int pos) {
         switch (pos){
             case 0:{
+
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.add(R.id.content_frame, new MobileRecharge(), "mobileTag");
                 //ft.addToBackStack("mobileTag");
                 ft.commit();
                 break;
             }case 1:{
-                startActivity(new Intent(context, PayDTHFragment.class));
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.add(R.id.content_frame, new PayLandLineBill(), "landlineTag");
+                //ft.addToBackStack("mobileTag");
+                ft.commit();
                 break;
             }case 2:{
-                startActivity(new Intent(context, PayElectrictyBillActivity.class));
-                break;
-            }case 3:{
-                startActivity(new Intent(context, PayLandLineBill.class));
-                break;
-            }case 4:{
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.add(R.id.content_frame, new PayDTHFragment(), "dthTag");
                 //ft.addToBackStack("mobileTag");
                 ft.commit();
                 break;
+            }case 3:{
+               // startActivity(new Intent(context, PayLandLineBill.class));
+                break;
+            }case 4:{
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.add(R.id.content_frame, new PayCableFragment(), "cableTag");
+                //ft.addToBackStack("mobileTag");
+                ft.commit();
+
+                break;
             }case 5:{
-                startActivity(new Intent(context, SendMoney.class));
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.add(R.id.content_frame, new PayElectrictyFragment(), "elctricityTag");
+                //ft.addToBackStack("mobileTag");
+                ft.commit();
+                break;
+            }case 6:{
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.add(R.id.content_frame, new PayElectrictyFragment(), "elctricityTag");
+                //ft.addToBackStack("mobileTag");
+                ft.commit();
+                break;
+            }case 7:{
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.add(R.id.content_frame, new DataCardFragment(), "datacardTag");
+                //ft.addToBackStack("mobileTag");
+                ft.commit();
                 break;
             }
             default:
@@ -189,8 +231,17 @@ public class HomeFragment extends Fragment implements RechargeClickListiner{
 //    }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        walletTxt.setText(CommonUtil.WALLETMONEY);
+    }
 
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        walletTxt.setText(CommonUtil.WALLETMONEY);
+    }
 
     public static class SpacesItemDecoration extends RecyclerView.ItemDecoration {
         private int space;

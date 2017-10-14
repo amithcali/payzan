@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_new"
+    android:clickable="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,16 +24,18 @@
         android:gravity="center"
         android:layout_marginBottom="12dp">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/landline_icon"/>
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:srcCompat="@drawable/ic_landline"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Landline"
-            android:gravity="bottom"
+            android:text="@string/landline"
+            android:gravity="center"
             android:textColor="@color/black"
             android:textSize="18sp"
+            android:layout_marginLeft="8dp"
             android:fontFamily="sans-serif-smallcaps"
             />
     </LinearLayout>
@@ -37,7 +43,7 @@
         <EditText
             android:layout_width="match_parent"
             android:id="@+id/operator"
-            android:hint="Operator"
+            android:hint="@string/operator"
             style="@style/EditTextStyle"
             android:textSize="16sp"
             android:layout_marginBottom="12dp"/>
@@ -51,7 +57,7 @@
         <EditText
             android:id="@+id/mobileEdt"
             style="@style/EditTextStyle"
-            android:hint="Number with STD Code"
+            android:hint="@string/number_with_std_code"
             android:inputType="numberDecimal"
             android:textSize="16sp" />
 
@@ -65,10 +71,27 @@
             android:src="@drawable/prepaid_contacts_icon" />
         </FrameLayout>
 
+        <EditText
+            android:layout_width="match_parent"
+            android:id="@+id/circleEdt"
+            android:hint="@string/select_circle"
+            style="@style/EditTextStyle"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp"/>
+
         <FrameLayout
             android:id="@+id/first"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/amount"
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="12dp"
+                android:hint="@string/amount"
+                android:inputType="numberDecimal"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/browsePlans"
@@ -76,28 +99,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="10dp"
-                android:text="browse Plans"
+                android:text="@string/browse_plans"
                 android:textColor="@color/accent"
                 android:textSize="10sp"
                 android:fontFamily="sans-serif-condensed"
                 />
-
-            <EditText
-                android:id="@+id/amount"
-                style="@style/EditTextStyle"
-                android:layout_width="match_parent"
-                android:layout_marginBottom="12dp"
-                android:hint="Amount"
-                android:inputType="numberDecimal"
-                android:textSize="16sp" />
         </FrameLayout>
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            style="@style/ButtonStyle"
             android:id="@+id/submit"
-            android:background="@drawable/border_fillcompletely"
-            android:text="Recharge"
+            android:text="@string/recharge"
             android:textAllCaps="false"
             android:layout_marginTop="16dp"
             android:textColor="@color/white"/>

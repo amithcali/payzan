@@ -59,9 +59,18 @@ import java.util.ArrayList;
 
 import calibrage.payzan.R;
 import calibrage.payzan.adapters.MyAdapter;
+import calibrage.payzan.model.LoginModel;
+import calibrage.payzan.model.LoginResponseModel;
+import calibrage.payzan.networkservice.MyServices;
+import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.SmsListener;
 import calibrage.payzan.utils.SmsReceiver;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,MyAdapter.AdapterOnClick {
@@ -80,6 +89,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private GoogleApiClient mGoogleApiClient;
     private SignInButton button;
+    private Subscription mRegisterSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,7 +179,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onClick(View view) {
                if(isValidateUi()){
-                 //  login();
+
+
+                   login();
                }
 
             }
@@ -235,49 +247,51 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         return true;
     }
 
-//    private void login(){
-//        JsonObject object = getLoginObject();
-//        MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
-//        mRegisterSubscription = service.UserLogin(object)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<LoginResponseModel>() {
-//                    @Override
-//                    public void onCompleted() {
-//                        Toast.makeText(LoginActivity.this, "check", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        if(e instanceof HttpException){
-//                            ((HttpException) e).code();
-//                            ((HttpException) e).message();
-//                            ((HttpException) e).response().errorBody();
-//                            try {
-//                                ((HttpException) e).response().errorBody().string();
-//                            } catch (IOException e1) {
-//                                e1.printStackTrace();
-//                            }
-//                            e.printStackTrace();
-//                        }
-//                        Toast.makeText(LoginActivity.this, "fail", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onNext(LoginResponseModel registerResponseModel) {
-//                        Toast.makeText(LoginActivity.this, "sucess", Toast.LENGTH_SHORT).show();
-//                        finish();
-//                    }
-//                });
-//    }
+    private void login(){
+        JsonObject object = getLoginObject();
+        MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
+        mRegisterSubscription = service.UserLogin(object)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<LoginResponseModel>() {
+                    @Override
+                    public void onCompleted() {
+                        Toast.makeText(LoginActivity.this, "check", Toast.LENGTH_SHORT).show();
+                    }
 
-//    private JsonObject getLoginObject() {
-//        LoginModel  loginModel = new LoginModel();
-//        loginModel.setPassword(txt_password.getText().toString());
-//        loginModel.setUserName(txt_Email.getText().toString());
-//        return new Gson().toJsonTree(loginModel)
-//                .getAsJsonObject();
-//    }
+                    @Override
+                    public void onError(Throwable e) {
+                        if(e instanceof HttpException){
+                            ((HttpException) e).code();
+                            ((HttpException) e).message();
+                            ((HttpException) e).response().errorBody();
+                            try {
+                                ((HttpException) e).response().errorBody().string();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(LoginActivity.this, "fail", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNext(LoginResponseModel loginResponseModel) {
+                        Toast.makeText(LoginActivity.this, "sucess", Toast.LENGTH_SHORT).show();
+                        CommonUtil.USERID = loginResponseModel.getData().getUser().getId();
+                        CommonUtil.WALLETID = String.valueOf(loginResponseModel.getData().getUserWallet().getWalletId());
+                        finish();
+                    }
+                });
+    }
+
+    private JsonObject getLoginObject() {
+        LoginModel loginModel = new LoginModel();
+        loginModel.setPassword(txt_password.getText().toString());
+        loginModel.setUserName(txt_Email.getText().toString());
+        return new Gson().toJsonTree(loginModel)
+                .getAsJsonObject();
+    }
 
 
 

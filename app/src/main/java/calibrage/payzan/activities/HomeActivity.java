@@ -1,41 +1,28 @@
 package calibrage.payzan.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.util.Pair;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 
 import calibrage.payzan.R;
+import calibrage.payzan.fragments.AddMoneyToWallet;
 import calibrage.payzan.fragments.HomeFragment;
-import calibrage.payzan.utils.CommonUtil;
 
 import static calibrage.payzan.utils.CommonUtil.buildCounterDrawable;
 
@@ -52,6 +39,7 @@ public class HomeActivity extends AppCompatActivity  {
     private FrameLayout content_frame;
     private FragmentManager fragmentManager;
     private Menu Menu;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,14 +49,14 @@ public class HomeActivity extends AppCompatActivity  {
         fragmentManager = getSupportFragmentManager();
         content_frame = (FrameLayout) findViewById(R.id.content_frame);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, new HomeFragment())
+                .replace(R.id.content_frame, new HomeFragment(),"homeTag")
                 .commit();
-        Toast.makeText(this, "testing in activity", Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this, "testing in activity", Toast.LENGTH_SHORT).show();
        // CommonUtil.printKeyHash(this);
 
 
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+         bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
         BottomNavigationViewHelper bottomNavigationViewHelper = new BottomNavigationViewHelper();
         bottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -97,8 +85,10 @@ public class HomeActivity extends AppCompatActivity  {
                                 break;
 
                             case R.id.action_wallet:
-                                Intent wintent = new Intent(HomeActivity.this,AddMoneyToWallet.class);
-                                startActivity(wintent);
+                                getSupportFragmentManager().beginTransaction()
+                                        .add(R.id.content_frame, new AddMoneyToWallet(),"walletTag")
+                                        .commit();
+
                                 break;
                             case R.id.action_offers:
                                 break;
@@ -187,6 +177,13 @@ public class HomeActivity extends AppCompatActivity  {
     @Override
     protected void onResume() {
         super.onResume();
+        updateBottomIcons();
+    }
 
+    private void updateBottomIcons(){
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag("homeTag");
+        if(fragment instanceof HomeFragment){
+            bottomNavigationView.setSelectedItemId(R.id.action_home);
+        }
     }
 }

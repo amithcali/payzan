@@ -18,7 +18,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_margin="8dp"
-            android:text="Order No 1234567"
+            android:text="@string/order_no"
             android:textColor="@color/black" />
 
         <TextView
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_margin="8dp"
-            android:text="15 sep 2017 08:15 PM"
+            android:text="@string/date_order"
             android:textColor="@color/gray"
             android:textSize="12sp"/>
 

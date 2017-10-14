@@ -50,6 +50,9 @@ public class CommonUtil {
     private static String LOG_TAG = "";
     static Pattern pattern = null;
     static Matcher matcher;
+    public static String USERID ="";
+    public static String WALLETID ="";
+    public static String WALLETMONEY ="0";
     public static final Pattern VEHICLE_NUMBER_PATTERN = Pattern.compile("^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$");
     private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-zA-Z]).{6,20})";
     public static DecimalFormat twoDForm = new DecimalFormat("#.##");

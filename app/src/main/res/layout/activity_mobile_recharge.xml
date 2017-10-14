@@ -68,7 +68,7 @@
                         <EditText
                             android:id="@+id/mobileEdt"
                             style="@style/EditTextStyle"
-                            android:hint="Mobile Number"
+                            android:hint="@string/mobile_number"
                             android:inputType="numberDecimal"
                             android:textSize="16sp" />
 
@@ -93,7 +93,7 @@
                             style="@style/EditTextStyle"
                             android:layout_width="match_parent"
                             android:layout_marginBottom="12dp"
-                            android:hint="Current Operator"
+                            android:hint="@string/current_operator"
                             android:textSize="16sp" />
 
                         <TextView
@@ -119,7 +119,7 @@
                             style="@style/EditTextStyle"
                             android:layout_width="match_parent"
                             android:layout_marginBottom="12dp"
-                            android:hint="Amount"
+                            android:hint="@string/amount"
                             android:inputType="numberDecimal"
                             android:textSize="16sp" />
 
@@ -182,7 +182,7 @@
                             android:id="@+id/talktimeRB"
                             android:layout_width="wrap_content"
                             android:layout_height="32dp"
-                            android:text="Talktime Topup"
+                            android:text="@string/talktime_topup"
                             android:textColor="@color/white"
                             android:textSize="12sp"
                             />
@@ -192,7 +192,7 @@
                             android:id="@+id/specialRB"
                             android:layout_width="wrap_content"
                             android:layout_height="32dp"
-                            android:text="Special Rechartge"
+                            android:text="@string/special_rechartge"
                             android:textSize="12sp"
                             />
                     </LinearLayout>
@@ -204,7 +204,7 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="16dp"
                         android:background="@drawable/roundbutton"
-                        android:text="Proceed to Recharge"
+                        android:text="@string/proceed_to_recharge"
                         android:textAllCaps="false"
                         android:textColor="@color/white" />
                 </LinearLayout>

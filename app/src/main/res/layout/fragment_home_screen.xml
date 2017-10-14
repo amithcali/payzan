@@ -65,7 +65,8 @@
                 android:layout_alignBottom="@+id/textView"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="18dp" />
+                android:layout_marginEnd="18dp"
+                android:id="@+id/walletTxt"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -289,6 +290,16 @@
                     android:layout_marginTop="4dp"
                     android:nestedScrollingEnabled="false">
                 </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/AgentRequestTxt"
+                    android:text="Partner with Payzan"
+                    android:gravity="center"
+                    android:layout_margin="8dp"
+                    android:layout_below="@+id/recylerviewbook"
+                    android:textColor="@color/accent"/>
 
             </RelativeLayout>
         </android.support.v4.widget.NestedScrollView>

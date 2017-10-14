@@ -6,7 +6,7 @@
     >
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,14 +21,13 @@
 
                 android:layout_width="40dp"
                 android:layout_height="20dp"
-                android:layout_gravity="center"
-              />
+                android:layout_gravity="center" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:gravity="center"
-                android:text="Login"
+                android:text="@string/login"
                 android:textColor="@color/White"
                 android:textSize="14dp" />
         </LinearLayout>
@@ -62,7 +61,7 @@
                     android:layout_marginBottom="35dp"
                     android:background="@drawable/roundededittext"
                     android:gravity="center_vertical"
-                    android:hint="Mobile or Email"
+                    android:hint="@string/mobile_or_email"
                     android:inputType="textEmailAddress"
                     android:paddingLeft="5dp"
                     android:textSize="12dp" />
@@ -84,7 +83,7 @@
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/roundededittext"
                     android:gravity="center_vertical"
-                    android:hint="Password"
+                    android:hint="@string/password"
                     android:inputType="textPassword"
                     android:paddingLeft="5dp"
                     android:textSize="12dp" />
@@ -126,7 +125,7 @@
                 android:layout_marginBottom="20dip"
                 android:layout_marginTop="20dip"
                 android:gravity="center"
-                android:text="Don't have account..?Signup"
+                android:text="@string/don_t_have_account_signup"
                 android:textColor="#263631"
                 android:textSize="12dp" />
 
@@ -145,7 +144,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@drawable/roundbutton_facebook"
-                android:text="Signin with Facebook"
+                android:text="@string/signin_with_facebook"
                 android:textAllCaps="false"
                 android:textColor="@color/White" />
 
@@ -157,10 +156,10 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/round_google_button"
-                android:text="Signin with Google"
+                android:text="@string/signin_with_google"
                 android:textAllCaps="false"
-                android:visibility="gone"
-                android:textColor="@color/White" />
+                android:textColor="@color/White"
+                android:visibility="gone" />
 
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/login"
@@ -171,8 +170,7 @@
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="30dp"
                 android:scaleType="centerInside"
-                android:visibility="gone"
-                />
+                android:visibility="gone" />
 
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/btn_sign_in"
@@ -182,7 +180,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/round_google_button"
-                android:text="Signin with Google"
+                android:text="@string/signin_with_google_test"
                 android:textAllCaps="false"
                 android:textColor="@color/White" />
 

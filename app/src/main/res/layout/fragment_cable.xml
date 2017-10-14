@@ -8,8 +8,7 @@
     android:clickable="true">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,32 +26,32 @@
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    app:srcCompat="@drawable/ic_dth"
+                    app:srcCompat="@drawable/ic_television"
                     android:layout_toLeftOf="@+id/header"
                     android:layout_marginRight="8dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="D T H"
+                    android:text="Cable TV"
                     android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:layout_centerInParent="true"
-                   android:id="@+id/header"
+                    android:id="@+id/header"
                     />
             </LinearLayout>
 
             <EditText
                 android:layout_width="match_parent"
                 android:id="@+id/operator"
-                android:hint="@string/subscriber_id"
+                android:hint="Operator"
                 style="@style/EditTextStyle"
                 android:textSize="16sp"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="12dp"/>
             <EditText
                 android:layout_width="match_parent"
                 android:id="@+id/customerId"
-                android:hint="@string/select_operator"
+                android:hint="Account Number"
                 style="@style/EditTextStyle"
                 android:textSize="16sp"
                 android:layout_marginBottom="12dp"/>
@@ -66,7 +65,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:id="@+id/amount"
-                    android:hint="@string/amount"
+                    android:hint="Amount"
                     style="@style/EditTextStyle"
                     android:textSize="16sp"
                     android:inputType="numberDecimal"
@@ -81,12 +80,12 @@
                     android:textColor="@color/accent"
                     android:textSize="10sp"
                     android:fontFamily="sans-serif-condensed"
-                     />
+                    />
             </FrameLayout>
 
 
             <Button
-              style="@style/ButtonStyle"
+                style="@style/ButtonStyle"
                 android:id="@+id/submit"
                 android:text="Proceed to Recharge"
                 android:layout_marginTop="16dp"

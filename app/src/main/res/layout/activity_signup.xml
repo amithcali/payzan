@@ -64,7 +64,7 @@
             android:orientation="vertical">
             <!-- Full Name Label -->
 
-            <utils.NoChangingBackgroundTextInputLayout
+            <calibrage.payzan.utils.NCBTextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
@@ -77,11 +77,11 @@
                 android:layout_height="35dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/roundededittext"
-                android:hint="+94 Mobile Number"
+                android:hint="@string/mobile_number_signup"
                 android:inputType="phone"
                 android:paddingLeft="5dp"
                 android:textSize="12dp" />
-            </utils.NoChangingBackgroundTextInputLayout>
+            </calibrage.payzan.utils.NCBTextInputLayout>
 
 
             <EditText
@@ -91,7 +91,7 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/roundededittext"
-                android:hint="Email (Optional)"
+                android:hint="@string/email_optional"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="5dp"
                 android:textSize="12dp" />
@@ -112,7 +112,7 @@
                     android:layout_marginTop="5dip"
                     android:background="@drawable/roundededittext"
                     android:fontFamily="serif"
-                    android:hint=" Create Password"
+                    android:hint="@string/create_password"
                     android:inputType="textPassword"
                     android:paddingLeft="5dp"
                     android:textSize="12dp" />
@@ -135,7 +135,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="10dip"
                 android:background="@drawable/roundbutton"
-                android:text="Sign Up"
+                android:text="@string/sign_up"
                 android:textAllCaps="false"
                 android:textColor="@color/White" />
             <!-- Link to Login Screen -->
@@ -154,7 +154,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:text="- or -" />
+                android:text="@string/or" />
 
             <Button
                 android:id="@+id/fbBtn"
@@ -163,7 +163,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@drawable/roundbutton_facebook"
-                android:text="Signin with Facebook"
+                android:text="@string/signin_with_facebook"
                 android:textAllCaps="false"
                 android:textColor="@color/White" />
 
@@ -189,7 +189,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/round_google_button"
-                android:text="Signin with Google"
+                android:text="@string/signin_with_google"
                 android:textAllCaps="false"
                 android:textColor="@color/White" />
         </LinearLayout>
