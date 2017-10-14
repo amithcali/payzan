@@ -7,23 +7,23 @@
         <!--  Header  Starts-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/thirtyDp"
             android:background="@color/DarkRed">
 
             <ImageView
 
-                android:layout_width="40dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/thirtyDp"
                 android:layout_gravity="center"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="@dimen/thirtyDp"
                 android:gravity="center"
                 android:text="Sign Up"
                 android:textColor="@color/White"
-                android:textSize="14dp" />
+                android:textSize="@dimen/text_size_inner_edit_text" />
         </LinearLayout>
 
         <LinearLayout
@@ -33,14 +33,14 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:paddingBottom="5dip"
-            android:paddingTop="5dip">
+            android:paddingBottom="@dimen/fiveDp"
+            android:paddingTop="@dimen/fiveDp">
             <!-- Logo Start-->
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/hunderedDp"
+                android:layout_height="@dimen/thirtyDp"
                 android:layout_gravity="center"
-                android:layout_margin="30dp"
+                android:layout_margin="@dimen/thirtyDp"
                 android:src="@mipmap/logo" />
             <!-- Logo Ends -->
         </LinearLayout>
@@ -49,7 +49,7 @@
         <LinearLayout
             android:id="@+id/footer"
             android:layout_width="fill_parent"
-            android:layout_height="60dip"
+            android:layout_height="@dimen/sixty"
             android:layout_alignParentBottom="true"
             android:orientation="vertical"></LinearLayout>
         <!-- Footer Ends -->
@@ -59,8 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/header"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="@dimen/fifteen"
+            android:layout_marginRight="@dimen/fifteen"
             android:orientation="vertical">
             <!-- Full Name Label -->
 
@@ -74,27 +74,27 @@
             <EditText
                 android:id="@+id/reg_mobile"
                 android:layout_width="fill_parent"
-                android:layout_height="35dp"
-                android:layout_marginBottom="10dp"
+                android:layout_height="@dimen/thirtyfiveDp"
+                android:layout_marginBottom="@dimen/tenDp"
                 android:background="@drawable/roundededittext"
                 android:hint="@string/mobile_number_signup"
                 android:inputType="phone"
-                android:paddingLeft="5dp"
-                android:textSize="12dp" />
+                android:paddingLeft="@dimen/fiveDp"
+                android:textSize="@dimen/edittext_text_size" />
             </calibrage.payzan.utils.NCBTextInputLayout>
 
 
             <EditText
                 android:id="@+id/reg_email"
                 android:layout_width="fill_parent"
-                android:layout_height="35dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="5dp"
+                android:layout_height="@dimen/thirtyfiveDp"
+                android:layout_marginBottom="@dimen/fifteen"
+                android:layout_marginTop="@dimen/fiveDp"
                 android:background="@drawable/roundededittext"
                 android:hint="@string/email_optional"
                 android:inputType="textEmailAddress"
-                android:paddingLeft="5dp"
-                android:textSize="12dp" />
+                android:paddingLeft="@dimen/fiveDp"
+                android:textSize="@dimen/edittext_text_size" />
 
             <android.support.design.widget.TextInputLayout
 
@@ -107,15 +107,15 @@
                 <EditText
                     android:id="@+id/reg_password"
                     android:layout_width="fill_parent"
-                    android:layout_height="35dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginTop="5dip"
+                    android:layout_height="@dimen/thirtyDp"
+                    android:layout_marginBottom="@dimen/fifteen"
+                    android:layout_marginTop="@dimen/fiveDp"
                     android:background="@drawable/roundededittext"
                     android:fontFamily="serif"
                     android:hint="@string/create_password"
                     android:inputType="textPassword"
-                    android:paddingLeft="5dp"
-                    android:textSize="12dp" />
+                    android:paddingLeft="@dimen/fiveDp"
+                    android:textSize="@dimen/edittext_text_size" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -127,13 +127,13 @@
                 android:layout_marginBottom="15dip"
                 android:gravity="center"
                 android:textColor="#263631"
-                android:textSize="11dp" />
+                android:textSize="@dimen/leven" />
 
             <Button
                 android:id="@+id/btnRegister"
                 android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dip"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginTop="@dimen/tenDp"
                 android:background="@drawable/roundbutton"
                 android:text="@string/sign_up"
                 android:textAllCaps="false"
@@ -142,26 +142,26 @@
             <TextView
                 android:id="@+id/linkToLogin"
                 android:layout_width="fill_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="20dip"
+                android:layout_height="@dimen/twentyDP"
+                android:layout_marginTop="@dimen/twentyDP"
                 android:gravity="center"
                 android:textColor="#263631"
-                android:textSize="12dp" />
+                android:textSize="@dimen/main_layout_head_bottom_margin" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                android:layout_height="@dimen/twentyFiveDP"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="@dimen/tenDp"
                 android:gravity="center"
                 android:text="@string/or" />
 
             <Button
                 android:id="@+id/fbBtn"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_height="@dimen/thirtyfiveDp"
+                android:layout_marginLeft="@dimen/fifteen"
+                android:layout_marginRight="@dimen/fifteen"
                 android:background="@drawable/roundbutton_facebook"
                 android:text="@string/signin_with_facebook"
                 android:textAllCaps="false"
@@ -169,12 +169,12 @@
 
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/login"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="@dimen/image_height"
+                android:layout_height="@dimen/image_width"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginBottom="@dimen/thirtyDp"
+                android:layout_marginTop="@dimen/thirtyDp"
                 android:scaleType="centerInside"
                 android:visibility="gone"
                 />
@@ -184,10 +184,10 @@
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/btn_sign_in"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="25dp"
+                android:layout_height="@dimen/thirtyfiveDp"
+                android:layout_marginLeft="@dimen/fifteen"
+                android:layout_marginRight="@dimen/fifteen"
+                android:layout_marginTop="@dimen/thirtyfiveDp"
                 android:background="@drawable/round_google_button"
                 android:text="@string/signin_with_google"
                 android:textAllCaps="false"

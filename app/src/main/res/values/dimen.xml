@@ -23,4 +23,20 @@
 
     <dimen name="text_size_inner_edit_text">10sp</dimen>
 
+    <!--extra dimensions -->
+    <dimen name="fiveDp">5dp</dimen>
+    <dimen name="tenDp">10dp</dimen>
+    <dimen name="leven">11dp</dimen>
+
+    <dimen name="fifteen">15dp</dimen>
+
+    <dimen name="twentyDP">20dp</dimen>
+    <dimen name="twentyFiveDP">25dp</dimen>
+    <dimen name="thirtyDp">30dp</dimen>
+    <dimen name="thirtyfiveDp">35dp</dimen>
+    <dimen name="sixty">60dp</dimen>
+
+    <dimen name="hunderedDp">100dp</dimen>
+
+
 </resources>

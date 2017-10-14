@@ -14,13 +14,13 @@
         <!--  Email Label -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/thirtyDp"
             android:background="@color/DarkRed">
 
             <ImageView
 
-                android:layout_width="40dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/edittext_height"
+                android:layout_height="@dimen/twentyDP"
                 android:layout_gravity="center" />
 
             <TextView
@@ -29,7 +29,7 @@
                 android:gravity="center"
                 android:text="@string/login"
                 android:textColor="@color/White"
-                android:textSize="14dp" />
+                android:textSize="@dimen/edittext_text_size" />
         </LinearLayout>
 
 
@@ -37,14 +37,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp">
+            android:paddingLeft="@dimen/layout_marin_left"
+            android:paddingRight="@dimen/layout_marin_right">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/hunderedDp"
+                android:layout_height="@dimen/twentyDP"
                 android:layout_gravity="center"
-                android:layout_margin="30dp"
+                android:layout_margin="@dimen/twentyDP"
                 android:src="@mipmap/logo" />
 
             <android.support.design.widget.TextInputLayout
@@ -57,14 +57,14 @@
                 <EditText
                     android:id="@+id/txt_Email"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_marginBottom="35dp"
+                    android:layout_height="@dimen/thirtyfiveDp"
+                    android:layout_marginBottom="@dimen/thirtyfiveDp"
                     android:background="@drawable/roundededittext"
                     android:gravity="center_vertical"
                     android:hint="@string/mobile_or_email"
                     android:inputType="textEmailAddress"
-                    android:paddingLeft="5dp"
-                    android:textSize="12dp" />
+                    android:paddingLeft="@dimen/fiveDp"
+                    android:textSize="@dimen/main_layout_head_bottom_margin" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -79,26 +79,26 @@
 
                     android:id="@+id/txt_password"
                     android:layout_width="fill_parent"
-                    android:layout_height="35dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_height="@dimen/thirtyfiveDp"
+                    android:layout_marginBottom="@dimen/fifteen"
                     android:background="@drawable/roundededittext"
                     android:gravity="center_vertical"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:paddingLeft="5dp"
-                    android:textSize="12dp" />
+                    android:paddingLeft="@dimen/fiveDp"
+                    android:textSize="@dimen/main_layout_head_bottom_margin" />
 
             </android.support.design.widget.TextInputLayout>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="@dimen/thirtyDp"
                 android:layout_gravity="end"
-                android:layout_margin="10dp"
+                android:layout_margin="@dimen/tenDp"
                 android:gravity="center"
                 android:text="Can not Login..?"
                 android:textColor="@color/Maroon"
-                android:textSize="12dp" />
+                android:textSize="@dimen/main_layout_head_bottom_margin" />
 
             <!-- Login button -->
             <TextView
@@ -106,13 +106,13 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="11dp" />
+                android:textSize="@dimen/main_layout_head_bottom_margin" />
 
             <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dip"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginTop="@dimen/tenDp"
                 android:background="@drawable/roundbutton"
                 android:text="Login"
                 android:textAllCaps="false"
@@ -123,26 +123,26 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dip"
-                android:layout_marginTop="20dip"
+                android:layout_marginTop="@dimen/twentyDP"
                 android:gravity="center"
                 android:text="@string/don_t_have_account_signup"
                 android:textColor="#263631"
-                android:textSize="12dp" />
+                android:textSize="@dimen/main_layout_head_bottom_margin"/>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="@dimen/twentyDP"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="@dimen/tenDp"
                 android:gravity="center"
                 android:text="- or -" />
 
             <Button
                 android:id="@+id/fbBtn"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_height="@dimen/thirtyfiveDp"
+                android:layout_marginLeft="@dimen/thirtyfiveDp"
+                android:layout_marginRight="@dimen/thirtyfiveDp"
                 android:background="@drawable/roundbutton_facebook"
                 android:text="@string/signin_with_facebook"
                 android:textAllCaps="false"
@@ -151,10 +151,10 @@
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="25dp"
+                android:layout_height="@dimen/thirtyfiveDp"
+                android:layout_marginLeft="@dimen/thirtyfiveDp"
+                android:layout_marginRight="@dimen/thirtyfiveDp"
+                android:layout_marginTop="@dimen/twentyFiveDP"
                 android:background="@drawable/round_google_button"
                 android:text="@string/signin_with_google"
                 android:textAllCaps="false"
@@ -163,22 +163,22 @@
 
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/login"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="@dimen/image_height"
+                android:layout_height="@dimen/image_height"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginBottom="@dimen/thirtyfiveDp"
+                android:layout_marginTop="@dimen/thirtyfiveDp"
                 android:scaleType="centerInside"
                 android:visibility="gone" />
 
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/btn_sign_in"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="25dp"
+                android:layout_height="@dimen/thirtyfiveDp"
+                android:layout_marginLeft="@dimen/thirtyfiveDp"
+                android:layout_marginRight="@dimen/thirtyfiveDp"
+                android:layout_marginTop="@dimen/twentyFiveDP"
                 android:background="@drawable/round_google_button"
                 android:text="@string/signin_with_google_test"
                 android:textAllCaps="false"
