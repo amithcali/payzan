@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:id="@+id/radioGroup">
+
+            <RadioButton
+                android:id="@+id/prepaidRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="prepaid"
+                android:layout_margin="8dp"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/postpaidRB"
+                android:text="postpaid"
+                android:layout_margin="8dp"/>
+        </RadioGroup>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/radioGroup">
+
+            <FrameLayout
+                android:id="@+id/first1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp">
+
+                <EditText
+                    android:id="@+id/mobileEdt"
+                    style="@style/EditTextStyle"
+                    android:hint="Mobile Number"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp" />
+
+
+                <ImageView
+                    android:id="@+id/mobileNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/prepaid_contacts_icon" />
+            </FrameLayout>
+
+
+
+            <FrameLayout
+                android:id="@+id/first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:id="@+id/currentOperator"
+                    android:hint="Current Operator"
+                    style="@style/EditTextStyle"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView
+                    android:id="@+id/updateOperator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:text="Update Operator"
+                    android:textColor="@color/accent"
+                    android:textSize="10sp"
+                    android:fontFamily="sans-serif-condensed"
+                    />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/first6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/amount"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="12dp"
+                    android:hint="Amount"
+                    android:inputType="numberDecimal"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/browsePlans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:text="browse Plans"
+                    android:textColor="@color/accent"
+                    android:textSize="10sp"
+                    android:fontFamily="sans-serif-condensed"
+                    />
+
+
+            </FrameLayout>
+
+            <!--<FrameLayout-->
+                <!--android:id="@+id/first"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<EditText-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:id="@+id/amount"-->
+                    <!--android:hint="Amount"-->
+                    <!--style="@style/EditTextStyle"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:inputType="numberDecimal"-->
+                    <!--android:layout_marginBottom="12dp"/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/browsePlans"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="right|center_vertical"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:text="browse Plans"-->
+                    <!--android:textColor="@color/accent"-->
+                    <!--android:textSize="10sp"-->
+                    <!--android:fontFamily="sans-serif-condensed"-->
+                    <!--/>-->
+            <!--</FrameLayout>-->
+
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:id="@+id/rechageTypeRadioGroup">
+
+                <RadioButton
+                    android:id="@+id/talktimeRB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Talktime Topup"
+                    android:layout_margin="8dp"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/specialRB"
+                    android:text="Special Rechartge"
+                    android:layout_margin="8dp"/>
+            </RadioGroup>
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/submit"
+                android:background="@drawable/border_fillcompletely"
+                android:text="Proceed to Recharge"
+                android:textAllCaps="false"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+
+</android.support.v4.widget.NestedScrollView>

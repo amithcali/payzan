@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="12dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/landline_icon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Landline"
+            android:gravity="bottom"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-smallcaps"
+            />
+    </LinearLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:id="@+id/operator"
+            android:hint="Operator"
+            style="@style/EditTextStyle"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp"/>
+
+        <FrameLayout
+            android:id="@+id/first1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp">
+
+        <EditText
+            android:id="@+id/mobileEdt"
+            style="@style/EditTextStyle"
+            android:hint="Number with STD Code"
+            android:inputType="numberDecimal"
+            android:textSize="16sp" />
+
+
+        <ImageView
+            android:id="@+id/mobileNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/prepaid_contacts_icon" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/browsePlans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="10dp"
+                android:text="browse Plans"
+                android:textColor="@color/accent"
+                android:textSize="10sp"
+                android:fontFamily="sans-serif-condensed"
+                />
+
+            <EditText
+                android:id="@+id/amount"
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="12dp"
+                android:hint="Amount"
+                android:inputType="numberDecimal"
+                android:textSize="16sp" />
+        </FrameLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/submit"
+            android:background="@drawable/border_fillcompletely"
+            android:text="Recharge"
+            android:textAllCaps="false"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/white"/>
+</LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

@@ -79,7 +79,7 @@
                     android:layout_marginRight="10dp"
                     android:text="browse Plans"
                     android:textColor="@color/accent"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/text_size_inner_edit_text"
                     android:fontFamily="sans-serif-condensed"
                      />
             </FrameLayout>
@@ -89,7 +89,7 @@
               style="@style/ButtonStyle"
                 android:id="@+id/submit"
                 android:text="Proceed to Recharge"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/main_layout_head_bottom_margin"
                 android:textColor="@color/white"/>
         </LinearLayout>
     </RelativeLayout>
