@@ -26,7 +26,7 @@
     <!--extra dimensions -->
     <dimen name="fiveDp">5dp</dimen>
     <dimen name="tenDp">10dp</dimen>
-    <dimen name="leven">11dp</dimen>
+    <dimen name="leven">11 dp</dimen>
 
     <dimen name="fifteen">15dp</dimen>
 
