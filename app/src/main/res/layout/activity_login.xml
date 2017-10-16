@@ -14,22 +14,22 @@
         <!--  Email Label -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/thirtyDp"
+            android:layout_height="@dimen/login_header_height"
             android:background="@color/DarkRed">
 
             <ImageView
 
                 android:layout_width="@dimen/edittext_height"
-                android:layout_height="@dimen/twentyDP"
+                android:layout_height="@dimen/img_back_height"
                 android:layout_gravity="center" />
 
-            <TextView
+            <calibrage.payzan.controls.CommonTextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/thirtyDp"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/login"
                 android:textColor="@color/White"
-                android:textSize="@dimen/edittext_text_size" />
+                android:textSize="@dimen/txt_FontSize" />
         </LinearLayout>
 
 
@@ -37,14 +37,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/layout_marin_left"
-            android:paddingRight="@dimen/layout_marin_right">
+            android:paddingLeft="@dimen/lyt_margin_left"
+            android:paddingRight="@dimen/lyt_margin_right">
 
             <ImageView
-                android:layout_width="@dimen/hunderedDp"
+                android:layout_width="@dimen/logo_width"
                 android:layout_height="@dimen/twentyDP"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/twentyDP"
+                android:layout_margin="@dimen/logo_margin"
                 android:src="@mipmap/logo" />
 
             <android.support.design.widget.TextInputLayout
@@ -54,17 +54,17 @@
                 app:errorEnabled="true"
                 app:hintEnabled="false">
 
-                <EditText
+                <calibrage.payzan.controls.CommonEditText
                     android:id="@+id/txt_Email"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/thirtyfiveDp"
-                    android:layout_marginBottom="@dimen/thirtyfiveDp"
+                    android:layout_height="@dimen/edt_height"
+                    android:layout_marginBottom="@dimen/edt_bottom_margin"
                     android:background="@drawable/roundededittext"
                     android:gravity="center_vertical"
                     android:hint="@string/mobile_or_email"
                     android:inputType="textEmailAddress"
-                    android:paddingLeft="@dimen/fiveDp"
-                    android:textSize="@dimen/main_layout_head_bottom_margin" />
+                    android:paddingLeft="@dimen/edt_text_pading_left"
+                    android:textSize="@dimen/edt_FontSize" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -75,86 +75,86 @@
                 app:hintEnabled="false"
                 app:passwordToggleEnabled="true">
 
-                <EditText
+                <calibrage.payzan.controls.CommonEditText
 
                     android:id="@+id/txt_password"
                     android:layout_width="fill_parent"
-                    android:layout_height="@dimen/thirtyfiveDp"
+                    android:layout_height="@dimen/edittext_height"
                     android:layout_marginBottom="@dimen/fifteen"
                     android:background="@drawable/roundededittext"
                     android:gravity="center_vertical"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:paddingLeft="@dimen/fiveDp"
-                    android:textSize="@dimen/main_layout_head_bottom_margin" />
+                    android:paddingLeft="@dimen/edt_text_pading_left"
+                    android:textSize="@dimen/edt_FontSize" />
 
             </android.support.design.widget.TextInputLayout>
 
-            <TextView
+            <calibrage.payzan.controls.CommonTextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/thirtyDp"
+                android:layout_height="@dimen/txt_height"
                 android:layout_gravity="end"
-                android:layout_margin="@dimen/tenDp"
+                android:layout_margin="@dimen/txt_margin"
                 android:gravity="center"
                 android:text="Can not Login..?"
                 android:textColor="@color/Maroon"
-                android:textSize="@dimen/main_layout_head_bottom_margin" />
+                android:textSize="@dimen/txt_FontSize" />
 
             <!-- Login button -->
-            <TextView
+            <calibrage.payzan.controls.CommonTextView
                 android:id="@+id/txt_terms"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="@dimen/main_layout_head_bottom_margin" />
+                android:textSize="@dimen/txt_FontSize" />
 
-            <Button
+            <calibrage.payzan.controls.CommonButton
                 android:id="@+id/btnLogin"
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/button_size"
-                android:layout_marginTop="@dimen/tenDp"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginTop="@dimen/btn_margin_top"
                 android:background="@drawable/roundbutton"
                 android:text="Login"
                 android:textAllCaps="false"
                 android:textColor="@color/White" />
             <!-- Link to Registration Screen -->
-            <TextView
+            <calibrage.payzan.controls.CommonTextView
                 android:id="@+id/link_to_register"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dip"
-                android:layout_marginTop="@dimen/twentyDP"
+                android:layout_marginTop="@dimen/txt_margin"
                 android:gravity="center"
                 android:text="@string/don_t_have_account_signup"
                 android:textColor="#263631"
-                android:textSize="@dimen/main_layout_head_bottom_margin"/>
+                android:textSize="@dimen/txt_FontSize"/>
 
-            <TextView
+            <calibrage.payzan.controls.CommonTextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/twentyDP"
+                android:layout_height="@dimen/txt_height"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/tenDp"
+                android:layout_marginBottom="@dimen/txt_margin"
                 android:gravity="center"
                 android:text="- or -" />
 
-            <Button
+            <calibrage.payzan.controls.CommonButton
                 android:id="@+id/fbBtn"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/thirtyfiveDp"
-                android:layout_marginLeft="@dimen/thirtyfiveDp"
-                android:layout_marginRight="@dimen/thirtyfiveDp"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginLeft="@dimen/btn_margin_left"
+                android:layout_marginRight="@dimen/btn_margin_right"
                 android:background="@drawable/roundbutton_facebook"
                 android:text="@string/signin_with_facebook"
                 android:textAllCaps="false"
                 android:textColor="@color/White" />
 
-            <Button
+            <calibrage.payzan.controls.CommonButton
                 android:id="@+id/button"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/thirtyfiveDp"
-                android:layout_marginLeft="@dimen/thirtyfiveDp"
-                android:layout_marginRight="@dimen/thirtyfiveDp"
-                android:layout_marginTop="@dimen/twentyFiveDP"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginLeft="@dimen/btn_margin_left"
+                android:layout_marginRight="@dimen/btn_margin_right"
+                android:layout_marginTop="@dimen/btn_margin_top"
                 android:background="@drawable/round_google_button"
                 android:text="@string/signin_with_google"
                 android:textAllCaps="false"
@@ -163,22 +163,22 @@
 
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/login"
-                android:layout_width="@dimen/image_height"
-                android:layout_height="@dimen/image_height"
+                android:layout_width="@dimen/img_height"
+                android:layout_height="@dimen/img_width"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/thirtyfiveDp"
-                android:layout_marginTop="@dimen/thirtyfiveDp"
+                android:layout_marginBottom="@dimen/btn_height"
+                android:layout_marginTop="@dimen/btn_width"
                 android:scaleType="centerInside"
                 android:visibility="gone" />
 
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/btn_sign_in"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/thirtyfiveDp"
-                android:layout_marginLeft="@dimen/thirtyfiveDp"
-                android:layout_marginRight="@dimen/thirtyfiveDp"
-                android:layout_marginTop="@dimen/twentyFiveDP"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginLeft="@dimen/btn_margin_left"
+                android:layout_marginRight="@dimen/btn_margin_right"
+                android:layout_marginTop="@dimen/btn_margin_top"
                 android:background="@drawable/round_google_button"
                 android:text="@string/signin_with_google_test"
                 android:textAllCaps="false"

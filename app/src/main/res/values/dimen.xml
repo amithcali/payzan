@@ -1,6 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
+    <!--Layout Sizes-->
+    <dimen name="lyt_margin_left">16dp</dimen>
+    <dimen name="lyt_margin_right">16dp</dimen>
+    <dimen name="lyt_margin_top">16dp</dimen>
+    <dimen name="lyt_margin_bottom">12dp</dimen>
+    <dimen name="lyt_margin">8dp</dimen>
+
+    <!--common TextView sizes-->
+    <dimen name="txt_height">30dp</dimen>
+    <dimen name="txt_width">4dp</dimen>
+    <dimen name="txt_FontSize">12dp</dimen>
+    <dimen name="txt_margin">10dp</dimen>
+
+
+    <!--common Edittext Sizes-->
+    <dimen name="edt_height">35dp</dimen>
+    <dimen name="edt_widtht">4dp</dimen>
+    <dimen name="edt_FontSize">16sp</dimen>
+    <dimen name="edt_bottom_margin">16sp</dimen>
+    <dimen name="edt_text_pading_left">5dp</dimen>
+
+
+
+
+    <!--common button sizes-->
+    <dimen name="btn_height">40dp</dimen>
+    <dimen name="btn_width">4dp</dimen>
+    <dimen name="btn_FontSize">4dp</dimen>
+    <dimen name="btn_margin_top">10dp</dimen>
+    <dimen name="btn_margin_left">35dp</dimen>
+    <dimen name="btn_margin_right">35dp</dimen>
+
+    <dimen name="btn1_height">35dp</dimen>
+    <dimen name="btn1_font">12dp</dimen>
+
+    <!--common image sizes-->
+    <dimen name="img_height">80dp</dimen>
+    <dimen name="img_width">80dp</dimen>
+
+    <!--Header View Sizes-->
+    <dimen name="header_image_height">4dp</dimen>
+    <dimen name="header_image_width">4dp</dimen>
+
+
+    <!--Search bar Sizes-->
+    <dimen name="search_image_height">4dp</dimen>
+    <dimen name="search_image_width">4dp</dimen>
+
+    <dimen name="search_bar_height">4dp</dimen>
+    <dimen name="search_bar_width">4dp</dimen>
+
+    <!--ListView Row sizes-->
+
+    <dimen name="lst_image_height">4dp</dimen>
+    <dimen name="lst_image_width">4dp</dimen>
+
+    <dimen name="lst_txt_height">4dp</dimen>
+    <dimen name="lst_txt_width">4dp</dimen>
+
+
+    <!--ListView Row Item Sizes - - End  -->
+    <dimen name="font_header">18sp</dimen>
+
+<!--Login page-->
+    <dimen name="login_header_height">30dp</dimen>
+    <dimen name="login_header_width">4dp</dimen>
+
+
+    <dimen name="img_back_height">20dp</dimen>
+    <dimen name="img_back__width">4dp</dimen>
+
+
+
+    <dimen name="logo_height">20dp</dimen>
+    <dimen name="logo_width">100dp</dimen>
+    <dimen name="logo_margin">20dp</dimen>
+
+
+    <!--radio button-->
+    <dimen name="rdo_margin">8dp</dimen>
+    <dimen name="rdo_width">100dp</dimen>
+    <dimen name="rdo_height">20dp</dimen>
+
+    <!--&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
     <dimen name="edittext_text_input_layout_padding">4dp</dimen>
 
     <dimen name="layout_marin_left">16dp</dimen>
@@ -48,7 +133,6 @@
     <dimen name="thirtyDp">30dp</dimen>
     <dimen name="thirtyfiveDp">35dp</dimen>
     <dimen name="sixty">60dp</dimen>
-
     <dimen name="hunderedDp">100dp</dimen>
 
 

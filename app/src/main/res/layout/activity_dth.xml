@@ -14,41 +14,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/layout_margin_top"
-            android:layout_marginRight="@dimen/layout_marin_right"
-            android:layout_marginLeft="@dimen/layout_marin_left">
+            android:layout_marginTop="@dimen/lyt_margin_top"
+            android:layout_marginRight="@dimen/lyt_margin_right"
+            android:layout_marginLeft="@dimen/lyt_margin_left">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginBottom="@dimen/layout_marin_bottom">
+                android:layout_marginBottom="@dimen/lyt_margin_bottom">
                 <ImageView
-                    android:layout_width="@dimen/image_height"
-                    android:layout_height="@dimen/image_width"
+                    android:layout_width="@dimen/img_height"
+                    android:layout_height="@dimen/img_height"
                     app:srcCompat="@drawable/ic_dth"
                     android:layout_toLeftOf="@+id/header"
-                    android:layout_marginRight="@dimen/layout_marin_right"/>
+                    android:layout_marginRight="@dimen/lyt_margin_right"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="D T H"
                     android:gravity="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_header_size"
+                    android:textSize="@dimen/font_header"
                     android:layout_centerInParent="true"
                    android:id="@+id/header"
                     />
             </LinearLayout>
 
-            <EditText
+            <calibrage.payzan.controls.CommonEditText
                 android:layout_width="match_parent"
                 android:id="@+id/operator"
                 android:hint="@string/subscriber_id"
                 style="@style/EditTextStyle"
                 android:textSize="@dimen/edittext_text_size"
-                android:layout_marginBottom="@dimen/main_layout_head_bottom_margin" />
+                android:layout_marginBottom="@dimen/lyt_margin_bottom" />
             <EditText
                 android:layout_width="match_parent"
                 android:id="@+id/customerId"

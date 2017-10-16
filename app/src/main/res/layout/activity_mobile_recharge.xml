@@ -14,7 +14,7 @@
         <include
             android:id="@+id/mainlayout"
             layout="@layout/main_header"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/eightDp">
+                android:layout_margin="@dimen/lyt_margin">
 
                 <RadioGroup
                     android:id="@+id/radioGroup"
@@ -38,19 +38,19 @@
                         android:id="@+id/prepaidRB"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/eightDp"
-                        android:text="prepaid"
+                        android:layout_margin="@dimen/rdo_margin"
                         android:button="@drawable/radio_btn"
-                        android:textColor="@color/accent"/>
+                        android:text="prepaid"
+                        android:textColor="@color/accent" />
 
                     <RadioButton
                         android:id="@+id/postpaidRB"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/eightDp"
-                        android:text="postpaid"
+                        android:layout_margin="@dimen/rdo_margin"
                         android:button="@drawable/radio_btn"
-                        android:textColor="@color/accent"/>
+                        android:text="postpaid"
+                        android:textColor="@color/accent" />
                 </RadioGroup>
 
                 <LinearLayout
@@ -62,16 +62,14 @@
                     <FrameLayout
                         android:id="@+id/first1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                      >
+                        android:layout_height="wrap_content">
 
-                        <EditText
+                        <calibrage.payzan.controls.CommonEditText
                             android:id="@+id/mobileEdt"
                             style="@style/EditTextStyle"
-                            android:hint="@string/mobile_number"
-                            android:inputType="numberDecimal"
                             android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"
-                             />
+                            android:hint="@string/mobile_number"
+                            android:inputType="numberDecimal" />
 
 
                         <ImageView
@@ -89,16 +87,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <EditText
+                        <calibrage.payzan.controls.CommonEditText
                             android:id="@+id/currentOperator"
                             style="@style/EditTextStyle"
                             android:layout_width="match_parent"
                             android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"
-                            android:hint="@string/current_operator"
-                            />
+                            android:hint="@string/current_operator" />
 
-                       <TextView
-                           style="@style/InnerEditTextView"
+                        <calibrage.payzan.controls.CommonEditText
+                            style="@style/InnerEditTextView"
                             android:text="Update Operator"
                             android:textColor="@color/accent" />
 
@@ -109,21 +106,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <EditText
+                        <calibrage.payzan.controls.CommonEditText
                             android:id="@+id/amount"
                             style="@style/EditTextStyle"
                             android:layout_width="match_parent"
-                            android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"
+                            android:layout_marginBottom="@dimen/edt_bottom_margin"
                             android:hint="@string/amount"
-                            android:inputType="numberDecimal"
-                           />
+                            android:inputType="numberDecimal" />
 
-                        <TextView
+                        <calibrage.payzan.controls.CommonTextView
+                            android:id="@+id/browsePlans"
                             style="@style/InnerEditTextView"
                             android:text="browse Plans"
-                            android:id="@+id/browsePlans"
                             android:textColor="@color/accent" />
-
 
 
                     </FrameLayout>
@@ -159,40 +154,38 @@
                         android:id="@+id/rechageTypeRadioGroup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_gravity="center"
                         android:layout_marginTop="16dp"
-                        android:orientation="horizontal"
                         android:background="@drawable/border_accent"
+                        android:gravity="center"
+                        android:orientation="horizontal"
                         android:padding="1dp"
 
-                       >
+                        >
 
-                        <Button
-                            style="@android:style/Widget.Holo.Button.Borderless.Small"
+                        <calibrage.payzan.controls.CommonButton
                             android:id="@+id/talktimeRB"
+                            style="@android:style/Widget.Holo.Button.Borderless.Small"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/thirtyfiveDp"
+                            android:layout_height="@dimen/btn1_height"
                             android:text="@string/talktime_topup"
                             android:textColor="@color/white"
-                            android:textSize="12sp"
-                            />
+                            android:textSize="@dimen/btn1_font" />
 
-                        <Button
-                            style="@android:style/Widget.Holo.Button.Borderless.Small"
+                        <calibrage.payzan.controls.CommonButton
                             android:id="@+id/specialRB"
+                            style="@android:style/Widget.Holo.Button.Borderless.Small"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/thirtyfiveDp"
+                            android:layout_height="@dimen/btn1_height"
                             android:text="@string/special_rechartge"
-                            android:textSize="@dimen/toolbar_text_size"
-                            />
+                            android:textSize="@dimen/btn1_font" />
                     </LinearLayout>
 
 
-                    <Button
+                    <calibrage.payzan.controls.CommonButton
                         android:id="@+id/submit"
                         style="@style/ButtonStyle"
-                        android:layout_marginTop="@dimen/layout_marin_bottom"
+                        android:layout_marginTop="@dimen/btn_margin_top"
                         android:background="@drawable/roundbutton"
                         android:text="@string/proceed_to_recharge"
                         android:textAllCaps="false"

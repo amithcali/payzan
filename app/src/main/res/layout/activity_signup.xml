@@ -1,199 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--  Header  Starts-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       >
-        <!--  Header  Starts-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/thirtyDp"
-            android:background="@color/DarkRed">
+        android:layout_height="@dimen/login_header_height"
+        android:background="@color/DarkRed">
 
-            <ImageView
+        <ImageView
 
-                android:layout_width="@dimen/button_size"
-                android:layout_height="@dimen/thirtyDp"
-                android:layout_gravity="center"
-                />
+            android:layout_width="@dimen/edittext_height"
+            android:layout_height="@dimen/img_back_height"
+            android:layout_gravity="center" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/thirtyDp"
-                android:gravity="center"
-                android:text="Sign Up"
-                android:textColor="@color/White"
-                android:textSize="@dimen/text_size_inner_edit_text" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/header"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+        <calibrage.payzan.controls.CommonTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingBottom="@dimen/fiveDp"
-            android:paddingTop="@dimen/fiveDp">
-            <!-- Logo Start-->
-            <ImageView
-                android:layout_width="@dimen/hunderedDp"
-                android:layout_height="@dimen/thirtyDp"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/thirtyDp"
-                android:src="@mipmap/logo" />
-            <!-- Logo Ends -->
-        </LinearLayout>
-        <!--  Header Ends -->
-        <!-- Footer Start -->
-        <LinearLayout
-            android:id="@+id/footer"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/sixty"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical"></LinearLayout>
-        <!-- Footer Ends -->
+            android:text="@string/sign_up"
+            android:textColor="@color/White"
+            android:textSize="@dimen/txt_FontSize" />
+    </LinearLayout>
 
-        <!-- Registration Form -->
-        <LinearLayout
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:paddingBottom="@dimen/fiveDp"
+        android:paddingTop="@dimen/fiveDp">
+        <!-- Logo Start-->
+        <ImageView
+            android:layout_width="@dimen/logo_width"
+            android:layout_height="@dimen/twentyDP"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/logo_margin"
+            android:src="@mipmap/logo" />
+        <!-- Logo Ends -->
+    </LinearLayout>
+    <!--  Header Ends -->
+    <!-- Footer Start -->
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/sixty"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"></LinearLayout>
+    <!-- Footer Ends -->
+
+    <!-- Registration Form -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:layout_marginLeft="@dimen/fifteen"
+        android:layout_marginRight="@dimen/fifteen"
+        android:orientation="vertical">
+        <!-- Full Name Label -->
+
+        <calibrage.payzan.utils.NCBTextInputLayout
+            android:id="@+id/reg_mobile_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/header"
-            android:layout_marginLeft="@dimen/fifteen"
-            android:layout_marginRight="@dimen/fifteen"
-            android:orientation="vertical">
-            <!-- Full Name Label -->
+            app:errorEnabled="true"
+            app:hintEnabled="false">
 
-            <calibrage.payzan.utils.NCBTextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:hintEnabled="false"
-                android:id="@+id/reg_mobile_til"
-                app:errorEnabled="true">
-
-            <EditText
+            <calibrage.payzan.controls.CommonEditText
                 android:id="@+id/reg_mobile"
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/thirtyfiveDp"
-                android:layout_marginBottom="@dimen/tenDp"
+                android:layout_height="@dimen/edt_height"
+                android:layout_marginBottom="@dimen/edt_bottom_margin"
                 android:background="@drawable/roundededittext"
                 android:hint="@string/mobile_number_signup"
                 android:inputType="phone"
-                android:paddingLeft="@dimen/fiveDp"
-                android:textSize="@dimen/edittext_text_size" />
-            </calibrage.payzan.utils.NCBTextInputLayout>
+                android:paddingLeft="@dimen/edt_text_pading_left"
+                android:textSize="@dimen/edt_FontSize" />
+        </calibrage.payzan.utils.NCBTextInputLayout>
 
 
-            <EditText
-                android:id="@+id/reg_email"
+        <calibrage.payzan.controls.CommonEditText
+            android:id="@+id/reg_email"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/edt_height"
+            android:layout_marginBottom="@dimen/edt_bottom_margin"
+            android:background="@drawable/roundededittext"
+            android:hint="@string/email_optional"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="@dimen/edt_text_pading_left"
+            android:textSize="@dimen/edt_FontSize" />
+
+        <android.support.design.widget.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true">
+
+            <calibrage.payzan.controls.CommonEditText
+                android:id="@+id/reg_password"
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/thirtyfiveDp"
-                android:layout_marginBottom="@dimen/fifteen"
-                android:layout_marginTop="@dimen/fiveDp"
+                android:layout_height="@dimen/edt_height"
+                android:layout_marginBottom="@dimen/edt_bottom_margin"
                 android:background="@drawable/roundededittext"
-                android:hint="@string/email_optional"
-                android:inputType="textEmailAddress"
-                android:paddingLeft="@dimen/fiveDp"
-                android:textSize="@dimen/edittext_text_size" />
-
-            <android.support.design.widget.TextInputLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:hintEnabled="false"
-                app:passwordToggleEnabled="true"
-               >
-
-                <EditText
-                    android:id="@+id/reg_password"
-                    android:layout_width="fill_parent"
-                    android:layout_height="@dimen/thirtyDp"
-                    android:layout_marginBottom="@dimen/fifteen"
-                    android:layout_marginTop="@dimen/fiveDp"
-                    android:background="@drawable/roundededittext"
-                    android:fontFamily="serif"
-                    android:hint="@string/create_password"
-                    android:inputType="textPassword"
-                    android:paddingLeft="@dimen/fiveDp"
-                    android:textSize="@dimen/edittext_text_size" />
-            </android.support.design.widget.TextInputLayout>
+                android:fontFamily="serif"
+                android:hint="@string/create_password"
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/edt_text_pading_left"
+                android:textSize="@dimen/edt_FontSize" />
+        </android.support.design.widget.TextInputLayout>
 
 
+        <calibrage.payzan.controls.CommonTextView
+            android:id="@+id/terms_comditions"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/txt_margin"
+            android:gravity="center"
+            android:textColor="#263631"
+            android:textSize="@dimen/txt_FontSize" />
 
-            <TextView
-                android:id="@+id/terms_comditions"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dip"
-                android:gravity="center"
-                android:textColor="#263631"
-                android:textSize="@dimen/leven" />
+        <calibrage.payzan.controls.CommonButton
+            android:id="@+id/btnRegister"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginTop="@dimen/btn_margin_top"
+            android:background="@drawable/roundbutton"
+            android:text="@string/sign_up"
+            android:textAllCaps="false"
+            android:textColor="@color/White" />
+        <!-- Link to Login Screen -->
+        <calibrage.payzan.controls.CommonTextView
+            android:id="@+id/linkToLogin"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/twentyDP"
+            android:layout_marginTop="@dimen/txt_margin"
+            android:gravity="center"
+            android:textColor="#263631"
+            android:textSize="@dimen/txt_FontSize" />
 
-            <Button
-                android:id="@+id/btnRegister"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/button_size"
-                android:layout_marginTop="@dimen/tenDp"
-                android:background="@drawable/roundbutton"
-                android:text="@string/sign_up"
-                android:textAllCaps="false"
-                android:textColor="@color/White" />
-            <!-- Link to Login Screen -->
-            <TextView
-                android:id="@+id/linkToLogin"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/twentyDP"
-                android:layout_marginTop="@dimen/twentyDP"
-                android:gravity="center"
-                android:textColor="#263631"
-                android:textSize="@dimen/main_layout_head_bottom_margin" />
+        <calibrage.payzan.controls.CommonTextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/txt_height"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/txt_margin"
+            android:gravity="center"
+            android:text="- or -" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/twentyFiveDP"
-                android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/tenDp"
-                android:gravity="center"
-                android:text="@string/or" />
+        <calibrage.payzan.controls.CommonButton
+            android:id="@+id/fbBtn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginLeft="@dimen/btn_margin_left"
+            android:layout_marginRight="@dimen/btn_margin_right"
+            android:background="@drawable/roundbutton_facebook"
+            android:text="@string/signin_with_facebook"
+            android:textAllCaps="false"
+            android:textColor="@color/White" />
 
-            <Button
-                android:id="@+id/fbBtn"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/thirtyfiveDp"
-                android:layout_marginLeft="@dimen/fifteen"
-                android:layout_marginRight="@dimen/fifteen"
-                android:background="@drawable/roundbutton_facebook"
-                android:text="@string/signin_with_facebook"
-                android:textAllCaps="false"
-                android:textColor="@color/White" />
-
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/login"
-                android:layout_width="@dimen/image_height"
-                android:layout_height="@dimen/image_width"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/thirtyDp"
-                android:layout_marginTop="@dimen/thirtyDp"
-                android:scaleType="centerInside"
-                android:visibility="gone"
-                />
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login"
+            android:layout_width="@dimen/image_height"
+            android:layout_height="@dimen/image_width"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/thirtyDp"
+            android:layout_marginTop="@dimen/thirtyDp"
+            android:scaleType="centerInside"
+            android:visibility="gone" />
 
 
-
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/btn_sign_in"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/thirtyfiveDp"
-                android:layout_marginLeft="@dimen/fifteen"
-                android:layout_marginRight="@dimen/fifteen"
-                android:layout_marginTop="@dimen/thirtyfiveDp"
-                android:background="@drawable/round_google_button"
-                android:text="@string/signin_with_google"
-                android:textAllCaps="false"
-                android:textColor="@color/White" />
-        </LinearLayout>
-        <!-- Registration Form Ends -->
-    </RelativeLayout>
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/btn_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginLeft="@dimen/btn_margin_left"
+            android:layout_marginRight="@dimen/btn_margin_right"
+            android:layout_marginTop="@dimen/btn_margin_top"
+            android:background="@drawable/round_google_button"
+            android:text="@string/signin_with_google"
+            android:textAllCaps="false"
+            android:textColor="@color/White" />
+    </LinearLayout>
+    <!-- Registration Form Ends -->
+</RelativeLayout>
 
 
