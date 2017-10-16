@@ -15,18 +15,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp">
+            android:layout_marginTop="@dimen/layout_marin_right"
+            android:layout_marginRight="@dimen/layout_marin_right"
+            android:layout_marginLeft="@dimen/layout_marin_right">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="@dimen/main_layout_head_bottom_margin">
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="@dimen/image_width"
+                android:layout_height="@dimen/image_width"
                 app:srcCompat="@drawable/ic_electricity"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
                 android:text="Electricity Bill"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="@dimen/text_header_size"
                 android:fontFamily="serif"
                 />
         </LinearLayout>
@@ -52,29 +52,24 @@
                 android:id="@+id/ElectrictyEdt"
                 android:hint="@string/select_district"
                 style="@style/EditTextStyle"
-                android:textSize="16sp"
-                android:layout_marginBottom="12dp"/>
+               />
             <EditText
                 android:layout_width="match_parent"
                 android:id="@+id/ServiceNEdt"
                 android:hint="@string/service_no"
                 style="@style/EditTextStyle"
-                android:textSize="16sp"
-                android:layout_marginBottom="12dp"/>
+               />
             <EditText
                 android:layout_width="match_parent"
                 android:id="@+id/amountEdt"
                 android:hint="@string/amount"
                 style="@style/EditTextStyle"
-                android:textSize="16sp"
-                android:layout_marginBottom="12dp"
                 android:inputType="number"/>
             <Button
               style="@style/ButtonStyle"
                 android:id="@+id/submit"
                 android:text="@string/proceed_to_pay_bill"
-                android:layout_marginTop="16dp"
-                android:textColor="@color/white"/>
+              />
 
         </LinearLayout>
 

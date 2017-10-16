@@ -72,6 +72,8 @@ public class HomeActivity extends AppCompatActivity  {
                                 getSupportFragmentManager().beginTransaction()
                                         .replace(R.id.content_frame, new HomeFragment())
                                         .commit();
+                                toolbar.setNavigationIcon(null);
+                                toolbar.setTitle("");
 //                                SpannableString s = new SpannableString(item.getTitle());
 //                                s.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.accent,null)), 0, s.length(), 0);
 //                                item.setTitle(s);
@@ -109,7 +111,7 @@ public class HomeActivity extends AppCompatActivity  {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search, menu);//Menu Resource, Menu
         MenuItem menuItem = menu.findItem(R.id.action_cart);
-        menuItem.setIcon(buildCounterDrawable(HomeActivity.this,2,  R.drawable.head_notification_icon));
+        menuItem.setIcon(buildCounterDrawable(HomeActivity.this,2,  R.drawable.ic_notification));
         return true;
     }
 

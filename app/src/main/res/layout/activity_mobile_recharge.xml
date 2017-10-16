@@ -25,7 +25,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp">
+                android:layout_margin="@dimen/eightDp">
 
                 <RadioGroup
                     android:id="@+id/radioGroup"
@@ -38,7 +38,7 @@
                         android:id="@+id/prepaidRB"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
+                        android:layout_margin="@dimen/eightDp"
                         android:text="prepaid"
                         android:button="@drawable/radio_btn"
                         android:textColor="@color/accent"/>
@@ -47,7 +47,7 @@
                         android:id="@+id/postpaidRB"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
+                        android:layout_margin="@dimen/eightDp"
                         android:text="postpaid"
                         android:button="@drawable/radio_btn"
                         android:textColor="@color/accent"/>
@@ -63,14 +63,15 @@
                         android:id="@+id/first1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp">
+                      >
 
                         <EditText
                             android:id="@+id/mobileEdt"
                             style="@style/EditTextStyle"
                             android:hint="@string/mobile_number"
                             android:inputType="numberDecimal"
-                            android:textSize="16sp" />
+                            android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"
+                             />
 
 
                         <ImageView
@@ -78,7 +79,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center_vertical"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="@dimen/text_size_inner_edit_text"
                             android:src="@drawable/prepaid_contacts_icon" />
                     </FrameLayout>
 
@@ -92,20 +93,14 @@
                             android:id="@+id/currentOperator"
                             style="@style/EditTextStyle"
                             android:layout_width="match_parent"
-                            android:layout_marginBottom="12dp"
+                            android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"
                             android:hint="@string/current_operator"
-                            android:textSize="16sp" />
+                            />
 
-                        <TextView
-                            android:id="@+id/updateOperator"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right|center_vertical"
-                            android:layout_marginRight="10dp"
-                            android:fontFamily="sans-serif-condensed"
+                       <TextView
+                           style="@style/InnerEditTextView"
                             android:text="Update Operator"
-                            android:textColor="@color/accent"
-                            android:textSize="10sp" />
+                            android:textColor="@color/accent" />
 
                     </FrameLayout>
 
@@ -118,21 +113,17 @@
                             android:id="@+id/amount"
                             style="@style/EditTextStyle"
                             android:layout_width="match_parent"
-                            android:layout_marginBottom="12dp"
+                            android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"
                             android:hint="@string/amount"
                             android:inputType="numberDecimal"
-                            android:textSize="16sp" />
+                           />
 
                         <TextView
-                            android:id="@+id/browsePlans"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right|center_vertical"
-                            android:layout_marginRight="10dp"
-                            android:fontFamily="sans-serif-condensed"
+                            style="@style/InnerEditTextView"
                             android:text="browse Plans"
-                            android:textColor="@color/accent"
-                            android:textSize="10sp" />
+                            android:id="@+id/browsePlans"
+                            android:textColor="@color/accent" />
+
 
 
                     </FrameLayout>
@@ -181,7 +172,7 @@
                             style="@android:style/Widget.Holo.Button.Borderless.Small"
                             android:id="@+id/talktimeRB"
                             android:layout_width="wrap_content"
-                            android:layout_height="32dp"
+                            android:layout_height="@dimen/thirtyfiveDp"
                             android:text="@string/talktime_topup"
                             android:textColor="@color/white"
                             android:textSize="12sp"
@@ -191,18 +182,17 @@
                             style="@android:style/Widget.Holo.Button.Borderless.Small"
                             android:id="@+id/specialRB"
                             android:layout_width="wrap_content"
-                            android:layout_height="32dp"
+                            android:layout_height="@dimen/thirtyfiveDp"
                             android:text="@string/special_rechartge"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/toolbar_text_size"
                             />
                     </LinearLayout>
 
 
                     <Button
                         android:id="@+id/submit"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="16dp"
+                        style="@style/ButtonStyle"
+                        android:layout_marginTop="@dimen/layout_marin_bottom"
                         android:background="@drawable/roundbutton"
                         android:text="@string/proceed_to_recharge"
                         android:textAllCaps="false"
