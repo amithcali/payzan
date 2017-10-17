@@ -42,5 +42,6 @@
     <color name="Red">#FF4500</color>
     <color name="lightgrey">#D3D3D3</color>
 
-
+    <color name="new_accent_cb">#e4aaaf</color>
+    <color name="new_accent_c">#99edbfc3</color>
 </resources>

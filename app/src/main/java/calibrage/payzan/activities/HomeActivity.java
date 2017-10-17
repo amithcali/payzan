@@ -10,12 +10,15 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Field;
@@ -40,6 +43,8 @@ public class HomeActivity extends AppCompatActivity  {
     private FragmentManager fragmentManager;
     private Menu Menu;
     private BottomNavigationView bottomNavigationView;
+    private TextView textCartItemCount;
+    int mCartItemCount = 10;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,9 +115,40 @@ public class HomeActivity extends AppCompatActivity  {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search, menu);//Menu Resource, Menu
-        MenuItem menuItem = menu.findItem(R.id.action_cart);
-        menuItem.setIcon(buildCounterDrawable(HomeActivity.this,2,  R.drawable.ic_notification));
+       final MenuItem menuItem = menu.findItem(R.id.action_cart);
+        //menuItem.setIcon(buildCounterDrawable(HomeActivity.this,2,  R.drawable.ic_notification));
+
+       // final MenuItem menuItem = menu.findItem(R.id.action_cart);
+
+        View actionView = MenuItemCompat.getActionView(menuItem);
+        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
+
+        setupBadge();
+
+        actionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onOptionsItemSelected(menuItem);
+            }
+        });
+
         return true;
+    }
+
+    private void setupBadge() {
+
+        if (textCartItemCount != null) {
+            if (mCartItemCount == 0) {
+                if (textCartItemCount.getVisibility() != View.GONE) {
+                    textCartItemCount.setVisibility(View.GONE);
+                }
+            } else {
+                textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
+                if (textCartItemCount.getVisibility() != View.VISIBLE) {
+                    textCartItemCount.setVisibility(View.VISIBLE);
+                }
+            }
+        }
     }
 
     @Override

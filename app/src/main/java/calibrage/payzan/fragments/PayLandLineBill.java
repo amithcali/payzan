@@ -1,19 +1,32 @@
 package calibrage.payzan.fragments;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
+import calibrage.payzan.controls.CommonEditText;
+import calibrage.payzan.interfaces.DrawableClickListener;
+import calibrage.payzan.utils.NCBTextInputLayout;
 
 /**
  * Created by Calibrage11 on 9/28/2017.
@@ -23,19 +36,140 @@ public class PayLandLineBill extends Fragment {
 
     private View rootView;
     private Context context;
+    private NCBTextInputLayout operatorTXT,numberTXT,circleTXT,amountTXT;
+    private calibrage.payzan.controls.CommonEditText  operatorEdt,mobilenoEdt,amount;
+    private AutoCompleteTextView circleEdt;
+    static final int PICK_CONTACT = 1;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-    }
+    ;}
+
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.activity_paylandline_bill, container, false);
         context = this.getActivity();
+        setViews();
+        initViews();
+        return  rootView;
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case (PICK_CONTACT):
+                if (resultCode == Activity.RESULT_OK) {
+                    Uri contactData = data.getData();
+                    Cursor c = context.getContentResolver().query(contactData, null, null, null, null);
+                    if (c.moveToFirst()) {
+                        String hasPhone = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        mobilenoEdt.setText(hasPhone);
+                    }
+
+                }
+                break;
+        }
+    }
+
+    private void initViews() {
+        operatorEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });mobilenoEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(charSequence.length()>0){
+                    numberTXT.setErrorEnabled(false);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });circleEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });amount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(charSequence.length()>0){
+                    amountTXT.setErrorEnabled(false);
+                }
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        mobilenoEdt.setDrawableClickListener(new DrawableClickListener() {
+
+
+            public void onClick(DrawablePosition target) {
+                switch (target) {
+                    case RIGHT:
+                        //Do something here
+                        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                        startActivityForResult(intent, PICK_CONTACT);
+
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+        });
+    }
+
+    private void setViews() {
+
         setHasOptionsMenu(true);
+
+
         ((AppCompatActivity)getActivity()).setSupportActionBar(HomeActivity.toolbar);
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
         HomeActivity.toolbar.setTitle(getResources().getString(R.string.landline_sname));
@@ -47,6 +181,15 @@ public class PayLandLineBill extends Fragment {
                 closeTab();
             }
         });
+        operatorTXT = (NCBTextInputLayout)rootView.findViewById(R.id.operatorTXT);
+        numberTXT = (NCBTextInputLayout)rootView.findViewById(R.id.numberTXT);
+        circleTXT = (NCBTextInputLayout)rootView.findViewById(R.id.circleTXT);
+        amountTXT = (NCBTextInputLayout)rootView.findViewById(R.id.amountTXT);
+
+        operatorEdt = (CommonEditText) rootView.findViewById(R.id.operatorEdt);
+        mobilenoEdt = (CommonEditText) rootView.findViewById(R.id.mobilenoEdt);
+        circleEdt = (AutoCompleteTextView) rootView.findViewById(R.id.circleEdt);
+        amount = (CommonEditText) rootView.findViewById(R.id.amount);
         rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
         rootView.setOnKeyListener(new View.OnKeyListener() {
@@ -62,9 +205,7 @@ public class PayLandLineBill extends Fragment {
                 }
             }
         });
-        return  rootView;
     }
-
     private void closeTab(){
         Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("landlineTag");
 
@@ -73,6 +214,28 @@ public class PayLandLineBill extends Fragment {
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         HomeActivity.toolbar.setTitle("");
         HomeActivity.toolbar.setNavigationIcon(null);
+    }
+
+    private boolean isValidateUi(){
+
+        if(TextUtils.isEmpty(operatorEdt.getText().toString().trim())){
+            operatorTXT.setErrorEnabled(true);
+            operatorTXT.setError("please select operator");
+            return false;
+        }else if(TextUtils.isEmpty(mobilenoEdt.getText().toString().trim())){
+            numberTXT.setError("enter number");
+            numberTXT.setErrorEnabled(true);
+            return false;
+        }else if(TextUtils.isEmpty(circleEdt.getText().toString().trim())){
+            circleTXT.setError("select cicle");
+            circleTXT.setErrorEnabled(true);
+            return false;
+        }else if(TextUtils.isEmpty(amount.getText().toString().trim())){
+            amountTXT.setError("enter amount");
+            amountTXT.setErrorEnabled(true);
+            return false;
+        }
+        return true;
     }
 
 }

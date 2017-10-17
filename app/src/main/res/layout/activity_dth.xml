@@ -41,46 +41,52 @@
                    android:id="@+id/header"
                     />
             </LinearLayout>
+<calibrage.payzan.utils.NCBTextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/SubscriberTXT">
 
-            <calibrage.payzan.controls.CommonEditText
+    <calibrage.payzan.controls.CommonEditText
+        android:id="@+id/subscriberEdt"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:hint="@string/subscriber_id" />
+
+</calibrage.payzan.utils.NCBTextInputLayout>
+
+            <calibrage.payzan.utils.NCBTextInputLayout
                 android:layout_width="match_parent"
-                android:id="@+id/operator"
-                android:hint="@string/subscriber_id"
-                style="@style/EditTextStyle"
-                android:textSize="@dimen/edt_FontSize"
-                android:layout_marginBottom="@dimen/lyt_margin_bottom" />
-            <calibrage.payzan.controls.CommonEditText
+                android:layout_height="wrap_content"
+                android:id="@+id/OperatorTXT">
+            <AutoCompleteTextView
                 android:layout_width="match_parent"
-                android:id="@+id/customerId"
+                android:id="@+id/operatorSpn"
                 android:hint="@string/select_operator"
                 style="@style/EditTextStyle"
-                android:textSize="@dimen/edittext_text_size"
-                android:layout_marginBottom="@dimen/edt_FontSize"/>
+               />
+            </calibrage.payzan.utils.NCBTextInputLayout>
 
 
             <FrameLayout
                 android:id="@+id/first"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <calibrage.payzan.controls.CommonEditText
+                <calibrage.payzan.utils.NCBTextInputLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/amountTXT">
+                <calibrage.payzan.controls.CommonEditText
                     android:id="@+id/amount"
                     android:hint="@string/amount"
                     style="@style/EditTextStyle"
-                    android:textSize="@dimen/edt_FontSize"
                     android:inputType="numberDecimal"
                     android:layout_marginBottom="@dimen/edt_bottom_margin"/>
+                </calibrage.payzan.utils.NCBTextInputLayout>
+
                 <calibrage.payzan.controls.CommonTextView
                     android:id="@+id/browsePlans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"
-                    android:layout_marginRight="@dimen/txt_margin"
                     android:text="browse Plans"
-                    android:textColor="@color/accent"
-                    android:textSize="@dimen/txt_FontSize"
-                    android:fontFamily="sans-serif-condensed"
+                    style="@style/InnerEditTextView"
                      />
             </FrameLayout>
 

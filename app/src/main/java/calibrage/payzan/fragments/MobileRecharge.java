@@ -84,7 +84,7 @@ public class MobileRecharge extends Fragment {
     private ArrayList<OperatorModel.ListResult> listResults;
     private String serviceProviderType;
     private NCBTextInputLayout mobileNumberTXT, operatorTXT, amountTXT;
-    private Boolean  isProvider=false;
+    private Boolean isProvider = false;
 
 
     @Nullable
@@ -93,42 +93,14 @@ public class MobileRecharge extends Fragment {
         rootview = inflater.inflate(R.layout.activity_mobile_recharge, container, false);
         context = this.getActivity();
         //  android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        setHasOptionsMenu(true);
-        listResults = new ArrayList<OperatorModel.ListResult>();
-        ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
-        HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
-        HomeActivity.toolbar.setTitle(getResources().getString(R.string.mobile_recharge_sname));
-        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
-        HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        setViews();
+        initViews();
 
-                closeTab();
-            }
-        });
-        mobileNumber = (ImageView) rootview.findViewById(R.id.mobileNumber);
-        mobileEdt = (CommonEditText) rootview.findViewById(R.id.mobileEdt);
-        amount = (CommonEditText) rootview.findViewById(R.id.amount);
-        currentOperator = (AutoCompleteTextView) rootview.findViewById(R.id.currentOperator);
-        talktimeRB = (Button) rootview.findViewById(R.id.talktimeRB);
-        specialRB = (Button) rootview.findViewById(R.id.specialRB);
-        prepaidRB = (RadioButton) rootview.findViewById(R.id.prepaidRB);
-        postpaidRB = (RadioButton) rootview.findViewById(R.id.postpaidRB);
-        postpaidRB = (RadioButton) rootview.findViewById(R.id.postpaidRB);
-        updateOperatorId = (TextView) rootview.findViewById(R.id.updateOperatorId);
-        submit = (Button) rootview.findViewById(R.id.submit);
-        mobileNumberTXT = (NCBTextInputLayout) rootview.findViewById(R.id.mobileNumberTXT);
-        operatorTXT = (NCBTextInputLayout) rootview.findViewById(R.id.operatorTXT);
-        amountTXT = (NCBTextInputLayout) rootview.findViewById(R.id.amountTXT);
-        setHasOptionsMenu(true);
-        currentOperator.setThreshold(1);
 
-        talktimeRB.setBackgroundResource(R.drawable.roundbutton);
-        talktimeRB.setTextColor(ContextCompat.getColor(context, R.color.white_new));
-        specialRB.setTextColor(ContextCompat.getColor(context, R.color.accent));
-        serviceProviderType = CommonConstants.SERVICE_PROVIDER_ID_PREPAID;
-        prepaidRB.setChecked(true);
-        getOperator(CommonConstants.SERVICE_PROVIDER_ID_PREPAID);
+        return rootview;
+    }
+
+    private void initViews() {
 
         prepaidRB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,7 +113,7 @@ public class MobileRecharge extends Fragment {
         postpaidRB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                serviceProviderType = CommonConstants.SERVICE_PROVIDER_ID_PREPAID;
+                serviceProviderType = CommonConstants.SERVICE_PROVIDER_ID_POSTPAID;
                 getOperator(serviceProviderType);
             }
         });
@@ -292,8 +264,45 @@ public class MobileRecharge extends Fragment {
 
             }
         });
+    }
 
-        return rootview;
+    private void setViews() {
+        setHasOptionsMenu(true);
+        listResults = new ArrayList<OperatorModel.ListResult>();
+        ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
+        HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
+        HomeActivity.toolbar.setTitle(getResources().getString(R.string.mobile_recharge_sname));
+        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
+        HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                closeTab();
+            }
+        });
+        mobileNumber = (ImageView) rootview.findViewById(R.id.mobileNumber);
+        mobileEdt = (CommonEditText) rootview.findViewById(R.id.mobileEdt);
+        amount = (CommonEditText) rootview.findViewById(R.id.amount);
+        currentOperator = (AutoCompleteTextView) rootview.findViewById(R.id.currentOperator);
+        talktimeRB = (Button) rootview.findViewById(R.id.talktimeRB);
+        specialRB = (Button) rootview.findViewById(R.id.specialRB);
+        prepaidRB = (RadioButton) rootview.findViewById(R.id.prepaidRB);
+        postpaidRB = (RadioButton) rootview.findViewById(R.id.postpaidRB);
+        postpaidRB = (RadioButton) rootview.findViewById(R.id.postpaidRB);
+        updateOperatorId = (TextView) rootview.findViewById(R.id.updateOperatorId);
+        submit = (Button) rootview.findViewById(R.id.submit);
+        mobileNumberTXT = (NCBTextInputLayout) rootview.findViewById(R.id.mobileNumberTXT);
+        operatorTXT = (NCBTextInputLayout) rootview.findViewById(R.id.operatorTXT);
+        amountTXT = (NCBTextInputLayout) rootview.findViewById(R.id.amountTXT);
+        setHasOptionsMenu(true);
+        currentOperator.setThreshold(1);
+
+        talktimeRB.setBackgroundResource(R.drawable.roundbutton);
+        talktimeRB.setTextColor(ContextCompat.getColor(context, R.color.white_new));
+        specialRB.setTextColor(ContextCompat.getColor(context, R.color.accent));
+        serviceProviderType = CommonConstants.SERVICE_PROVIDER_ID_PREPAID;
+        prepaidRB.setChecked(true);
+        getOperator(CommonConstants.SERVICE_PROVIDER_ID_PREPAID);
     }
 
     private void getOperator(String providerType) {
@@ -397,10 +406,10 @@ public class MobileRecharge extends Fragment {
         for (int i = 0; i < listResults.size(); i++) {
             operator.add(listResults.get(i).getServiceProviderName());
         }
-        for (int i = 0; i <operator.size() ; i++) {
-            if(operator.get(i).matches(currentOperator.getText().toString().trim()));
+        for (int i = 0; i < operator.size(); i++) {
+            if (operator.get(i).matches(currentOperator.getText().toString().trim())) ;
             {
-                isProvider =true;
+                isProvider = true;
                 break;
             }
         }

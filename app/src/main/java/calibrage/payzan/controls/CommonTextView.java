@@ -13,7 +13,7 @@ import calibrage.payzan.utils.Fontcache;
  * Created by Calibrage19 on 05-10-2017.
  */
 
-public class CommonTextView extends TextView {
+public class CommonTextView extends android.support.v7.widget.AppCompatTextView {
 
     public CommonTextView(Context context) {
         super(context);

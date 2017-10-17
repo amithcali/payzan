@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.v7.widget.CardView  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
@@ -11,13 +12,17 @@
     card_view:cardCornerRadius="@dimen/card_corner_radius_home"
     card_view:cardElevation="@dimen/card_corner_elevation_home"
     card_view:cardUseCompatPadding="true"
+    card_view:cardBackgroundColor="@color/new_accent_c">
 
-    >
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="@drawable/border_accentcolor_button"
+        android:layout_margin=".5dp"
+        >
 
         <LinearLayout
             android:layout_width="@dimen/card_view_width"

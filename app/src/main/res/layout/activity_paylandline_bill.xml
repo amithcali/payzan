@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,106 +9,113 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/lyt_margin_top"
-        android:layout_marginRight="@dimen/lyt_margin_right"
-        android:layout_marginLeft="@dimen/lyt_margin_left">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="@dimen/main_layout_head_bottom_margin">
-        <ImageView
-            android:layout_width="@dimen/img_height"
-            android:layout_height="@dimen/img_width"
-            app:srcCompat="@drawable/ic_landline"
-            />
-        <calibrage.payzan.controls.CommonTextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/landline"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/font_header"
-            android:layout_marginLeft="@dimen/txt_margin"
-            android:fontFamily="sans-serif-smallcaps"
-            />
-    </LinearLayout>
 
-        <calibrage.payzan.controls.CommonEditText
-            android:id="@+id/operator"
-            android:hint="@string/operator"
-            style="@style/EditTextStyle"
-            android:layout_marginBottom="@dimen/edt_FontSize"/>
-
-        <FrameLayout
-            android:id="@+id/first1"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-           >
+            android:layout_marginLeft="@dimen/lyt_margin_left"
+            android:layout_marginRight="@dimen/lyt_margin_right"
+            android:layout_marginTop="@dimen/lyt_margin_top"
+            android:orientation="vertical">
 
-        <calibrage.payzan.controls.CommonEditText
-            android:id="@+id/mobileEdt"
-            style="@style/EditTextStyle"
-            android:hint="@string/number_with_std_code"
-            android:inputType="numberDecimal"
-          />
-
-
-        <ImageView
-            android:id="@+id/mobileNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="@dimen/txt_margin"
-            android:src="@drawable/prepaid_contacts_icon" />
-        </FrameLayout>
-
-        <calibrage.payzan.controls.CommonEditText
-            android:layout_width="match_parent"
-            android:id="@+id/circleEdt"
-            android:hint="@string/select_circle"
-            style="@style/EditTextStyle"
-           />
-
-        <FrameLayout
-            android:id="@+id/first"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <calibrage.payzan.controls.CommonEditText
-                android:id="@+id/amount"
-                style="@style/EditTextStyle"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/edt_bottom_margin"
-                android:hint="@string/amount"
-                android:inputType="numberDecimal"
-                />
-
-            <calibrage.payzan.controls.CommonTextView
-                android:id="@+id/browsePlans"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="@dimen/lyt_margin_right"
-                android:text="@string/browse_plans"
-                android:textColor="@color/accent"
-                android:textSize="@dimen/txt_FontSize"
-                android:fontFamily="sans-serif-condensed"
-                />
-        </FrameLayout>
+                android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-        <calibrage.payzan.controls.CommonButton
-            style="@style/ButtonStyle"
-            android:id="@+id/submit"
-            android:text="@string/recharge"
-            android:textAllCaps="false"
-            android:textColor="@color/white"/>
-</LinearLayout>
+                <ImageView
+                    android:layout_width="@dimen/img_height"
+                    android:layout_height="@dimen/img_width"
+                    app:srcCompat="@drawable/ic_landline" />
+
+                <calibrage.payzan.controls.CommonTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/txt_margin"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center"
+                    android:text="@string/landline"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_header" />
+            </LinearLayout>
+
+            <calibrage.payzan.utils.NCBTextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/operatorTXT">
+
+                <calibrage.payzan.controls.CommonEditText
+                    android:id="@+id/operatorEdt"
+                    style="@style/EditTextStyle"
+                    android:hint="@string/operator" />
+            </calibrage.payzan.utils.NCBTextInputLayout>
+
+            <calibrage.payzan.utils.NCBTextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/numberTXT">
+
+                <calibrage.payzan.controls.CommonEditText
+                    android:id="@+id/mobilenoEdt"
+                    style="@style/EditTextStyle"
+                    android:drawableRight="@drawable/prepaid_contacts_icon"
+                    android:hint="@string/number_with_std_code"
+                    android:inputType="numberDecimal" />
+            </calibrage.payzan.utils.NCBTextInputLayout>
+
+            <calibrage.payzan.utils.NCBTextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/circleTXT">
+
+                <AutoCompleteTextView
+                    android:id="@+id/circleEdt"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:hint="@string/select_circle" />
+            </calibrage.payzan.utils.NCBTextInputLayout>
+
+            <FrameLayout
+                android:id="@+id/first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <calibrage.payzan.utils.NCBTextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/amountTXT">
+
+                    <calibrage.payzan.controls.CommonEditText
+                        android:id="@+id/amount"
+                        style="@style/EditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="@dimen/edt_bottom_margin"
+                        android:hint="@string/amount"
+                        android:inputType="numberDecimal" />
+
+                </calibrage.payzan.utils.NCBTextInputLayout>
+
+                <calibrage.payzan.controls.CommonTextView
+                    android:id="@+id/browsePlans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="@dimen/lyt_margin_right"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/browse_plans"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/txt_FontSize" />
+            </FrameLayout>
+
+            <calibrage.payzan.controls.CommonButton
+                android:id="@+id/submit"
+                style="@style/ButtonStyle"
+                android:text="@string/recharge"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </LinearLayout>
 
     </RelativeLayout>
 

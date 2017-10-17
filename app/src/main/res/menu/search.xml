@@ -9,7 +9,8 @@
     <item
         android:id="@+id/action_cart"
         android:title="notification"
-        android:icon="@drawable/head_notification_icon"
-        app:showAsAction="always|collapseActionView"
+        android:icon="@drawable/actionbar_space_between_icon"
+        app:showAsAction="always"
+        app:actionLayout="@layout/custom_action_item_layout"
         />
     </menu>

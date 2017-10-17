@@ -73,24 +73,41 @@
                 android:textSize="@dimen/edt_FontSize"
                 android:visibility="gone"
                 android:layout_marginBottom="@dimen/edt_bottom_margin"/>
-            <calibrage.payzan.controls.CommonEditText
-
-                android:id="@+id/ElectrictyEdt"
+            <calibrage.payzan.utils.NCBTextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/operatorTXT">
+            <AutoCompleteTextView
+                android:id="@+id/operatorSpn"
                 android:hint="Operator"
                 style="@style/EditTextStyle"
                />
+            </calibrage.payzan.utils.NCBTextInputLayout>
+
+            <calibrage.payzan.utils.NCBTextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dataCardTXT">
             <calibrage.payzan.controls.CommonEditText
                 android:layout_width="match_parent"
-                android:id="@+id/ServiceNEdt"
+                android:id="@+id/datCardNoEdt"
                 android:hint="Data Card Number"
                 style="@style/EditTextStyle"
                />
+            </calibrage.payzan.utils.NCBTextInputLayout>
+            <calibrage.payzan.utils.NCBTextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/amountTXT">
             <calibrage.payzan.controls.CommonEditText
                 android:layout_width="match_parent"
                 android:id="@+id/amountEdt"
                 android:hint="Amount"
                 style="@style/EditTextStyle"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"/>
+            </calibrage.payzan.utils.NCBTextInputLayout>
+
             <calibrage.payzan.controls.CommonButton
                 style="@style/ButtonStyle"
                 android:id="@+id/submit"
