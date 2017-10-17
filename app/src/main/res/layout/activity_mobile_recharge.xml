@@ -62,12 +62,12 @@
                     <FrameLayout
                         android:id="@+id/first1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/main_layout_head_bottom_margin">
 
                         <calibrage.payzan.controls.CommonEditText
                             android:id="@+id/mobileEdt"
                             style="@style/EditTextStyle"
-                            android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"
                             android:hint="@string/mobile_number"
                             android:inputType="numberDecimal" />
 
@@ -76,8 +76,8 @@
                             android:id="@+id/mobileNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="right|center_vertical"
-                            android:layout_marginRight="@dimen/text_size_inner_edit_text"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="@dimen/tenDp"
                             android:src="@drawable/prepaid_contacts_icon" />
                     </FrameLayout>
 
@@ -85,18 +85,20 @@
                     <FrameLayout
                         android:id="@+id/first"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                       >
 
-                        <calibrage.payzan.controls.CommonEditText
+                        <AutoCompleteTextView
                             android:id="@+id/currentOperator"
                             style="@style/EditTextStyle"
                             android:layout_width="match_parent"
-                            android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"
-                            android:hint="@string/current_operator" />
+                            android:hint="@string/current_operator"
+                            android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"/>
 
-                        <calibrage.payzan.controls.CommonEditText
+                        <calibrage.payzan.controls.CommonTextView
                             style="@style/InnerEditTextView"
                             android:text="Update Operator"
+                            android:id="@+id/updateOperatorId"
                             android:textColor="@color/accent" />
 
                     </FrameLayout>

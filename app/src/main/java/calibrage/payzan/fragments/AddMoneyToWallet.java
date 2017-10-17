@@ -32,6 +32,7 @@ import calibrage.payzan.model.PostWalletModel;
 import calibrage.payzan.model.WalletResponse;
 import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
+import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.CommonUtil;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
@@ -155,9 +156,9 @@ public class AddMoneyToWallet extends Fragment {
                     public void onNext(WalletResponse walletResponse) {
                         Toast.makeText(context, "sucess", Toast.LENGTH_SHORT).show();
                        // finish();
-                       CommonUtil.WALLETMONEY = String.valueOf(walletResponse.getResult().getBalance());
+                       CommonConstants.WALLETMONEY = String.valueOf(walletResponse.getResult().getBalance());
                         CommonUtil.displayDialogWindow("Wallet is Updated Sucessfully",alertDialog,context);
-                        walletTxt.setText(CommonUtil.WALLETMONEY);
+                        walletTxt.setText(CommonConstants.WALLETMONEY);
                         closeTab();
                     }
                 });
@@ -166,9 +167,9 @@ public class AddMoneyToWallet extends Fragment {
     private JsonObject postWalletObject() {
         PostWalletModel postWalletModel = new PostWalletModel();
         postWalletModel.setAmount(Integer.parseInt(enterMoneyEdt.getText().toString()));
-        postWalletModel.setUpdatedByUserId(CommonUtil.USERID);
-        postWalletModel.setCreatedByUserId(CommonUtil.USERID);
-        postWalletModel.setWalletId(CommonUtil.WALLETID);
+        postWalletModel.setUpdatedByUserId(CommonConstants.USERID);
+        postWalletModel.setCreatedByUserId(CommonConstants.USERID);
+        postWalletModel.setWalletId(CommonConstants.WALLETID);
         postWalletModel.setReasonTypeId(20);
         postWalletModel.setTransactionTypeId(18);
 

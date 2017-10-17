@@ -63,6 +63,7 @@ import calibrage.payzan.model.LoginModel;
 import calibrage.payzan.model.LoginResponseModel;
 import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
+import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.SmsListener;
 import calibrage.payzan.utils.SmsReceiver;
@@ -278,8 +279,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     @Override
                     public void onNext(LoginResponseModel loginResponseModel) {
                         Toast.makeText(LoginActivity.this, "sucess", Toast.LENGTH_SHORT).show();
-                        CommonUtil.USERID = loginResponseModel.getData().getUser().getId();
-                        CommonUtil.WALLETID = String.valueOf(loginResponseModel.getData().getUserWallet().getWalletId());
+                        CommonConstants.USERID = loginResponseModel.getData().getUser().getId();
+                        CommonConstants.WALLETID = String.valueOf(loginResponseModel.getData().getUserWallet().getWalletId());
                         finish();
                     }
                 });

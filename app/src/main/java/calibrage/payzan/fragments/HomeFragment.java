@@ -26,6 +26,7 @@ import calibrage.payzan.activities.SendMoney;
 import calibrage.payzan.adapters.BannerAdapter;
 import calibrage.payzan.adapters.RechargeAdapter;
 import calibrage.payzan.interfaces.RechargeClickListiner;
+import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.CommonUtil;
 
 
@@ -234,13 +235,13 @@ public class HomeFragment extends Fragment implements RechargeClickListiner{
     @Override
     public void onResume() {
         super.onResume();
-        walletTxt.setText(CommonUtil.WALLETMONEY);
+        walletTxt.setText(CommonConstants.WALLETMONEY);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        walletTxt.setText(CommonUtil.WALLETMONEY);
+        walletTxt.setText(CommonConstants.WALLETMONEY);
     }
 
     public static class SpacesItemDecoration extends RecyclerView.ItemDecoration {

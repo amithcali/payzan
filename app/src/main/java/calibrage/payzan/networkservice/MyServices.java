@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import calibrage.payzan.model.DistrictModel;
 import calibrage.payzan.model.LoginResponseModel;
 import calibrage.payzan.model.MandalModel;
+import calibrage.payzan.model.OperatorModel;
 import calibrage.payzan.model.StatesModel;
 import calibrage.payzan.model.VillageModel;
 import calibrage.payzan.model.WalletResponse;
@@ -38,6 +39,8 @@ public interface MyServices {
     Observable<MandalModel> getMandals(@Url String url);
     @GET
     Observable<VillageModel> getVillages(@Url String url);
+    @GET
+    Observable<OperatorModel> getOperator(@Url String url);
 
 
 }

@@ -11,6 +11,8 @@ import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -50,9 +52,7 @@ public class CommonUtil {
     private static String LOG_TAG = "";
     static Pattern pattern = null;
     static Matcher matcher;
-    public static String USERID ="";
-    public static String WALLETID ="";
-    public static String WALLETMONEY ="0";
+
     public static final Pattern VEHICLE_NUMBER_PATTERN = Pattern.compile("^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$");
     private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-zA-Z]).{6,20})";
     public static DecimalFormat twoDForm = new DecimalFormat("#.##");
@@ -324,5 +324,21 @@ public class CommonUtil {
         view.setDrawingCacheEnabled(false);
 
         return new BitmapDrawable(context.getResources(), bitmap);
+    }
+
+    public static boolean isNetworkAvailable(Context ctx) {
+
+        try {
+            ConnectivityManager cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+
+            if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
