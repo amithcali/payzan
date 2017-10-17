@@ -59,18 +59,20 @@
                     android:layout_below="@+id/radioGroup"
                     android:orientation="vertical">
 
-                    <FrameLayout
-                        android:id="@+id/first1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/main_layout_head_bottom_margin">
+
+
+                        <calibrage.payzan.utils.NCBTextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/mobileNumberTXT">
 
                         <calibrage.payzan.controls.CommonEditText
                             android:id="@+id/mobileEdt"
                             style="@style/EditTextStyle"
                             android:hint="@string/mobile_number"
-                            android:inputType="numberDecimal" />
-
+                            android:inputType="numberDecimal"
+                            android:drawableRight="@drawable/prepaid_contacts_icon"/>
+                        </calibrage.payzan.utils.NCBTextInputLayout>
 
                         <ImageView
                             android:id="@+id/mobileNumber"
@@ -78,8 +80,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
                             android:layout_marginRight="@dimen/tenDp"
-                            android:src="@drawable/prepaid_contacts_icon" />
-                    </FrameLayout>
+                            android:visibility="gone"
+                            />
+
 
 
                     <FrameLayout
@@ -87,19 +90,24 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                        >
-
+                        <calibrage.payzan.utils.NCBTextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/operatorTXT">
                         <AutoCompleteTextView
                             android:id="@+id/currentOperator"
                             style="@style/EditTextStyle"
                             android:layout_width="match_parent"
                             android:hint="@string/current_operator"
-                            android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"/>
+                           />
+                        </calibrage.payzan.utils.NCBTextInputLayout>
 
                         <calibrage.payzan.controls.CommonTextView
                             style="@style/InnerEditTextView"
                             android:text="Update Operator"
                             android:id="@+id/updateOperatorId"
-                            android:textColor="@color/accent" />
+                            android:textColor="@color/accent"
+                            android:paddingTop="12dp"/>
 
                     </FrameLayout>
 
@@ -108,19 +116,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
+                        <calibrage.payzan.utils.NCBTextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/amountTXT">
+
                         <calibrage.payzan.controls.CommonEditText
                             android:id="@+id/amount"
                             style="@style/EditTextStyle"
                             android:layout_width="match_parent"
-                            android:layout_marginBottom="@dimen/edt_bottom_margin"
                             android:hint="@string/amount"
                             android:inputType="numberDecimal" />
+
+                        </calibrage.payzan.utils.NCBTextInputLayout>
 
                         <calibrage.payzan.controls.CommonTextView
                             android:id="@+id/browsePlans"
                             style="@style/InnerEditTextView"
                             android:text="browse Plans"
-                            android:textColor="@color/accent" />
+                            android:textColor="@color/accent"
+                            android:paddingTop="12dp"/>
 
 
                     </FrameLayout>
@@ -158,6 +173,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:background="@drawable/border_accent"
                         android:gravity="center"
                         android:orientation="horizontal"

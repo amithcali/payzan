@@ -8,16 +8,21 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -33,18 +38,22 @@ import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.activities.LoginActivity;
 import calibrage.payzan.adapters.GenericAdapter;
 import calibrage.payzan.adapters.SingleLineDropDownAdapter;
+import calibrage.payzan.controls.CommonEditText;
+import calibrage.payzan.interfaces.DrawableClickListener;
 import calibrage.payzan.model.LoginResponseModel;
 import calibrage.payzan.model.OperatorModel;
 import calibrage.payzan.networkservice.ApiConstants;
 import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonConstants;
+import calibrage.payzan.utils.NCBTextInputLayout;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 import rx.Subscription;
@@ -62,10 +71,10 @@ public class MobileRecharge extends Fragment {
 
     private RadioButton prepaidRB, postpaidRB;
     private Button
-            talktimeRB, specialRB;
+            talktimeRB, specialRB, submit;
     private ImageView mobileNumber;
     static final int PICK_CONTACT = 1;
-    private EditText mobileEdt;
+    private calibrage.payzan.controls.CommonEditText mobileEdt, amount;
     private Toolbar toolbar;
     private View rootview;
     private Context context;
@@ -73,6 +82,9 @@ public class MobileRecharge extends Fragment {
     private AutoCompleteTextView currentOperator;
     private Subscription operatorSubscription;
     private ArrayList<OperatorModel.ListResult> listResults;
+    private String serviceProviderType;
+    private NCBTextInputLayout mobileNumberTXT, operatorTXT, amountTXT;
+    private Boolean  isProvider=false;
 
 
     @Nullable
@@ -95,7 +107,8 @@ public class MobileRecharge extends Fragment {
             }
         });
         mobileNumber = (ImageView) rootview.findViewById(R.id.mobileNumber);
-        mobileEdt = (EditText) rootview.findViewById(R.id.mobileEdt);
+        mobileEdt = (CommonEditText) rootview.findViewById(R.id.mobileEdt);
+        amount = (CommonEditText) rootview.findViewById(R.id.amount);
         currentOperator = (AutoCompleteTextView) rootview.findViewById(R.id.currentOperator);
         talktimeRB = (Button) rootview.findViewById(R.id.talktimeRB);
         specialRB = (Button) rootview.findViewById(R.id.specialRB);
@@ -103,33 +116,132 @@ public class MobileRecharge extends Fragment {
         postpaidRB = (RadioButton) rootview.findViewById(R.id.postpaidRB);
         postpaidRB = (RadioButton) rootview.findViewById(R.id.postpaidRB);
         updateOperatorId = (TextView) rootview.findViewById(R.id.updateOperatorId);
+        submit = (Button) rootview.findViewById(R.id.submit);
+        mobileNumberTXT = (NCBTextInputLayout) rootview.findViewById(R.id.mobileNumberTXT);
+        operatorTXT = (NCBTextInputLayout) rootview.findViewById(R.id.operatorTXT);
+        amountTXT = (NCBTextInputLayout) rootview.findViewById(R.id.amountTXT);
         setHasOptionsMenu(true);
+        currentOperator.setThreshold(1);
 
         talktimeRB.setBackgroundResource(R.drawable.roundbutton);
         talktimeRB.setTextColor(ContextCompat.getColor(context, R.color.white_new));
         specialRB.setTextColor(ContextCompat.getColor(context, R.color.accent));
+        serviceProviderType = CommonConstants.SERVICE_PROVIDER_ID_PREPAID;
+        prepaidRB.setChecked(true);
+        getOperator(CommonConstants.SERVICE_PROVIDER_ID_PREPAID);
 
         prepaidRB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                serviceProviderType = CommonConstants.SERVICE_PROVIDER_ID_PREPAID;
+                getOperator(serviceProviderType);
             }
         });
 
         postpaidRB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                serviceProviderType = CommonConstants.SERVICE_PROVIDER_ID_PREPAID;
+                getOperator(serviceProviderType);
             }
         });
 
         updateOperatorId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getOperator(CommonConstants.SERVICE_PROVIDER_ID_POSTPAID);
+                currentOperator.showDropDown();
             }
         });
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validateUI();
+
+            }
+        });
+        currentOperator.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                currentOperator.showDropDown();
+
+
+                return false;
+            }
+        });
+        mobileEdt.setDrawableClickListener(new DrawableClickListener() {
+
+
+            public void onClick(DrawablePosition target) {
+                switch (target) {
+                    case RIGHT:
+                        //Do something here
+                        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                        startActivityForResult(intent, PICK_CONTACT);
+
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+        });
+
+        mobileEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() > 0) {
+                    mobileNumberTXT.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        currentOperator.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() > 0) {
+                    operatorTXT.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        amount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() > 0) {
+                    amountTXT.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         // currentOperator.setAdapter();
 
@@ -177,8 +289,7 @@ public class MobileRecharge extends Fragment {
         mobileNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
-                startActivityForResult(intent, PICK_CONTACT);
+
             }
         });
 
@@ -188,7 +299,7 @@ public class MobileRecharge extends Fragment {
     private void getOperator(String providerType) {
 
         MyServices service = ServiceFactory.createRetrofitService(context, MyServices.class);
-        operatorSubscription = service.getOperator(ApiConstants.MOBILE_SERVICES+providerType)
+        operatorSubscription = service.getOperator(ApiConstants.MOBILE_SERVICES + providerType)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<OperatorModel>() {
@@ -216,10 +327,12 @@ public class MobileRecharge extends Fragment {
                     @Override
                     public void onNext(OperatorModel operatorModel) {
 
-//                        listResults = (ArrayList<OperatorModel.ListResult>) operatorModel.getListResult();
+                        listResults = (ArrayList<OperatorModel.ListResult>) operatorModel.getListResult();
 //                        ArrayAdapter<OperatorModel.ListResult> listResultArrayAdapter = new ArrayAdapter<OperatorModel.ListResult>(context,android.R.layout.simple_dropdown_item_1line,listResults);
 //                        currentOperator.setAdapter(listResultArrayAdapter);
-                        GenericAdapter genericAdapter = new GenericAdapter(context,operatorModel.getListResult(),R.layout.adapter_single_item);
+
+
+                        GenericAdapter genericAdapter = new GenericAdapter(context, operatorModel.getListResult(), R.layout.adapter_single_item);
                         currentOperator.setAdapter(genericAdapter);
                     }
                 });
@@ -258,5 +371,40 @@ public class MobileRecharge extends Fragment {
 
         HomeActivity.toolbar.setNavigationIcon(null);
         HomeActivity.toolbar.setTitle("");
+    }
+
+    private boolean validateUI() {
+        isProviderExists();
+        if (TextUtils.isEmpty(mobileEdt.getText().toString().trim())) {
+            mobileNumberTXT.setErrorEnabled(true);
+            mobileNumberTXT.setError("enter mobile number");
+        } else if (TextUtils.isEmpty(currentOperator.getText().toString().trim())) {
+            operatorTXT.setErrorEnabled(true);
+            operatorTXT.setError("select operator ");
+        } else if (!isProvider) {
+            operatorTXT.setErrorEnabled(true);
+            operatorTXT.setError("your  operator is not valid ");
+        } else if (amount.getText().toString().trim().equalsIgnoreCase("")) {
+            amountTXT.setErrorEnabled(true);
+            amountTXT.setError("enter amount");
+        }
+        return true;
+
+    }
+
+    private void isProviderExists() {
+        ArrayList<String> operator = new ArrayList<>();
+        for (int i = 0; i < listResults.size(); i++) {
+            operator.add(listResults.get(i).getServiceProviderName());
+        }
+        for (int i = 0; i <operator.size() ; i++) {
+            if(operator.get(i).matches(currentOperator.getText().toString().trim()));
+            {
+                isProvider =true;
+                break;
+            }
+        }
+
+
     }
 }

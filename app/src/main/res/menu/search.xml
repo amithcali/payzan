@@ -4,10 +4,12 @@
     android:icon="@drawable/ic_search"
     android:title="Search"
     app:showAsAction="always|collapseActionView"
+      android:visible="false"
      />
     <item
         android:id="@+id/action_cart"
         android:title="notification"
         android:icon="@drawable/head_notification_icon"
-        app:showAsAction="always|collapseActionView" />
+        app:showAsAction="always|collapseActionView"
+        />
     </menu>
