@@ -14,6 +14,7 @@
     <dimen name="txt_width">4dp</dimen>
     <dimen name="txt_FontSize">12dp</dimen>
     <dimen name="txt_margin">10dp</dimen>
+    <dimen name="txt_padding">4dp</dimen>
 
 
     <!--common Edittext Sizes-->
@@ -94,6 +95,18 @@
     <dimen name="rdo_width">100dp</dimen>
     <dimen name="rdo_height">20dp</dimen>
 
+
+    <dimen name="card_corner_radius_home">6dp</dimen>
+    <dimen name="card_corner_elevation_home">6dp</dimen>
+
+    <dimen name="card_image_width">30dp</dimen>
+    <dimen name="card_image_height">30dp</dimen>
+
+    <dimen name="card_view_width">60dp</dimen>
+    <dimen name="card_view_height">70dp</dimen>
+
+    <dimen name="rcv_margin_left">4dp</dimen>
+    <dimen name="rcv_margin_right">4dp</dimen>
     <!--&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
     <dimen name="edittext_text_input_layout_padding">4dp</dimen>
 
@@ -145,14 +158,7 @@
     <dimen name="hunderedDp">100dp</dimen>
 
 
-    <dimen name="card_corner_radius_home">6dp</dimen>
-    <dimen name="card_corner_elevation_home">6dp</dimen>
 
-    <dimen name="card_image_width">30dp</dimen>
-    <dimen name="card_image_height">30dp</dimen>
-
-    <dimen name="card_view_width">60dp</dimen>
-    <dimen name="card_view_height">70dp</dimen>
     <dimen name="tenSP">10sp</dimen>
 
 

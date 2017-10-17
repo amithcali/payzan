@@ -10,12 +10,12 @@
         android:layout_gravity="center"
         />
 
-    <TextView
+    <calibrage.payzan.controls.CommonTextView
         android:id="@+id/count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="15"
-        android:textSize="16sp"
+        android:textSize="@dimen/edt_FontSize"
         android:layout_gravity="end"
         android:gravity="center"
         android:background="@drawable/round_background"

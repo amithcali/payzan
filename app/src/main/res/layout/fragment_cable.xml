@@ -13,41 +13,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp">
+            android:layout_marginTop="@dimen/lyt_margin_top"
+            android:layout_marginRight="@dimen/lyt_margin_right"
+            android:layout_marginLeft="@dimen/lyt_margin_left">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="@dimen/lyt_margin_bottom">
                 <ImageView
-                    android:layout_width="@dimen/image_height"
-                    android:layout_height="@dimen/image_height"
+                    android:layout_width="@dimen/img_height"
+                    android:layout_height="@dimen/img_width"
                     app:srcCompat="@drawable/ic_television"
                     android:layout_toLeftOf="@+id/header"
-                    android:layout_marginRight="@dimen/eightDp"/>
-                <TextView
+                    android:layout_marginRight="@dimen/img_wallet_margin"/>
+                <calibrage.payzan.controls.CommonTextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Cable TV"
                     android:gravity="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_header_size"
+                    android:textSize="@dimen/font_header"
                     android:layout_centerInParent="true"
                     android:id="@+id/header"
                     />
             </LinearLayout>
 
-            <EditText
+            <calibrage.payzan.controls.CommonEditText
                 android:layout_width="match_parent"
                 android:id="@+id/operator"
                 android:hint="Operator"
                 style="@style/EditTextStyle"
                 />
-            <EditText
+            <calibrage.payzan.controls.CommonEditText
                 android:layout_width="match_parent"
                 android:id="@+id/customerId"
                 android:hint="Account Number"
@@ -60,14 +60,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
+                <calibrage.payzan.controls.CommonEditText
                     android:layout_width="match_parent"
                     android:id="@+id/amount"
                     android:hint="Amount"
                     style="@style/EditTextStyle"
                     android:inputType="numberDecimal"
                     />
-                <TextView
+                <calibrage.payzan.controls.CommonTextView
                     android:id="@+id/browsePlans"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -75,13 +75,13 @@
                     android:layout_marginRight="@dimen/tenDp"
                     android:text="browse Plans"
                     android:textColor="@color/accent"
-                    android:textSize="@dimen/tenSP"
+                    android:textSize="@dimen/txt_FontSize"
                     android:fontFamily="sans-serif-condensed"
                     />
             </FrameLayout>
 
 
-            <Button
+            <calibrage.payzan.controls.CommonButton
                 style="@style/ButtonStyle"
                 android:id="@+id/submit"
                 android:text="Proceed to Recharge"

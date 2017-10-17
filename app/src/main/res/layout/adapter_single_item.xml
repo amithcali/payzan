@@ -3,12 +3,12 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <calibrage.payzan.controls.CommonTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="state"
         android:id="@+id/itemId"
-        android:padding="4dp"
+        android:padding="@dimen/txt_padding"
         android:textColor="@color/accent"/>
     <View
         android:layout_width="match_parent"
