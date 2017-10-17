@@ -15,57 +15,57 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/layout_marin_right"
-            android:layout_marginRight="@dimen/layout_marin_right"
-            android:layout_marginLeft="@dimen/layout_marin_right">
+            android:layout_marginTop="@dimen/lyt_margin_top"
+            android:layout_marginRight="@dimen/lyt_margin_right"
+            android:layout_marginLeft="@dimen/lyt_margin_left">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginBottom="@dimen/main_layout_head_bottom_margin">
+            android:layout_marginBottom="@dimen/lyt_margin_bottom">
             <ImageView
-                android:layout_width="@dimen/image_width"
-                android:layout_height="@dimen/image_width"
+                android:layout_width="@dimen/img_height"
+                android:layout_height="@dimen/img_width"
                 app:srcCompat="@drawable/ic_electricity"/>
-            <TextView
+            <calibrage.payzan.controls.CommonTextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Electricity Bill"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_header_size"
+                android:textSize="@dimen/font_header"
                 android:fontFamily="serif"
                 />
         </LinearLayout>
 
-            <EditText
+            <calibrage.payzan.controls.CommonEditText
                 android:layout_width="match_parent"
                 android:id="@+id/stateEdt"
                 android:hint="State"
                 style="@style/EditTextStyle"
-                android:textSize="16sp"
+                android:textSize="@dimen/edt_FontSize"
                 android:visibility="gone"
-                android:layout_marginBottom="12dp"/>
-            <EditText
+                android:layout_marginBottom="@dimen/edt_bottom_margin"/>
+            <calibrage.payzan.controls.CommonEditText
                 android:layout_width="match_parent"
                 android:id="@+id/ElectrictyEdt"
                 android:hint="@string/select_district"
                 style="@style/EditTextStyle"
                />
-            <EditText
+            <calibrage.payzan.controls.CommonEditText
                 android:layout_width="match_parent"
                 android:id="@+id/ServiceNEdt"
                 android:hint="@string/service_no"
                 style="@style/EditTextStyle"
                />
-            <EditText
+            <calibrage.payzan.controls.CommonEditText
                 android:layout_width="match_parent"
                 android:id="@+id/amountEdt"
                 android:hint="@string/amount"
                 style="@style/EditTextStyle"
                 android:inputType="number"/>
-            <Button
+            <calibrage.payzan.controls.CommonButton
               style="@style/ButtonStyle"
                 android:id="@+id/submit"
                 android:text="@string/proceed_to_pay_bill"

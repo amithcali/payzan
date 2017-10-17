@@ -30,7 +30,7 @@
                     app:srcCompat="@drawable/ic_dth"
                     android:layout_toLeftOf="@+id/header"
                     android:layout_marginRight="@dimen/lyt_margin_right"/>
-                <TextView
+                <calibrage.payzan.controls.CommonTextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="D T H"
@@ -47,15 +47,15 @@
                 android:id="@+id/operator"
                 android:hint="@string/subscriber_id"
                 style="@style/EditTextStyle"
-                android:textSize="@dimen/edittext_text_size"
+                android:textSize="@dimen/edt_FontSize"
                 android:layout_marginBottom="@dimen/lyt_margin_bottom" />
-            <EditText
+            <calibrage.payzan.controls.CommonEditText
                 android:layout_width="match_parent"
                 android:id="@+id/customerId"
                 android:hint="@string/select_operator"
                 style="@style/EditTextStyle"
                 android:textSize="@dimen/edittext_text_size"
-                android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"/>
+                android:layout_marginBottom="@dimen/edt_FontSize"/>
 
 
             <FrameLayout
@@ -63,33 +63,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
+                <calibrage.payzan.controls.CommonEditText
                     android:layout_width="match_parent"
                     android:id="@+id/amount"
                     android:hint="@string/amount"
                     style="@style/EditTextStyle"
-                    android:textSize="@dimen/edittext_text_size"
+                    android:textSize="@dimen/edt_FontSize"
                     android:inputType="numberDecimal"
-                    android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"/>
-                <TextView
+                    android:layout_marginBottom="@dimen/edt_bottom_margin"/>
+                <calibrage.payzan.controls.CommonTextView
                     android:id="@+id/browsePlans"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="@dimen/txt_margin"
                     android:text="browse Plans"
                     android:textColor="@color/accent"
-                    android:textSize="@dimen/text_size_inner_edit_text"
+                    android:textSize="@dimen/txt_FontSize"
                     android:fontFamily="sans-serif-condensed"
                      />
             </FrameLayout>
 
 
-            <Button
+            <calibrage.payzan.controls.CommonButton
               style="@style/ButtonStyle"
                 android:id="@+id/submit"
                 android:text="Proceed to Recharge"
-                android:layout_marginTop="@dimen/main_layout_head_bottom_margin"
+                android:layout_marginTop="@dimen/btn_FontSize"
                 android:textColor="@color/white"/>
         </LinearLayout>
     </RelativeLayout>

@@ -38,20 +38,20 @@
 
                 <ImageView
                     android:id="@+id/walletBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="8dp"
+                    android:layout_width="@dimen/img_wallet_height"
+                    android:layout_height="@dimen/img_wallet_width"
+                    android:layout_margin="@dimen/img_wallet_margin"
                     android:background="@drawable/border_accentcolor_button"
-                    android:padding="4dp"
+                    android:padding="@dimen/img_wallet_padding"
                     android:src="@drawable/wallet_icon" />
 
                 <ImageView
                     android:id="@+id/BankBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="8dp"
+                    android:layout_width="@dimen/img_wallet_height"
+                    android:layout_height="@dimen/img_wallet_width"
+                    android:layout_margin="@dimen/img_wallet_margin"
                     android:background="@drawable/border_accentcolor_button"
-                    android:padding="4dp"
+                    android:padding="@dimen/img_wallet_padding"
                     android:src="@drawable/bank_icon" />
             </LinearLayout>
 
@@ -71,11 +71,11 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="@dimen/img_wallet1_height"
+                        android:layout_height="@dimen/img_wallet1_width"
                         android:src="@drawable/bank_icon" />
 
-                    <TextView
+                    <calibrage.payzan.controls.CommonTextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="4dp"
@@ -83,16 +83,16 @@
                         android:gravity="bottom"
                         android:text="Bank"
                         android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/edt_FontSize"
                         android:textStyle="bold" />
 
                 </LinearLayout>
 
-                <EditText
+                <calibrage.payzan.controls.CommonEditText
                     android:id="@+id/nameEdt"
                     style="@style/EditTextStyle"
                     android:hint="Name"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/edt_FontSize" />
 
                 <FrameLayout
                     android:id="@+id/firsst"
@@ -105,42 +105,42 @@
                         style="@style/EditTextStyle"
                         android:dropDownAnchor="@id/nameEdt"
                         android:hint="select bank "
-                        android:textSize="16sp"></AutoCompleteTextView>
+                        android:textSize="@dimen/edt_FontSize"></AutoCompleteTextView>
 
                     <ImageView
                         android:id="@+id/bankdrop"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginRight="@dimen/img_wallet_margin"
                         android:src="@android:drawable/arrow_down_float" />
                 </FrameLayout>
 
 
-                <EditText
+                <calibrage.payzan.controls.CommonEditText
                     android:id="@+id/AccountNumberEdt"
                     style="@style/EditTextStyle"
                     android:hint="Account Number"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/edt_FontSize" />
 
-                <EditText
+                <calibrage.payzan.controls.CommonEditText
                     android:id="@+id/ifscEdt"
                     style="@style/EditTextStyle"
                     android:hint="IFSC Code"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/edt_FontSize" />
                 <!--<EditText-->
                 <!--style="@style/EditTextStyle"-->
                 <!--android:hint="Mobile"-->
                 <!--android:textSize="16sp"-->
                 <!--/>-->
-                <EditText
+                <calibrage.payzan.controls.CommonEditText
                     android:id="@+id/amountEdt"
                     style="@style/EditTextStyle"
                     android:hint="Enter Amount"
                     android:inputType="numberDecimal"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/edt_FontSize" />
 
-                <Button
+                <calibrage.payzan.controls.CommonButton
                     android:id="@+id/sendBankBtn"
                     style="@style/ButtonStyle"
                     android:text="Send Money" />
@@ -170,7 +170,7 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/wallet_icon" />
 
-                    <TextView
+                    <calibrage.payzan.controls.CommonTextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="4dp"
@@ -178,7 +178,7 @@
                         android:gravity="bottom"
                         android:text="Wallet"
                         android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/font_header"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -190,12 +190,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp">
 
-                    <EditText
+                    <calibrage.payzan.controls.CommonEditText
                         android:id="@+id/mobileEdt"
                         style="@style/EditTextStyle"
                         android:hint="Enter Mobile Number"
                         android:inputType="numberDecimal"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/edt_FontSize" />
 
 
                     <ImageView
@@ -203,34 +203,34 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginRight="@dimen/img_wallet_margin"
                         android:src="@drawable/prepaid_contacts_icon" />
                 </FrameLayout>
 
-                <EditText
+                <calibrage.payzan.controls.CommonEditText
                     android:id="@+id/amountWalletEdt"
                     style="@style/EditTextStyle"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="@dimen/edt_bottom_margin"
                     android:hint="Enter Amount"
                     android:inputType="numberDecimal"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/edt_FontSize" />
 
-                <Button
+                <calibrage.payzan.controls.CommonButton
                     android:id="@+id/sendWalletBtn"
                     style="@style/ButtonStyle"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/btn_margin_bottom"
                     android:text="Send Money" />
 
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
+        <calibrage.payzan.controls.CommonTextView
             android:id="@+id/prevoious"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/mainlayout"
             android:background="@color/very_light_gray"
-            android:padding="16dp"
+            android:padding="@dimen/edt_FontSize"
             android:text="Recent Payments"
             android:textColor="@color/black" />
 

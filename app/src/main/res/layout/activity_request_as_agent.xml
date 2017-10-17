@@ -72,7 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
             android:id="@+id/firstNameTIl">
-        <EditText
+        <calibrage.payzan.controls.CommonEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/EditTextStyle"
@@ -85,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
             android:id="@+id/middleNameTIL">
-        <EditText
+        <calibrage.payzan.controls.CommonEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/EditTextStyle"
@@ -98,7 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
             android:id="@+id/lastNameTIL">
-        <EditText
+        <calibrage.payzan.controls.CommonEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/EditTextStyle"
@@ -111,7 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
             android:id="@+id/mobileTIL">
-        <EditText
+        <calibrage.payzan.controls.CommonEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/EditTextStyle"
@@ -124,7 +124,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
             android:id="@+id/emailTIL">
-        <EditText
+        <calibrage.payzan.controls.CommonEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/EditTextStyle"
@@ -137,7 +137,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
             android:id="@+id/address1TIL" >
-        <EditText
+        <calibrage.payzan.controls.CommonEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/EditTextStyle"
@@ -150,7 +150,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
             android:id="@+id/address2TIL">
-        <EditText
+        <calibrage.payzan.controls.CommonEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/EditTextStyle"
@@ -163,7 +163,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
             android:id="@+id/landmarkTIL">
-        <EditText
+        <calibrage.payzan.controls.CommonEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/EditTextStyle"
@@ -175,9 +175,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
             android:id="@+id/commentTIL">
-        <EditText
+        <calibrage.payzan.controls.CommonEditText
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/edittext_height"
             style="@style/EditTextStyle"
             android:hint="Enter your comments"
             android:inputType="text"
@@ -185,12 +185,12 @@
     </calibrage.payzan.utils.NCBTextInputLayout>
 
 
-        <Button
+        <calibrage.payzan.controls.CommonButton
             style="@style/ButtonStyle"
             android:id="@+id/submit"
             android:text="Submit"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="@dimen/btn_margin_top"
+            android:layout_marginBottom="@dimen/btn_margin_bottom"
             android:textColor="@color/white"/>
 
     </LinearLayout>

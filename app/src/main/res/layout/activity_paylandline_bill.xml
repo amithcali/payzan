@@ -14,9 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/layout_marin_right"
-        android:layout_marginRight="@dimen/layout_marin_right"
-        android:layout_marginLeft="@dimen/layout_marin_right">
+        android:layout_marginTop="@dimen/lyt_margin_top"
+        android:layout_marginRight="@dimen/lyt_margin_right"
+        android:layout_marginLeft="@dimen/lyt_margin_left">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,27 +24,27 @@
         android:gravity="center"
         android:layout_marginBottom="@dimen/main_layout_head_bottom_margin">
         <ImageView
-            android:layout_width="@dimen/image_height"
-            android:layout_height="@dimen/image_height"
+            android:layout_width="@dimen/img_height"
+            android:layout_height="@dimen/img_width"
             app:srcCompat="@drawable/ic_landline"
             />
-        <TextView
+        <calibrage.payzan.controls.CommonTextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/landline"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_header_size"
-            android:layout_marginLeft="8dp"
+            android:textSize="@dimen/font_header"
+            android:layout_marginLeft="@dimen/txt_margin"
             android:fontFamily="sans-serif-smallcaps"
             />
     </LinearLayout>
 
-        <EditText
+        <calibrage.payzan.controls.CommonEditText
             android:id="@+id/operator"
             android:hint="@string/operator"
             style="@style/EditTextStyle"
-            android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"/>
+            android:layout_marginBottom="@dimen/edt_FontSize"/>
 
         <FrameLayout
             android:id="@+id/first1"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
            >
 
-        <EditText
+        <calibrage.payzan.controls.CommonEditText
             android:id="@+id/mobileEdt"
             style="@style/EditTextStyle"
             android:hint="@string/number_with_std_code"
@@ -65,11 +65,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="@dimen/tenDp"
+            android:layout_marginRight="@dimen/txt_margin"
             android:src="@drawable/prepaid_contacts_icon" />
         </FrameLayout>
 
-        <EditText
+        <calibrage.payzan.controls.CommonEditText
             android:layout_width="match_parent"
             android:id="@+id/circleEdt"
             android:hint="@string/select_circle"
@@ -81,29 +81,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <calibrage.payzan.controls.CommonEditText
                 android:id="@+id/amount"
                 style="@style/EditTextStyle"
                 android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"
+                android:layout_marginBottom="@dimen/edt_bottom_margin"
                 android:hint="@string/amount"
                 android:inputType="numberDecimal"
                 />
 
-            <TextView
+            <calibrage.payzan.controls.CommonTextView
                 android:id="@+id/browsePlans"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="@dimen/tenDp"
+                android:layout_marginRight="@dimen/lyt_margin_right"
                 android:text="@string/browse_plans"
                 android:textColor="@color/accent"
-                android:textSize="@dimen/tenSP"
+                android:textSize="@dimen/txt_FontSize"
                 android:fontFamily="sans-serif-condensed"
                 />
         </FrameLayout>
 
-        <Button
+        <calibrage.payzan.controls.CommonButton
             style="@style/ButtonStyle"
             android:id="@+id/submit"
             android:text="@string/recharge"
