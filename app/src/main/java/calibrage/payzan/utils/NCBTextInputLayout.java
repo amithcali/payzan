@@ -117,6 +117,7 @@ public class NCBTextInputLayout extends TextInputLayout {
      *
      * @return {@link ColorFilter}
      */
+
     @Nullable
     private ColorFilter getBackgroundDefaultColorFilter() {
         ColorFilter defaultColorFilter = null;

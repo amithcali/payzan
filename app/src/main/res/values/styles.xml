@@ -68,7 +68,7 @@
 
     <style name="EditTextStyle">
         <item name="android:paddingLeft">@dimen/edt_text_pading_left</item>
-        <item name="android:layout_marginBottom">@dimen/edt_bottom_margin</item>
+
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/edt_height</item>
         <item name="android:background">@drawable/border_edit_text</item>

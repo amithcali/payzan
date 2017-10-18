@@ -64,14 +64,15 @@
 
 
                         <calibrage.payzan.utils.NCBTextInputLayout
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/mobileNumberTXT">
-
+                            <!--style="@style/EditTextStyle"-->
                         <calibrage.payzan.controls.CommonEditText
                             android:paddingLeft="@dimen/edt_text_pading_left"
                             android:id="@+id/mobileEdt"
-                            style="@style/EditTextStyle"
+                           style="@style/EditTextStyle"
                             android:hint="@string/mobile_number"
                             android:inputType="numberDecimal"
                             android:drawableRight="@drawable/prepaid_contacts_icon"/>
