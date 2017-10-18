@@ -35,18 +35,20 @@
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:textSize="@dimen/edt_FontSize"
                         android:id="@+id/prepaidRB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/rdo_width"
+                        android:layout_height="@dimen/rdo_height"
                         android:layout_margin="@dimen/rdo_margin"
                         android:button="@drawable/radio_btn"
                         android:text="prepaid"
                         android:textColor="@color/accent" />
 
                     <RadioButton
+                        android:textSize="@dimen/edt_FontSize"
                         android:id="@+id/postpaidRB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/rdo_width"
+                        android:layout_height="@dimen/rdo_height"
                         android:layout_margin="@dimen/rdo_margin"
                         android:button="@drawable/radio_btn"
                         android:text="postpaid"
@@ -67,6 +69,7 @@
                             android:id="@+id/mobileNumberTXT">
 
                         <calibrage.payzan.controls.CommonEditText
+                            android:paddingLeft="@dimen/edt_text_pading_left"
                             android:id="@+id/mobileEdt"
                             style="@style/EditTextStyle"
                             android:hint="@string/mobile_number"
@@ -95,6 +98,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/operatorTXT">
                         <AutoCompleteTextView
+                            android:paddingLeft="@dimen/edt_text_pading_left"
                             android:id="@+id/currentOperator"
                             style="@style/EditTextStyle"
                             android:layout_width="match_parent"
@@ -122,6 +126,7 @@
                             android:id="@+id/amountTXT">
 
                         <calibrage.payzan.controls.CommonEditText
+                            android:paddingLeft="@dimen/edt_text_pading_left"
                             android:id="@+id/amount"
                             style="@style/EditTextStyle"
                             android:layout_width="match_parent"

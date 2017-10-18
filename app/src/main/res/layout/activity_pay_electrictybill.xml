@@ -82,7 +82,7 @@
                 android:hint="@string/amount"
                 style="@style/EditTextStyle"
                 android:inputType="number"
-                android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"/>
+                android:layout_marginBottom="@dimen/edt_bottom_margin"/>
             </calibrage.payzan.utils.NCBTextInputLayout>
             <calibrage.payzan.controls.CommonButton
               style="@style/ButtonStyle"

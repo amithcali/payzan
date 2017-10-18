@@ -20,7 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/lyt_margin_bottom"
+            android:layout_margin="@dimen/lyt_margin_bottom"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -43,7 +43,7 @@
             android:id="@+id/amount"
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
-            android:layout_marginBottom="@dimen/lyt_margin_bottom"
+            android:layout_marginBottom="@dimen/edt_bottom_margin"
             android:hint="@string/enter_amount_to_be_added_in_the_wallet"
             android:inputType="numberDecimal"
             android:textSize="@dimen/edt_FontSize" />
@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:hint="@string/enter_promo_code"
             android:inputType="textCapCharacters"
-            android:layout_marginBottom="@dimen/lyt_margin_bottom"
+            android:layout_marginBottom="@dimen/edt_bottom_margin"
             android:textSize="@dimen/edt_FontSize" />
 
         <calibrage.payzan.controls.CommonButton

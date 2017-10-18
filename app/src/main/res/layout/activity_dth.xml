@@ -47,6 +47,7 @@
     android:id="@+id/SubscriberTXT">
 
     <calibrage.payzan.controls.CommonEditText
+        android:layout_marginBottom="@dimen/edt_bottom_margin"
         android:id="@+id/subscriberEdt"
         style="@style/EditTextStyle"
         android:layout_width="match_parent"
@@ -59,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/OperatorTXT">
             <AutoCompleteTextView
+                android:layout_marginBottom="@dimen/edt_bottom_margin"
                 android:layout_width="match_parent"
                 android:id="@+id/operatorSpn"
                 android:hint="@string/select_operator"

@@ -47,6 +47,9 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+android:textSize="@dimen/edt_FontSize"
+                    android:height="@dimen/rdo_height"
+                    android:width="@dimen/rdo_width"
                     android:id="@+id/prepaidRB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -56,6 +59,9 @@
                     android:textColor="@color/accent"/>
 
                 <RadioButton
+                    android:textSize="@dimen/edt_FontSize"
+                    android:height="@dimen/rdo_height"
+                    android:width="@dimen/rdo_width"
                     android:id="@+id/postpaidRB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -105,7 +111,7 @@
                 android:hint="Amount"
                 style="@style/EditTextStyle"
                 android:inputType="number"
-                android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"/>
+                android:layout_marginBottom="@dimen/edt_bottom_margin"/>
             </calibrage.payzan.utils.NCBTextInputLayout>
 
             <calibrage.payzan.controls.CommonButton

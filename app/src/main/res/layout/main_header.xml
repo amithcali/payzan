@@ -9,7 +9,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/toolbar_img_height"
         android:background="@drawable/home_logo"
         android:scaleType="center"
         android:gravity="center"
