@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
     <!--  Header  Starts-->
     <LinearLayout
+        android:id="@+id/lyt_header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/login_header_height"
         android:background="@color/DarkRed">
@@ -24,24 +25,24 @@
             android:textSize="@dimen/txt_FontSize" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/header"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:paddingBottom="@dimen/fiveDp"
-        android:paddingTop="@dimen/fiveDp">
-        <!-- Logo Start-->
-        <ImageView
-            android:layout_width="@dimen/logo_width"
-            android:layout_height="@dimen/twentyDP"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/logo_margin"
-            android:src="@mipmap/logo" />
-        <!-- Logo Ends -->
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:id="@+id/header"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:gravity="center"-->
+        <!--android:paddingBottom="@dimen/fiveDp"-->
+        <!--android:paddingTop="@dimen/fiveDp">-->
+        <!--&lt;!&ndash; Logo Start&ndash;&gt;-->
+        <!--<ImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginBottom="@dimen/btn_margin_bottom"-->
+            <!--android:src="@mipmap/home_logo" />-->
+        <!--&lt;!&ndash; Logo Ends &ndash;&gt;-->
+    <!--</LinearLayout>-->
     <!--  Header Ends -->
     <!-- Footer Start -->
     <LinearLayout
@@ -54,14 +55,20 @@
 
     <!-- Registration Form -->
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/header"
+        android:layout_below="@id/lyt_header"
         android:layout_marginLeft="@dimen/fifteen"
         android:layout_marginRight="@dimen/fifteen"
         android:orientation="vertical">
         <!-- Full Name Label -->
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/btn_margin_bottom"
+            android:src="@mipmap/home_logo" />
         <calibrage.payzan.utils.NCBTextInputLayout
             android:id="@+id/reg_mobile_til"
             android:layout_width="match_parent"

@@ -17,8 +17,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="gone">
-
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,12 +42,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/header_home_background"
             android:layout_below="@+id/id_appbar"
-            android:layout_marginLeft="@dimen/eightDp"
-            android:layout_marginRight="@dimen/eightDp"
-            android:layout_marginTop="@dimen/fourDp"
+            android:layout_marginLeft="@dimen/lyt_home_margin_left"
+            android:layout_marginRight="@dimen/lyt_home_margin_right"
+            android:layout_marginTop="@dimen/lyt_home_margin_top"
             android:background="@color/new_back">
 
-            <TextView
+            <calibrage.payzan.controls.CommonTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/eigteen"
@@ -87,9 +85,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/money"
-            android:layout_marginLeft="@dimen/layout_marin_left"
-            android:layout_marginRight="@dimen/layout_marin_right"
-            android:layout_marginTop="@dimen/fourDp"
+            android:layout_marginLeft="@dimen/lyt_home_margin_left"
+            android:layout_marginRight="@dimen/lyt_home_margin_right"
+            android:layout_marginTop="@dimen/lyt_home_margin_top"
             android:orientation="horizontal">
 
             <android.support.v7.widget.CardView
@@ -105,7 +103,7 @@
                     android:background="@drawable/border_accentcolor_button"
                     android:orientation="vertical"
                     android:paddingBottom="@dimen/eightDp"
-                    android:paddingLeft="@dimen/layout_marin_left"
+                    android:paddingLeft="@dimen/lyt_margin_left"
                     android:paddingRight="@dimen/layout_marin_left"
                     android:paddingTop="@dimen/eightDp">
 
@@ -241,9 +239,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/recharge"
-                    android:layout_marginLeft="@dimen/fifteen"
-                    android:layout_marginRight="@dimen/fifteen"
-                    android:layout_marginTop="@dimen/fourDp"
+                    android:layout_marginLeft="@dimen/lyt_margin_left"
+                    android:layout_marginRight="@dimen/lyt_home_margin_right"
+                    android:layout_marginTop="@dimen/lyt_home_margin_top"
                     android:nestedScrollingEnabled="false">
                 </android.support.v7.widget.RecyclerView>
 
