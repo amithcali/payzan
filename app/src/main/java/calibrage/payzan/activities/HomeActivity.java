@@ -43,6 +43,7 @@ public class HomeActivity extends AppCompatActivity  {
     private FragmentManager fragmentManager;
     private Menu Menu;
     private BottomNavigationView bottomNavigationView;
+
     private TextView textCartItemCount;
     int mCartItemCount = 10;
 
