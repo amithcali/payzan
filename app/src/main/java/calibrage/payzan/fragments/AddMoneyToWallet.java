@@ -62,17 +62,7 @@ public class AddMoneyToWallet extends Fragment {
         rootView = inflater.inflate(R.layout.activity_add_money_to_wallet, container, false);
         context = this.getActivity();
         setHasOptionsMenu(true);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(HomeActivity.toolbar);
-        HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
-        HomeActivity.toolbar.setTitle(getResources().getString(R.string.wallet_sname));
-        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
-        HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                closeTab();
-            }
-        });
         enterMoneyEdt = (EditText)rootView.findViewById(R.id.amount);
         enterpromocodeEdt = (EditText)rootView.findViewById(R.id.promocode);
         submit = (Button)rootView.findViewById(R.id.submit);
@@ -88,21 +78,7 @@ public class AddMoneyToWallet extends Fragment {
             }
         });
 
-        rootView.setFocusableInTouchMode(true);
-        rootView.requestFocus();
-        rootView.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
 
-                    closeTab();
-                    // onCloseFragment();
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
         return  rootView;
     }
 
@@ -112,16 +88,7 @@ public class AddMoneyToWallet extends Fragment {
 
 
     }
-    private void closeTab(){
-        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("walletTag");
 
-
-        if (fragment != null)
-            getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-
-        HomeActivity.toolbar.setNavigationIcon(null);
-        HomeActivity.toolbar.setTitle("");
-    }
 
 
     private void addWallet(){
@@ -159,7 +126,7 @@ public class AddMoneyToWallet extends Fragment {
                        CommonConstants.WALLETMONEY = String.valueOf(walletResponse.getResult().getBalance());
                         CommonUtil.displayDialogWindow("Wallet is Updated Sucessfully",alertDialog,context);
                         walletTxt.setText(CommonConstants.WALLETMONEY);
-                        closeTab();
+                      //  closeTab();
                     }
                 });
     }

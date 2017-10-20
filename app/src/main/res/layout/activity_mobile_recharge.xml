@@ -74,7 +74,6 @@
                             android:id="@+id/mobileEdt"
                             android:layout_width="fill_parent"
                             android:layout_height="@dimen/edt_height"
-                            android:layout_marginBottom="@dimen/edt_bottom_margin"
                             android:background="@drawable/roundededittext"
                             android:gravity="center_vertical"
                             android:hint="@string/mobile_number"

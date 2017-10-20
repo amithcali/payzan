@@ -32,7 +32,7 @@
             app:tabMaxWidth="0dp"
             android:layout_below="@+id/appbar"
             app:tabSelectedTextColor="@color/accent"
-            app:tabTextColor="@color/blue" />
+            app:tabTextColor="@color/accent" />
 
         <android.support.v4.view.ViewPager
             android:layout_width="match_parent"

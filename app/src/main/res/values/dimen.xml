@@ -125,6 +125,15 @@
     <dimen name="banner_image_width">150dp</dimen>
     <dimen name="banner_height_height">80dp</dimen>
 
+
+    <!---Add mmoney text-->
+    <dimen name="txt_money_size">18sp</dimen>
+    <dimen name="txt_money_padding">4dp</dimen>
+    <dimen name="txt_money_margin">4dp</dimen>
+
+    <!--tab_layout_txt-->
+    <dimen name="tab_txt_size">10sp</dimen>
+
     <!--&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
     <dimen name="edittext_text_input_layout_padding">4dp</dimen>
 
