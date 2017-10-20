@@ -200,9 +200,12 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
         return rootView;
     }
     private void closeTab() {
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, new LoginFragment(),"LoginTag")
+        Toast.makeText(context, "ON BACK KEY PRESED", Toast.LENGTH_SHORT).show();
+       getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, new HomeFragment())
                 .commit();
+//        toolbar.setNavigationIcon(null);
+//        toolbar.setTitle("");
 //        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("SignupTag");
 //
 //
