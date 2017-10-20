@@ -204,8 +204,8 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
        getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, new HomeFragment())
                 .commit();
-//        toolbar.setNavigationIcon(null);
-//        toolbar.setTitle("");
+        HomeActivity.toolbar.setNavigationIcon(null);
+        HomeActivity.toolbar.setTitle("");
 //        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("SignupTag");
 //
 //
