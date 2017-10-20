@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -81,7 +82,7 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
     private GoogleApiClient mGoogleApiClient;
     private SignInButton button;
     private Subscription mRegisterSubscription;
-
+    public  static Toolbar toolbar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -151,6 +152,47 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
         textView.setMovementMethod(LinkMovementMethod.getInstance());
         textView.setHighlightColor(Color.TRANSPARENT);
 
+        SpannableString ss_signup = new SpannableString(getResources().getString(R.string.don_t_have_account_signup));
+        ClickableSpan clickableSpan_s = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                // startActivity(new Intent(MyActivity.this, NextActivity.class));
+                Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(false);
+            }
+        };
+        ClickableSpan clickableSpan_s1 = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+             //   startActivity(new Intent(getActivity(), signup.class));
+                Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
+
+                // display frgamnet
+               getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, new SignupFragment(),"SignupTag")
+                        .commit();
+
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(false);
+            }
+        };
+       // ss_signup.setSpan(clickableSpan_s, 1, 19, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss_signup.setSpan(clickableSpan_s1, 21, 27, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+        link_to_register.setText(ss_signup);
+        link_to_register.setMovementMethod(LinkMovementMethod.getInstance());
+        link_to_register.setHighlightColor(Color.TRANSPARENT);
+
         fbBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -176,12 +218,12 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
 
             }
         });
-        link_to_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), signup.class));
-            }
-        });
+//        link_to_register.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getActivity(), signup.class));
+//            }
+//        });
 
         //FacebookSdk.sdkInitialize(getApplicationContext());
         // printKeyHash(this);

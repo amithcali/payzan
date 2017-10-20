@@ -21,7 +21,7 @@
     <dimen name="edt_height">35dp</dimen>
     <dimen name="edt_widtht">4dp</dimen>
     <dimen name="edt_FontSize">16sp</dimen>
-    <dimen name="edt_bottom_margin">16sp</dimen>
+    <dimen name="edt_bottom_margin">10sp</dimen>
     <dimen name="edt_text_pading_left">5dp</dimen>
     <dimen name="edt_text_pading_">15dp</dimen>
 
