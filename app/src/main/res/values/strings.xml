@@ -12,6 +12,7 @@
     <string name="datacard_sname">"Data Card"</string>
     <string name="electricity_sname">"Electricity"</string>
     <string name="wallet_sname">"Wallet"</string>
+    <string name="login_sname">"Login"</string>
     <string name="add_money_to_wallet">Add money to wallet</string>
     <string name="enter_amount_to_be_added_in_the_wallet">Enter amount to be added in the wallet</string>
     <string name="enter_promo_code">Enter promo code</string>

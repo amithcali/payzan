@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -14,6 +15,7 @@ import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +46,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import calibrage.payzan.R;
+import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.activities.LoginActivity;
 import calibrage.payzan.activities.signup;
 import calibrage.payzan.adapters.MyAdapter;
@@ -59,7 +62,6 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
 
 
 public class LoginFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener, MyAdapter.AdapterOnClick {
@@ -91,6 +93,7 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.activity_login, container, false);
+
         context = this.getActivity();
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) rootView.findViewById(R.id.login);
@@ -103,7 +106,16 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
         link_to_register = (TextView) rootView.findViewById(R.id.link_to_register);
         IntiateGoogleApi();
 
+        HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
+        HomeActivity.toolbar.setTitle(getResources().getString(R.string.login_sname));
+        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
+        HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                closeTab();
+            }
+        });
         SpannableString ss = new SpannableString(getResources().getString(R.string.terms_and_conditions));
         ClickableSpan clickableSpan1 = new ClickableSpan() {
             @Override
@@ -175,7 +187,6 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
         // printKeyHash(this);
 
 
-
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -207,7 +218,33 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
 
             }
         });
+        rootView.setFocusableInTouchMode(true);
+        rootView.requestFocus();
+        rootView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+                    closeTab();
+                    // onCloseFragment();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
         return rootView;
+    }
+
+    private void closeTab() {
+        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("LoginTag");
+
+
+        if (fragment != null)
+            getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+
+        HomeActivity.toolbar.setNavigationIcon(null);
+        HomeActivity.toolbar.setTitle("");
     }
 
     private void IntiateGoogleApi() {
@@ -221,26 +258,31 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
-
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                .enableAutoManage(getActivity(), this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-        loginButton.setReadPermissions("email");
+        if (mGoogleApiClient == null || !mGoogleApiClient.isConnected()) {
+            try {
+                mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                        .enableAutoManage(getActivity() /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                        .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                        .build();
+                loginButton.setReadPermissions("email");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+//        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+//                .enableAutoManage(getActivity(), this)
+//                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+//                .build();
+//        loginButton.setReadPermissions("email");
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-       // IntiateGoogleApi();
+        // IntiateGoogleApi();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mGoogleApiClient.stopAutoManage(getActivity());
-        mGoogleApiClient.disconnect();
-    }
+
 
     private void login() {
         JsonObject object = getLoginObject();
@@ -299,6 +341,7 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
             e.printStackTrace();
         }
     }
+
     private JsonObject getLoginObject() {
         LoginModel loginModel = new LoginModel();
         loginModel.setPassword(txt_password.getText().toString());
