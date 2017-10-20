@@ -95,10 +95,9 @@ public class HomeActivity extends AppCompatActivity  {
 //                                Intent intent1 = new Intent(HomeActivity.this,ProfileActivity.class);
 //                                startActivity(intent1);
                                 getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.content_frame, new LoginFragment())
+                                        .add(R.id.content_frame, new LoginFragment(),"LoginTag")
                                         .commit();
-                                toolbar.setNavigationIcon(null);
-                                toolbar.setTitle("Login");
+
                                 break;
 
                             case R.id.action_wallet:

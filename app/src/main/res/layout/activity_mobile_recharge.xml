@@ -70,9 +70,13 @@
                             android:id="@+id/mobileNumberTXT">
                             <!--style="@style/EditTextStyle"-->
                         <calibrage.payzan.controls.CommonEditText
-                           android:paddingLeft="15dp"
+                            android:paddingLeft="15dp"
                             android:id="@+id/mobileEdt"
-                           style="@style/EditTextStyle"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/edt_height"
+                            android:layout_marginBottom="@dimen/edt_bottom_margin"
+                            android:background="@drawable/roundededittext"
+                            android:gravity="center_vertical"
                             android:hint="@string/mobile_number"
                             android:inputType="numberDecimal"
                             android:drawableRight="@drawable/prepaid_contacts_icon"/>
@@ -127,7 +131,6 @@
                             android:id="@+id/amountTXT">
 
                         <calibrage.payzan.controls.CommonEditText
-                            android:paddingLeft="@dimen/edt_text_pading_left"
                             android:id="@+id/amount"
                             style="@style/EditTextStyle"
                             android:layout_width="match_parent"
