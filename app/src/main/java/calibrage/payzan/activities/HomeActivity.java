@@ -27,6 +27,7 @@ import calibrage.payzan.R;
 import calibrage.payzan.fragments.AddMoneyToWallet;
 import calibrage.payzan.fragments.HomeFragment;
 import calibrage.payzan.fragments.LoginFragment;
+import calibrage.payzan.fragments.TransactionMainFragment;
 
 import static calibrage.payzan.utils.CommonUtil.buildCounterDrawable;
 
@@ -102,7 +103,7 @@ public class HomeActivity extends AppCompatActivity  {
 
                             case R.id.action_wallet:
                                 getSupportFragmentManager().beginTransaction()
-                                        .add(R.id.content_frame, new AddMoneyToWallet(),"walletTag")
+                                        .add(R.id.content_frame, new TransactionMainFragment(),"walletTag")
                                         .commit();
 
                                 break;

@@ -25,6 +25,7 @@ import calibrage.payzan.activities.RequestForAgent;
 import calibrage.payzan.activities.SendMoney;
 import calibrage.payzan.adapters.BannerAdapter;
 import calibrage.payzan.adapters.RechargeAdapter;
+import calibrage.payzan.adapters.WalletAdapter;
 import calibrage.payzan.interfaces.RechargeClickListiner;
 import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.CommonUtil;
@@ -36,8 +37,9 @@ import calibrage.payzan.utils.CommonUtil;
 
 public class HomeFragment extends Fragment implements RechargeClickListiner{
     private View  view;
-    private RecyclerView recharge_recylerview,recylerviewbanner,recylerviewbook;
-    private ArrayList<Pair<Integer,String>> menuPairList = new ArrayList<>();
+    private RecyclerView recharge_recylerview,recylerviewbanner,recylerviewbook,recylerviewpay;
+    private ArrayList<Pair<Integer,String>> rechargePairList = new ArrayList<>();
+    private ArrayList<Pair<Integer,String>> payPairList = new ArrayList<>();
     private Context context;
     public static TextView AgentRequestTxt,walletTxt;
 
@@ -65,22 +67,29 @@ public class HomeFragment extends Fragment implements RechargeClickListiner{
         recharge_recylerview = (RecyclerView) view.findViewById(R.id.recylerview);
         recylerviewbanner = (RecyclerView) view.findViewById(R.id.recylerviewbanner);
         recylerviewbook = (RecyclerView) view.findViewById(R.id.recylerviewbook);
+        recylerviewpay = (RecyclerView) view.findViewById(R.id.recylerviewpay);
         AgentRequestTxt = (TextView) view.findViewById(R.id.AgentRequestTxt);
         walletTxt = (TextView) view.findViewById(R.id.walletTxt);
         //  pay_recylerview = (RecyclerView)findViewById(R.id.pay_recylerview);
-        menuPairList.add(Pair.create(R.drawable.ic_mobile, "Mobile"));
-        menuPairList.add(Pair.create(R.drawable.ic_landline, "Landline"));
-        menuPairList.add(Pair.create(R.drawable.ic_dth, "DTH"));
-        menuPairList.add(Pair.create(R.drawable.ic_internet, "Internet"));
-        menuPairList.add(Pair.create(R.drawable.ic_television, "Cable TV"));
-        menuPairList.add(Pair.create(R.drawable.ic_electricity, "Electricity"));
-        menuPairList.add(Pair.create(R.drawable.ic_water_tap, "Water"));
-        menuPairList.add(Pair.create(R.drawable.ic_data_card, "Data Card"));
+        rechargePairList.add(Pair.create(R.drawable.ic_mobile, "Mobile"));
+        rechargePairList.add(Pair.create(R.drawable.ic_landline, "Landline"));
+        rechargePairList.add(Pair.create(R.drawable.ic_dth, "DTH"));
+        rechargePairList.add(Pair.create(R.drawable.ic_internet, "Internet"));
+        rechargePairList.add(Pair.create(R.drawable.ic_television, "Cable TV"));
+        rechargePairList.add(Pair.create(R.drawable.ic_electricity, "Electricity"));
+        rechargePairList.add(Pair.create(R.drawable.ic_water_tap, "Water"));
+        rechargePairList.add(Pair.create(R.drawable.ic_data_card, "Data Card"));
+
+        payPairList.add(Pair.create(R.drawable.ic_pay_send,"Pay/Send"));
+        payPairList.add(Pair.create(R.drawable.ic_add_withdraw,"Add/Withdrawal"));
+        payPairList.add(Pair.create(R.drawable.ic_mytransactions,"My transctions"));
+
+        WalletAdapter walletAdapter = new WalletAdapter(context,payPairList);
+        recylerviewpay.setAdapter(walletAdapter);
+        recylerviewpay.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
 
 
-
-
-        RechargeAdapter rechargeAdapter = new RechargeAdapter(context,menuPairList);
+        RechargeAdapter rechargeAdapter = new RechargeAdapter(context,rechargePairList);
          rechargeAdapter.setOnAdapterListener(HomeFragment.this);
         recharge_recylerview.setAdapter(rechargeAdapter);
         recharge_recylerview.setLayoutManager(new GridLayoutManager(context,4));
