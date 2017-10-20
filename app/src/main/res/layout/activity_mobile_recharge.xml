@@ -70,7 +70,7 @@
                             android:id="@+id/mobileNumberTXT">
                             <!--style="@style/EditTextStyle"-->
                         <calibrage.payzan.controls.CommonEditText
-                            android:paddingLeft="@dimen/edt_text_pading_left"
+                           android:paddingLeft="15dp"
                             android:id="@+id/mobileEdt"
                            style="@style/EditTextStyle"
                             android:hint="@string/mobile_number"

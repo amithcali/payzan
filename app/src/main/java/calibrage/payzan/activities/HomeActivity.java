@@ -26,6 +26,7 @@ import java.lang.reflect.Field;
 import calibrage.payzan.R;
 import calibrage.payzan.fragments.AddMoneyToWallet;
 import calibrage.payzan.fragments.HomeFragment;
+import calibrage.payzan.fragments.LoginFragment;
 
 import static calibrage.payzan.utils.CommonUtil.buildCounterDrawable;
 
@@ -86,10 +87,17 @@ public class HomeActivity extends AppCompatActivity  {
 //                                item.setIcon(R.drawable.ic_cart);
                                     break;
                             case R.id.action_login:
-                                Intent intent = new Intent(HomeActivity.this,LoginActivity.class);
-                                startActivity(intent);
+
+                                /* insted calling activity we need to cal fragment*/
+//                                Intent intent = new Intent(HomeActivity.this,LoginActivity.class);
+//                                startActivity(intent);
 //                                Intent intent1 = new Intent(HomeActivity.this,ProfileActivity.class);
 //                                startActivity(intent1);
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.content_frame, new LoginFragment())
+                                        .commit();
+                                toolbar.setNavigationIcon(null);
+                                toolbar.setTitle("Login");
                                 break;
 
                             case R.id.action_wallet:
@@ -112,6 +120,10 @@ public class HomeActivity extends AppCompatActivity  {
 
 
     }
+    public void ReplcaFragment(android.support.v4.app.Fragment fragment) {
+        fragmentManager.beginTransaction().add(R.id.content_frame, fragment).commit();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

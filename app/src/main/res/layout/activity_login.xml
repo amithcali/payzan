@@ -13,6 +13,7 @@
         android:orientation="vertical">
         <!--  Email Label -->
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/login_header_height"
             android:background="@color/DarkRed">
@@ -41,6 +42,7 @@
             android:paddingRight="@dimen/lyt_margin_right">
 
             <ImageView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -48,6 +50,7 @@
                 android:src="@mipmap/home_logo" />
 
             <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="@dimen/lyt_margin_top"
                 android:id="@+id/inp_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
