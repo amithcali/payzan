@@ -201,7 +201,7 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
     }
     private void closeTab() {
         getActivity().getSupportFragmentManager().beginTransaction()
-                .add(R.id.content_frame, new LoginFragment(),"LoginTag")
+                .replace(R.id.content_frame, new LoginFragment(),"LoginTag")
                 .commit();
 //        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("SignupTag");
 //
