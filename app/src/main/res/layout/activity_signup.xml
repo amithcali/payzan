@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fitsSystemWindows="false"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!--  Header  Starts-->
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/lyt_header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/login_header_height"
@@ -26,22 +28,22 @@
     </LinearLayout>
 
     <!--<LinearLayout-->
-        <!--android:id="@+id/header"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:gravity="center"-->
-        <!--android:paddingBottom="@dimen/fiveDp"-->
-        <!--android:paddingTop="@dimen/fiveDp">-->
-        <!--&lt;!&ndash; Logo Start&ndash;&gt;-->
-        <!--<ImageView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginBottom="@dimen/btn_margin_bottom"-->
-            <!--android:src="@mipmap/home_logo" />-->
-        <!--&lt;!&ndash; Logo Ends &ndash;&gt;-->
+    <!--android:id="@+id/header"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_marginTop="20dp"-->
+    <!--android:gravity="center"-->
+    <!--android:paddingBottom="@dimen/fiveDp"-->
+    <!--android:paddingTop="@dimen/fiveDp">-->
+    <!--&lt;!&ndash; Logo Start&ndash;&gt;-->
+    <!--<ImageView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginBottom="@dimen/btn_margin_bottom"-->
+    <!--android:src="@mipmap/home_logo" />-->
+    <!--&lt;!&ndash; Logo Ends &ndash;&gt;-->
     <!--</LinearLayout>-->
     <!--  Header Ends -->
     <!-- Footer Start -->
@@ -52,23 +54,30 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical"></LinearLayout>
     <!-- Footer Ends -->
-
+    <ImageView
+        android:layout_marginTop="@dimen/btn_margin_top"
+        android:visibility="gone"
+        android:layout_below="@id/lyt_header"
+        android:id="@+id/img_headerimg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_img_height"
+        android:background="@drawable/home_logo"
+        android:scaleType="center"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/btn_margin_bottom"
+        android:src="@mipmap/home_logo" />
     <!-- Registration Form -->
     <LinearLayout
-
+android:layout_marginTop="@dimen/lyt_margin_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/lyt_header"
+        android:layout_below="@id/img_headerimg"
         android:layout_marginLeft="@dimen/fifteen"
         android:layout_marginRight="@dimen/fifteen"
         android:orientation="vertical">
         <!-- Full Name Label -->
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/btn_margin_bottom"
-            android:src="@mipmap/home_logo" />
+
+
         <calibrage.payzan.utils.NCBTextInputLayout
             android:id="@+id/reg_mobile_til"
             android:layout_width="match_parent"
@@ -88,17 +97,23 @@
                 android:textSize="@dimen/edt_FontSize" />
         </calibrage.payzan.utils.NCBTextInputLayout>
 
+        <calibrage.payzan.utils.NCBTextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:hintEnabled="false">
 
-        <calibrage.payzan.controls.CommonEditText
-            android:id="@+id/reg_email"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/edt_height"
-            android:layout_marginBottom="@dimen/edt_bottom_margin"
-            android:background="@drawable/roundededittext"
-            android:hint="@string/email_optional"
-            android:inputType="textEmailAddress"
-            android:paddingLeft="@dimen/edt_text_pading_left"
-            android:textSize="@dimen/edt_FontSize" />
+            <calibrage.payzan.controls.CommonEditText
+                android:id="@+id/reg_email"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/edt_height"
+                android:layout_marginBottom="@dimen/edt_bottom_margin"
+                android:background="@drawable/roundededittext"
+                android:hint="@string/email_optional"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="@dimen/edt_text_pading_left"
+                android:textSize="@dimen/edt_FontSize" />
+        </calibrage.payzan.utils.NCBTextInputLayout>
 
         <android.support.design.widget.TextInputLayout
 

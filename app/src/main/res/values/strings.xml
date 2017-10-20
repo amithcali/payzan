@@ -5,6 +5,7 @@
     <string name="com_facebook_loginview_log_in_button">Connect</string>
     <string name="com_facebook_loginview_log_out_button">Your Logout</string>
     <string name="terms_and_conditions">By loging in,you accept our Term\'s  &amp; Conditions and Privacy Policy</string>
+
     <string name="mobile_recharge_sname">"Mobile recharge &amp; Pay bill"</string>
     <string name="dth_sname">"DTH"</string>
     <string name="landline_sname">"Landline"</string>

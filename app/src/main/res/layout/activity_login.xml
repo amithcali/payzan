@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:scrollbars="none"
+    android:layout_marginBottom="@dimen/bottom_nav_height"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
@@ -123,10 +125,11 @@
                 android:textColor="@color/White" />
             <!-- Link to Registration Screen -->
             <calibrage.payzan.controls.CommonTextView
+
                 android:id="@+id/link_to_register"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dip"
+                android:layout_marginBottom="@dimen/txt_margin"
                 android:layout_marginTop="@dimen/txt_margin"
                 android:gravity="center"
                 android:text="@string/don_t_have_account_signup"
@@ -192,4 +195,4 @@
 
     </LinearLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</ScrollView>
