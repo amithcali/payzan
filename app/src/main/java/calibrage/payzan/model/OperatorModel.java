@@ -80,60 +80,79 @@ public class OperatorModel {
 
     public class ListResult {
 
-        @SerializedName("ServiceProviderName")
+
+        @SerializedName("Name")
         @Expose
-        private String serviceProviderName;
-        @SerializedName("ServiceProviderId")
+        private String name;
+        @SerializedName("Remarks")
         @Expose
-        private Integer serviceProviderId;
+        private String remarks;
+        @SerializedName("FileName")
+        @Expose
+        private String fileName;
+        @SerializedName("FileLocation")
+        @Expose
+        private String fileLocation;
+        @SerializedName("FileExtension")
+        @Expose
+        private String fileExtension;
         @SerializedName("Id")
         @Expose
         private Integer id;
-        @SerializedName("ClassTypeId")
-        @Expose
-        private Integer classTypeId;
-        @SerializedName("Description")
-        @Expose
-        private String description;
-        @SerializedName("TableName")
-        @Expose
-        private Object tableName;
-        @SerializedName("ColumnName")
-        @Expose
-        private Object columnName;
-        @SerializedName("SortOrder")
-        @Expose
-        private Object sortOrder;
         @SerializedName("IsActive")
         @Expose
         private Boolean isActive;
         @SerializedName("CreatedBy")
         @Expose
         private String createdBy;
-        @SerializedName("Created")
-        @Expose
-        private String created;
         @SerializedName("ModifiedBy")
         @Expose
         private String modifiedBy;
+        @SerializedName("Created")
+        @Expose
+        private String created;
         @SerializedName("Modified")
         @Expose
         private String modified;
 
-        public String getServiceProviderName() {
-            return serviceProviderName;
+        public String getName() {
+            return name;
         }
 
-        public void setServiceProviderName(String serviceProviderName) {
-            this.serviceProviderName = serviceProviderName;
+        public void setName(String name) {
+            this.name = name;
         }
 
-        public Integer getServiceProviderId() {
-            return serviceProviderId;
+        public String getRemarks() {
+            return remarks;
         }
 
-        public void setServiceProviderId(Integer serviceProviderId) {
-            this.serviceProviderId = serviceProviderId;
+        public void setRemarks(String remarks) {
+            this.remarks = remarks;
+        }
+
+        public String getFileName() {
+            return fileName;
+        }
+
+        public void setFileName(String fileName) {
+            this.fileName = fileName;
+        }
+
+        public String getFileLocation() {
+            return fileLocation;
+        }
+
+        public void setFileLocation(String fileLocation) {
+            this.fileLocation = fileLocation;
+        }
+
+        public String getFileExtension() {
+            return fileExtension;
+        }
+
+        public void setFileExtension(String fileExtension) {
+            this.fileExtension = fileExtension;
         }
 
         public Integer getId() {
@@ -142,46 +161,6 @@ public class OperatorModel {
 
         public void setId(Integer id) {
             this.id = id;
-        }
-
-        public Integer getClassTypeId() {
-            return classTypeId;
-        }
-
-        public void setClassTypeId(Integer classTypeId) {
-            this.classTypeId = classTypeId;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        public Object getTableName() {
-            return tableName;
-        }
-
-        public void setTableName(Object tableName) {
-            this.tableName = tableName;
-        }
-
-        public Object getColumnName() {
-            return columnName;
-        }
-
-        public void setColumnName(Object columnName) {
-            this.columnName = columnName;
-        }
-
-        public Object getSortOrder() {
-            return sortOrder;
-        }
-
-        public void setSortOrder(Object sortOrder) {
-            this.sortOrder = sortOrder;
         }
 
         public Boolean getIsActive() {
@@ -200,20 +179,20 @@ public class OperatorModel {
             this.createdBy = createdBy;
         }
 
-        public String getCreated() {
-            return created;
-        }
-
-        public void setCreated(String created) {
-            this.created = created;
-        }
-
         public String getModifiedBy() {
             return modifiedBy;
         }
 
         public void setModifiedBy(String modifiedBy) {
             this.modifiedBy = modifiedBy;
+        }
+
+        public String getCreated() {
+            return created;
+        }
+
+        public void setCreated(String created) {
+            this.created = created;
         }
 
         public String getModified() {

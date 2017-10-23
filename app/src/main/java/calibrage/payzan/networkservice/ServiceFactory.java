@@ -34,18 +34,18 @@ public class ServiceFactory {
         return retrofit.create(clazz);
     }
 
-    public static <T> T createRetrofitServiceForPaypal(Context context, final Class<T> clazz) {
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.PAYPAL_URL)
-                .client(getHttpClient(context))
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build();
-
-
-        return retrofit.create(clazz);
-    }
+//    public static <T> T createRetrofitServiceForPaypal(Context context, final Class<T> clazz) {
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(BuildConfig.PAYPAL_URL)
+//                .client(getHttpClient(context))
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+//                .build();
+//
+//
+//        return retrofit.create(clazz);
+//    }
 
     private static OkHttpClient getHttpClient(final Context context) {
 

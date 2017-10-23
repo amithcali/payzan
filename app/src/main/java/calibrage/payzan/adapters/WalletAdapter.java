@@ -12,6 +12,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import calibrage.payzan.R;
+import calibrage.payzan.interfaces.RechargeClickListiner;
+import calibrage.payzan.interfaces.TransctionClickListiner;
 
 /**
  * Created by Calibrage11 on 10/18/2017.
@@ -20,6 +22,7 @@ import calibrage.payzan.R;
 public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.MyHolder> {
     private ArrayList<Pair<Integer,String >> itemsPairArrayList;
     private Context context;
+    private TransctionClickListiner  transctionClickListiner;
 
     public WalletAdapter(Context context,ArrayList<Pair<Integer,String >> itemsPairArrayList){
         this.context = context;
@@ -35,13 +38,13 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.MyHolder> 
     }
 
     @Override
-    public void onBindViewHolder(MyHolder holder, int position) {
+    public void onBindViewHolder(final MyHolder holder, int position) {
         holder.imageView.setImageResource(itemsPairArrayList.get(holder.getAdapterPosition()).first);
         holder.textView.setText(itemsPairArrayList.get(holder.getAdapterPosition()).second);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // rechargeClickListiner.onAdapterClickListiner(holder.getAdapterPosition());
+                transctionClickListiner.onTransAdapterClickListiner(holder.getAdapterPosition());
             }
         });
     }
@@ -60,4 +63,8 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.MyHolder> 
             textView=(TextView) itemView.findViewById(R.id.text);
         }
     }
+    public void setOnAdapterListener(TransctionClickListiner transctionClickListiner) {
+        this.transctionClickListiner = transctionClickListiner;
+    }
+
 }

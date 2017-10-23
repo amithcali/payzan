@@ -131,6 +131,9 @@
     <dimen name="txt_money_padding">4dp</dimen>
     <dimen name="txt_money_margin">4dp</dimen>
 
+    <!---wallwt card view-->
+    <dimen name="card_wallet_layout">98dp</dimen>
+
     <!--tab_layout_txt-->
     <dimen name="tab_txt_size">10sp</dimen>
 

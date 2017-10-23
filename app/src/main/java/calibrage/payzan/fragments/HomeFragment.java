@@ -27,6 +27,7 @@ import calibrage.payzan.adapters.BannerAdapter;
 import calibrage.payzan.adapters.RechargeAdapter;
 import calibrage.payzan.adapters.WalletAdapter;
 import calibrage.payzan.interfaces.RechargeClickListiner;
+import calibrage.payzan.interfaces.TransctionClickListiner;
 import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.CommonUtil;
 
@@ -35,7 +36,7 @@ import calibrage.payzan.utils.CommonUtil;
  * Created by Calibrage11 on 9/23/2017.
  */
 
-public class HomeFragment extends Fragment implements RechargeClickListiner{
+public class HomeFragment extends Fragment implements RechargeClickListiner,TransctionClickListiner{
     private View  view;
     private RecyclerView recharge_recylerview,recylerviewbanner,recylerviewbook,recylerviewpay;
     private ArrayList<Pair<Integer,String>> rechargePairList = new ArrayList<>();
@@ -86,6 +87,7 @@ public class HomeFragment extends Fragment implements RechargeClickListiner{
 
         WalletAdapter walletAdapter = new WalletAdapter(context,payPairList);
         recylerviewpay.setAdapter(walletAdapter);
+        walletAdapter.setOnAdapterListener(HomeFragment.this);
         recylerviewpay.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
 
 
@@ -157,7 +159,7 @@ public class HomeFragment extends Fragment implements RechargeClickListiner{
                 break;
             }case 6:{
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.add(R.id.content_frame, new PayElectrictyFragment(), "elctricityTag");
+                ft.add(R.id.content_frame, new PayWaterFragment(), "waterTag");
                 //ft.addToBackStack("mobileTag");
                 ft.commit();
                 break;
@@ -251,6 +253,29 @@ public class HomeFragment extends Fragment implements RechargeClickListiner{
     public void onPause() {
         super.onPause();
         walletTxt.setText(CommonConstants.WALLETMONEY);
+    }
+
+    @Override
+    public void onTransAdapterClickListiner(int pos) {
+        TransactionMainFragment transactionMainFragment = new TransactionMainFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("position", pos);
+        transactionMainFragment.setArguments(bundle);
+
+        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.add(R.id.content_frame, transactionMainFragment, "walletTag");
+        //ft.addToBackStack("mobileTag");
+        ft.commit();
+        if(pos==0){
+
+
+
+        }else if(pos==1){
+
+        }else if(pos==2){
+
+        }
+
     }
 
     public static class SpacesItemDecoration extends RecyclerView.ItemDecoration {

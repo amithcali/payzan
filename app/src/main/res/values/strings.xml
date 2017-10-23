@@ -8,6 +8,7 @@
 
     <string name="mobile_recharge_sname">"Mobile recharge &amp; Pay bill"</string>
     <string name="dth_sname">"DTH"</string>
+    <string name="water_sname">"Water"</string>
     <string name="landline_sname">"Landline"</string>
     <string name="cabletv_sname">"Cable TV"</string>
     <string name="datacard_sname">"Data Card"</string>
@@ -35,6 +36,7 @@
     <string name="proceed_to_recharge">Proceed to Recharge</string>
     <string name="select_district">Select District</string>
     <string name="service_no">Service No</string>
+    <string name="consumer_no">Consumer No</string>
     <string name="proceed_to_pay_bill">Proceed to Pay Bill</string>
     <string name="landline">Landline</string>
     <string name="operator">Operator</string>
@@ -55,5 +57,6 @@
     <string name="date_order">15 sep 2017 08:15 PM</string>
     <string name="comments">Comment(optional)</string>
     <string name="send_money">Send Money</string>
+    <string name="select_board">Select Board</string>
 
 </resources>

@@ -1,22 +1,15 @@
 package calibrage.payzan.fragments;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
@@ -40,15 +33,15 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by Calibrage11 on 9/27/2017.
+ * Created by Calibrage11 on 10/23/2017.
  */
 
-public class PayDTHFragment extends Fragment implements GenericAdapter.AdapterOnClick{
+public class PayWaterFragment extends Fragment implements GenericAdapter.AdapterOnClick {
     private View rootView;
     private Context context;
-    private NCBTextInputLayout subscriberTXT, operatorTXT, amountTXT;
-    private CommonEditText subscriberEdt, amount;
-    private AutoCompleteTextView operatorSpn;
+    private AutoCompleteTextView boardSpn;
+    private CommonEditText consumerNEdt, amountEdt;
+    private NCBTextInputLayout consNoTXT, boardTXT, amountTXT;
     private ArrayList<OperatorModel.ListResult> listResults;
     private Subscription operatorSubscription;
 
@@ -60,77 +53,24 @@ public class PayDTHFragment extends Fragment implements GenericAdapter.AdapterOn
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.activity_dth, container, false);
+        rootView = inflater.inflate(R.layout.fragment_pay_water, container, false);
         context = this.getActivity();
         // getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         setViews();
         initViews();
-        getOperator(CommonConstants.SERVICE_PROVIDER_ID_DTH);
+
 
         return rootView;
     }
 
-    private void initViews() {
-        subscriberEdt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length() > 0) {
-                    subscriberTXT.setErrorEnabled(false);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        amount.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length() > 0) {
-                    amountTXT.setErrorEnabled(false);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        operatorSpn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                operatorSpn.showDropDown();
-                return false;
-            }
-        });
-    }
-
     private void setViews() {
-        subscriberTXT = (NCBTextInputLayout) rootView.findViewById(R.id.SubscriberTXT);
-        operatorTXT = (NCBTextInputLayout) rootView.findViewById(R.id.operatorTXT);
-        amountTXT = (NCBTextInputLayout) rootView.findViewById(R.id.amountTXT);
-
-        subscriberEdt = (CommonEditText) rootView.findViewById(R.id.subscriberEdt);
-        amount = (CommonEditText) rootView.findViewById(R.id.amount);
-        operatorSpn = (AutoCompleteTextView) rootView.findViewById(R.id.operatorSpn);
 
         setHasOptionsMenu(true);
+        listResults = new ArrayList<OperatorModel.ListResult>();
         ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
-        HomeActivity.toolbar.setTitle(getResources().getString(R.string.dth_sname));
+        HomeActivity.toolbar.setTitle(getResources().getString(R.string.water_sname));
         HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
         HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,39 +79,26 @@ public class PayDTHFragment extends Fragment implements GenericAdapter.AdapterOn
                 closeTab();
             }
         });
-        rootView.setFocusableInTouchMode(true);
-        rootView.requestFocus();
-        rootView.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
+        consumerNEdt = (CommonEditText) rootView.findViewById(R.id.consumerNEdt);
+        amountEdt = (CommonEditText) rootView.findViewById(R.id.amountEdt);
+        boardSpn = (AutoCompleteTextView) rootView.findViewById(R.id.boardSpn);
+        boardTXT = (NCBTextInputLayout) rootView.findViewById(R.id.boardTXT);
+        consNoTXT = (NCBTextInputLayout) rootView.findViewById(R.id.consNoTXT);
+        amountTXT = (NCBTextInputLayout) rootView.findViewById(R.id.amountTXT);
 
-                    closeTab();
-                    // onCloseFragment();
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
+        getOperator(CommonConstants.SERVICE_PROVIDER_ID_WATER);
+
     }
 
-    private boolean isValidateUI() {
+    private void initViews() {
+        boardSpn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                boardSpn.showDropDown();
+                return false;
+            }
+        });
 
-        if(TextUtils.isEmpty(subscriberEdt.getText().toString().trim())){
-            subscriberTXT.setError("enter subscriber id");
-            subscriberTXT.setErrorEnabled(true);
-            return true;
-        }else if(TextUtils.isEmpty(operatorSpn.getText().toString().trim())){
-            operatorTXT.setError("select operator");
-            operatorTXT.setErrorEnabled(true);
-            return true;
-        }else if(TextUtils.isEmpty(amount.getText().toString().trim())){
-            amountTXT.setError("enter amount");
-            amountTXT.setErrorEnabled(true);
-            return true;
-        }
-        return true;
     }
 
     private void getOperator(String providerType) {
@@ -211,22 +138,14 @@ public class PayDTHFragment extends Fragment implements GenericAdapter.AdapterOn
 
 
                         GenericAdapter genericAdapter = new GenericAdapter(context, operatorModel.getListResult(), R.layout.adapter_single_item);
-                        genericAdapter.setAdapterOnClick(PayDTHFragment.this);
-                        operatorSpn.setAdapter(genericAdapter);
+                        genericAdapter.setAdapterOnClick(PayWaterFragment.this);
+                        boardSpn.setAdapter(genericAdapter);
                     }
                 });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            // close this activity and return to preview activity (if there is any)
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private void closeTab() {
-        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("dthTag");
+        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("waterTag");
 
 
         if (fragment != null)
@@ -236,8 +155,9 @@ public class PayDTHFragment extends Fragment implements GenericAdapter.AdapterOn
         HomeActivity.toolbar.setTitle("");
     }
 
+
     @Override
     public void adapterOnClick(int position) {
-        operatorSpn.setText(listResults.get(position).getName());
+        boardSpn.setText(listResults.get(position).getName());
     }
 }

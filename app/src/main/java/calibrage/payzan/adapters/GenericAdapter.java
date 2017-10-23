@@ -58,11 +58,11 @@ public class GenericAdapter<T> extends ArrayAdapter<T> {
             }
 
             TextView name = (TextView) convertView.findViewById(R.id.itemId);
-            name.setText(data.get(i).getServiceProviderName());
+            name.setText(data.get(i).getName());
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //adapterOnClick.adapterOnClick(i);
+                    adapterOnClick.adapterOnClick(i);
                 }
             });
         } catch (Exception e) {
@@ -78,14 +78,14 @@ public class GenericAdapter<T> extends ArrayAdapter<T> {
                 new Filter() {
                     @Override
                     public String convertResultToString(Object resultValue) {
-                        return ((OperatorModel.ListResult) resultValue).getServiceProviderName();
+                        return ((OperatorModel.ListResult) resultValue).getName();
                     }
                     @Override
                     protected FilterResults performFiltering(CharSequence charSequence) {
 
                         if (charSequence != null) {
                             for (OperatorModel.ListResult data1 : data ) {
-                                if (data1.getServiceProviderName().toLowerCase().startsWith(charSequence.toString().toLowerCase())) {
+                                if (data1.getName().toLowerCase().startsWith(charSequence.toString().toLowerCase())) {
                                 }
                             }
                             FilterResults filterResults = new FilterResults();

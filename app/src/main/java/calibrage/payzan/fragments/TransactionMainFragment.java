@@ -33,6 +33,16 @@ public class TransactionMainFragment extends Fragment {
     private ViewPagerAdapter adapter;
     private Context context;
     private View rootview;
+    private int currentItem;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            currentItem = bundle.getInt("position", 0);
+        }
+    }
 
     @Nullable
     @Override
@@ -55,7 +65,7 @@ public class TransactionMainFragment extends Fragment {
         viewPager = (ViewPager)rootview.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
      //   viewPager.setOffscreenPageLimit(4);
-        viewPager.setCurrentItem(0, true);
+        viewPager.setCurrentItem(currentItem, true);
         tabs.setupWithViewPager(viewPager);
 
         rootview.setFocusableInTouchMode(true);
@@ -120,7 +130,7 @@ public class TransactionMainFragment extends Fragment {
 
         adapter.addFragment(new SendMoneyToWallet(),strings[0]);
         adapter.addFragment(new AddMoneyToWallet(),strings[1]);
-        adapter.addFragment(new AddMoneyToWallet(),strings[2]);
+        adapter.addFragment(new MyTransactions(),strings[2]);
         viewPager.setAdapter(adapter);
 
 

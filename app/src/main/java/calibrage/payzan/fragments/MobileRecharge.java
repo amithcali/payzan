@@ -67,7 +67,7 @@ import static calibrage.payzan.utils.CommonUtil.buildCounterDrawable;
  * Created by Calibrage11 on 10/2/2017.
  */
 
-public class MobileRecharge extends Fragment {
+public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOnClick {
 
     private RadioButton prepaidRB, postpaidRB;
     private Button
@@ -342,6 +342,7 @@ public class MobileRecharge extends Fragment {
 
 
                         GenericAdapter genericAdapter = new GenericAdapter(context, operatorModel.getListResult(), R.layout.adapter_single_item);
+                        genericAdapter.setAdapterOnClick(MobileRecharge.this);
                         currentOperator.setAdapter(genericAdapter);
                     }
                 });
@@ -404,7 +405,7 @@ public class MobileRecharge extends Fragment {
     private void isProviderExists() {
         ArrayList<String> operator = new ArrayList<>();
         for (int i = 0; i < listResults.size(); i++) {
-            operator.add(listResults.get(i).getServiceProviderName());
+            operator.add(listResults.get(i).getName());
         }
         for (int i = 0; i < operator.size(); i++) {
             if (operator.get(i).matches(currentOperator.getText().toString().trim())) ;
@@ -415,5 +416,10 @@ public class MobileRecharge extends Fragment {
         }
 
 
+    }
+
+    @Override
+    public void adapterOnClick(int position) {
+        currentOperator.setText(listResults.get(position).getName());
     }
 }

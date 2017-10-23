@@ -10,7 +10,12 @@ public class CommonConstants {
 
     public  static String SERVICE_PROVIDER_ID_POSTPAID = "8";
     public  static String SERVICE_PROVIDER_ID_PREPAID = "7";
+    public  static String SERVICE_PROVIDER_ID_ELECTRICITY= "9";
+    public  static String SERVICE_PROVIDER_ID_DTH= "12";
+    public  static String SERVICE_PROVIDER_ID_WATER= "10";
 
+
+    //---------------user data---------------------//
     public static String USERID ="";
     public static String WALLETID ="";
     public static String WALLETMONEY ="0";
