@@ -27,7 +27,9 @@ import calibrage.payzan.R;
 import calibrage.payzan.fragments.AddMoneyToWallet;
 import calibrage.payzan.fragments.HomeFragment;
 import calibrage.payzan.fragments.LoginFragment;
+import calibrage.payzan.fragments.ProfileHomeFragment;
 import calibrage.payzan.fragments.TransactionMainFragment;
+import calibrage.payzan.fragments.UserProfileHome;
 
 import static calibrage.payzan.utils.CommonUtil.buildCounterDrawable;
 
@@ -94,9 +96,15 @@ public class HomeActivity extends AppCompatActivity  {
 //                                startActivity(intent);
 //                                Intent intent1 = new Intent(HomeActivity.this,ProfileActivity.class);
 //                                startActivity(intent1);
+//                                getSupportFragmentManager().beginTransaction()
+//                                        .add(R.id.content_frame, new LoginFragment(),"LoginTag")
+//                                        .commit();
+
                                 getSupportFragmentManager().beginTransaction()
-                                        .add(R.id.content_frame, new LoginFragment(),"LoginTag")
+                                        .replace(R.id.content_frame, new UserProfileHome())
                                         .commit();
+                                toolbar.setNavigationIcon(null);
+                                toolbar.setTitle("");
 
                                 break;
 

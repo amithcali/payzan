@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="calibrage.payzan.fragments.UserProfileHome">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-      >
+        android:layout_margin="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -127,10 +125,6 @@
 
                 </LinearLayout>
 
-                <view
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"></view>
-
 
             </LinearLayout>
 
@@ -145,6 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="@dimen/txt_height"
@@ -169,10 +164,6 @@
                         android:src="@color/cardview_dark_background" />
 
                 </LinearLayout>
-
-                <view
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"></view>
 
 
             </LinearLayout>
@@ -214,10 +205,6 @@
 
                 </LinearLayout>
 
-                <view
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"></view>
-
 
             </LinearLayout>
 
@@ -258,10 +245,6 @@
 
                 </LinearLayout>
 
-                <view
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"></view>
-
 
             </LinearLayout>
 
@@ -301,10 +284,6 @@
                         android:src="@color/cardview_dark_background" />
 
                 </LinearLayout>
-
-                <view
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"></view>
 
 
             </LinearLayout>
