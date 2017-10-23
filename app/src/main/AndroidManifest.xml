@@ -102,7 +102,7 @@
             android:name=".activities.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/profileThem"
-            android:windowSoftInputMode="adjustNothing">
+            android:windowSoftInputMode="adjustPan|adjustResize">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -114,15 +114,15 @@
 
 
         </activity>
-        <activity
-            android:name=".fragments.AddMoneyToWallet"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustPan"
-            android:theme="@style/actionbarTheme"
-            android:label="Add Money to Wallet">
+        <!--<activity-->
+            <!--android:name=".fragments.AddMoneyToWallet"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="stateVisible|adjustPan"-->
+            <!--android:theme="@style/actionbarTheme"-->
+            <!--android:label="Add Money to Wallet">-->
 
 
-        </activity>
+        <!--</activity>-->
         <activity
             android:name=".activities.SendMoney"
             android:screenOrientation="portrait"
@@ -139,16 +139,16 @@
 
 
         <!--</activity>-->
-        <activity
+        <!--<activity-->
 
-            android:name=".fragments.PayElectrictyFragment"
-            android:label="Electricity Bill Payment"
-            android:screenOrientation="portrait"
-            android:theme="@style/actionbarTheme"
-            android:windowSoftInputMode="stateVisible|adjustResize">
+            <!--android:name=".fragments.PayElectrictyFragment"-->
+            <!--android:label="Electricity Bill Payment"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@style/actionbarTheme"-->
+            <!--android:windowSoftInputMode="stateVisible|adjustResize">-->
 
 
-        </activity>
+        <!--</activity>-->
         <!--<activity-->
             <!--android:name=".activities.PayLandLineBill"-->
             <!--android:label="Mobile Recharge and Pay Bill"-->
