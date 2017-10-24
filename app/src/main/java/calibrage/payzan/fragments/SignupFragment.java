@@ -67,7 +67,7 @@ import static calibrage.payzan.utils.CommonUtil.isValidEmail;
  */
 
 public class SignupFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
-    private EditText reg_mobile,reg_email,reg_password;
+    private EditText reg_mobile,reg_email,reg_password,confirm_password;
     private LoginButton loginButton;
     private Button fbBtn,btnRegister;
     private CallbackManager callbackManager;
@@ -95,6 +95,7 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
         reg_mobile = (EditText) rootView.findViewById(R.id.reg_mobile);
         reg_email = (EditText) rootView.findViewById(R.id.reg_email);
         reg_password = (EditText)rootView.findViewById(R.id.reg_password);
+        confirm_password = (EditText)rootView.findViewById(R.id.confirm_password);
         reg_mobile_til = (TextInputLayout) rootView.findViewById(R.id.reg_mobile_til);
 
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
@@ -286,9 +287,10 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
     }
     private JsonObject getRegisterObject() {
         RegisterModel registerModel = new RegisterModel();
-        registerModel.setMobileNumber(reg_mobile.getText().toString());
-        registerModel.setPassword(reg_password.getText().toString());
-        registerModel.setEmail(reg_email.getText().toString());
+        registerModel.setMobileNumber(reg_mobile.getText().toString().trim());
+        registerModel.setPassword(reg_password.getText().toString().trim());
+        registerModel.setEmail(reg_email.getText().toString().trim());
+        registerModel.setConfirmPassword(confirm_password.getText().toString().trim());
         return  new Gson().toJsonTree(registerModel)
                 .getAsJsonObject();
     }

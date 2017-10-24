@@ -16,6 +16,9 @@ import com.google.gson.annotations.SerializedName;
         @SerializedName("password")
         @Expose
         private String password;
+    @SerializedName("ConfirmPassword")
+        @Expose
+        private String ConfirmPassword;
         @SerializedName("email")
         @Expose
         private String email;
@@ -53,6 +56,14 @@ import com.google.gson.annotations.SerializedName;
 
     public void setRoleId(String roleId) {
         this.roleId = roleId;
+    }
+
+    public String getConfirmPassword() {
+        return ConfirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        ConfirmPassword = confirmPassword;
     }
 }
 

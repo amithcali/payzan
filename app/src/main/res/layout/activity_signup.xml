@@ -134,6 +134,25 @@ android:layout_marginTop="@dimen/lyt_margin_top"
                 android:paddingLeft="@dimen/edt_text_pading_left"
                 android:textSize="@dimen/edt_FontSize" />
         </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true">
+
+            <calibrage.payzan.controls.CommonEditText
+                android:id="@+id/confirm_password"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/edt_height"
+                android:layout_marginBottom="@dimen/edt_bottom_margin"
+                android:background="@drawable/roundededittext"
+                android:fontFamily="serif"
+                android:hint="@string/create_password"
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/edt_text_pading_left"
+                android:textSize="@dimen/edt_FontSize" />
+        </android.support.design.widget.TextInputLayout>
 
 
         <calibrage.payzan.controls.CommonTextView
