@@ -91,20 +91,22 @@ public class HomeActivity extends AppCompatActivity  {
                                     break;
                             case R.id.action_login:
 
+
+
                                 /* insted calling activity we need to cal fragment*/
 //                                Intent intent = new Intent(HomeActivity.this,LoginActivity.class);
 //                                startActivity(intent);
 //                                Intent intent1 = new Intent(HomeActivity.this,ProfileActivity.class);
 //                                startActivity(intent1);
-//                                getSupportFragmentManager().beginTransaction()
-//                                        .add(R.id.content_frame, new LoginFragment(),"LoginTag")
-//                                        .commit();
-
                                 getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.content_frame, new UserProfileHome())
+                                        .add(R.id.content_frame, new LoginFragment(),"LoginTag")
                                         .commit();
-                                toolbar.setNavigationIcon(null);
-                                toolbar.setTitle("");
+
+//                                getSupportFragmentManager().beginTransaction()
+//                                        .replace(R.id.content_frame, new UserProfileHome())
+//                                        .commit();
+//                                toolbar.setNavigationIcon(null);
+//                                toolbar.setTitle("");
 
                                 break;
 

@@ -25,6 +25,7 @@ import calibrage.payzan.networkservice.ApiConstants;
 import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonConstants;
+import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.NCBTextInputLayout;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
@@ -148,11 +149,12 @@ public class PayWaterFragment extends Fragment implements GenericAdapter.Adapter
         Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("waterTag");
 
 
-        if (fragment != null)
+        if (fragment != null){
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-
-        HomeActivity.toolbar.setNavigationIcon(null);
-        HomeActivity.toolbar.setTitle("");
+            HomeActivity.toolbar.setNavigationIcon(null);
+            HomeActivity.toolbar.setTitle("");
+            CommonUtil.hideSoftKeyboard((AppCompatActivity)getActivity());
+        }
     }
 
 

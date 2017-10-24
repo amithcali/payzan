@@ -9,6 +9,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -200,12 +201,13 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
         return rootView;
     }
     private void closeTab() {
-        Toast.makeText(context, "ON BACK KEY PRESED", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context, "ON BACK KEY PRESED", Toast.LENGTH_SHORT).show();
        getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, new HomeFragment())
                 .commit();
         HomeActivity.toolbar.setNavigationIcon(null);
         HomeActivity.toolbar.setTitle("");
+        CommonUtil.hideSoftKeyboard((AppCompatActivity)getActivity());
 //        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("SignupTag");
 //
 //

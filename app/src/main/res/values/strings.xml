@@ -13,6 +13,7 @@
     <string name="cabletv_sname">"Cable TV"</string>
     <string name="datacard_sname">"Data Card"</string>
     <string name="electricity_sname">"Electricity"</string>
+    <string name="broadband_sname">"Broadband"</string>
     <string name="wallet_sname">" My Wallet"</string>
     <string name="login_sname">"Login"</string>
     <string name="add_money_to_wallet">Add money to wallet</string>

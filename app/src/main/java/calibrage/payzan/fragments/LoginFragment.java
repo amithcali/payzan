@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -56,6 +57,7 @@ import calibrage.payzan.model.LoginResponseModel;
 import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonConstants;
+import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.SmsListener;
 import calibrage.payzan.utils.SmsReceiver;
 import retrofit2.adapter.rxjava.HttpException;
@@ -282,11 +284,13 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
         Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("LoginTag");
 
 
-        if (fragment != null)
+        if (fragment != null){
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+            HomeActivity.toolbar.setNavigationIcon(null);
+            HomeActivity.toolbar.setTitle("");
+            CommonUtil.hideSoftKeyboard((AppCompatActivity)getActivity());
+        }
 
-        HomeActivity.toolbar.setNavigationIcon(null);
-        HomeActivity.toolbar.setTitle("");
     }
 
     private void IntiateGoogleApi() {

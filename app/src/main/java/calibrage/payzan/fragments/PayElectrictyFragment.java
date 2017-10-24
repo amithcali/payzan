@@ -14,26 +14,44 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
+import calibrage.payzan.adapters.GenericAdapter;
 import calibrage.payzan.controls.CommonEditText;
+import calibrage.payzan.model.OperatorModel;
+import calibrage.payzan.networkservice.ApiConstants;
+import calibrage.payzan.networkservice.MyServices;
+import calibrage.payzan.networkservice.ServiceFactory;
+import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.NCBTextInputLayout;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Calibrage11 on 9/27/2017.
  */
 
-public class PayElectrictyFragment extends Fragment {
+public class PayElectrictyFragment extends Fragment implements GenericAdapter.AdapterOnClick {
 
     private View rootView;
     private Context context;
     private NCBTextInputLayout districtTXT, serviceNoTXT, amountTXT;
     private CommonEditText amountEdt, ServiceNEdt;
     private AutoCompleteTextView districtSpn;
+    private Subscription operatorSubscription;
+    private ArrayList<OperatorModel.ListResult> listResults;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +68,7 @@ public class PayElectrictyFragment extends Fragment {
 
         setViews();
         initViews();
+        getOperator("9");
 
         return rootView;
     }
@@ -107,6 +126,13 @@ public class PayElectrictyFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
 
+            }
+        });
+        districtSpn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                districtSpn.showDropDown();
+                return false;
             }
         });
         ServiceNEdt.addTextChangedListener(new TextWatcher() {
@@ -169,10 +195,12 @@ public class PayElectrictyFragment extends Fragment {
         Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("elctricityTag");
 
 
-        if (fragment != null)
+        if (fragment != null){
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-        HomeActivity.toolbar.setTitle("");
-        HomeActivity.toolbar.setNavigationIcon(null);
+            HomeActivity.toolbar.setNavigationIcon(null);
+            HomeActivity.toolbar.setTitle("");
+            CommonUtil.hideSoftKeyboard((AppCompatActivity)getActivity());
+        }
     }
 
     @Override
@@ -180,4 +208,51 @@ public class PayElectrictyFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    private void getOperator(String providerType) {
+
+        MyServices service = ServiceFactory.createRetrofitService(context, MyServices.class);
+        operatorSubscription = service.getOperator(ApiConstants.MOBILE_SERVICES + providerType)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<OperatorModel>() {
+                    @Override
+                    public void onCompleted() {
+                        Toast.makeText(context, "check", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (e instanceof HttpException) {
+                            ((HttpException) e).code();
+                            ((HttpException) e).message();
+                            ((HttpException) e).response().errorBody();
+                            try {
+                                ((HttpException) e).response().errorBody().string();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNext(OperatorModel operatorModel) {
+
+                        listResults = (ArrayList<OperatorModel.ListResult>) operatorModel.getListResult();
+//                        ArrayAdapter<OperatorModel.ListResult> listResultArrayAdapter = new ArrayAdapter<OperatorModel.ListResult>(context,android.R.layout.simple_dropdown_item_1line,listResults);
+//                        currentOperator.setAdapter(listResultArrayAdapter);
+
+
+                        GenericAdapter genericAdapter = new GenericAdapter(context, operatorModel.getListResult(), R.layout.adapter_single_item);
+                        genericAdapter.setAdapterOnClick(PayElectrictyFragment.this);
+                        districtSpn.setAdapter(genericAdapter);
+                    }
+                });
+    }
+
+    @Override
+    public void adapterOnClick(int position) {
+
+    }
 }

@@ -121,7 +121,7 @@
                         android:layout_height="@dimen/txt_height"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:src="@color/cardview_dark_background" />
+                        android:src="@drawable/ic_up_arrow" />
 
                 </LinearLayout>
 

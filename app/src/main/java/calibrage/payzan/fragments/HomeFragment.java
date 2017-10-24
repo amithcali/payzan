@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment implements RechargeClickListiner,Tran
         rechargePairList.add(Pair.create(R.drawable.ic_mobile, "Mobile"));
         rechargePairList.add(Pair.create(R.drawable.ic_landline, "Landline"));
         rechargePairList.add(Pair.create(R.drawable.ic_dth, "DTH"));
-        rechargePairList.add(Pair.create(R.drawable.ic_internet, "Internet"));
+        rechargePairList.add(Pair.create(R.drawable.ic_internet, "Broadband"));
         rechargePairList.add(Pair.create(R.drawable.ic_television, "Cable TV"));
         rechargePairList.add(Pair.create(R.drawable.ic_electricity, "Electricity"));
         rechargePairList.add(Pair.create(R.drawable.ic_water_tap, "Water"));
@@ -142,7 +142,11 @@ public class HomeFragment extends Fragment implements RechargeClickListiner,Tran
                 ft.commit();
                 break;
             }case 3:{
-               // startActivity(new Intent(context, PayLandLineBill.class));
+               // startActivity(new Intent(context, PayLandLineBill.class));broadbandTag
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.add(R.id.content_frame, new BroadbandFragment(), "broadbandTag");
+                //ft.addToBackStack("mobileTag");
+                ft.commit();
                 break;
             }case 4:{
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();

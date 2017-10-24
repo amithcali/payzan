@@ -97,13 +97,13 @@
 
 
     <dimen name="card_corner_radius_home">8dp</dimen>
-    <dimen name="card_corner_elevation_home">6dp</dimen>
+    <dimen name="card_corner_elevation_home">2dp</dimen>
 
     <dimen name="card_image_width">30dp</dimen>
     <dimen name="card_image_height">30dp</dimen>
 
-    <dimen name="card_view_width">60dp</dimen>
-    <dimen name="card_view_height">70dp</dimen>
+    <dimen name="card_view_width">64dp</dimen>
+    <dimen name="card_view_height">74dp</dimen>
 
     <dimen name="rcv_margin_left">4dp</dimen>
     <dimen name="rcv_margin_right">4dp</dimen>

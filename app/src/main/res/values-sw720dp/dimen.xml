@@ -99,7 +99,7 @@
     <dimen name="card_image_width">60dp</dimen>
     <dimen name="card_image_height">60dp</dimen>
 
-    <dimen name="card_view_width">120dp</dimen>
+    <dimen name="card_view_width">128dp</dimen>
     <dimen name="card_view_height">135dp</dimen>
 
     <dimen name="rcv_margin_left">4dp</dimen>
