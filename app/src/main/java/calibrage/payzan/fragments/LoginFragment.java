@@ -58,6 +58,7 @@ import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.CommonUtil;
+import calibrage.payzan.utils.PayZanEnums;
 import calibrage.payzan.utils.SmsListener;
 import calibrage.payzan.utils.SmsReceiver;
 import retrofit2.adapter.rxjava.HttpException;
@@ -65,6 +66,7 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import calibrage.payzan.utils.SharedPrefsData;
 
 
 public class LoginFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener, MyAdapter.AdapterOnClick {
@@ -84,7 +86,7 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
     private GoogleApiClient mGoogleApiClient;
     private SignInButton button;
     private Subscription mRegisterSubscription;
-    public  static Toolbar toolbar;
+    public static Toolbar toolbar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -171,12 +173,12 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
         ClickableSpan clickableSpan_s1 = new ClickableSpan() {
             @Override
             public void onClick(View textView) {
-             //   startActivity(new Intent(getActivity(), signup.class));
+                //   startActivity(new Intent(getActivity(), signup.class));
                 Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
 
                 // display frgamnet
-               getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, new SignupFragment(),"SignupTag")
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, new SignupFragment(), "SignupTag")
                         .commit();
 
             }
@@ -187,7 +189,7 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
                 ds.setUnderlineText(false);
             }
         };
-       // ss_signup.setSpan(clickableSpan_s, 1, 19, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        // ss_signup.setSpan(clickableSpan_s, 1, 19, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         ss_signup.setSpan(clickableSpan_s1, 21, 27, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
@@ -284,11 +286,11 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
         Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("LoginTag");
 
 
-        if (fragment != null){
+        if (fragment != null) {
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
             HomeActivity.toolbar.setNavigationIcon(null);
             HomeActivity.toolbar.setTitle("");
-            CommonUtil.hideSoftKeyboard((AppCompatActivity)getActivity());
+            CommonUtil.hideSoftKeyboard((AppCompatActivity) getActivity());
         }
 
     }
@@ -329,7 +331,6 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
     }
 
 
-
     private void login() {
         JsonObject object = getLoginObject();
         MyServices service = ServiceFactory.createRetrofitService(getActivity(), MyServices.class);
@@ -340,6 +341,7 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
                     @Override
                     public void onCompleted() {
                         Toast.makeText(getActivity(), "check", Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
@@ -363,6 +365,12 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
                         Toast.makeText(getActivity(), "sucess", Toast.LENGTH_SHORT).show();
                         CommonConstants.USERID = loginResponseModel.getData().getUser().getId();
                         CommonConstants.WALLETID = String.valueOf(loginResponseModel.getData().getUserWallet().getWalletId());
+                        /*  if user successfully login savig success  Object */
+                        SharedPrefsData.getInstance(getActivity()).updateIntValue(getActivity(),CommonConstants.ISLOGIN, CommonConstants.Login);
+
+                        Intent i = new Intent(getContext(), HomeActivity.class);
+                        startActivity(i);
+
                         //finish();
                     }
                 });

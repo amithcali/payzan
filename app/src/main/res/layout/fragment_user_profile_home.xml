@@ -391,6 +391,7 @@ android:scrollbars="none"
             android:textSize="@dimen/btn_FontSize" />
 
         <calibrage.payzan.controls.CommonButton
+            android:id="@+id/btn_sign_out"
             android:layout_width="match_parent"
             android:layout_height="@dimen/txt_height"
             android:layout_marginTop="@dimen/lyt_margin_top"
