@@ -70,10 +70,10 @@ import static calibrage.payzan.utils.CommonUtil.isValidEmail;
  * Created by Calibrage19 on 20-10-2017.
  */
 
-public class SignupFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks {
-    private EditText reg_mobile,reg_email,reg_password,confirm_password;
+public class SignupFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+    private EditText reg_mobile, reg_email, reg_password, confirm_password;
     private LoginButton loginButton;
-    private Button fbBtn,btnRegister;
+    private Button fbBtn, btnRegister;
     private CallbackManager callbackManager;
     private GoogleApiClient mGoogleApiClient;
     private SignInButton button;
@@ -84,13 +84,14 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
     private Subscription mRegisterSubscription;
     private View rootView;
     private Context context;
-    public  static Toolbar toolbar;
+    public static Toolbar toolbar;
     private OnChildFragmentToActivityInteractionListener mActivityListener;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.activity_signup, container, false);
-        context= getActivity();
+        context = getActivity();
 
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) rootView.findViewById(R.id.login);
@@ -99,8 +100,8 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
         button = (SignInButton) rootView.findViewById(R.id.btn_sign_in);
         reg_mobile = (EditText) rootView.findViewById(R.id.reg_mobile);
         reg_email = (EditText) rootView.findViewById(R.id.reg_email);
-        reg_password = (EditText)rootView.findViewById(R.id.reg_password);
-        confirm_password = (EditText)rootView.findViewById(R.id.reg_confirm_password);
+        reg_password = (EditText) rootView.findViewById(R.id.reg_password);
+        confirm_password = (EditText) rootView.findViewById(R.id.reg_confirm_password);
         reg_mobile_til = (TextInputLayout) rootView.findViewById(R.id.reg_mobile_til);
         IntiateGoogleApi();
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
@@ -140,23 +141,19 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               signIn();
+                signIn();
 
             }
         });
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isValidateUi()){
+                if (isValidateUi()) {
                     registerUser();
                 }
 
             }
         });
-
-
-
-
 
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -206,14 +203,15 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
         });
         return rootView;
     }
+
     private void closeTab() {
-       // Toast.makeText(context, "ON BACK KEY PRESED", Toast.LENGTH_SHORT).show();
-       getActivity().getSupportFragmentManager().beginTransaction()
+        // Toast.makeText(context, "ON BACK KEY PRESED", Toast.LENGTH_SHORT).show();
+        getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, new HomeFragment())
                 .commit();
         HomeActivity.toolbar.setNavigationIcon(null);
         HomeActivity.toolbar.setTitle("");
-        CommonUtil.hideSoftKeyboard((AppCompatActivity)getActivity());
+        CommonUtil.hideSoftKeyboard((AppCompatActivity) getActivity());
         mActivityListener.messageFromChildFragmentToActivity("handleBottomNavigation");
 //        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("SignupTag");
 //
@@ -240,7 +238,7 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
 
                     @Override
                     public void onError(Throwable e) {
-                        if(e instanceof HttpException){
+                        if (e instanceof HttpException) {
                             ((HttpException) e).code();
                             ((HttpException) e).message();
                             ((HttpException) e).response().errorBody();
@@ -257,12 +255,13 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
                     @Override
                     public void onNext(ResponseModel registerResponseModel) {
                         Toast.makeText(getActivity(), "sucess", Toast.LENGTH_SHORT).show();
-                       // finish();
+                        // finish();
                     }
                 });
 
 
     }
+
     private void IntiateGoogleApi() {
 //        SmsReceiver.bindListener(new SmsListener() {
 //            @Override
@@ -293,39 +292,40 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
 
         }
     }
+
     private JsonObject getRegisterObject() {
         RegisterModel registerModel = new RegisterModel();
         registerModel.setMobileNumber(reg_mobile.getText().toString().trim());
         registerModel.setPassword(reg_password.getText().toString().trim());
         registerModel.setEmail(reg_email.getText().toString().trim());
         registerModel.setConfirmPassword(confirm_password.getText().toString().trim());
-        return  new Gson().toJsonTree(registerModel)
+        return new Gson().toJsonTree(registerModel)
                 .getAsJsonObject();
     }
 
-    private boolean isValidateUi(){
-        if(TextUtils.isEmpty(reg_mobile.getText().toString().trim())){
-             CommonUtil.displayDialogWindow("Please enter mobile no.",alertDialog,getActivity());
+    private boolean isValidateUi() {
+        if (TextUtils.isEmpty(reg_mobile.getText().toString().trim())) {
+            CommonUtil.displayDialogWindow("Please enter mobile no.", alertDialog, getActivity());
 //            reg_mobile_til.setErrorEnabled(true);
 //            reg_mobile_til.setError("Please enter mobile no.");
             return false;
-        } else if(!TextUtils.isEmpty(reg_mobile.getText().toString().trim())&& (reg_mobile.getText().toString().length()>14||reg_mobile.getText().toString().length()<10)) {
+        } else if (!TextUtils.isEmpty(reg_mobile.getText().toString().trim()) && (reg_mobile.getText().toString().length() > 14 || reg_mobile.getText().toString().length() < 10)) {
             CommonUtil.displayDialogWindow("Please enter valid mobile no.", alertDialog, getActivity());
             return false;
-        }else if   (!isValidEmail(reg_email.getText().toString())) {
-            CommonUtil.displayDialogWindow("Please enter valid email ",alertDialog,getActivity());
+        } else if (!isValidEmail(reg_email.getText().toString())) {
+            CommonUtil.displayDialogWindow("Please enter valid email ", alertDialog, getActivity());
             return false;
-        }else if(TextUtils.isEmpty(reg_password.getText().toString().trim())){
-            CommonUtil.displayDialogWindow("Please enter password ",alertDialog,getActivity());
+        } else if (TextUtils.isEmpty(reg_password.getText().toString().trim())) {
+            CommonUtil.displayDialogWindow("Please enter password ", alertDialog, getActivity());
             return false;
-        }
-        else if(TextUtils.isEmpty(confirm_password.getText().toString().trim())){
-            CommonUtil.displayDialogWindow("Please enter confirm password ",alertDialog,getActivity());
+        } else if (TextUtils.isEmpty(confirm_password.getText().toString().trim())) {
+            CommonUtil.displayDialogWindow("Please enter confirm password ", alertDialog, getActivity());
             return false;
         }
 
         return true;
     }
+
     private void setProfileToView(JSONObject jsonObject) {
 //        try {
 //            dummy.setText(jsonObject.getString("email") + "\n" + jsonObject.getString("gender") + "\n" + jsonObject.getString("name"));
@@ -334,6 +334,7 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
 //            e.printStackTrace();
 //        }
     }
+
     private void revokeAccess() {
         Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -368,9 +369,12 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
     private void signIn() {
         SignupFragment fragment = (SignupFragment) getActivity().getSupportFragmentManager()
                 .findFragmentByTag("SignupTag");
+
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+
         fragment.startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
     private void signOut() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -381,16 +385,30 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
                     }
                 });
     }
+
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 
+
     @Override
     public void onPause() {
         super.onPause();
-        mGoogleApiClient.stopAutoManage(getActivity());
-        mGoogleApiClient.disconnect();
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.stopAutoManage(getActivity());
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.stopAutoManage(getActivity());
+            mGoogleApiClient.disconnect();
+        }
+
     }
 
     @Override
@@ -405,7 +423,7 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-       // super.onActivityResult(requestCode, resultCode, data);
+        // super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
 
 //        if (requestCode == RC_SIGN_IN) {
@@ -423,8 +441,8 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
             Log.e(" ", "display name: " + acct.getDisplayName());
 
             String personName = acct.getDisplayName();
-            String personPhotoUrl=null;
-            if(acct.getPhotoUrl()!=null){
+            String personPhotoUrl = null;
+            if (acct.getPhotoUrl() != null) {
                 personPhotoUrl = acct.getPhotoUrl().toString();
             }
 

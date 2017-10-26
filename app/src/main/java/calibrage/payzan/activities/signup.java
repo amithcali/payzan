@@ -1,5 +1,6 @@
 package calibrage.payzan.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -55,22 +56,24 @@ import static calibrage.payzan.utils.CommonUtil.isValidEmail;
 
 
 public class signup extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
-    private EditText reg_mobile,reg_email,reg_password;
+    private EditText reg_mobile, reg_email, reg_password;
     private LoginButton loginButton;
-    private Button fbBtn,btnRegister;
+    private Button fbBtn, btnRegister;
     private CallbackManager callbackManager;
     private GoogleApiClient mGoogleApiClient;
     private SignInButton button;
     private static final int RC_SIGN_IN = 007;
     private AlertDialog alertDialog;
-   // private Subscription mRegisterSubscription;
-    private TextInputLayout  reg_mobile_til;
+    // private Subscription mRegisterSubscription;
+    private TextInputLayout reg_mobile_til;
     private Subscription mRegisterSubscription;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        this.context = signup.this;
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login);
         fbBtn = (Button) findViewById(R.id.fbBtn);
@@ -115,9 +118,9 @@ public class signup extends AppCompatActivity implements GoogleApiClient.OnConne
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if(isValidateUi()){
-                   registerUser();
-               }
+                if (isValidateUi() && CommonUtil.isNetworkAvailable(context)) {
+                    registerUser();
+                }
 
             }
         });
@@ -132,7 +135,6 @@ public class signup extends AppCompatActivity implements GoogleApiClient.OnConne
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         loginButton.setReadPermissions("email");
-
 
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -171,8 +173,8 @@ public class signup extends AppCompatActivity implements GoogleApiClient.OnConne
         JsonObject object = getRegisterObject();
         MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
 
-      mRegisterSubscription = service.userRegister(object)
-              .subscribeOn(Schedulers.newThread())
+        mRegisterSubscription = service.userRegister(object)
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ResponseModel>() {
                     @Override
@@ -182,7 +184,7 @@ public class signup extends AppCompatActivity implements GoogleApiClient.OnConne
 
                     @Override
                     public void onError(Throwable e) {
-                        if(e instanceof HttpException){
+                        if (e instanceof HttpException) {
                             ((HttpException) e).code();
                             ((HttpException) e).message();
                             ((HttpException) e).response().errorBody();
@@ -211,29 +213,30 @@ public class signup extends AppCompatActivity implements GoogleApiClient.OnConne
         registerModel.setMobileNumber(reg_mobile.getText().toString());
         registerModel.setPassword(reg_password.getText().toString());
         registerModel.setEmail(reg_email.getText().toString());
-        return  new Gson().toJsonTree(registerModel)
+        return new Gson().toJsonTree(registerModel)
                 .getAsJsonObject();
     }
 
-    private boolean isValidateUi(){
-        if(TextUtils.isEmpty(reg_mobile.getText().toString())){
-           // CommonUtil.displayDialogWindow("Please enter mobile no.",alertDialog,signup.this);
+    private boolean isValidateUi() {
+        if (TextUtils.isEmpty(reg_mobile.getText().toString())) {
+            // CommonUtil.displayDialogWindow("Please enter mobile no.",alertDialog,signup.this);
             reg_mobile_til.setErrorEnabled(true);
             reg_mobile_til.setError("Please enter mobile no.");
             return false;
-        } else if(!TextUtils.isEmpty(reg_mobile.getText().toString())&& (reg_mobile.getText().toString().length()>14||reg_mobile.getText().toString().length()<10)) {
+        } else if (!TextUtils.isEmpty(reg_mobile.getText().toString()) && (reg_mobile.getText().toString().length() > 14 || reg_mobile.getText().toString().length() < 10)) {
             CommonUtil.displayDialogWindow("Please enter valid mobile no.", alertDialog, signup.this);
             return false;
-        }else if   (!isValidEmail(reg_email.getText().toString())) {
-            CommonUtil.displayDialogWindow("Please enter valid email ",alertDialog,signup.this);
+        } else if (!isValidEmail(reg_email.getText().toString())) {
+            CommonUtil.displayDialogWindow("Please enter valid email ", alertDialog, signup.this);
             return false;
-        }else if(TextUtils.isEmpty(reg_password.getText().toString())){
-            CommonUtil.displayDialogWindow("Please enter password ",alertDialog,signup.this);
+        } else if (TextUtils.isEmpty(reg_password.getText().toString())) {
+            CommonUtil.displayDialogWindow("Please enter password ", alertDialog, signup.this);
             return false;
         }
 
         return true;
     }
+
     private void setProfileToView(JSONObject jsonObject) {
 //        try {
 //            dummy.setText(jsonObject.getString("email") + "\n" + jsonObject.getString("gender") + "\n" + jsonObject.getString("name"));
@@ -242,6 +245,7 @@ public class signup extends AppCompatActivity implements GoogleApiClient.OnConne
 //            e.printStackTrace();
 //        }
     }
+
     private void revokeAccess() {
         Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -256,6 +260,7 @@ public class signup extends AppCompatActivity implements GoogleApiClient.OnConne
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
     private void signOut() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -292,6 +297,7 @@ public class signup extends AppCompatActivity implements GoogleApiClient.OnConne
             });
         }
     }
+
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(" ", "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
@@ -301,8 +307,8 @@ public class signup extends AppCompatActivity implements GoogleApiClient.OnConne
             Log.e(" ", "display name: " + acct.getDisplayName());
 
             String personName = acct.getDisplayName();
-            String personPhotoUrl=null;
-            if(acct.getPhotoUrl()!=null){
+            String personPhotoUrl = null;
+            if (acct.getPhotoUrl() != null) {
                 personPhotoUrl = acct.getPhotoUrl().toString();
             }
 

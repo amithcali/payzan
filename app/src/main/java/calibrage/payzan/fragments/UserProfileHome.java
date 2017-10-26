@@ -37,6 +37,7 @@ public class UserProfileHome extends Fragment {
             @Override
             public void onClick(View v) {
                 SharedPrefsData.getInstance(getActivity()).ClearData(getActivity());
+
                 Toast.makeText(getActivity(), "DATA Cleared", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getContext(), HomeActivity.class);
                 startActivity(i);

@@ -70,6 +70,7 @@ import rx.schedulers.Schedulers;
 import calibrage.payzan.utils.SharedPrefsData;
 
 
+
 public class LoginFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener, MyAdapter.AdapterOnClick {
     private View rootView;
     private Context context;
@@ -216,8 +217,7 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isValidateUi()) {
-
+                if (isValidateUi()&& CommonUtil.isNetworkAvailable(context)) {
 
                     login();
                 }
@@ -355,8 +355,23 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
     @Override
     public void onPause() {
         super.onPause();
-        mGoogleApiClient.stopAutoManage(getActivity());
-        mGoogleApiClient.disconnect();
+        if(mGoogleApiClient !=null  &&   mGoogleApiClient.isConnected())
+        {
+            mGoogleApiClient.stopAutoManage(getActivity());
+            mGoogleApiClient.disconnect();
+        }
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mGoogleApiClient !=null  &&   mGoogleApiClient.isConnected())
+        {
+            mGoogleApiClient.stopAutoManage(getActivity());
+            mGoogleApiClient.disconnect();
+        }
+
     }
 
     private void login() {
@@ -394,6 +409,7 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
                         CommonConstants.USERID = loginResponseModel.getData().getUser().getId();
                         CommonConstants.WALLETID = String.valueOf(loginResponseModel.getData().getUserWallet().getWalletId());
                         /*  if user successfully login savig success  Object */
+
                         SharedPrefsData.getInstance(getActivity()).updateIntValue(getActivity(),CommonConstants.ISLOGIN, CommonConstants.Login);
 
                         Intent i = new Intent(getContext(), HomeActivity.class);
