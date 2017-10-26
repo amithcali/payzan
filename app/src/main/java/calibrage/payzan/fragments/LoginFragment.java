@@ -363,6 +363,7 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
 
     }
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();
