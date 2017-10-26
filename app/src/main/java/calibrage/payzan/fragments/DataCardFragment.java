@@ -180,7 +180,7 @@ public class DataCardFragment extends Fragment implements GenericAdapter.Adapter
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isValidateUi()){
+                if (isValidateUi()) {
 
                 }
             }
@@ -206,55 +206,56 @@ public class DataCardFragment extends Fragment implements GenericAdapter.Adapter
 
 
     private void getOperator(String providerType) {
-
-        MyServices service = ServiceFactory.createRetrofitService(context, MyServices.class);
-        operatorSubscription = service.getOperator(ApiConstants.MOBILE_SERVICES + providerType)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<OperatorModel>() {
-                    @Override
-                    public void onCompleted() {
-                        Toast.makeText(context, "check", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        if (e instanceof HttpException) {
-                            ((HttpException) e).code();
-                            ((HttpException) e).message();
-                            ((HttpException) e).response().errorBody();
-                            try {
-                                ((HttpException) e).response().errorBody().string();
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-                            e.printStackTrace();
+        if (CommonUtil.isNetworkAvailable(context)) {
+            MyServices service = ServiceFactory.createRetrofitService(context, MyServices.class);
+            operatorSubscription = service.getOperator(ApiConstants.MOBILE_SERVICES + providerType)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Subscriber<OperatorModel>() {
+                        @Override
+                        public void onCompleted() {
+                            Toast.makeText(context, "check", Toast.LENGTH_SHORT).show();
                         }
-                        Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
-                    }
 
-                    @Override
-                    public void onNext(OperatorModel operatorModel) {
+                        @Override
+                        public void onError(Throwable e) {
+                            if (e instanceof HttpException) {
+                                ((HttpException) e).code();
+                                ((HttpException) e).message();
+                                ((HttpException) e).response().errorBody();
+                                try {
+                                    ((HttpException) e).response().errorBody().string();
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+                                e.printStackTrace();
+                            }
+                            Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
+                        }
 
-                        listResults = (ArrayList<OperatorModel.ListResult>) operatorModel.getListResult();
+                        @Override
+                        public void onNext(OperatorModel operatorModel) {
+
+                            listResults = (ArrayList<OperatorModel.ListResult>) operatorModel.getListResult();
 //                        ArrayAdapter<OperatorModel.ListResult> listResultArrayAdapter = new ArrayAdapter<OperatorModel.ListResult>(context,android.R.layout.simple_dropdown_item_1line,listResults);
 //                        currentOperator.setAdapter(listResultArrayAdapter);
 
 
-                        GenericAdapter genericAdapter = new GenericAdapter(context, operatorModel.getListResult(), R.layout.adapter_single_item);
-                        genericAdapter.setAdapterOnClick(DataCardFragment.this);
-                        operatorSpn.setAdapter(genericAdapter);
-                    }
-                });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            // close this activity and return to preview activity (if there is any)
+                            GenericAdapter genericAdapter = new GenericAdapter(context, operatorModel.getListResult(), R.layout.adapter_single_item);
+                            genericAdapter.setAdapterOnClick(DataCardFragment.this);
+                            operatorSpn.setAdapter(genericAdapter);
+                        }
+                    });
         }
-        return super.onOptionsItemSelected(item);
-    }
+        }
+
+        @Override
+        public boolean onOptionsItemSelected (MenuItem item){
+            if (item.getItemId() == android.R.id.home) {
+                // close this activity and return to preview activity (if there is any)
+            }
+            return super.onOptionsItemSelected(item);
+        }
 
     private void closeTab() {
         Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("datacardTag");

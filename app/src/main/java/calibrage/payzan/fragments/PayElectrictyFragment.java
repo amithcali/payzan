@@ -209,7 +209,7 @@ public class PayElectrictyFragment extends Fragment implements GenericAdapter.Ad
     }
 
     private void getOperator(String providerType) {
-
+if(CommonUtil.isNetworkAvailable(context)){
         MyServices service = ServiceFactory.createRetrofitService(context, MyServices.class);
         operatorSubscription = service.getOperator(ApiConstants.MOBILE_SERVICES + providerType)
                 .subscribeOn(Schedulers.newThread())
@@ -249,7 +249,7 @@ public class PayElectrictyFragment extends Fragment implements GenericAdapter.Ad
                         districtSpn.setAdapter(genericAdapter);
                     }
                 });
-    }
+    }}
 
     @Override
     public void adapterOnClick(int position) {

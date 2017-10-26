@@ -192,6 +192,8 @@ public class PayCableFragment extends Fragment implements GenericAdapter.Adapter
     }
 
     private void getOperator(String providerType) {
+if(CommonUtil.isNetworkAvailable(context)){
+
 
         MyServices service = ServiceFactory.createRetrofitService(context, MyServices.class);
         operatorSubscription = service.getOperator(ApiConstants.MOBILE_SERVICES + providerType)
@@ -232,7 +234,7 @@ public class PayCableFragment extends Fragment implements GenericAdapter.Adapter
                         operatorSpn.setAdapter(genericAdapter);;
                     }
                 });
-    }
+    }}
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
