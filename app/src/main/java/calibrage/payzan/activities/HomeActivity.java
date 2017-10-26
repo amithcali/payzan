@@ -81,6 +81,7 @@ public class HomeActivity extends AppCompatActivity implements OnFragmentInterac
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                         switch (item.getItemId()) {
                             case R.id.action_home:
 

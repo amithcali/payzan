@@ -378,7 +378,7 @@ android:scrollbars="none"
 
         <calibrage.payzan.controls.CommonButton
 
-
+android:id="@+id/btn_share"
             android:layout_marginBottom="@dimen/lyt_margin_bottom"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
