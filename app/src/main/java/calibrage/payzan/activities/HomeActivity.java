@@ -110,7 +110,7 @@ public class HomeActivity extends AppCompatActivity implements OnFragmentInterac
                                 /*    if user alredy login show profile els show login screen */
                                 if (val == CommonConstants.Login) {
                                     getSupportFragmentManager().beginTransaction()
-                                            .replace(R.id.content_frame, new UserProfileHome())
+                                            .replace(R.id.content_frame, new UserProfileHome(),"profileHomeTag")
                                             .commit();
                                     toolbar.setNavigationIcon(null);
                                     toolbar.setTitle("");
@@ -268,6 +268,17 @@ public class HomeActivity extends AppCompatActivity implements OnFragmentInterac
     public void messageFromChildFragmentToActivity(String myString) {
         if(myString.equalsIgnoreCase("moveTowallet")){
             bottomNavigationView.setSelectedItemId(R.id.action_wallet);
+        }else if(myString.equalsIgnoreCase("signout")) {
+            val =  SharedPrefsData.getInstance(HomeActivity.this).getIntFromSharedPrefs(CommonConstants.ISLOGIN);
+            setupToolbar();
+            menu = bottomNavigationView.getMenu();
+            if(val == CommonConstants.Login)
+            {
+                menu.findItem(R.id.action_login).setTitle("Profile");
+            }
+            else {
+                menu.findItem(R.id.action_login).setTitle("Login");
+            }
         }else {
             bottomNavigationView.setSelectedItemId(R.id.action_home);
         }

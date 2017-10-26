@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +15,16 @@ import android.widget.Toast;
 
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
+import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
 import calibrage.payzan.utils.CommonConstants;
+import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.SharedPrefsData;
 
 
 public class UserProfileHome extends Fragment {
     private Button btn_logOut,btn_Share;
+    private OnChildFragmentToActivityInteractionListener mActivityListener;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,9 +44,13 @@ public class UserProfileHome extends Fragment {
             public void onClick(View v) {
                 SharedPrefsData.getInstance(getActivity()).ClearData(getActivity());
 
-                Toast.makeText(getActivity(), "DATA Cleared", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(getContext(), HomeActivity.class);
-                startActivity(i);
+               // Toast.makeText(getActivity(), "DATA Cleared", Toast.LENGTH_SHORT).show();
+//                Intent i = new Intent(getContext(), HomeActivity.class);
+//                startActivity(i);
+               // getActivity().finish();
+
+                closeTab();
+
             }
         });
         btn_Share.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +68,49 @@ public class UserProfileHome extends Fragment {
                 startActivity(Intent.createChooser(Ishare, "Share link!"));
             }
         });
+
+        v.setFocusableInTouchMode(true);
+        v.requestFocus();
+        v.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+                    closeTab();
+                    // onCloseFragment();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
         return v;
+    }
+
+    private void closeTab() {
+        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("profileHomeTag");
+        mActivityListener.messageFromChildFragmentToActivity("signout");
+
+        if (fragment != null) {
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new LoginFragment()).commit();
+            HomeActivity.toolbar.setNavigationIcon(null);
+            HomeActivity.toolbar.setTitle("");
+            CommonUtil.hideSoftKeyboard((AppCompatActivity) getActivity());
+        }
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // check if Activity implements listener
+        if (context instanceof OnChildFragmentToActivityInteractionListener) {
+            mActivityListener = (OnChildFragmentToActivityInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnChildFragmentToActivityInteractionListener");
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
