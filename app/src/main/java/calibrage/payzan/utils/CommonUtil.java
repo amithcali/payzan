@@ -23,6 +23,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -181,6 +183,11 @@ public class CommonUtil {
             InputMethodManager inputMethodManager = (InputMethodManager) appCompatActivity.getSystemService(appCompatActivity.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(appCompatActivity.getCurrentFocus().getWindowToken(), 0);
         }
+    }
+
+    public static void adjustSoftKeyboard(Window window){
+        window.setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
     public static LinkedHashMap<String, Object> toMap(JSONObject object) throws JSONException {

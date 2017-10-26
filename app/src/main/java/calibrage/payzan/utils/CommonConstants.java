@@ -13,6 +13,9 @@ public class CommonConstants {
     public static String SERVICE_PROVIDER_ID_ELECTRICITY = "9";
     public static String SERVICE_PROVIDER_ID_DTH = "12";
     public static String SERVICE_PROVIDER_ID_WATER = "10";
+    public static String SERVICE_PROVIDER_ID_DATACARD = "40";
+    public static String SERVICE_PROVIDER_ID_LANDLINE = "41";
+    public static String SERVICE_PROVIDER_ID_CABLEBILL = "42";
 
 
     //---------------user data---------------------//

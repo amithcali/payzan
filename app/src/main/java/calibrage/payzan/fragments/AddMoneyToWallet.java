@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -48,38 +49,91 @@ import static calibrage.payzan.fragments.HomeFragment.walletTxt;
 
 public class AddMoneyToWallet extends Fragment {
 
-    private EditText enterMoneyEdt,enterpromocodeEdt;
+    private EditText enterMoneyEdt, enterpromocodeEdt;
     private Button submit;
     private Toolbar toolbar;
     private View rootView;
     private Context context;
     private AlertDialog alertDialog;
     private Subscription mRegisterSubscription;
+    private TextView addHundTxt, addfiveTxt, addthouTxt;
+    private int addMoney;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.activity_add_money_to_wallet, container, false);
         context = this.getActivity();
+
         setHasOptionsMenu(true);
 
-        enterMoneyEdt = (EditText)rootView.findViewById(R.id.amount);
-        enterpromocodeEdt = (EditText)rootView.findViewById(R.id.promocode);
-        submit = (Button)rootView.findViewById(R.id.submit);
+        setViews();
+        initViews();
+
+
+        return rootView;
+    }
+
+    private void setViews() {
+
+        enterMoneyEdt = (EditText) rootView.findViewById(R.id.amount);
+        addHundTxt = (TextView) rootView.findViewById(R.id.addHundTxt);
+
+        addfiveTxt = (TextView) rootView.findViewById(R.id.addfiveTxt);
+        addthouTxt = (TextView) rootView.findViewById(R.id.addthouTxt);
+        enterpromocodeEdt = (EditText) rootView.findViewById(R.id.promocode);
+        submit = (Button) rootView.findViewById(R.id.submit);
+
+    }
+
+    private void initViews() {
+
+        addHundTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                addMoney(100);
+            }
+        });
+        addfiveTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addMoney(500);
+            }
+        });
+        addthouTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addMoney(1000);
+
+            }
+        });
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(enterMoneyEdt.getText().toString().equalsIgnoreCase("")){
-                    CommonUtil.displayDialogWindow("please enter amount",alertDialog,context);
-                }else {
+
+
+                if (enterMoneyEdt.getText().toString().equalsIgnoreCase("")) {
+                    CommonUtil.displayDialogWindow("please enter amount", alertDialog, context);
+                } else {
                     addWallet();
                 }
 
             }
         });
 
+    }
 
-        return  rootView;
+    private void addMoney(int amount) {
+
+        try {
+            int value = Integer.parseInt("0"+enterMoneyEdt.getText().toString());
+            addMoney = value + amount;
+        }catch (Exception e){
+
+        }
+        enterMoneyEdt.setText(String.valueOf(addMoney));
     }
 
     @Override
@@ -90,8 +144,7 @@ public class AddMoneyToWallet extends Fragment {
     }
 
 
-
-    private void addWallet(){
+    private void addWallet() {
         JsonObject object = postWalletObject();
         MyServices service = ServiceFactory.createRetrofitService(context, MyServices.class);
         mRegisterSubscription = service.UserAddWallet(object)
@@ -105,7 +158,7 @@ public class AddMoneyToWallet extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
-                        if(e instanceof HttpException){
+                        if (e instanceof HttpException) {
                             ((HttpException) e).code();
                             ((HttpException) e).message();
                             ((HttpException) e).response().errorBody();
@@ -122,11 +175,11 @@ public class AddMoneyToWallet extends Fragment {
                     @Override
                     public void onNext(WalletResponse walletResponse) {
                         Toast.makeText(context, "sucess", Toast.LENGTH_SHORT).show();
-                       // finish();
-                       CommonConstants.WALLETMONEY = String.valueOf(walletResponse.getResult().getBalance());
-                        CommonUtil.displayDialogWindow("Wallet is Updated Sucessfully",alertDialog,context);
+                        // finish();
+                        CommonConstants.WALLETMONEY = String.valueOf(walletResponse.getResult().getBalance());
+                        CommonUtil.displayDialogWindow("Wallet is Updated Sucessfully", alertDialog, context);
                         walletTxt.setText(CommonConstants.WALLETMONEY);
-                      //  closeTab();
+                        //  closeTab();
                     }
                 });
     }

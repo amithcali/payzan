@@ -26,6 +26,10 @@ import calibrage.payzan.activities.SendMoney;
 import calibrage.payzan.adapters.BannerAdapter;
 import calibrage.payzan.adapters.RechargeAdapter;
 import calibrage.payzan.adapters.WalletAdapter;
+import calibrage.payzan.interfaces.CommunicateFragments;
+import calibrage.payzan.interfaces.OnChildFragmentInteractionListener;
+import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
+import calibrage.payzan.interfaces.OnFragmentInteractionListener;
 import calibrage.payzan.interfaces.RechargeClickListiner;
 import calibrage.payzan.interfaces.TransctionClickListiner;
 import calibrage.payzan.utils.CommonConstants;
@@ -36,18 +40,21 @@ import calibrage.payzan.utils.CommonUtil;
  * Created by Calibrage11 on 9/23/2017.
  */
 
-public class HomeFragment extends Fragment implements RechargeClickListiner,TransctionClickListiner{
+public class HomeFragment extends Fragment implements RechargeClickListiner,TransctionClickListiner,CommunicateFragments {
     private View  view;
     private RecyclerView recharge_recylerview,recylerviewbanner,recylerviewbook,recylerviewpay;
     private ArrayList<Pair<Integer,String>> rechargePairList = new ArrayList<>();
     private ArrayList<Pair<Integer,String>> payPairList = new ArrayList<>();
     private Context context;
     public static TextView AgentRequestTxt,walletTxt;
+   // private CommunicateFragments communicateFragments;
+    private OnChildFragmentToActivityInteractionListener mListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        // setHasOptionsMenu(true);
+        CommonUtil.adjustSoftKeyboard(getActivity().getWindow());
     }
 
     @Nullable
@@ -265,14 +272,14 @@ public class HomeFragment extends Fragment implements RechargeClickListiner,Tran
         Bundle bundle = new Bundle();
         bundle.putInt("position", pos);
         transactionMainFragment.setArguments(bundle);
+      //  transactionMainFragment.setFragmentCommunication(HomeFragment.this);
 
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.add(R.id.content_frame, transactionMainFragment, "walletTag");
+        mListener.messageFromChildFragmentToActivity("moveTowallet");
         //ft.addToBackStack("mobileTag");
         ft.commit();
         if(pos==0){
-
-
 
         }else if(pos==1){
 
@@ -281,6 +288,40 @@ public class HomeFragment extends Fragment implements RechargeClickListiner,Tran
         }
 
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnChildFragmentToActivityInteractionListener) {
+            mListener = (OnChildFragmentToActivityInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+
+//    public void setFragmentCommunication(CommunicateFragments  fragmentCommunication){
+//        this.communicateFragments = fragmentCommunication;
+//    }
+
+    @Override
+    public void onFragmentInteraction(String id) {
+        //  communicateFragments.onFragmentInteraction(id);
+    }
+
+//    @Override
+//    public void messageFromChildToParent(String myString) {
+//
+//    }
+
+
 
     public static class SpacesItemDecoration extends RecyclerView.ItemDecoration {
         private int space;

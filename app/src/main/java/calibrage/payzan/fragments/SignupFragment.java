@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +32,9 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -47,6 +50,7 @@ import java.io.IOException;
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.activities.signup;
+import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
 import calibrage.payzan.model.RegisterModel;
 import calibrage.payzan.model.ResponseModel;
 import calibrage.payzan.networkservice.MyServices;
@@ -66,7 +70,7 @@ import static calibrage.payzan.utils.CommonUtil.isValidEmail;
  * Created by Calibrage19 on 20-10-2017.
  */
 
-public class SignupFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
+public class SignupFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks {
     private EditText reg_mobile,reg_email,reg_password,confirm_password;
     private LoginButton loginButton;
     private Button fbBtn,btnRegister;
@@ -81,12 +85,13 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
     private View rootView;
     private Context context;
     public  static Toolbar toolbar;
+    private OnChildFragmentToActivityInteractionListener mActivityListener;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.activity_signup, container, false);
-        IntiateGoogleApi();
         context= getActivity();
+
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) rootView.findViewById(R.id.login);
         fbBtn = (Button) rootView.findViewById(R.id.fbBtn);
@@ -95,9 +100,9 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
         reg_mobile = (EditText) rootView.findViewById(R.id.reg_mobile);
         reg_email = (EditText) rootView.findViewById(R.id.reg_email);
         reg_password = (EditText)rootView.findViewById(R.id.reg_password);
-        confirm_password = (EditText)rootView.findViewById(R.id.confirm_password);
+        confirm_password = (EditText)rootView.findViewById(R.id.reg_confirm_password);
         reg_mobile_til = (TextInputLayout) rootView.findViewById(R.id.reg_mobile_til);
-
+        IntiateGoogleApi();
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
         HomeActivity.toolbar.setTitle(getResources().getString(R.string.sign_up));
         HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
@@ -135,7 +140,7 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity();
+               signIn();
 
             }
         });
@@ -209,6 +214,7 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
         HomeActivity.toolbar.setNavigationIcon(null);
         HomeActivity.toolbar.setTitle("");
         CommonUtil.hideSoftKeyboard((AppCompatActivity)getActivity());
+        mActivityListener.messageFromChildFragmentToActivity("handleBottomNavigation");
 //        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("SignupTag");
 //
 //
@@ -258,31 +264,33 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
 
     }
     private void IntiateGoogleApi() {
-        SmsReceiver.bindListener(new SmsListener() {
-            @Override
-            public void messageReceived(String messageText) {
-                Log.d("Text", messageText);
-                Toast.makeText(getActivity(), "Message: " + messageText, Toast.LENGTH_LONG).show();
-            }
-        });
+//        SmsReceiver.bindListener(new SmsListener() {
+//            @Override
+//            public void messageReceived(String messageText) {
+//                Log.d("Text", messageText);
+//                Toast.makeText(getActivity(), "Message: " + messageText, Toast.LENGTH_LONG).show();
+//            }
+//        });
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
-        if (mGoogleApiClient == null || !mGoogleApiClient.isConnected()) {
-            try {
-                mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                        .enableAutoManage(getActivity() /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                        .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                        .build();
-                loginButton.setReadPermissions("email");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 //        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
 //                .enableAutoManage(getActivity(), this)
 //                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
 //                .build();
-//        loginButton.setReadPermissions("email");
+        loginButton.setReadPermissions("email");
+        if (mGoogleApiClient == null || !mGoogleApiClient.isConnected()) {
+            try {
+                mGoogleApiClient = new GoogleApiClient.Builder((FragmentActivity) context)
+                        .enableAutoManage((FragmentActivity) context /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                        .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                        .build();
+
+                loginButton.setReadPermissions("email");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
     }
     private JsonObject getRegisterObject() {
@@ -296,19 +304,23 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
     }
 
     private boolean isValidateUi(){
-        if(TextUtils.isEmpty(reg_mobile.getText().toString())){
-            // CommonUtil.displayDialogWindow("Please enter mobile no.",alertDialog,signup.this);
-            reg_mobile_til.setErrorEnabled(true);
-            reg_mobile_til.setError("Please enter mobile no.");
+        if(TextUtils.isEmpty(reg_mobile.getText().toString().trim())){
+             CommonUtil.displayDialogWindow("Please enter mobile no.",alertDialog,getActivity());
+//            reg_mobile_til.setErrorEnabled(true);
+//            reg_mobile_til.setError("Please enter mobile no.");
             return false;
-        } else if(!TextUtils.isEmpty(reg_mobile.getText().toString())&& (reg_mobile.getText().toString().length()>14||reg_mobile.getText().toString().length()<10)) {
+        } else if(!TextUtils.isEmpty(reg_mobile.getText().toString().trim())&& (reg_mobile.getText().toString().length()>14||reg_mobile.getText().toString().length()<10)) {
             CommonUtil.displayDialogWindow("Please enter valid mobile no.", alertDialog, getActivity());
             return false;
         }else if   (!isValidEmail(reg_email.getText().toString())) {
             CommonUtil.displayDialogWindow("Please enter valid email ",alertDialog,getActivity());
             return false;
-        }else if(TextUtils.isEmpty(reg_password.getText().toString())){
+        }else if(TextUtils.isEmpty(reg_password.getText().toString().trim())){
             CommonUtil.displayDialogWindow("Please enter password ",alertDialog,getActivity());
+            return false;
+        }
+        else if(TextUtils.isEmpty(confirm_password.getText().toString().trim())){
+            CommonUtil.displayDialogWindow("Please enter confirm password ",alertDialog,getActivity());
             return false;
         }
 
@@ -332,9 +344,32 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
                 });
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // check if Activity implements listener
+        if (context instanceof OnChildFragmentToActivityInteractionListener) {
+            mActivityListener = (OnChildFragmentToActivityInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnChildFragmentToActivityInteractionListener");
+        }
+
+        // check if parent Fragment implements listener
+//        if (getActivity().getSupportFragmentManager().findFragmentByTag("walletTag") instanceof OnChildFragmentInteractionListener) {
+//
+//            mParentListener = (OnChildFragmentInteractionListener) getParentFragment();
+//        } else {
+//            throw new RuntimeException("The parent fragment must implement OnChildFragmentInteractionListener");
+//        }
+    }
+
     private void signIn() {
+        SignupFragment fragment = (SignupFragment) getActivity().getSupportFragmentManager()
+                .findFragmentByTag("SignupTag");
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        fragment.startActivityForResult(signInIntent, RC_SIGN_IN);
     }
     private void signOut() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
@@ -348,6 +383,69 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
     }
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mGoogleApiClient.stopAutoManage(getActivity());
+        mGoogleApiClient.disconnect();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == RC_SIGN_IN) {
+            SignupFragment fragment = (SignupFragment) getActivity().getSupportFragmentManager()
+                    .findFragmentByTag("SignupTag");
+            fragment.onActivityResult(requestCode, resultCode, data);
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+       // super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+
+//        if (requestCode == RC_SIGN_IN) {
+//            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+//            handleSignInResult(result);
+//        }
+    }
+
+    private void handleSignInResult(GoogleSignInResult result) {
+        Log.d(" ", "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+
+            Log.e(" ", "display name: " + acct.getDisplayName());
+
+            String personName = acct.getDisplayName();
+            String personPhotoUrl=null;
+            if(acct.getPhotoUrl()!=null){
+                personPhotoUrl = acct.getPhotoUrl().toString();
+            }
+
+            String email = acct.getEmail();
+
+            Log.e(" ", "Name: " + personName + ", email: " + email
+                    + ", Image: " + personPhotoUrl);
+
+        } else {
+            // Signed out, show unauthenticated UI.
+            // updateUI(false);
+        }
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
 
     }
 }

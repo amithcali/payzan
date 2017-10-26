@@ -21,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ import calibrage.payzan.model.OperatorModel;
 import calibrage.payzan.networkservice.ApiConstants;
 import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
+import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.NCBTextInputLayout;
 import retrofit2.adapter.rxjava.HttpException;
@@ -52,20 +54,21 @@ public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterO
 
     private View rootView;
     private Context context;
-    private NCBTextInputLayout operatorTXT,numberTXT,circleTXT,amountTXT;
-    private calibrage.payzan.controls.CommonEditText mobilenoEdt,amount;
-    private AutoCompleteTextView circleEdt,operatorEdt;
+    private NCBTextInputLayout operatorTXT, numberTXT, circleTXT, amountTXT;
+    private calibrage.payzan.controls.CommonEditText mobilenoEdt, amount;
+    private AutoCompleteTextView circleEdt, operatorEdt;
     static final int PICK_CONTACT = 1;
     private Subscription operatorSubscription;
     private ArrayList<OperatorModel.ListResult> listResults;
+    private Button submit;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-    ;}
-
+        CommonUtil.adjustSoftKeyboard(getActivity().getWindow());
+        ;
+    }
 
 
     @Nullable
@@ -75,9 +78,10 @@ public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterO
         context = this.getActivity();
         setViews();
         initViews();
-        getOperator("41");
-        return  rootView;
+        getOperator(CommonConstants.SERVICE_PROVIDER_ID_LANDLINE);
+        return rootView;
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -119,7 +123,8 @@ public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterO
             public void afterTextChanged(Editable editable) {
 
             }
-        });mobilenoEdt.addTextChangedListener(new TextWatcher() {
+        });
+        mobilenoEdt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -127,7 +132,7 @@ public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterO
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.length()>0){
+                if (charSequence.length() > 0) {
                     numberTXT.setErrorEnabled(false);
                 }
 
@@ -137,7 +142,8 @@ public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterO
             public void afterTextChanged(Editable editable) {
 
             }
-        });circleEdt.addTextChangedListener(new TextWatcher() {
+        });
+        circleEdt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -152,10 +158,11 @@ public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterO
             public void afterTextChanged(Editable editable) {
 
             }
-        });amount.addTextChangedListener(new TextWatcher() {
+        });
+        amount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.length()>0){
+                if (charSequence.length() > 0) {
                     amountTXT.setErrorEnabled(false);
                 }
 
@@ -190,6 +197,14 @@ public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterO
             }
 
         });
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isValidateUi()){
+
+                }
+            }
+        });
     }
 
     private void setViews() {
@@ -197,7 +212,7 @@ public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterO
         setHasOptionsMenu(true);
 
 
-        ((AppCompatActivity)getActivity()).setSupportActionBar(HomeActivity.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
         HomeActivity.toolbar.setTitle(getResources().getString(R.string.landline_sname));
         HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
@@ -208,15 +223,16 @@ public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterO
                 closeTab();
             }
         });
-        operatorTXT = (NCBTextInputLayout)rootView.findViewById(R.id.operatorTXT);
-        numberTXT = (NCBTextInputLayout)rootView.findViewById(R.id.numberTXT);
-        circleTXT = (NCBTextInputLayout)rootView.findViewById(R.id.circleTXT);
-        amountTXT = (NCBTextInputLayout)rootView.findViewById(R.id.amountTXT);
+        operatorTXT = (NCBTextInputLayout) rootView.findViewById(R.id.operatorTXT);
+        numberTXT = (NCBTextInputLayout) rootView.findViewById(R.id.numberTXT);
+        circleTXT = (NCBTextInputLayout) rootView.findViewById(R.id.circleTXT);
+        amountTXT = (NCBTextInputLayout) rootView.findViewById(R.id.amountTXT);
 
         operatorEdt = (AutoCompleteTextView) rootView.findViewById(R.id.operatorEdt);
         mobilenoEdt = (CommonEditText) rootView.findViewById(R.id.mobilenoEdt);
         circleEdt = (AutoCompleteTextView) rootView.findViewById(R.id.circleEdt);
         amount = (CommonEditText) rootView.findViewById(R.id.amount);
+        submit = (Button) rootView.findViewById(R.id.submit);
         rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
         rootView.setOnKeyListener(new View.OnKeyListener() {
@@ -276,33 +292,34 @@ public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterO
                     }
                 });
     }
-    private void closeTab(){
+
+    private void closeTab() {
         Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("landlineTag");
 
 
-        if (fragment != null){
+        if (fragment != null) {
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
             HomeActivity.toolbar.setNavigationIcon(null);
             HomeActivity.toolbar.setTitle("");
-            CommonUtil.hideSoftKeyboard((AppCompatActivity)getActivity());
+            CommonUtil.hideSoftKeyboard((AppCompatActivity) getActivity());
         }
     }
 
-    private boolean isValidateUi(){
+    private boolean isValidateUi() {
 
-        if(TextUtils.isEmpty(operatorEdt.getText().toString().trim())){
+        if (TextUtils.isEmpty(operatorEdt.getText().toString().trim())) {
             operatorTXT.setErrorEnabled(true);
             operatorTXT.setError("please select operator");
             return false;
-        }else if(TextUtils.isEmpty(mobilenoEdt.getText().toString().trim())){
+        } else if (TextUtils.isEmpty(mobilenoEdt.getText().toString().trim())) {
             numberTXT.setError("enter number");
             numberTXT.setErrorEnabled(true);
             return false;
-        }else if(TextUtils.isEmpty(circleEdt.getText().toString().trim())){
+        } else if (TextUtils.isEmpty(circleEdt.getText().toString().trim())) {
             circleTXT.setError("select cicle");
             circleTXT.setErrorEnabled(true);
             return false;
-        }else if(TextUtils.isEmpty(amount.getText().toString().trim())){
+        } else if (TextUtils.isEmpty(amount.getText().toString().trim())) {
             amountTXT.setError("enter amount");
             amountTXT.setErrorEnabled(true);
             return false;

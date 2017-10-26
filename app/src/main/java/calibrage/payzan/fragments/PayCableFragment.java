@@ -29,6 +29,7 @@ import calibrage.payzan.model.OperatorModel;
 import calibrage.payzan.networkservice.ApiConstants;
 import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
+import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.NCBTextInputLayout;
 import retrofit2.adapter.rxjava.HttpException;
@@ -64,7 +65,7 @@ public class PayCableFragment extends Fragment implements GenericAdapter.Adapter
         context = this.getActivity();
         setViews();
         initViews();
-        getOperator("42");
+        getOperator(CommonConstants.SERVICE_PROVIDER_ID_CABLEBILL);
 
         return rootView;
     }
@@ -255,6 +256,7 @@ public class PayCableFragment extends Fragment implements GenericAdapter.Adapter
 
     @Override
     public void adapterOnClick(int position) {
+        operatorSpn.setText(listResults.get(position).getName());
 
     }
 }

@@ -195,6 +195,10 @@ public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOn
             @Override
             public void afterTextChanged(Editable editable) {
 
+
+
+
+
             }
         });
         amount.addTextChangedListener(new TextWatcher() {
@@ -360,7 +364,7 @@ public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOn
                     Cursor c = context.getContentResolver().query(contactData, null, null, null, null);
                     if (c.moveToFirst()) {
                         String hasPhone = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        mobileEdt.setText(hasPhone);
+                        mobileEdt.setText(hasPhone.replaceAll("\\s",""));
                     }
 
                 }

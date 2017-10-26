@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,29 +13,31 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/lyt_margin_top"
+            android:layout_marginLeft="@dimen/lyt_margin_left"
             android:layout_marginRight="@dimen/lyt_margin_right"
-            android:layout_marginLeft="@dimen/lyt_margin_left">
+            android:layout_marginTop="@dimen/lyt_margin_top"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/lyt_margin_bottom"
                 android:gravity="center"
-                android:layout_marginBottom="@dimen/lyt_margin_bottom">
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="@dimen/img_height"
                     android:layout_height="@dimen/img_width"
-                    app:srcCompat="@drawable/ic_data_card"/>
+                    app:srcCompat="@drawable/ic_data_card" />
+
                 <calibrage.payzan.controls.CommonTextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Data Card"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/font_header"
                     android:fontFamily="serif"
-                    />
+                    android:gravity="center"
+                    android:text="Data Card"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_header" />
             </LinearLayout>
 
             <RadioGroup
@@ -47,82 +48,82 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-android:textSize="@dimen/edt_FontSize"
-                    android:height="@dimen/rdo_height"
-                    android:width="@dimen/rdo_width"
                     android:id="@+id/prepaidRB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/rdo_margin"
-                    android:text="prepaid"
+                    android:width="@dimen/rdo_width"
+                    android:height="@dimen/rdo_height"
                     android:button="@drawable/radio_btn"
-                    android:textColor="@color/accent"/>
+                    android:text="prepaid"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/edt_FontSize" />
 
                 <RadioButton
-                    android:textSize="@dimen/edt_FontSize"
-                    android:height="@dimen/rdo_height"
-                    android:width="@dimen/rdo_width"
                     android:id="@+id/postpaidRB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/rdo_margin"
-                    android:text="postpaid"
+                    android:width="@dimen/rdo_width"
+                    android:height="@dimen/rdo_height"
                     android:button="@drawable/radio_btn"
-                    android:textColor="@color/accent"/>
+                    android:text="postpaid"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/edt_FontSize" />
             </RadioGroup>
 
             <calibrage.payzan.controls.CommonEditText
-                android:layout_width="match_parent"
                 android:id="@+id/stateEdt"
-                android:hint="State"
                 style="@style/EditTextStyle"
-                android:textSize="@dimen/edt_FontSize"
-                android:visibility="gone"
-                android:layout_marginBottom="@dimen/edt_bottom_margin"/>
-            <calibrage.payzan.utils.NCBTextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/operatorTXT">
-            <AutoCompleteTextView
-                android:id="@+id/operatorSpn"
-                android:hint="Operator"
-                style="@style/EditTextStyle"
-               />
+                android:layout_marginBottom="@dimen/edt_bottom_margin"
+                android:hint="State"
+                android:textSize="@dimen/edt_FontSize"
+                android:visibility="gone" />
+
+            <calibrage.payzan.utils.NCBTextInputLayout
+                android:id="@+id/operatorTXT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/operatorSpn"
+                    style="@style/EditTextStyle"
+                    android:hint="Operator" />
             </calibrage.payzan.utils.NCBTextInputLayout>
 
             <calibrage.payzan.utils.NCBTextInputLayout
+                android:id="@+id/dataCardTXT"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/dataCardTXT">
-            <calibrage.payzan.controls.CommonEditText
-                android:layout_width="match_parent"
-                android:id="@+id/datCardNoEdt"
-                android:hint="Data Card Number"
-                style="@style/EditTextStyle"
-               />
+                android:layout_height="wrap_content">
+
+                <calibrage.payzan.controls.CommonEditText
+                    android:id="@+id/datCardNoEdt"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:hint="@string/data_card_number" />
             </calibrage.payzan.utils.NCBTextInputLayout>
+
             <calibrage.payzan.utils.NCBTextInputLayout
+                android:id="@+id/amountTXT"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/amountTXT">
-            <calibrage.payzan.controls.CommonEditText
-                android:layout_width="match_parent"
-                android:id="@+id/amountEdt"
-                android:hint="Amount"
-                style="@style/EditTextStyle"
-                android:inputType="number"
-                android:layout_marginBottom="@dimen/edt_bottom_margin"/>
+                android:layout_height="wrap_content">
+
+                <calibrage.payzan.controls.CommonEditText
+                    android:id="@+id/amountEdt"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/edt_bottom_margin"
+                    android:hint="@string/amount"
+                    android:inputType="number" />
             </calibrage.payzan.utils.NCBTextInputLayout>
 
             <calibrage.payzan.controls.CommonButton
-                style="@style/ButtonStyle"
                 android:id="@+id/submit"
-                android:text="Proceed to Pay Bill"
-               />
+                style="@style/ButtonStyle"
+                android:text="@string/proceed_to_pay_bill" />
 
         </LinearLayout>
-
-
 
 
     </RelativeLayout>

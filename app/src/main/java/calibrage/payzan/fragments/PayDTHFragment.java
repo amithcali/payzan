@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -52,6 +53,7 @@ public class PayDTHFragment extends Fragment implements GenericAdapter.AdapterOn
     private AutoCompleteTextView operatorSpn;
     private ArrayList<OperatorModel.ListResult> listResults;
     private Subscription operatorSubscription;
+    private Button submit;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -117,6 +119,15 @@ public class PayDTHFragment extends Fragment implements GenericAdapter.AdapterOn
                 return false;
             }
         });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isValidateUI()){
+
+                }
+            }
+        });
     }
 
     private void setViews() {
@@ -127,6 +138,8 @@ public class PayDTHFragment extends Fragment implements GenericAdapter.AdapterOn
         subscriberEdt = (CommonEditText) rootView.findViewById(R.id.subscriberEdt);
         amount = (CommonEditText) rootView.findViewById(R.id.amount);
         operatorSpn = (AutoCompleteTextView) rootView.findViewById(R.id.operatorSpn);
+
+        submit = (Button) rootView.findViewById(R.id.submit);
 
         setHasOptionsMenu(true);
         ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);

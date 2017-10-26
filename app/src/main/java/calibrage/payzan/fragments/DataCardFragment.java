@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -52,6 +53,7 @@ public class DataCardFragment extends Fragment implements GenericAdapter.Adapter
     private AutoCompleteTextView operatorSpn;
     private Subscription operatorSubscription;
     private ArrayList<OperatorModel.ListResult> listResults;
+    private Button submit;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,7 +69,7 @@ public class DataCardFragment extends Fragment implements GenericAdapter.Adapter
         context = this.getActivity();
         setViews();
         initViews();
-        getOperator("40");
+        getOperator(CommonConstants.SERVICE_PROVIDER_ID_DATACARD);
 
         return rootView;
     }
@@ -81,6 +83,8 @@ public class DataCardFragment extends Fragment implements GenericAdapter.Adapter
         dataCardTXT = (NCBTextInputLayout) rootView.findViewById(R.id.dataCardTXT);
         amountTXT = (NCBTextInputLayout) rootView.findViewById(R.id.amountTXT);
         operatorSpn = (AutoCompleteTextView) rootView.findViewById(R.id.operatorSpn);
+        operatorSpn = (AutoCompleteTextView) rootView.findViewById(R.id.operatorSpn);
+        submit = (Button) rootView.findViewById(R.id.submit);
         setHasOptionsMenu(true);
         ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
@@ -172,20 +176,29 @@ public class DataCardFragment extends Fragment implements GenericAdapter.Adapter
                 return false;
             }
         });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isValidateUi()){
+
+                }
+            }
+        });
     }
 
     private boolean isValidateUi() {
         if (TextUtils.isEmpty(operatorSpn.getText().toString().trim())) {
             operatorTXT.setError("please select operator");
-            operatorTXT.setErrorEnabled(false);
+            operatorTXT.setErrorEnabled(true);
             return false;
         } else if (TextUtils.isEmpty(datCardNoEdt.getText().toString().trim())) {
             dataCardTXT.setError("enter data card no.");
-            dataCardTXT.setErrorEnabled(false);
+            dataCardTXT.setErrorEnabled(true);
             return false;
         } else if (TextUtils.isEmpty(amountEdt.getText().toString().trim())) {
             amountTXT.setError("enter amount");
-            amountTXT.setErrorEnabled(false);
+            amountTXT.setErrorEnabled(true);
             return false;
         }
         return true;
@@ -247,7 +260,7 @@ public class DataCardFragment extends Fragment implements GenericAdapter.Adapter
         Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("datacardTag");
 
 
-        if (fragment != null){
+        if (fragment != null) {
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
             HomeActivity.toolbar.setNavigationIcon(null);
             HomeActivity.toolbar.setTitle("");
@@ -258,7 +271,7 @@ public class DataCardFragment extends Fragment implements GenericAdapter.Adapter
 
     @Override
     public void adapterOnClick(int position) {
-
+        operatorSpn.setText(listResults.get(position).getName());
     }
 }
 

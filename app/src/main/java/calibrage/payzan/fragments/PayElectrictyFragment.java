@@ -175,15 +175,15 @@ public class PayElectrictyFragment extends Fragment implements GenericAdapter.Ad
 
     private boolean isValidateUi() {
 
-        if(TextUtils.isEmpty(districtSpn.getText().toString().trim())){
+        if (TextUtils.isEmpty(districtSpn.getText().toString().trim())) {
             districtTXT.setError("select district");
             districtTXT.setErrorEnabled(true);
             return false;
-        }else if(TextUtils.isEmpty(ServiceNEdt.getText().toString().trim())){
+        } else if (TextUtils.isEmpty(ServiceNEdt.getText().toString().trim())) {
             serviceNoTXT.setError("enter service no");
             serviceNoTXT.setErrorEnabled(true);
             return false;
-        }else if(TextUtils.isEmpty(amountEdt.getText().toString().trim())){
+        } else if (TextUtils.isEmpty(amountEdt.getText().toString().trim())) {
             amountTXT.setError("enter amount");
             amountTXT.setErrorEnabled(true);
             return false;
@@ -195,11 +195,11 @@ public class PayElectrictyFragment extends Fragment implements GenericAdapter.Ad
         Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("elctricityTag");
 
 
-        if (fragment != null){
+        if (fragment != null) {
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
             HomeActivity.toolbar.setNavigationIcon(null);
             HomeActivity.toolbar.setTitle("");
-            CommonUtil.hideSoftKeyboard((AppCompatActivity)getActivity());
+            CommonUtil.hideSoftKeyboard((AppCompatActivity) getActivity());
         }
     }
 
@@ -253,6 +253,6 @@ public class PayElectrictyFragment extends Fragment implements GenericAdapter.Ad
 
     @Override
     public void adapterOnClick(int position) {
-
+        districtSpn.setText(listResults.get(position).getName());
     }
 }

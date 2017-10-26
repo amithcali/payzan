@@ -27,6 +27,10 @@ import calibrage.payzan.fragments.HomeFragment;
 import calibrage.payzan.fragments.LoginFragment;
 import calibrage.payzan.fragments.TransactionMainFragment;
 import calibrage.payzan.fragments.UserProfileHome;
+import calibrage.payzan.interfaces.CommunicateFragments;
+import calibrage.payzan.interfaces.OnChildFragmentInteractionListener;
+import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
+import calibrage.payzan.interfaces.OnFragmentInteractionListener;
 import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.SharedPrefsData;
 
@@ -37,8 +41,8 @@ import static calibrage.payzan.utils.CommonUtil.buildCounterDrawable;
  * Created by Calibrage11 on 9/22/2017.
  */
 
-public class HomeActivity extends AppCompatActivity {
-
+public class HomeActivity extends AppCompatActivity implements OnFragmentInteractionListener,OnChildFragmentToActivityInteractionListener {
+   // CommunicateFragments
     private Menu menu;
     public static Toolbar toolbar;
 
@@ -58,8 +62,9 @@ public class HomeActivity extends AppCompatActivity {
         setupToolbar();
         fragmentManager = getSupportFragmentManager();
         content_frame = (FrameLayout) findViewById(R.id.content_frame);
+        HomeFragment homeFragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, new HomeFragment(), "homeTag")
+                .replace(R.id.content_frame, homeFragment, "homeTag")
                 .commit();
         //  Toast.makeText(this, "testing in activity", Toast.LENGTH_SHORT).show();
         // CommonUtil.printKeyHash(this);
@@ -118,8 +123,10 @@ public class HomeActivity extends AppCompatActivity {
                                 break;
 
                             case R.id.action_wallet:
+                                TransactionMainFragment transactionMainFragment =new TransactionMainFragment();
+                               // transactionMainFragment.setFragmentCommunication(HomeActivity.this);
                                 getSupportFragmentManager().beginTransaction()
-                                        .add(R.id.content_frame, new TransactionMainFragment(), "walletTag")
+                                        .add(R.id.content_frame,transactionMainFragment , "walletTag")
                                         .commit();
 
                                 break;
@@ -153,41 +160,41 @@ public class HomeActivity extends AppCompatActivity {
         }
 
 //        String valuee="profile";
-//        getMenuInflater().inflate(R.menu.bottom_navigation_main, menu);//Menu Resource, Menu
+////        getMenuInflater().inflate(R.menu.bottom_navigation_main, menu);//Menu Resource, Menu
 //        MenuItem menuItem = menu.findItem(R.id.action_offers);
-//        //   menuItem.setIcon(buildCounterDrawable(HomeActivity.this,2,  R.drawable.ic_notification));
-//        menuItem.setTitle(valuee);
-//        // final MenuItem menuItem = menu.findItem(R.id.action_cart);
+//           menuItem.setIcon(buildCounterDrawable(HomeActivity.this,2,  R.drawable.ic_notification));
+//
+//         final MenuItem menuItem = menu.findItem(R.id.action_cart);
         return true;
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-////        getMenuInflater().inflate(R.menu.search, menu);//Menu Resource, Menu
-////        final MenuItem menuItem = menu.findItem(R.id.action_cart);
-////        //menuItem.setIcon(buildCounterDrawable(HomeActivity.this,2,  R.drawable.ic_notification));
-////
-////        // final MenuItem menuItem = menu.findItem(R.id.action_cart);
-////
-////        View actionView = MenuItemCompat.getActionView(menuItem);
-////        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
-////
-////        setupBadge();
-////
-////        actionView.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View v) {
-////                onOptionsItemSelected(menuItem);
-////            }
-////        });
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);//Menu Resource, Menu
+        final MenuItem menuItem = menu.findItem(R.id.action_cart);
+        //menuItem.setIcon(buildCounterDrawable(HomeActivity.this,2,  R.drawable.ic_notification));
+
+        // final MenuItem menuItem = menu.findItem(R.id.action_cart);
+
+        View actionView = MenuItemCompat.getActionView(menuItem);
+        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
+
+        setupBadge();
+
+        actionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onOptionsItemSelected(menuItem);
+            }
+        });
 //        String valuee="profile";
 //        getMenuInflater().inflate(R.menu.bottom_navigation_main, menu);//Menu Resource, Menu
 //     MenuItem menuItem = menu.findItem(R.id.action_login);
 //      //   menuItem.setIcon(buildCounterDrawable(HomeActivity.this,2,  R.drawable.ic_notification));
 //        menuItem.setTitle(valuee);
-//        // final MenuItem menuItem = menu.findItem(R.id.action_cart);
-//        return true;
-//    }
+        // final MenuItem menuItem = menu.findItem(R.id.action_cart);
+        return true;
+    }
 
 
 
@@ -241,6 +248,28 @@ public class HomeActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(ContextCompat.getColor(HomeActivity.this, R.color.new_accent));
         toolbar.setTitle("f");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+    }
+
+//    @Override
+//    public void onFragmentInteraction(String id) {
+//        Toast.makeText(this, ""+id, Toast.LENGTH_SHORT).show();
+//    }
+
+
+
+    @Override
+    public void messageFromParentFragmentToActivity(String myString) {
+
+    }
+
+    @Override
+    public void messageFromChildFragmentToActivity(String myString) {
+        if(myString.equalsIgnoreCase("moveTowallet")){
+            bottomNavigationView.setSelectedItemId(R.id.action_wallet);
+        }else {
+            bottomNavigationView.setSelectedItemId(R.id.action_home);
+        }
 
     }
 

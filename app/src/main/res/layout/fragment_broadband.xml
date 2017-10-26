@@ -41,6 +41,7 @@
                         android:fontFamily="serif"
                         android:gravity="center"
                         android:text="Broadband"
+                        android:layout_marginLeft="@dimen/txt_margin"
                         android:textColor="@color/black"
                         android:textSize="@dimen/font_header" />
                 </LinearLayout>

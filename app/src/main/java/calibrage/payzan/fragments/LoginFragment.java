@@ -52,6 +52,7 @@ import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.activities.LoginActivity;
 import calibrage.payzan.activities.signup;
 import calibrage.payzan.adapters.MyAdapter;
+import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
 import calibrage.payzan.model.LoginModel;
 import calibrage.payzan.model.LoginResponseModel;
 import calibrage.payzan.networkservice.MyServices;
@@ -81,6 +82,7 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
     private Button fbBtn, btnLogin;
     private EditText txt_Email, txt_password;
     private AlertDialog alertDialog;
+    private OnChildFragmentToActivityInteractionListener mActivityListener;
 
 
     private GoogleApiClient mGoogleApiClient;
@@ -284,7 +286,7 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
 
     private void closeTab() {
         Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("LoginTag");
-
+        mActivityListener.messageFromChildFragmentToActivity("handleBottomNavigation");
 
         if (fragment != null) {
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
@@ -293,6 +295,27 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
             CommonUtil.hideSoftKeyboard((AppCompatActivity) getActivity());
         }
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // check if Activity implements listener
+        if (context instanceof OnChildFragmentToActivityInteractionListener) {
+            mActivityListener = (OnChildFragmentToActivityInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnChildFragmentToActivityInteractionListener");
+        }
+
+        // check if parent Fragment implements listener
+//        if (getActivity().getSupportFragmentManager().findFragmentByTag("walletTag") instanceof OnChildFragmentInteractionListener) {
+//
+//            mParentListener = (OnChildFragmentInteractionListener) getParentFragment();
+//        } else {
+//            throw new RuntimeException("The parent fragment must implement OnChildFragmentInteractionListener");
+//        }
     }
 
     private void IntiateGoogleApi() {
@@ -329,7 +352,12 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
         super.onResume();
         // IntiateGoogleApi();
     }
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        mGoogleApiClient.stopAutoManage(getActivity());
+        mGoogleApiClient.disconnect();
+    }
 
     private void login() {
         JsonObject object = getLoginObject();
