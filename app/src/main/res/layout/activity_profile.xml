@@ -53,7 +53,7 @@
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_user" />
 
-                        <TextView
+                        <calibrage.payzan.controls.CommonTextView
                             android:id="@+id/editimage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                             android:layout_height="wrap_content"
                             android:hint="First Name">
 
-                            <EditText
+                            <calibrage.payzan.controls.CommonEditText
                                 android:id="@+id/firstNameEdt"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                             android:layout_toRightOf="@+id/imagelayout"
                             android:hint="Last Name">
 
-                            <EditText
+                            <calibrage.payzan.controls.CommonEditText
                                 android:id="@+id/lastNameEdt"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
                     </FrameLayout>
                 </RelativeLayout>
 
-                <TextView
+                <calibrage.payzan.controls.CommonTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/very_light_gray"
@@ -180,7 +180,7 @@
                         android:layout_toRightOf="@+id/emailicon"
                         android:hint="Email">
 
-                        <EditText
+                        <calibrage.payzan.controls.CommonEditText
                             android:id="@+id/emailEdt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -211,7 +211,7 @@
                         android:layout_toRightOf="@+id/emailicon"
                         android:hint="Mobile No.">
 
-                        <EditText
+                        <calibrage.payzan.controls.CommonEditText
                             android:id="@+id/mobileEdt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -241,7 +241,7 @@
                         android:layout_toRightOf="@+id/emailicon"
                         android:hint="Date of Birth">
 
-                        <EditText
+                        <calibrage.payzan.controls.CommonEditText
                             android:id="@+id/DOBEdt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -271,7 +271,7 @@
                             android:layout_marginLeft="4dp"
                             android:src="@drawable/ic_gender" />
 
-                        <TextView
+                        <calibrage.payzan.controls.CommonTextView
                             android:id="@+id/gendrText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
