@@ -2,7 +2,8 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +29,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/lyt_margin">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/imagelayout">
 
-                        <android.support.design.widget.TextInputLayout
+                        <calibrage.payzan.utils.NCBTextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="First Name">
@@ -79,9 +81,9 @@
                             <calibrage.payzan.controls.CommonEditText
                                 android:id="@+id/firstNameEdt"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                              style="@style/EditTextStyle"
                                 app:backgroundTint="@color/very_light_gray" />
-                        </android.support.design.widget.TextInputLayout>
+                        </calibrage.payzan.utils.NCBTextInputLayout>
 
                         <ImageView
                             android:id="@+id/firstclearBtn"
@@ -89,6 +91,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center_vertical"
                             android:layout_marginRight="10dp"
+                            android:paddingTop="8dp"
                             android:src="@drawable/ic_delete" />
                     </FrameLayout>
 
@@ -99,7 +102,7 @@
                         android:layout_below="@+id/first"
                         android:layout_toRightOf="@+id/imagelayout">
 
-                        <android.support.design.widget.TextInputLayout
+                        <calibrage.payzan.utils.NCBTextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@+id/imagelayout"
@@ -108,9 +111,9 @@
                             <calibrage.payzan.controls.CommonEditText
                                 android:id="@+id/lastNameEdt"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                style="@style/EditTextStyle"
                                 app:backgroundTint="@color/very_light_gray" />
-                        </android.support.design.widget.TextInputLayout>
+                        </calibrage.payzan.utils.NCBTextInputLayout>
 
                         <ImageView
                             android:id="@+id/lastClearBtn"
@@ -118,6 +121,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center_vertical"
                             android:layout_marginRight="10dp"
+                            android:paddingTop="8dp"
                             android:src="@drawable/ic_delete" />
                     </FrameLayout>
                 </RelativeLayout>
@@ -137,12 +141,12 @@
 
                     <ImageView
                         android:id="@+id/usericon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_margin="4dp"
                         android:src="@drawable/ic_user" />
 
-                    <android.support.design.widget.TextInputLayout
+                    <calibrage.payzan.utils.NCBTextInputLayout
                         android:id="@+id/displaynamelayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -150,12 +154,12 @@
                         android:layout_toRightOf="@+id/usericon"
                         android:hint="Display Name">
 
-                        <EditText
+                        <calibrage.payzan.controls.CommonEditText
                             android:id="@+id/displayNameEdt"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            style="@style/EditTextStyle"
                             app:backgroundTint="@color/very_light_gray" />
-                    </android.support.design.widget.TextInputLayout>
+                    </calibrage.payzan.utils.NCBTextInputLayout>
 
                 </LinearLayout>
 
@@ -166,13 +170,13 @@
 
                     <ImageView
                         android:id="@+id/emailicon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_below="@+id/usericon"
                         android:layout_margin="4dp"
                         android:src="@drawable/ic_email" />
 
-                    <android.support.design.widget.TextInputLayout
+                    <calibrage.payzan.utils.NCBTextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/displaynamelayout"
@@ -183,10 +187,10 @@
                         <calibrage.payzan.controls.CommonEditText
                             android:id="@+id/emailEdt"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            style="@style/EditTextStyle"
                             android:inputType="textEmailAddress"
                             app:backgroundTint="@color/very_light_gray" />
-                    </android.support.design.widget.TextInputLayout>
+                    </calibrage.payzan.utils.NCBTextInputLayout>
 
                 </LinearLayout>
 
@@ -196,13 +200,14 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_below="@+id/usericon"
                         android:layout_margin="4dp"
-                        app:srcCompat="@drawable/ic_mobile" />
+                        app:srcCompat="@drawable/ic_mobile"
+                        android:scaleType="center"/>
 
-                    <android.support.design.widget.TextInputLayout
+                    <calibrage.payzan.utils.NCBTextInputLayout
                         android:id="@+id/emaillayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -214,10 +219,10 @@
                         <calibrage.payzan.controls.CommonEditText
                             android:id="@+id/mobileEdt"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            style="@style/EditTextStyle"
                             android:inputType="phone"
                             app:backgroundTint="@color/very_light_gray" />
-                    </android.support.design.widget.TextInputLayout>
+                    </calibrage.payzan.utils.NCBTextInputLayout>
 
                 </LinearLayout>
 
@@ -227,13 +232,13 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_below="@+id/usericon"
                         android:layout_margin="4dp"
                         android:src="@drawable/ic_birthday" />
 
-                    <android.support.design.widget.TextInputLayout
+                    <calibrage.payzan.utils.NCBTextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/displaynamelayout"
@@ -244,13 +249,13 @@
                         <calibrage.payzan.controls.CommonEditText
                             android:id="@+id/DOBEdt"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            style="@style/EditTextStyle"
                             app:backgroundTint="@color/very_light_gray"
                             android:editable="false"
                             android:singleLine="true"
                             android:clickable="true"
                            />
-                    </android.support.design.widget.TextInputLayout>
+                    </calibrage.payzan.utils.NCBTextInputLayout>
 
                 </LinearLayout>
 
@@ -266,8 +271,8 @@
 
                         <ImageView
                             android:id="@+id/gendericon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
                             android:layout_marginLeft="4dp"
                             android:src="@drawable/ic_gender" />
 

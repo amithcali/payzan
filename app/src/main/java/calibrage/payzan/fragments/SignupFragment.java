@@ -2,6 +2,7 @@ package calibrage.payzan.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,8 +14,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -22,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -85,6 +92,7 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
     private View rootView;
     private Context context;
     public static Toolbar toolbar;
+    private TextView terms_comditions,linkToLogin;
     private OnChildFragmentToActivityInteractionListener mActivityListener;
 
     @Nullable
@@ -103,6 +111,8 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
         reg_password = (EditText) rootView.findViewById(R.id.reg_password);
         confirm_password = (EditText) rootView.findViewById(R.id.reg_confirm_password);
         reg_mobile_til = (TextInputLayout) rootView.findViewById(R.id.reg_mobile_til);
+        terms_comditions = (TextView) rootView.findViewById(R.id.terms_comditions);
+        linkToLogin = (TextView) rootView.findViewById(R.id.linkToLogin);
         IntiateGoogleApi();
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
         HomeActivity.toolbar.setTitle(getResources().getString(R.string.sign_up));
@@ -114,6 +124,61 @@ public class SignupFragment extends Fragment implements GoogleApiClient.OnConnec
                 closeTab();
             }
         });
+
+        SpannableString ss = new SpannableString(getResources().getString(R.string.terms_and_conditions));
+        SpannableString ssToLogin = new SpannableString(getResources().getString(R.string.already_have_account));
+        ClickableSpan clickableSpan1 = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                // startActivity(new Intent(MyActivity.this, NextActivity.class));
+                Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(false);
+            }
+        };
+        ClickableSpan clickableSpan2 = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                // startActivity(new Intent(MyActivity.this, NextActivity.class));
+                Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(false);
+            }
+        };
+        ss.setSpan(clickableSpan1, 27, 48, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss.setSpan(clickableSpan2, 51, 66, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        ClickableSpan clickableSpanToLogin = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                // startActivity(new Intent(MyActivity.this, NextActivity.class));
+                Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(false);
+            }
+        };
+
+        terms_comditions.setText(ss);
+        terms_comditions.setMovementMethod(LinkMovementMethod.getInstance());
+        terms_comditions.setHighlightColor(Color.TRANSPARENT);
+        ssToLogin.setSpan(clickableSpanToLogin,22,27,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        linkToLogin.setText(ssToLogin);
+        linkToLogin.setMovementMethod(LinkMovementMethod.getInstance());
+        linkToLogin.setHighlightColor(Color.TRANSPARENT);
+
+
         fbBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

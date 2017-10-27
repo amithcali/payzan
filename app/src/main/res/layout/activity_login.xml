@@ -112,7 +112,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="@dimen/txt_FontSize" />
+                android:textSize="@dimen/tenSP" />
 
             <calibrage.payzan.controls.CommonButton
                 android:id="@+id/btnLogin"

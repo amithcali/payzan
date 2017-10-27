@@ -173,8 +173,8 @@
             android:gravity="center"
             android:textColor="#263631"
             android:text=""
-            android:textSize="@dimen/txt_FontSize"
-            android:visibility="gone"/>
+            android:textSize="@dimen/tenSP"
+            android:visibility="visible"/>
 
         <calibrage.payzan.controls.CommonButton
             android:id="@+id/btnRegister"
