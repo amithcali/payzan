@@ -10,47 +10,98 @@ import java.util.List;
  */
 
 
+public class LoginResponseModel {
 
-    public class LoginResponseModel {
-
-    @SerializedName("StatusCode")
-    @Expose
-    private Integer statusCode;
-    @SerializedName("data")
+    @SerializedName("Result")
     @Expose
     private Data data;
+    @SerializedName("IsSuccess")
+    @Expose
+    private Boolean isSuccess;
+    @SerializedName("AffectedRecords")
+    @Expose
+    private Integer affectedRecords;
+    @SerializedName("EndUserMessage")
+    @Expose
+    private String endUserMessage;
+    @SerializedName("ValidationErrors")
+    @Expose
+    private List<Object> validationErrors = null;
+    @SerializedName("Exception")
+    @Expose
+    private Object exception;
 
-    public Integer getStatusCode() {
-        return statusCode;
-    }
-
-    public void setStatusCode(Integer statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    public Data getData() {
+    public Data getdata() {
         return data;
     }
 
-    public void setData(Data data) {
-        this.data = data;
+    public void setResult(Data result) {
+        this.data = result;
     }
 
+    public Boolean getIsSuccess() {
+        return isSuccess;
+    }
 
-    public class Data {
+    public void setIsSuccess(Boolean isSuccess) {
+        this.isSuccess = isSuccess;
+    }
+
+    public Integer getAffectedRecords() {
+        return affectedRecords;
+    }
+
+    public void setAffectedRecords(Integer affectedRecords) {
+        this.affectedRecords = affectedRecords;
+    }
+
+    public String getEndUserMessage() {
+        return endUserMessage;
+    }
+
+    public void setEndUserMessage(String endUserMessage) {
+        this.endUserMessage = endUserMessage;
+    }
+
+    public List<Object> getValidationErrors() {
+        return validationErrors;
+    }
+
+    public void setValidationErrors(List<Object> validationErrors) {
+        this.validationErrors = validationErrors;
+    }
+
+    public Object getException() {
+        return exception;
+    }
+
+    public void setException(Object exception) {
+        this.exception = exception;
+    }
+
+   public class Data {
 
         @SerializedName("User")
         @Expose
         private User user;
         @SerializedName("Roles")
         @Expose
-        private List<Role> roles = null;
+        private List<Object> roles = null;
         @SerializedName("ActivityRights")
         @Expose
         private List<Object> activityRights = null;
         @SerializedName("UserWallet")
         @Expose
-        private UserWallet userWallet;
+        private Object userWallet;
+        @SerializedName("AccessToken")
+        @Expose
+        private String accessToken;
+        @SerializedName("ExpiresIn")
+        @Expose
+        private Integer expiresIn;
+        @SerializedName("TokenType")
+        @Expose
+        private String tokenType;
 
         public User getUser() {
             return user;
@@ -60,11 +111,11 @@ import java.util.List;
             this.user = user;
         }
 
-        public List<Role> getRoles() {
+        public List<Object> getRoles() {
             return roles;
         }
 
-        public void setRoles(List<Role> roles) {
+        public void setRoles(List<Object> roles) {
             this.roles = roles;
         }
 
@@ -76,15 +127,38 @@ import java.util.List;
             this.activityRights = activityRights;
         }
 
-        public UserWallet getUserWallet() {
+        public Object getUserWallet() {
             return userWallet;
         }
 
-        public void setUserWallet(UserWallet userWallet) {
+        public void setUserWallet(Object userWallet) {
             this.userWallet = userWallet;
         }
 
-        public class User {
+        public String getAccessToken() {
+            return accessToken;
+        }
+
+        public void setAccessToken(String accessToken) {
+            this.accessToken = accessToken;
+        }
+
+        public Integer getExpiresIn() {
+            return expiresIn;
+        }
+
+        public void setExpiresIn(Integer expiresIn) {
+            this.expiresIn = expiresIn;
+        }
+
+        public String getTokenType() {
+            return tokenType;
+        }
+
+        public void setTokenType(String tokenType) {
+            this.tokenType = tokenType;
+        }
+        class User {
 
             @SerializedName("Id")
             @Expose
@@ -97,7 +171,7 @@ import java.util.List;
             private String userName;
             @SerializedName("PhoneNumber")
             @Expose
-            private String phoneNumber;
+            private Object phoneNumber;
 
             public String getId() {
                 return id;
@@ -123,147 +197,17 @@ import java.util.List;
                 this.userName = userName;
             }
 
-            public String getPhoneNumber() {
+            public Object getPhoneNumber() {
                 return phoneNumber;
             }
 
-            public void setPhoneNumber(String phoneNumber) {
+            public void setPhoneNumber(Object phoneNumber) {
                 this.phoneNumber = phoneNumber;
             }
-
         }
-
-        public class Role {
-
-            @SerializedName("UserId")
-            @Expose
-            private String userId;
-            @SerializedName("RoleId")
-            @Expose
-            private String roleId;
-
-            public String getUserId() {
-                return userId;
-            }
-
-            public void setUserId(String userId) {
-                this.userId = userId;
-            }
-
-            public String getRoleId() {
-                return roleId;
-            }
-
-            public void setRoleId(String roleId) {
-                this.roleId = roleId;
-            }
-
-
-        }
-
-        public class UserWallet {
-
-            @SerializedName("UserId")
-            @Expose
-            private String userId;
-            @SerializedName("WalletId")
-            @Expose
-            private String walletId;
-            @SerializedName("Balance")
-            @Expose
-            private Integer balance;
-            @SerializedName("Id")
-            @Expose
-            private Integer id;
-            @SerializedName("IsActive")
-            @Expose
-            private Boolean isActive;
-            @SerializedName("CreatedByUserId")
-            @Expose
-            private String createdByUserId;
-            @SerializedName("CreatedDate")
-            @Expose
-            private String createdDate;
-            @SerializedName("UpdatedByUserId")
-            @Expose
-            private String updatedByUserId;
-            @SerializedName("UpdatedDate")
-            @Expose
-            private String updatedDate;
-
-            public String getUserId() {
-                return userId;
-            }
-
-            public void setUserId(String userId) {
-                this.userId = userId;
-            }
-
-            public String getWalletId() {
-                return walletId;
-            }
-
-            public void setWalletId(String walletId) {
-                this.walletId = walletId;
-            }
-
-            public Integer getBalance() {
-                return balance;
-            }
-
-            public void setBalance(Integer balance) {
-                this.balance = balance;
-            }
-
-            public Integer getId() {
-                return id;
-            }
-
-            public void setId(Integer id) {
-                this.id = id;
-            }
-
-            public Boolean getIsActive() {
-                return isActive;
-            }
-
-            public void setIsActive(Boolean isActive) {
-                this.isActive = isActive;
-            }
-
-            public String getCreatedByUserId() {
-                return createdByUserId;
-            }
-
-            public void setCreatedByUserId(String createdByUserId) {
-                this.createdByUserId = createdByUserId;
-            }
-
-            public String getCreatedDate() {
-                return createdDate;
-            }
-
-            public void setCreatedDate(String createdDate) {
-                this.createdDate = createdDate;
-            }
-
-            public String getUpdatedByUserId() {
-                return updatedByUserId;
-            }
-
-            public void setUpdatedByUserId(String updatedByUserId) {
-                this.updatedByUserId = updatedByUserId;
-            }
-
-            public String getUpdatedDate() {
-                return updatedDate;
-            }
-
-            public void setUpdatedDate(String updatedDate) {
-                this.updatedDate = updatedDate;
-            }
-
-        }
-
     }
+
+
+
 }
+

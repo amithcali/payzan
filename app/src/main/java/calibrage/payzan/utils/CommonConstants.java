@@ -1,5 +1,8 @@
 package calibrage.payzan.utils;
 
+
+import calibrage.payzan.model.LoginResponseModel;
+
 /**
  * Created by Calibrage11 on 10/16/2017.
  */

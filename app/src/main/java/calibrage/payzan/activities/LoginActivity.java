@@ -279,8 +279,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     @Override
                     public void onNext(LoginResponseModel loginResponseModel) {
                         Toast.makeText(LoginActivity.this, "sucess", Toast.LENGTH_SHORT).show();
-                        CommonConstants.USERID = loginResponseModel.getData().getUser().getId();
-                        CommonConstants.WALLETID = String.valueOf(loginResponseModel.getData().getUserWallet().getWalletId());
+                      String data=  loginResponseModel.getdata().getAccessToken();
+                        Toast.makeText(LoginActivity.this, "Token :"+data, Toast.LENGTH_SHORT).show();
+                        /*CommonConstants.USERID = loginResponseModel.getdata().getTokenType().toString();
+                        CommonConstants.WALLETID = String.valueOf(loginResponseModel.getdata()..getUserWallet().getWalletId());*/
                         finish();
                     }
                 });

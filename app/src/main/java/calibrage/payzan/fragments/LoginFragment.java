@@ -409,8 +409,11 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
                     @Override
                     public void onNext(LoginResponseModel loginResponseModel) {
                         Toast.makeText(getActivity(), "sucess", Toast.LENGTH_SHORT).show();
-                        CommonConstants.USERID = loginResponseModel.getData().getUser().getId();
-                        CommonConstants.WALLETID = String.valueOf(loginResponseModel.getData().getUserWallet().getWalletId());
+                        String TOke=loginResponseModel.getdata().getAccessToken();
+                        Toast.makeText(getActivity(), "Token :"+loginResponseModel.getdata().getAccessToken(), Toast.LENGTH_SHORT).show();
+
+                     /*   CommonConstants.USERID = loginResponseModel.getData().getUser().getId();
+                        CommonConstants.WALLETID = String.valueOf(loginResponseModel.getData().getUserWallet().getWalletId());*/
                         /*  if user successfully login savig success  Object */
 
                         SharedPrefsData.getInstance(getActivity()).updateIntValue(getActivity(),CommonConstants.ISLOGIN, CommonConstants.Login);
