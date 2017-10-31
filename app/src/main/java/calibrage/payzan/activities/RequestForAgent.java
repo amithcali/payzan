@@ -371,18 +371,19 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
     private JsonObject getAgentObject() {
 
         AgentModel agentModel = new AgentModel();
-        agentModel.setId(1);
-        agentModel.setAddressLine1("hyd");
-        agentModel.setAddressLine2("hyd1");
-        agentModel.setTitleTypeId(0);
+        agentModel.setId(0);
+        agentModel.setAgentRequestCategoryId(38);
+        agentModel.setTitleTypeId(4);
         agentModel.setFirstName("mahesh");
         agentModel.setMiddleName("mashi");
         agentModel.setLastName("mnah");
         agentModel.setMobileNumber("7032214460");
         agentModel.setEmail("mall@m.com");
+        agentModel.setAddressLine1("hyd");
+        agentModel.setAddressLine2("hyd1");
         agentModel.setLandmark("kjufgjkhkjfg");
-        agentModel.setVillageId(0);
-        agentModel.setComments(";klsdl,gjkldsfj");
+        agentModel.setVillageId(1);
+        agentModel.setComments("jhjhdhh");
         agentModel.setCreated("2017-10-31T05:15:57.983Z");
 
 
