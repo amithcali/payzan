@@ -15,13 +15,15 @@ import android.widget.Toast;
 
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
+import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
 import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.SharedPrefsData;
 
 
-public class UserProfileHome extends Fragment {
+public class UserProfileHome extends BaseFragment {
+    public static final String TAG = UserProfileHome.class.getSimpleName();
     private Button btn_logOut,btn_Share;
     private OnChildFragmentToActivityInteractionListener mActivityListener;
 

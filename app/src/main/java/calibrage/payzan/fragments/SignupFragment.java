@@ -57,6 +57,7 @@ import java.io.IOException;
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.activities.signup;
+import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
 import calibrage.payzan.model.RegisterModel;
 import calibrage.payzan.model.ResponseModel;
@@ -77,7 +78,8 @@ import static calibrage.payzan.utils.CommonUtil.isValidEmail;
  * Created by Calibrage19 on 20-10-2017.
  */
 
-public class SignupFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+public class SignupFragment extends BaseFragment implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+    public static final String TAG = SignupFragment.class.getSimpleName();
     private EditText reg_mobile, reg_email, reg_password, confirm_password;
     private LoginButton loginButton;
     private Button fbBtn, btnRegister;

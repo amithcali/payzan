@@ -8,12 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import calibrage.payzan.R;
+import calibrage.payzan.controls.BaseFragment;
 
 /**
  * Created by Calibrage11 on 10/23/2017.
  */
 
-public class ProfileHomeFragment extends Fragment {
+public class ProfileHomeFragment extends BaseFragment {
+    public static final String TAG = ProfileHomeFragment.class.getSimpleName();
     View view;
 
     @Override

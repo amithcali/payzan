@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.adapters.GenericAdapter;
+import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.controls.CommonEditText;
 import calibrage.payzan.model.OperatorModel;
 import calibrage.payzan.networkservice.ApiConstants;
@@ -45,7 +46,8 @@ import rx.schedulers.Schedulers;
  * Created by Calibrage11 on 9/27/2017.
  */
 
-public class PayDTHFragment extends Fragment implements GenericAdapter.AdapterOnClick{
+public class PayDTHFragment extends BaseFragment implements GenericAdapter.AdapterOnClick{
+    public static final String TAG = PayDTHFragment.class.getSimpleName();
     private View rootView;
     private Context context;
     private NCBTextInputLayout subscriberTXT, operatorTXT, amountTXT;
@@ -141,19 +143,22 @@ public class PayDTHFragment extends Fragment implements GenericAdapter.AdapterOn
 
         submit = (Button) rootView.findViewById(R.id.submit);
 
+        HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
+        HomeActivity.toolbar.setTitle(getResources().getString(R.string.dth_sname));
+/*
         setHasOptionsMenu(true);
         ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
-        HomeActivity.toolbar.setTitle(getResources().getString(R.string.dth_sname));
-        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
+        HomeActivity.toolbar.setTitle(getResources().getString(R.string.dth_sname));*/
+       /* HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
         HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 closeTab();
             }
-        });
-        rootView.setFocusableInTouchMode(true);
+        });*/
+       /* rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
         rootView.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -167,7 +172,7 @@ public class PayDTHFragment extends Fragment implements GenericAdapter.AdapterOn
                     return false;
                 }
             }
-        });
+        });*/
     }
 
     private boolean isValidateUI() {

@@ -15,12 +15,14 @@ import java.util.ArrayList;
 import calibrage.payzan.R;
 import calibrage.payzan.adapters.MyTransactionAdapter;
 import calibrage.payzan.adapters.TransactionTypeAdapter;
+import calibrage.payzan.controls.BaseFragment;
 
 /**
  * Created by Calibrage11 on 10/20/2017.
  */
 
-public class MyTransactions extends Fragment {
+public class MyTransactions extends BaseFragment {
+    public static final String TAG = MyOrderFragment.class.getSimpleName();
     private View rootView;
     private Context context;
     private RecyclerView recyclerView,recylerview_transaction;

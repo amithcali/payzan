@@ -14,6 +14,7 @@ import android.widget.AutoCompleteTextView;
 
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
+import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.controls.CommonEditText;
 import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.NCBTextInputLayout;
@@ -22,8 +23,8 @@ import calibrage.payzan.utils.NCBTextInputLayout;
  * Created by Calibrage11 on 10/23/2017.
  */
 
-public class BroadbandFragment extends Fragment {
-
+public class BroadbandFragment extends BaseFragment {
+    public static final String TAG = BroadbandFragment.class.getSimpleName();
     private View rootView;
     private Context context;
     private CommonEditText ServiceNEdt, amountEdt;
@@ -45,7 +46,7 @@ public class BroadbandFragment extends Fragment {
         context = this.getActivity();
         //  android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         setViews();
-        initViews();
+
 
 
         return rootView;
@@ -53,19 +54,25 @@ public class BroadbandFragment extends Fragment {
 
     private void setViews() {
 
-        setHasOptionsMenu(true);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
+        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
         HomeActivity.toolbar.setTitle(getResources().getString(R.string.broadband_sname));
+        /*HomeActivity.toolbar.setTitle(getResources().getString(R.string.broadband_sname));
         HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
-        HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);*/
+       /* setHasOptionsMenu(true);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
+        HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);*/
+       /* HomeActivity.toolbar.setTitle(getResources().getString(R.string.broadband_sname));
+        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));*/
+        /*HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 closeTab();
             }
         });
-
+*/
         serviceNoTXT = (NCBTextInputLayout)rootView.findViewById(R.id.serviceNoTXT);
         operatorTXT = (NCBTextInputLayout)rootView.findViewById(R.id.operatorTXT);
         amountTXT = (NCBTextInputLayout)rootView.findViewById(R.id.amountTXT);
@@ -73,7 +80,7 @@ public class BroadbandFragment extends Fragment {
         ServiceNEdt = (CommonEditText) rootView.findViewById(R.id.ServiceNEdt);
         amountEdt = (CommonEditText) rootView.findViewById(R.id.amountEdt);
 
-        rootView.setFocusableInTouchMode(true);
+        /*rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
         rootView.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -88,14 +95,12 @@ public class BroadbandFragment extends Fragment {
                 }
             }
         });
-
-
-    }
-    private void initViews() {
+*/
 
     }
 
-    private void closeTab() {
+
+    /*private void closeTab() {
         Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("broadbandTag");
         if (fragment != null) {
             CommonUtil.hideSoftKeyboard((AppCompatActivity) getActivity());
@@ -103,5 +108,5 @@ public class BroadbandFragment extends Fragment {
             HomeActivity.toolbar.setNavigationIcon(null);
             HomeActivity.toolbar.setTitle("");
         }
-    }
+    }*/
 }

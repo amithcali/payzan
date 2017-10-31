@@ -9,87 +9,114 @@ import java.util.List;
  * Created by Calibrage11 on 10/5/2017.
  */
 
-public class StatesModel  {
-    @SerializedName("StatusCode")
+public class StatesModel {
+
+    @SerializedName("ListResult")
     @Expose
-    private Integer statusCode;
-    @SerializedName("StatusMessage")
+    private List<Data> listResult = null;
+    @SerializedName("IsSuccess")
     @Expose
-    private String statusMessage;
-    @SerializedName("data")
+    private Boolean isSuccess;
+    @SerializedName("AffectedRecords")
     @Expose
-    private List<Data> data;
+    private Integer affectedRecords;
+    @SerializedName("EndUserMessage")
+    @Expose
+    private String endUserMessage;
+    @SerializedName("ValidationErrors")
+    @Expose
+    private List<Object> validationErrors = null;
+    @SerializedName("Exception")
+    @Expose
+    private Object exception;
 
-    public Integer getStatusCode() {
-        return statusCode;
+    public List<Data> getListResult() {
+        return listResult;
     }
 
-    public void setStatusCode(Integer statusCode) {
-        this.statusCode = statusCode;
+    public void setListResult(List<Data> listResult) {
+        this.listResult = listResult;
     }
 
-    public String getStatusMessage() {
-        return statusMessage;
+    public Boolean getIsSuccess() {
+        return isSuccess;
     }
 
-    public void setStatusMessage(String statusMessage) {
-        this.statusMessage = statusMessage;
+    public void setIsSuccess(Boolean isSuccess) {
+        this.isSuccess = isSuccess;
     }
 
-    public List<Data> getData() {
-        return data;
+    public Integer getAffectedRecords() {
+        return affectedRecords;
     }
 
-    public void setData(List<Data> data) {
-        this.data = data;
+    public void setAffectedRecords(Integer affectedRecords) {
+        this.affectedRecords = affectedRecords;
     }
 
+    public String getEndUserMessage() {
+        return endUserMessage;
+    }
+
+    public void setEndUserMessage(String endUserMessage) {
+        this.endUserMessage = endUserMessage;
+    }
+
+    public List<Object> getValidationErrors() {
+        return validationErrors;
+    }
+
+    public void setValidationErrors(List<Object> validationErrors) {
+        this.validationErrors = validationErrors;
+    }
+
+    public Object getException() {
+        return exception;
+    }
+
+    public void setException(Object exception) {
+        this.exception = exception;
+    }
 
     public class Data {
 
-        @SerializedName("Id")
+        @SerializedName("CountryName")
         @Expose
-        private Integer id;
+        private String countryName;
         @SerializedName("Code")
         @Expose
         private String code;
         @SerializedName("Name")
         @Expose
         private String name;
-        @SerializedName("StateId")
-        @Expose
-        private Integer stateId;
-        @SerializedName("StateName")
-        @Expose
-        private String stateName;
         @SerializedName("CountryId")
         @Expose
         private Integer countryId;
-        @SerializedName("CountryName")
+        @SerializedName("Id")
         @Expose
-        private String countryName;
+        private Integer id;
         @SerializedName("IsActive")
         @Expose
         private Boolean isActive;
-        @SerializedName("CreatedByUserId")
+        @SerializedName("CreatedBy")
         @Expose
-        private String createdByUserId;
-        @SerializedName("CreatedDate")
+        private String createdBy;
+        @SerializedName("ModifiedBy")
         @Expose
-        private String createdDate;
-        @SerializedName("UpdatedByUserId")
+        private String modifiedBy;
+        @SerializedName("Created")
         @Expose
-        private String updatedByUserId;
-        @SerializedName("UpdatedDate")
+        private String created;
+        @SerializedName("Modified")
         @Expose
-        private String updatedDate;
+        private String modified;
 
-        public Integer getId() {
-            return id;
+        public String getCountryName() {
+            return countryName;
         }
 
-        public void setId(Integer id) {
-            this.id = id;
+        public void setCountryName(String countryName) {
+            this.countryName = countryName;
         }
 
         public String getCode() {
@@ -108,22 +135,6 @@ public class StatesModel  {
             this.name = name;
         }
 
-        public Integer getStateId() {
-            return stateId;
-        }
-
-        public void setStateId(Integer stateId) {
-            this.stateId = stateId;
-        }
-
-        public String getStateName() {
-            return stateName;
-        }
-
-        public void setStateName(String stateName) {
-            this.stateName = stateName;
-        }
-
         public Integer getCountryId() {
             return countryId;
         }
@@ -132,12 +143,12 @@ public class StatesModel  {
             this.countryId = countryId;
         }
 
-        public String getCountryName() {
-            return countryName;
+        public Integer getId() {
+            return id;
         }
 
-        public void setCountryName(String countryName) {
-            this.countryName = countryName;
+        public void setId(Integer id) {
+            this.id = id;
         }
 
         public Boolean getIsActive() {
@@ -148,36 +159,36 @@ public class StatesModel  {
             this.isActive = isActive;
         }
 
-        public String getCreatedByUserId() {
-            return createdByUserId;
+        public String getCreatedBy() {
+            return createdBy;
         }
 
-        public void setCreatedByUserId(String createdByUserId) {
-            this.createdByUserId = createdByUserId;
+        public void setCreatedBy(String createdBy) {
+            this.createdBy = createdBy;
         }
 
-        public String getCreatedDate() {
-            return createdDate;
+        public String getModifiedBy() {
+            return modifiedBy;
         }
 
-        public void setCreatedDate(String createdDate) {
-            this.createdDate = createdDate;
+        public void setModifiedBy(String modifiedBy) {
+            this.modifiedBy = modifiedBy;
         }
 
-        public String getUpdatedByUserId() {
-            return updatedByUserId;
+        public String getCreated() {
+            return created;
         }
 
-        public void setUpdatedByUserId(String updatedByUserId) {
-            this.updatedByUserId = updatedByUserId;
+        public void setCreated(String created) {
+            this.created = created;
         }
 
-        public String getUpdatedDate() {
-            return updatedDate;
+        public String getModified() {
+            return modified;
         }
 
-        public void setUpdatedDate(String updatedDate) {
-            this.updatedDate = updatedDate;
+        public void setModified(String modified) {
+            this.modified = modified;
         }
 
     }

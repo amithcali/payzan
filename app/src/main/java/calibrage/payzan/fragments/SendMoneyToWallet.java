@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import calibrage.payzan.R;
+import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.controls.CommonEditText;
 import calibrage.payzan.interfaces.DrawableClickListener;
 import calibrage.payzan.utils.NCBTextInputLayout;
@@ -24,7 +25,8 @@ import calibrage.payzan.utils.NCBTextInputLayout;
  * Created by Calibrage11 on 10/20/2017.
  */
 
-public class SendMoneyToWallet extends Fragment {
+public class SendMoneyToWallet extends BaseFragment {
+    public static final String TAG = SendMoneyToWallet.class.getSimpleName();
     private View rootView;
     private Context context;
     private NCBTextInputLayout mobileNumberTXT,amountTXT,commentTXT;

@@ -12,13 +12,14 @@ import android.view.ViewGroup;
 
 import calibrage.payzan.R;
 import calibrage.payzan.adapters.MyOrderAdapter;
+import calibrage.payzan.controls.BaseFragment;
 
 /**
  * Created by Calibrage11 on 9/21/2017.
  */
 
-public class MyOrderFragment extends Fragment {
-
+public class MyOrderFragment extends BaseFragment {
+    public static final String TAG = MyOrderFragment.class.getSimpleName();
     private View view;
     private RecyclerView  recyclerView;
     private Context  context;

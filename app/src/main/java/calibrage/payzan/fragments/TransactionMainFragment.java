@@ -21,6 +21,7 @@ import java.util.List;
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.activities.MyorderActivity;
+import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.interfaces.CommunicateFragments;
 import calibrage.payzan.interfaces.OnChildFragmentInteractionListener;
 import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
@@ -29,8 +30,8 @@ import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
  * Created by Calibrage11 on 10/20/2017.
  */
 
-public class TransactionMainFragment extends Fragment {
-
+public class TransactionMainFragment extends BaseFragment {
+    public static final String TAG = TransactionMainFragment.class.getSimpleName();
     private TabLayout tabs;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;

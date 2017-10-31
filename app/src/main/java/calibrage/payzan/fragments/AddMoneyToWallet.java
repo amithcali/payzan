@@ -27,6 +27,7 @@ import java.io.IOException;
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.activities.LoginActivity;
+import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.model.LoginModel;
 import calibrage.payzan.model.LoginResponseModel;
 import calibrage.payzan.model.PostWalletModel;
@@ -47,8 +48,8 @@ import static calibrage.payzan.fragments.HomeFragment.walletTxt;
  * Created by Calibrage11 on 9/25/2017.
  */
 
-public class AddMoneyToWallet extends Fragment {
-
+public class AddMoneyToWallet extends BaseFragment {
+    public static final String TAG = AddMoneyToWallet.class.getSimpleName();
     private EditText enterMoneyEdt, enterpromocodeEdt;
     private Button submit;
     private Toolbar toolbar;

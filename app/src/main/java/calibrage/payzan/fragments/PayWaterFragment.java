@@ -38,6 +38,7 @@ import rx.schedulers.Schedulers;
  */
 
 public class PayWaterFragment extends Fragment implements GenericAdapter.AdapterOnClick {
+    public static final String TAG = PayWaterFragment.class.getSimpleName();
     private View rootView;
     private Context context;
     private AutoCompleteTextView boardSpn;
@@ -69,17 +70,18 @@ public class PayWaterFragment extends Fragment implements GenericAdapter.Adapter
 
         setHasOptionsMenu(true);
         listResults = new ArrayList<OperatorModel.ListResult>();
-        ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
+        /*((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
+      /*  HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);*/
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
         HomeActivity.toolbar.setTitle(getResources().getString(R.string.water_sname));
         HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
-        HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+       /* HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 closeTab();
             }
-        });
+        });*/
         consumerNEdt = (CommonEditText) rootView.findViewById(R.id.consumerNEdt);
         amountEdt = (CommonEditText) rootView.findViewById(R.id.amountEdt);
         boardSpn = (AutoCompleteTextView) rootView.findViewById(R.id.boardSpn);

@@ -15,30 +15,28 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import calibrage.payzan.R;
-import calibrage.payzan.activities.RequestForAgent;
-import calibrage.payzan.model.DistrictModel;
+import calibrage.payzan.model.MandalModel;
 import calibrage.payzan.model.StatesModel;
 
 /**
  * Created by Calibrage11 on 10/5/2017.
  */
 
-public class SingleLineDropDownAdapter extends ArrayAdapter<StatesModel.Data> {
+public class SingleLineDropDownAdapterMandals extends ArrayAdapter<MandalModel.data> {
     private Context  context;
     private int resource;
-    private ArrayList<StatesModel.Data> data;
-    private AdapterOnClick adapterOnClick;
+    private ArrayList<MandalModel.data> data;
+    private AdapterMandalOnClick AdapterMandalOnClick;
 
 
 
 
-    public SingleLineDropDownAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<StatesModel.Data> data) {
+    public SingleLineDropDownAdapterMandals(@NonNull Context context, @LayoutRes int resource, @NonNull List<MandalModel.data> data) {
         super(context, resource, data);
         this.context = context;
         this.resource =resource;
-        this.data = (ArrayList<StatesModel.Data>) data;
+        this.data = (ArrayList<MandalModel.data>) data;
     }
 
 
@@ -57,10 +55,9 @@ public class SingleLineDropDownAdapter extends ArrayAdapter<StatesModel.Data> {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    adapterOnClick.adapterOnClick(position);
+                    AdapterMandalOnClick.AdapterMandalOnClick(position);
                 }
             });
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,7 +71,7 @@ public class SingleLineDropDownAdapter extends ArrayAdapter<StatesModel.Data> {
 
     @Nullable
     @Override
-    public StatesModel.Data getItem(int position) {
+    public MandalModel.data getItem(int position) {
         return data.get(position);
     }
 
@@ -85,13 +82,13 @@ public class SingleLineDropDownAdapter extends ArrayAdapter<StatesModel.Data> {
         new Filter() {
             @Override
             public String convertResultToString(Object resultValue) {
-                return ((StatesModel.Data) resultValue).getName();
+                return ((MandalModel.data) resultValue).getName();
             }
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
 
                 if (charSequence != null) {
-                    for (StatesModel.Data data1 : data ) {
+                    for (MandalModel.data data1 : data ) {
                         if (data1.getName().toLowerCase().startsWith(charSequence.toString().toLowerCase())) {
                         }
                     }
@@ -128,11 +125,12 @@ public class SingleLineDropDownAdapter extends ArrayAdapter<StatesModel.Data> {
 
     }
 
-    public  interface  AdapterOnClick{
-        void adapterOnClick(int position);
+    public  interface  AdapterMandalOnClick{
+
+        void AdapterMandalOnClick(int position);
     }
 
-    public void setAdapterOnClick(AdapterOnClick adapterOnClick){
-        this.adapterOnClick = adapterOnClick;
+    public void setAdapterMandalOnClick(AdapterMandalOnClick adapterOnClick){
+        this.AdapterMandalOnClick = adapterOnClick;
     }
 }

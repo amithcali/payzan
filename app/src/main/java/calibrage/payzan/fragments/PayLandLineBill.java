@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.adapters.GenericAdapter;
+import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.controls.CommonEditText;
 import calibrage.payzan.interfaces.DrawableClickListener;
 import calibrage.payzan.model.OperatorModel;
@@ -50,8 +51,8 @@ import rx.schedulers.Schedulers;
  * Created by Calibrage11 on 9/28/2017.
  */
 
-public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterOnClick {
-
+public class PayLandLineBill extends BaseFragment implements GenericAdapter.AdapterOnClick {
+    public static final String TAG = PayLandLineBill.class.getSimpleName();
     private View rootView;
     private Context context;
     private NCBTextInputLayout operatorTXT, numberTXT, circleTXT, amountTXT;
@@ -211,18 +212,19 @@ public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterO
 
         setHasOptionsMenu(true);
 
-
-        ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
         HomeActivity.toolbar.setTitle(getResources().getString(R.string.landline_sname));
-        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
-        HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        /*((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
+        HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
+        HomeActivity.toolbar.setTitle(getResources().getString(R.string.landline_sname));
+        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));*/
+       /* HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 closeTab();
             }
-        });
+        });*/
         operatorTXT = (NCBTextInputLayout) rootView.findViewById(R.id.operatorTXT);
         numberTXT = (NCBTextInputLayout) rootView.findViewById(R.id.numberTXT);
         circleTXT = (NCBTextInputLayout) rootView.findViewById(R.id.circleTXT);
@@ -233,7 +235,7 @@ public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterO
         circleEdt = (AutoCompleteTextView) rootView.findViewById(R.id.circleEdt);
         amount = (CommonEditText) rootView.findViewById(R.id.amount);
         submit = (Button) rootView.findViewById(R.id.submit);
-        rootView.setFocusableInTouchMode(true);
+        /*rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
         rootView.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -247,7 +249,7 @@ public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterO
                     return false;
                 }
             }
-        });
+        });*/
     }
 
     private void getOperator(String providerType) {
@@ -294,7 +296,7 @@ public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterO
         }
     }
     private void closeTab() {
-        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("landlineTag");
+        /*Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("landlineTag");
 
 
         if (fragment != null) {
@@ -302,7 +304,7 @@ public class PayLandLineBill extends Fragment implements GenericAdapter.AdapterO
             HomeActivity.toolbar.setNavigationIcon(null);
             HomeActivity.toolbar.setTitle("");
             CommonUtil.hideSoftKeyboard((AppCompatActivity) getActivity());
-        }
+        }*/
     }
 
     private boolean isValidateUi() {

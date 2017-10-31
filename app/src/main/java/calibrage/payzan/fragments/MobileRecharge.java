@@ -45,6 +45,7 @@ import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.activities.LoginActivity;
 import calibrage.payzan.adapters.GenericAdapter;
 import calibrage.payzan.adapters.SingleLineDropDownAdapter;
+import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.controls.CommonEditText;
 import calibrage.payzan.interfaces.DrawableClickListener;
 import calibrage.payzan.model.LoginResponseModel;
@@ -68,8 +69,8 @@ import static calibrage.payzan.utils.CommonUtil.buildCounterDrawable;
  * Created by Calibrage11 on 10/2/2017.
  */
 
-public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOnClick {
-
+public class MobileRecharge extends BaseFragment implements GenericAdapter.AdapterOnClick {
+    public static final String TAG = MobileRecharge.class.getSimpleName();
     private RadioButton prepaidRB, postpaidRB;
     private Button
             talktimeRB, specialRB, submit;
@@ -223,7 +224,7 @@ public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOn
         // currentOperator.setAdapter();
 
 
-        rootview.setFocusableInTouchMode(true);
+       /* rootview.setFocusableInTouchMode(true);
         rootview.requestFocus();
         rootview.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -237,7 +238,7 @@ public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOn
                     return false;
                 }
             }
-        });
+        });*/
 
         talktimeRB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -274,17 +275,20 @@ public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOn
     private void setViews() {
         setHasOptionsMenu(true);
         listResults = new ArrayList<OperatorModel.ListResult>();
-        ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
+        HomeActivity.toolbar.setTitle(getResources().getString(R.string.mobile_recharge_sname));
+        HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
+        /*((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
         HomeActivity.toolbar.setTitle(getResources().getString(R.string.mobile_recharge_sname));
-        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
-        HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));*/
+       /* HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                closeTab();
+                closeTab(TAG);
+               *//* closeTab();*//*
             }
-        });
+        });*/
         mobileNumber = (ImageView) rootview.findViewById(R.id.mobileNumber);
         mobileEdt = (CommonEditText) rootview.findViewById(R.id.mobileEdt);
         amount = (CommonEditText) rootview.findViewById(R.id.amount);
@@ -378,7 +382,7 @@ public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOn
     }
 
     private void closeTab() {
-        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("mobileTag");
+        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(TAG);
 
 
         if (fragment != null){

@@ -8,49 +8,72 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import calibrage.payzan.R;
+import calibrage.payzan.adapters.GenericAdapter;
 import calibrage.payzan.adapters.SingleLineDropDownAdapter;
+import calibrage.payzan.adapters.SingleLineDropDownAdapterMandals;
+import calibrage.payzan.adapters.SingleLineDropDownAdapterVillages;
+import calibrage.payzan.adapters.SingleLineDropDownAdapterdistrict;
+import calibrage.payzan.fragments.PayDTHFragment;
+import calibrage.payzan.model.AgentModel;
+import calibrage.payzan.model.AgentResponseModel;
 import calibrage.payzan.model.DistrictModel;
+import calibrage.payzan.model.LoginModel;
+import calibrage.payzan.model.LoginResponseModel;
 import calibrage.payzan.model.MandalModel;
-import calibrage.payzan.model.StatesModel;
+import calibrage.payzan.model.OperatorModel;
+import calibrage.payzan.model.StatesModel;;
 import calibrage.payzan.model.VillageModel;
 import calibrage.payzan.networkservice.ApiConstants;
 import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
+import calibrage.payzan.utils.CommonConstants;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static calibrage.payzan.R.id.operatorSpn;
+
 
 /**
  * Created by Calibrage11 on 10/5/2017.
  */
 
-public class RequestForAgent extends AppCompatActivity implements SingleLineDropDownAdapter.AdapterOnClick {
+public class RequestForAgent extends AppCompatActivity implements SingleLineDropDownAdapter.AdapterOnClick, SingleLineDropDownAdapterdistrict.AdapterDistOnClick, SingleLineDropDownAdapterMandals.AdapterMandalOnClick, SingleLineDropDownAdapterVillages.AdapterVillageOnClick {
 
     private TextInputLayout stateTIl, districtTIl, mandalTIl, villageTIl, firstNameTIl, middleNameTIL, lastNameTIL, mobileTIL, emailTIL, address1TIL, address2TIL, landmarkTIL, commentTIL;
     private EditText commentsEdt, landmarkEdt, address2Edt, address1Edt, emailEdt, mobileEdt, lastNameEdt, middleNameEdt, firstNameEdt;
     private AutoCompleteTextView villageSpn, mandalSpn, districtSpn, stateSpn;
-    private Subscription mGetStatesSubscription, mGetDistrictSubscription,getmGetDistrictSubscription;
+    private Subscription mGetStatesSubscription, mGetDistrictSubscription, getmGetDistrictSubscription;
     private MandalModel mandalModellist;
     private StatesModel statesModellist;
     private VillageModel villageModellist;
     private DistrictModel districtModellist;
+    private Button btn_submit;
+    private Subscription mRegisterSubscription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_as_agent);
+        PostAgentRequest();
         setViews();
         getStates();
+      /*  getDistricts();*/
+
 
     }
 
@@ -81,22 +104,58 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
         mandalSpn = (AutoCompleteTextView) findViewById(R.id.mandalSpn);
         districtSpn = (AutoCompleteTextView) findViewById(R.id.districtSpn);
         stateSpn = (AutoCompleteTextView) findViewById(R.id.stateSpn);
+        btn_submit = (Button) findViewById(R.id.submit);
 
         stateSpn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+
                 stateSpn.showDropDown();
+                getStates();
                 return false;
             }
         });
+        districtSpn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                districtSpn.showDropDown();
 
+                return false;
+            }
+        });
+        mandalSpn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                mandalSpn.showDropDown();
+
+                return false;
+            }
+        });
+        villageSpn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                villageSpn.showDropDown();
+
+                return false;
+            }
+        });
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
     }
 
     private void getStates() {
+
+
         MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
-        mGetStatesSubscription = service.getStates(ApiConstants.STATES + "1")
+
+        String URL = "http://192.168.1.147/PayZanAPI/api/AgentRequestInfo/AddUpdateAgentRequestInfo";/*ApiConstants.STATES +"1" ;*/
+        mGetStatesSubscription = service.getStates(URL)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<StatesModel>() {
@@ -126,16 +185,18 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
                         statesModellist = statesModel;
                         Toast.makeText(RequestForAgent.this, "sucess", Toast.LENGTH_SHORT).show();
 
-                        SingleLineDropDownAdapter singleLineDropDownAdapter = new SingleLineDropDownAdapter(RequestForAgent.this, R.layout.adapter_single_item, (List<StatesModel.Data>) statesModel.getData());
+                        SingleLineDropDownAdapter singleLineDropDownAdapter = new SingleLineDropDownAdapter(RequestForAgent.this, R.layout.adapter_single_item, (List<StatesModel.Data>) statesModel.getListResult());
                         singleLineDropDownAdapter.setAdapterOnClick(RequestForAgent.this);
                         stateSpn.setAdapter(singleLineDropDownAdapter);
                     }
                 });
     }
 
-    private void getDistricts() {
+
+    private void getDistricts(int id) {
+        String URL = "http://192.168.1.147/PayZanAPI/api/Districts/GetDistrictsInfo/" + id;  /*ApiConstants.DISTRICTS + "1"*/
         MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
-        mGetDistrictSubscription = service.getDistricts(ApiConstants.DISTRICTS + "1")
+        mGetDistrictSubscription = service.getDistricts(URL)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<DistrictModel>() {
@@ -165,15 +226,19 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
                         districtModellist = districtModel;
                         Toast.makeText(RequestForAgent.this, "sucess", Toast.LENGTH_SHORT).show();
 
+                        SingleLineDropDownAdapterdistrict singleLineDropDownAdapter = new SingleLineDropDownAdapterdistrict(RequestForAgent.this, R.layout.adapter_single_item, (List<DistrictModel.Data>) districtModel.getListResult());
+                        singleLineDropDownAdapter.setAdapterDistOnClick(RequestForAgent.this);
 
+                        districtSpn.setAdapter(singleLineDropDownAdapter);
                     }
                 });
     }
 
 
-    private void getMandals() {
+    private void getMandals(int Id) {
+        String Url = "http://192.168.1.147/PayZanAPI/api/Mandals/GetMandalInfo/" + Id;  /*ApiConstants.MANDALS + "1"*/
         MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
-        mGetDistrictSubscription = service.getMandals(ApiConstants.MANDALS + "1")
+        mGetDistrictSubscription = service.getMandals(Url)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<MandalModel>() {
@@ -204,12 +269,19 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
                         Toast.makeText(RequestForAgent.this, "sucess", Toast.LENGTH_SHORT).show();
 
 
+                        SingleLineDropDownAdapterMandals singleLineDropDownAdapter = new SingleLineDropDownAdapterMandals(RequestForAgent.this, R.layout.adapter_single_item, (List<MandalModel.data>) mandalModel.getListResult());
+                        singleLineDropDownAdapter.setAdapterMandalOnClick(RequestForAgent.this);
+
+                        mandalSpn.setAdapter(singleLineDropDownAdapter);
+
                     }
                 });
     }
-    private void getVillages() {
+
+    private void getVillages(int id) {
         MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
-        mGetDistrictSubscription = service.getVillages(ApiConstants.VILLAGE + "1")
+        String Url = "http://192.168.1.147/PayZanAPI/api/Villages/GetVillageInfo/" + id; /* ApiConstants.VILLAGE + "1"*/
+        mGetDistrictSubscription = service.getVillages(Url)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<VillageModel>() {
@@ -237,22 +309,121 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
                     @Override
                     public void onNext(VillageModel villageModel) {
                         villageModellist = villageModel;
+
                         Toast.makeText(RequestForAgent.this, "sucess", Toast.LENGTH_SHORT).show();
 
+
+                        SingleLineDropDownAdapterVillages singleLineDropDownAdapter = new SingleLineDropDownAdapterVillages(RequestForAgent.this, R.layout.adapter_single_item, (List<VillageModel.Data>) villageModel.getListResult());
+                        singleLineDropDownAdapter.setAdapterVillageOnClick(RequestForAgent.this);
+
+                        villageSpn.setAdapter(singleLineDropDownAdapter);
 
                     }
                 });
     }
+
 
     private void initViews() {
 
     }
 
 
-    @Override
-    public void adapterOnClick(int position) {
+    private void PostAgentRequest() {
+        JsonObject object = getAgentObject();
+        MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
+        mRegisterSubscription = (Subscription) service.agentRequest(object)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<AgentResponseModel>() {
+                    @Override
+                    public void onCompleted() {
+                        Toast.makeText(RequestForAgent.this, "check", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (e instanceof HttpException) {
+                            ((HttpException) e).code();
+                            ((HttpException) e).message();
+                            ((HttpException) e).response().errorBody();
+                            try {
+                                ((HttpException) e).response().errorBody().string();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(RequestForAgent.this, "fail", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNext(AgentResponseModel loginResponseModel) {
+
+                        Toast.makeText(RequestForAgent.this, "sucess", Toast.LENGTH_SHORT).show();
+                      /*  CommonConstants.USERID = loginResponseModel.getData().getUser().getId();
+                        CommonConstants.WALLETID = String.valueOf(loginResponseModel.getData().getUserWallet().getWalletId());*/
+                        finish();
+                    }
+                });
 
     }
+
+    private JsonObject getAgentObject() {
+
+        AgentModel agentModel = new AgentModel();
+        agentModel.setId(1);
+        agentModel.setAddressLine1("hyd");
+        agentModel.setAddressLine2("hyd1");
+        agentModel.setTitleTypeId(0);
+        agentModel.setFirstName("mahesh");
+        agentModel.setMiddleName("mashi");
+        agentModel.setLastName("mnah");
+        agentModel.setMobileNumber("7032214460");
+        agentModel.setEmail("mall@m.com");
+        agentModel.setLandmark("kjufgjkhkjfg");
+        agentModel.setVillageId(0);
+        agentModel.setComments(";klsdl,gjkldsfj");
+        agentModel.setCreated("2017-10-31T05:15:57.983Z");
+
+
+        return new Gson().toJsonTree(agentModel)
+                .getAsJsonObject();
+
+    }
+
+
+    @Override
+    public void adapterOnClick(int position) {
+        stateSpn.setText(statesModellist.getListResult().get(position).getName());
+        stateSpn.dismissDropDown();
+
+
+        getDistricts(statesModellist.getListResult().get(position).getId());
+    }
+
+    @Override
+    public void adapterDistOnClick(int position) {
+        districtSpn.setText(districtModellist.getListResult().get(position).getName());
+        districtSpn.dismissDropDown();
+
+        getMandals(districtModellist.getListResult().get(position).getId());
+    }
+
+    @Override
+    public void AdapterMandalOnClick(int position) {
+        mandalSpn.setText(mandalModellist.getListResult().get(position).getName());
+        mandalSpn.dismissDropDown();
+
+        getVillages(mandalModellist.getListResult().get(position).getId());
+    }
+
+
+    @Override
+    public void adapterVillageOnClick(int position) {
+        villageSpn.setText(villageModellist.getListResult().get(position).getName());
+        villageSpn.dismissDropDown();
+    }
+
 }
 
 

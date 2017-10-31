@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.adapters.GenericAdapter;
+import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.controls.CommonEditText;
 import calibrage.payzan.model.OperatorModel;
 import calibrage.payzan.networkservice.ApiConstants;
@@ -43,8 +44,8 @@ import rx.schedulers.Schedulers;
  * Created by Calibrage11 on 9/27/2017.
  */
 
-public class PayElectrictyFragment extends Fragment implements GenericAdapter.AdapterOnClick {
-
+public class PayElectrictyFragment extends BaseFragment implements GenericAdapter.AdapterOnClick {
+    public static final String TAG = PayElectrictyFragment.class.getSimpleName();
     private View rootView;
     private Context context;
     private NCBTextInputLayout districtTXT, serviceNoTXT, amountTXT;
@@ -80,20 +81,20 @@ public class PayElectrictyFragment extends Fragment implements GenericAdapter.Ad
         amountEdt = (CommonEditText) rootView.findViewById(R.id.amountEdt);
         ServiceNEdt = (CommonEditText) rootView.findViewById(R.id.ServiceNEdt);
         districtSpn = (AutoCompleteTextView) rootView.findViewById(R.id.districtSpn);
-        setHasOptionsMenu(true);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
+       /* setHasOptionsMenu(true);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);*/
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
         HomeActivity.toolbar.setTitle(getResources().getString(R.string.electricity_sname));
         HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
-        HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      /*  HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 closeTab();
             }
-        });
+        });*/
 
-        rootView.setFocusableInTouchMode(true);
+        /*rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
         rootView.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -107,7 +108,7 @@ public class PayElectrictyFragment extends Fragment implements GenericAdapter.Ad
                     return false;
                 }
             }
-        });
+        });*/
     }
 
     private void initViews() {

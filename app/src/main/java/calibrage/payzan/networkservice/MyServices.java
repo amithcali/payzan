@@ -41,6 +41,8 @@ public interface MyServices {
     Observable<VillageModel> getVillages(@Url String url);
     @GET
     Observable<OperatorModel> getOperator(@Url String url);
+    @POST(ApiConstants.AGENT_REQUEST)
+    Observable<calibrage.payzan.model.AgentResponseModel> agentRequest(@Body JsonObject data);
 
 
 }

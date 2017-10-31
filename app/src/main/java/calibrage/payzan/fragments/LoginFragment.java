@@ -52,6 +52,7 @@ import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.activities.LoginActivity;
 import calibrage.payzan.activities.signup;
 import calibrage.payzan.adapters.MyAdapter;
+import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
 import calibrage.payzan.model.LoginModel;
 import calibrage.payzan.model.LoginResponseModel;
@@ -71,7 +72,8 @@ import calibrage.payzan.utils.SharedPrefsData;
 
 
 
-public class LoginFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener, MyAdapter.AdapterOnClick {
+public class LoginFragment extends BaseFragment implements GoogleApiClient.OnConnectionFailedListener, MyAdapter.AdapterOnClick {
+    public static final String TAG = LoginFragment.class.getSimpleName();
     private View rootView;
     private Context context;
     private CallbackManager callbackManager;
@@ -117,13 +119,13 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
         HomeActivity.toolbar.setTitle(getResources().getString(R.string.login_sname));
         HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
-        HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        /*HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 closeTab();
             }
-        });
+        });*/
         SpannableString ss = new SpannableString(getResources().getString(R.string.terms_and_conditions));
         ClickableSpan clickableSpan1 = new ClickableSpan() {
             @Override
