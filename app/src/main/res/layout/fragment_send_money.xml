@@ -62,7 +62,7 @@
                         style="@style/EditTextStyle"
                         android:layout_width="match_parent"
                         android:hint="@string/comments"
-                        android:inputType="numberDecimal"
+                        android:inputType="text"
                         android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"/>
 
                 </calibrage.payzan.utils.NCBTextInputLayout>

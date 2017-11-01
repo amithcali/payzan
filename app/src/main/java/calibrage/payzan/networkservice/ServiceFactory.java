@@ -4,17 +4,22 @@ package calibrage.payzan.networkservice;
 import android.content.Context;
 
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 
 import calibrage.payzan.BuildConfig;
+import okhttp3.Authenticator;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.Route;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ServiceFactory {
+public class ServiceFactory implements Authenticator {
 
     /**
      * Creates a retrofit service from an arbitrary class (clazz)
@@ -65,4 +70,8 @@ public class ServiceFactory {
         return httpClient.build();
     }
 
+    @Override
+    public Request authenticate(Route route, Response response) throws IOException {
+        return null;
+    }
 }

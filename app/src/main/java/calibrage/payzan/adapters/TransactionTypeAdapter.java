@@ -34,7 +34,7 @@ public class TransactionTypeAdapter extends RecyclerView.Adapter<TransactionType
     }
 
     @Override
-    public void onBindViewHolder(MyHolder holder, int position) {
+    public void onBindViewHolder(final MyHolder holder,final int position) {
         holder.text.setText(transactionTypes.get(holder.getAdapterPosition()));
 
     }

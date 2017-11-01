@@ -92,7 +92,7 @@ public class LoginResponseModel {
         private List<Object> activityRights = null;
         @SerializedName("UserWallet")
         @Expose
-        private Object userWallet;
+        private UserWallet userWallet;
         @SerializedName("AccessToken")
         @Expose
         private String accessToken;
@@ -127,11 +127,11 @@ public class LoginResponseModel {
             this.activityRights = activityRights;
         }
 
-        public Object getUserWallet() {
+        public UserWallet getUserWallet() {
             return userWallet;
         }
 
-        public void setUserWallet(Object userWallet) {
+        public void setUserWallet(UserWallet userWallet) {
             this.userWallet = userWallet;
         }
 
@@ -158,7 +158,7 @@ public class LoginResponseModel {
         public void setTokenType(String tokenType) {
             this.tokenType = tokenType;
         }
-        class User {
+       public class User {
 
             @SerializedName("Id")
             @Expose
@@ -205,6 +205,109 @@ public class LoginResponseModel {
                 this.phoneNumber = phoneNumber;
             }
         }
+       public class UserWallet {
+
+           @SerializedName("UserId")
+           @Expose
+           private String userId;
+           @SerializedName("WalletId")
+           @Expose
+           private String walletId;
+           @SerializedName("Balance")
+           @Expose
+           private Integer balance;
+           @SerializedName("Id")
+           @Expose
+           private Integer id;
+           @SerializedName("IsActive")
+           @Expose
+           private Boolean isActive;
+           @SerializedName("CreatedBy")
+           @Expose
+           private String createdBy;
+           @SerializedName("ModifiedBy")
+           @Expose
+           private String modifiedBy;
+           @SerializedName("Created")
+           @Expose
+           private String created;
+           @SerializedName("Modified")
+           @Expose
+           private String modified;
+
+           public String getUserId() {
+               return userId;
+           }
+
+           public void setUserId(String userId) {
+               this.userId = userId;
+           }
+
+           public String getWalletId() {
+               return walletId;
+           }
+
+           public void setWalletId(String walletId) {
+               this.walletId = walletId;
+           }
+
+           public Integer getBalance() {
+               return balance;
+           }
+
+           public void setBalance(Integer balance) {
+               this.balance = balance;
+           }
+
+           public Integer getId() {
+               return id;
+           }
+
+           public void setId(Integer id) {
+               this.id = id;
+           }
+
+           public Boolean getIsActive() {
+               return isActive;
+           }
+
+           public void setIsActive(Boolean isActive) {
+               this.isActive = isActive;
+           }
+
+           public String getCreatedBy() {
+               return createdBy;
+           }
+
+           public void setCreatedBy(String createdBy) {
+               this.createdBy = createdBy;
+           }
+
+           public String getModifiedBy() {
+               return modifiedBy;
+           }
+
+           public void setModifiedBy(String modifiedBy) {
+               this.modifiedBy = modifiedBy;
+           }
+
+           public String getCreated() {
+               return created;
+           }
+
+           public void setCreated(String created) {
+               this.created = created;
+           }
+
+           public String getModified() {
+               return modified;
+           }
+
+           public void setModified(String modified) {
+               this.modified = modified;
+           }
+
+       }
     }
 
 

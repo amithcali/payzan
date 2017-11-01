@@ -144,7 +144,8 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:layout_margin="4dp"
-                        android:src="@drawable/ic_user" />
+                        android:src="@drawable/ic_user"
+                        android:visibility="gone"/>
 
                     <calibrage.payzan.utils.NCBTextInputLayout
                         android:id="@+id/displaynamelayout"
@@ -174,7 +175,8 @@
                         android:layout_height="36dp"
                         android:layout_below="@+id/usericon"
                         android:layout_margin="4dp"
-                        android:src="@drawable/ic_email" />
+                        android:src="@drawable/ic_email"
+                        android:visibility="gone"/>
 
                     <calibrage.payzan.utils.NCBTextInputLayout
                         android:layout_width="match_parent"
@@ -205,7 +207,8 @@
                         android:layout_below="@+id/usericon"
                         android:layout_margin="4dp"
                         app:srcCompat="@drawable/ic_mobile"
-                        android:scaleType="center"/>
+                        android:scaleType="center"
+                        android:visibility="gone"/>
 
                     <calibrage.payzan.utils.NCBTextInputLayout
                         android:id="@+id/emaillayout"
@@ -236,7 +239,8 @@
                         android:layout_height="36dp"
                         android:layout_below="@+id/usericon"
                         android:layout_margin="4dp"
-                        android:src="@drawable/ic_birthday" />
+                        android:src="@drawable/ic_birthday"
+                        android:visibility="gone"/>
 
                     <calibrage.payzan.utils.NCBTextInputLayout
                         android:layout_width="match_parent"
@@ -274,7 +278,8 @@
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:layout_marginLeft="4dp"
-                            android:src="@drawable/ic_gender" />
+                            android:src="@drawable/ic_gender"
+                            android:visibility="gone"/>
 
                         <calibrage.payzan.controls.CommonTextView
                             android:id="@+id/gendrText"
