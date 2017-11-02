@@ -1,120 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white_new"
-    android:clickable="true"
-    android:orientation="vertical">
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white_new"
+            android:clickable="true"
+            android:orientation="vertical" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           >
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/lyt_margin_left"
-        android:layout_marginRight="@dimen/lyt_margin_right"
-        android:layout_marginTop="@dimen/lyt_margin_top"
-        android:gravity="center"
-        android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/lyt_margin_left"
+            android:layout_marginRight="@dimen/lyt_margin_right"
+            android:layout_marginTop="@dimen/lyt_margin_top"
+            android:gravity="center"
+            android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/lyt_margin_bottom"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="gone">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/lyt_margin_bottom"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
 
             <ImageView
-                android:layout_width="@dimen/img_height"
-                android:layout_height="@dimen/image_width"
-                app:srcCompat="@drawable/ic_addmoneytowallet" />
+                    android:layout_width="@dimen/img_height"
+                    android:layout_height="@dimen/image_width"
+                    app:srcCompat="@drawable/ic_addmoneytowallet"/>
 
             <calibrage.payzan.controls.CommonTextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/add_money_to_wallet"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_header" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/add_money_to_wallet"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_header"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/lyt_margin_bottom"
-            android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/lyt_margin_bottom"
+                android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/addHundTxt"
-                    style="@style/AddMoneyTxt"
+                        android:id="@+id/addHundTxt"
+                        style="@style/AddMoneyTxt"
 
-                    android:text="100 +" />
+                        android:text="100 +"/>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/addfiveTxt"
-                    style="@style/AddMoneyTxt"
-                    android:text="500 +" />
+                        android:id="@+id/addfiveTxt"
+                        style="@style/AddMoneyTxt"
+                        android:text="500 +"/>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/addthouTxt"
-                    style="@style/AddMoneyTxt"
-                    android:text="1000 +"
-                     />
+                        android:id="@+id/addthouTxt"
+                        style="@style/AddMoneyTxt"
+                        android:text="1000 +"
+                />
 
             </LinearLayout>
 
 
         </LinearLayout>
 
-<calibrage.payzan.utils.NCBTextInputLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-        <calibrage.payzan.controls.CommonEditText
-            android:id="@+id/amount"
-            style="@style/EditTextStyle"
-            android:layout_width="match_parent"
-            android:hint="@string/enter_amount_to_be_added_in_the_wallet"
-            android:inputType="numberDecimal"
+        <calibrage.payzan.utils.NCBTextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <calibrage.payzan.controls.CommonEditText
+                    android:id="@+id/amount"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:hint="@string/enter_amount_to_be_added_in_the_wallet"
+                    android:inputType="numberDecimal"
             />
-</calibrage.payzan.utils.NCBTextInputLayout>
+        </calibrage.payzan.utils.NCBTextInputLayout>
 
         <calibrage.payzan.utils.NCBTextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <calibrage.payzan.controls.CommonEditText
-            android:id="@+id/promocode"
-            style="@style/EditTextStyle"
-            android:hint="@string/enter_promo_code"
-            android:inputType="textCapCharacters"
-            android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"/>
+            <calibrage.payzan.controls.CommonEditText
+                    android:id="@+id/promocode"
+                    style="@style/EditTextStyle"
+                    android:hint="@string/enter_promo_code"
+                    android:inputType="textCapCharacters"
+                    android:layout_marginBottom="@dimen/main_layout_head_bottom_margin"/>
         </calibrage.payzan.utils.NCBTextInputLayout>
 
         <calibrage.payzan.controls.CommonButton
-            android:id="@+id/submit"
-            style="@style/ButtonStyle"
-            android:text="@string/add_money"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+                android:id="@+id/submit"
+                style="@style/ButtonStyle"
+                android:text="@string/add_money"
+                android:textAllCaps="false"
+                android:textColor="@color/white"/>
     </LinearLayout>
 </ScrollView>
