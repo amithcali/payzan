@@ -6,11 +6,15 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -46,6 +50,8 @@ public class PayWaterFragment extends Fragment implements GenericAdapter.Adapter
     private NCBTextInputLayout consNoTXT, boardTXT, amountTXT;
     private ArrayList<OperatorModel.ListResult> listResults;
     private Subscription operatorSubscription;
+    private Button submit;
+    private String boardStr,consumerStr,amountStr;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,6 +94,7 @@ public class PayWaterFragment extends Fragment implements GenericAdapter.Adapter
         boardTXT = (NCBTextInputLayout) rootView.findViewById(R.id.boardTXT);
         consNoTXT = (NCBTextInputLayout) rootView.findViewById(R.id.consNoTXT);
         amountTXT = (NCBTextInputLayout) rootView.findViewById(R.id.amountTXT);
+        submit=(Button)rootView.findViewById(R.id.submit);
 
         getOperator(CommonConstants.SERVICE_PROVIDER_ID_WATER);
 
@@ -101,7 +108,51 @@ public class PayWaterFragment extends Fragment implements GenericAdapter.Adapter
                 return false;
             }
         });
+        consumerNEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0)
+                    consNoTXT.setErrorEnabled(false);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        amountEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    amountTXT.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isValidateUi()){
+
+                }
+            }
+        });
     }
 
     private void getOperator(String providerType) {
@@ -159,9 +210,36 @@ public class PayWaterFragment extends Fragment implements GenericAdapter.Adapter
         }
     }
 
+    private  boolean isValidateUi()
+    {
+        boardStr=boardSpn.getText().toString().trim();
+        consumerStr=consumerNEdt.getText().toString().trim();
+        amountStr=amountEdt.getText().toString().trim();
+        if (TextUtils.isEmpty(boardStr))
+        {
+            boardTXT.setErrorEnabled(true);
+            boardTXT.setError("select board");
+            return  false;
+        }
+        else if (TextUtils.isEmpty(consumerStr))
+        {
+            consNoTXT.setErrorEnabled(true);
+            consNoTXT.setError("enter consumer no");
+            return  false;
+        }
+        else if (TextUtils.isEmpty(amountStr))
+        {
+            amountTXT.setErrorEnabled(true);
+            amountTXT.setError("enter amount");
+            return false;
+        }
 
+        return true;
+    }
     @Override
     public void adapterOnClick(int position) {
         boardSpn.setText(listResults.get(position).getName());
     }
+
+
 }

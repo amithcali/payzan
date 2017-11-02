@@ -10,6 +10,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,7 @@ public class SendMoneyToWallet extends BaseFragment {
     static final int PICK_CONTACT = 1;
     private CommonButton submitBtn;
     private Subscription sendMoneySubscription;
+    private String mobileStr,amountStr,commentStr;
 
     @Nullable
     @Override
@@ -124,6 +126,7 @@ public class SendMoneyToWallet extends BaseFragment {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(validateUi())
                 sendMoneyRequest();
             }
         });
@@ -131,7 +134,30 @@ public class SendMoneyToWallet extends BaseFragment {
 
     }
 
+    private boolean validateUi() {
+        mobileStr=mobileEdt.getText().toString().trim();
+        amountStr=amount.getText().toString().trim();
+        commentStr=commentEdt.getText().toString().trim();
+
+        if (TextUtils.isEmpty(mobileStr)){
+            mobileNumberTXT.setErrorEnabled(true);
+            mobileNumberTXT.setError("enter mobile no");
+            return false;
+        }
+        else if (TextUtils.isEmpty(amountStr))
+        {
+            amountTXT.setErrorEnabled(true);
+            amountTXT.setError("enter amount");
+            return false;
+        }
+
+
+        return true;
+    }
+
     private void sendMoneyRequest() {
+
+
 
         JsonObject object = postJsonObject();
 

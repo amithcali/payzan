@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -52,6 +53,8 @@ public class PayCableFragment extends BaseFragment implements GenericAdapter.Ada
     private CommonEditText accontNoEdt, amountEdt;
     private Subscription operatorSubscription;
     private ArrayList<OperatorModel.ListResult> listResults;
+    private Button submit;
+    private  String operatorStr,accontNoStr,amountStr;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,6 +82,7 @@ public class PayCableFragment extends BaseFragment implements GenericAdapter.Ada
         amountEdt = (CommonEditText) rootView.findViewById(R.id.amountEdt);
         amountTXT = (NCBTextInputLayout) rootView.findViewById(R.id.amountTXT);
         operatorSpn = (AutoCompleteTextView) rootView.findViewById(R.id.operatorSpn);
+        submit=(Button)rootView.findViewById(R.id.submit);
        /* setHasOptionsMenu(true);
         ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);*/
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
@@ -174,18 +178,30 @@ public class PayCableFragment extends BaseFragment implements GenericAdapter.Ada
                 return false;
             }
         });
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isValidateUi())
+                {
+
+                }
+            }
+        });
     }
 
     private boolean isValidateUi() {
-        if (TextUtils.isEmpty(operatorSpn.getText().toString().trim())) {
+        operatorStr=operatorSpn.getText().toString().trim();
+        accontNoStr =accontNoEdt.getText().toString().trim();
+        amountStr=amountEdt.getText().toString().trim();
+        if (TextUtils.isEmpty(operatorStr)) {
             operatorTXT.setError("select operator");
             operatorTXT.setErrorEnabled(true);
             return true;
-        } else if (TextUtils.isEmpty(accontNoEdt.getText().toString().trim())) {
+        } else if (TextUtils.isEmpty(accontNoStr)) {
             accontNoTXT.setError("enter account no");
             accontNoTXT.setErrorEnabled(true);
             return true;
-        } else if (TextUtils.isEmpty(amountEdt.getText().toString().trim())) {
+        } else if (TextUtils.isEmpty(amountStr)) {
             amountTXT.setError("enter amount");
             amountTXT.setErrorEnabled(true);
             return true;

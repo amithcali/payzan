@@ -9,6 +9,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -36,6 +39,7 @@ import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.CommonUtil;
+import calibrage.payzan.utils.NCBTextInputLayout;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 import rx.Subscription;
@@ -59,6 +63,8 @@ public class AddMoneyToWallet extends BaseFragment {
     private Subscription mRegisterSubscription;
     private TextView addHundTxt, addfiveTxt, addthouTxt;
     private int addMoney;
+    private String addMoneyStr;
+    private NCBTextInputLayout addMoneyTxt;
 
     @Nullable
     @Override
@@ -84,6 +90,7 @@ public class AddMoneyToWallet extends BaseFragment {
         addthouTxt = (TextView) rootView.findViewById(R.id.addthouTxt);
         enterpromocodeEdt = (EditText) rootView.findViewById(R.id.promocode);
         submit = (Button) rootView.findViewById(R.id.submit);
+        addMoneyTxt=(NCBTextInputLayout)rootView.findViewById(R.id.addmoneytxt);
 
     }
 
@@ -115,15 +122,42 @@ public class AddMoneyToWallet extends BaseFragment {
             public void onClick(View view) {
 
 
-                if (enterMoneyEdt.getText().toString().equalsIgnoreCase("")) {
-                    CommonUtil.displayDialogWindow("please enter amount", alertDialog, context);
-                } else {
+                if(validateUi()) {
                     addWallet();
                 }
 
             }
         });
+        enterMoneyEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    addMoneyTxt.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+    }
+    private boolean validateUi()
+    {
+        addMoneyStr=enterMoneyEdt.getText().toString().trim();
+        if (TextUtils.isEmpty(addMoneyStr))
+        {
+            addMoneyTxt.setErrorEnabled(true);
+            addMoneyTxt.setError("enter amount");
+            return  false;
+        }
+        return true;
     }
 
     private void addMoney(int amount) {

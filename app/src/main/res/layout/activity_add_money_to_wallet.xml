@@ -92,7 +92,8 @@
 
         <calibrage.payzan.utils.NCBTextInputLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+            android:id="@+id/addmoneytxt">
         <calibrage.payzan.controls.CommonEditText
             android:id="@+id/amount"
             style="@style/EditTextStyle"

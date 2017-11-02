@@ -6,11 +6,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
@@ -30,6 +35,8 @@ public class BroadbandFragment extends BaseFragment {
     private CommonEditText ServiceNEdt, amountEdt;
     private NCBTextInputLayout operatorTXT,serviceNoTXT , amountTXT;
     private AutoCompleteTextView operatorSpn;
+    private Button submit;
+    private String operatorStr,servicesnoStr,amountStr;
 
 
     @Override
@@ -46,7 +53,7 @@ public class BroadbandFragment extends BaseFragment {
         context = this.getActivity();
         //  android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         setViews();
-
+        initViews();
 
 
         return rootView;
@@ -79,6 +86,7 @@ public class BroadbandFragment extends BaseFragment {
         operatorSpn = (AutoCompleteTextView) rootView.findViewById(R.id.operatorSpn);
         ServiceNEdt = (CommonEditText) rootView.findViewById(R.id.ServiceNEdt);
         amountEdt = (CommonEditText) rootView.findViewById(R.id.amountEdt);
+        submit=(Button)rootView.findViewById(R.id.submit);
 
         /*rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
@@ -98,6 +106,92 @@ public class BroadbandFragment extends BaseFragment {
 */
 
     }
+
+
+    private void initViews(){
+        operatorSpn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                operatorSpn.showDropDown();
+                return false;
+            }
+        });
+        ServiceNEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+                if (charSequence.length() > 0) {
+                    serviceNoTXT.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        amountEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+                if (charSequence.length() > 0) {
+                    amountTXT.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isValidateUi()){
+
+                }
+            }
+        });
+
+
+    }
+
+    private boolean isValidateUi(){
+
+        operatorStr=operatorSpn.getText().toString().trim();
+        servicesnoStr=ServiceNEdt.getText().toString().trim();
+        amountStr=amountEdt.getText().toString().trim();
+        if (TextUtils.isEmpty(operatorStr))
+        {
+            operatorTXT.setErrorEnabled(true);
+            operatorTXT.setError("please select operator");
+            return false;
+        }
+        else if (TextUtils.isEmpty(servicesnoStr))
+        {
+            serviceNoTXT.setErrorEnabled(true);
+            serviceNoTXT.setError("please enter serviceno");
+            return false;
+        }
+        else if (TextUtils.isEmpty(amountStr))
+        {
+            amountTXT.setErrorEnabled(true);
+            amountTXT.setError("please enter amount");
+            return  false;
+        }
+
+
+        return true;
+    }
+
 
 
     /*private void closeTab() {

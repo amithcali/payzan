@@ -56,6 +56,7 @@ public class DataCardFragment extends BaseFragment implements GenericAdapter.Ada
     private Subscription operatorSubscription;
     private ArrayList<OperatorModel.ListResult> listResults;
     private Button submit;
+    private String operatorStr,datCardStr,amountStr;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -190,15 +191,18 @@ public class DataCardFragment extends BaseFragment implements GenericAdapter.Ada
     }
 
     private boolean isValidateUi() {
-        if (TextUtils.isEmpty(operatorSpn.getText().toString().trim())) {
+        operatorStr=operatorSpn.getText().toString().trim();
+        datCardStr= datCardNoEdt.getText().toString().trim();
+        amountStr= amountEdt.getText().toString().trim();
+        if (TextUtils.isEmpty(operatorStr)) {
             operatorTXT.setError("please select operator");
             operatorTXT.setErrorEnabled(true);
             return false;
-        } else if (TextUtils.isEmpty(datCardNoEdt.getText().toString().trim())) {
+        } else if (TextUtils.isEmpty(datCardStr)) {
             dataCardTXT.setError("enter data card no.");
             dataCardTXT.setErrorEnabled(true);
             return false;
-        } else if (TextUtils.isEmpty(amountEdt.getText().toString().trim())) {
+        } else if (TextUtils.isEmpty(amountStr)) {
             amountTXT.setError("enter amount");
             amountTXT.setErrorEnabled(true);
             return false;

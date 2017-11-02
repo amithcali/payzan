@@ -62,6 +62,7 @@ public class PayLandLineBill extends BaseFragment implements GenericAdapter.Adap
     private Subscription operatorSubscription;
     private ArrayList<OperatorModel.ListResult> listResults;
     private Button submit;
+    private String operatorStr,mobilenoStr,circleStr,amountStr;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -163,15 +164,15 @@ public class PayLandLineBill extends BaseFragment implements GenericAdapter.Adap
         amount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length() > 0) {
-                    amountTXT.setErrorEnabled(false);
-                }
+
 
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                if (charSequence.length() > 0) {
+                    amountTXT.setErrorEnabled(false);
+                }
             }
 
             @Override
@@ -308,20 +309,23 @@ public class PayLandLineBill extends BaseFragment implements GenericAdapter.Adap
     }
 
     private boolean isValidateUi() {
-
-        if (TextUtils.isEmpty(operatorEdt.getText().toString().trim())) {
+        operatorStr=operatorEdt.getText().toString().trim();
+        mobilenoStr=mobilenoEdt.getText().toString().trim();
+        circleStr =circleEdt.getText().toString().trim();
+        amountStr=  amount.getText().toString().trim();
+        if (TextUtils.isEmpty(operatorStr)) {
             operatorTXT.setErrorEnabled(true);
             operatorTXT.setError("please select operator");
             return false;
-        } else if (TextUtils.isEmpty(mobilenoEdt.getText().toString().trim())) {
+        } else if (TextUtils.isEmpty(mobilenoStr)) {
             numberTXT.setError("enter number");
             numberTXT.setErrorEnabled(true);
             return false;
-        } else if (TextUtils.isEmpty(circleEdt.getText().toString().trim())) {
+        } else if (TextUtils.isEmpty(circleStr)) {
             circleTXT.setError("select cicle");
             circleTXT.setErrorEnabled(true);
             return false;
-        } else if (TextUtils.isEmpty(amount.getText().toString().trim())) {
+        } else if (TextUtils.isEmpty(amountStr)) {
             amountTXT.setError("enter amount");
             amountTXT.setErrorEnabled(true);
             return false;

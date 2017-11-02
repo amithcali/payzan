@@ -18,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -53,6 +54,8 @@ public class PayElectrictyFragment extends BaseFragment implements GenericAdapte
     private AutoCompleteTextView districtSpn;
     private Subscription operatorSubscription;
     private ArrayList<OperatorModel.ListResult> listResults;
+    private Button submit;
+    private String districtStr,ServiceStr,amountStr;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,6 +84,7 @@ public class PayElectrictyFragment extends BaseFragment implements GenericAdapte
         amountEdt = (CommonEditText) rootView.findViewById(R.id.amountEdt);
         ServiceNEdt = (CommonEditText) rootView.findViewById(R.id.ServiceNEdt);
         districtSpn = (AutoCompleteTextView) rootView.findViewById(R.id.districtSpn);
+        submit=(Button)rootView.findViewById(R.id.submit);
        /* setHasOptionsMenu(true);
         ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);*/
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
@@ -171,20 +175,30 @@ public class PayElectrictyFragment extends BaseFragment implements GenericAdapte
 
             }
         });
+       submit.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               if (isValidateUi()){
+
+               }
+           }
+       });
 
     }
 
     private boolean isValidateUi() {
-
-        if (TextUtils.isEmpty(districtSpn.getText().toString().trim())) {
+        districtStr  = districtSpn.getText().toString().trim();
+        ServiceStr  =ServiceNEdt.getText().toString().trim();
+        amountStr  =amountEdt.getText().toString().trim();
+        if (TextUtils.isEmpty(districtStr)) {
             districtTXT.setError("select district");
             districtTXT.setErrorEnabled(true);
             return false;
-        } else if (TextUtils.isEmpty(ServiceNEdt.getText().toString().trim())) {
+        } else if (TextUtils.isEmpty(ServiceStr)) {
             serviceNoTXT.setError("enter service no");
             serviceNoTXT.setErrorEnabled(true);
             return false;
-        } else if (TextUtils.isEmpty(amountEdt.getText().toString().trim())) {
+        } else if (TextUtils.isEmpty(amountStr)) {
             amountTXT.setError("enter amount");
             amountTXT.setErrorEnabled(true);
             return false;

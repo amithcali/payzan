@@ -87,6 +87,7 @@ public class MobileRecharge extends BaseFragment implements GenericAdapter.Adapt
     private String serviceProviderType;
     private NCBTextInputLayout mobileNumberTXT, operatorTXT, amountTXT;
     private Boolean isProvider = false;
+    private String mobileStr,currentOperatorStr,amountStr;
 
 
     @Nullable
@@ -138,6 +139,7 @@ public class MobileRecharge extends BaseFragment implements GenericAdapter.Adapt
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 currentOperator.showDropDown();
+
 
 
                 return false;
@@ -395,16 +397,20 @@ public class MobileRecharge extends BaseFragment implements GenericAdapter.Adapt
 
     private boolean validateUI() {
         isProviderExists();
-        if (TextUtils.isEmpty(mobileEdt.getText().toString().trim())) {
+        mobileStr = mobileEdt.getText().toString().trim();
+        currentOperatorStr= currentOperator.getText().toString().trim();
+        amountStr=amount.getText().toString().trim();
+
+        if (TextUtils.isEmpty(mobileStr)) {
             mobileNumberTXT.setErrorEnabled(true);
             mobileNumberTXT.setError("enter mobile number");
-        } else if (TextUtils.isEmpty(currentOperator.getText().toString().trim())) {
+        } else if (TextUtils.isEmpty(currentOperatorStr)) {
             operatorTXT.setErrorEnabled(true);
             operatorTXT.setError("select operator ");
         } else if (!isProvider) {
             operatorTXT.setErrorEnabled(true);
             operatorTXT.setError("your  operator is not valid ");
-        } else if (amount.getText().toString().trim().equalsIgnoreCase("")) {
+        } else if (amountStr.equalsIgnoreCase("")) {
             amountTXT.setErrorEnabled(true);
             amountTXT.setError("enter amount");
         }
@@ -431,5 +437,6 @@ public class MobileRecharge extends BaseFragment implements GenericAdapter.Adapt
     @Override
     public void adapterOnClick(int position) {
         currentOperator.setText(listResults.get(position).getName());
+
     }
 }

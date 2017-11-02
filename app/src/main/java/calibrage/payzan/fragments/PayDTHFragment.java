@@ -56,6 +56,7 @@ public class PayDTHFragment extends BaseFragment implements GenericAdapter.Adapt
     private ArrayList<OperatorModel.ListResult> listResults;
     private Subscription operatorSubscription;
     private Button submit;
+    private  String subscriberStr,operatorStr,amountStr;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -176,16 +177,18 @@ public class PayDTHFragment extends BaseFragment implements GenericAdapter.Adapt
     }
 
     private boolean isValidateUI() {
-
-        if(TextUtils.isEmpty(subscriberEdt.getText().toString().trim())){
+        subscriberStr= subscriberEdt.getText().toString().trim();
+        operatorStr= operatorSpn.getText().toString().trim();
+        amountStr =amount.getText().toString().trim();
+        if(TextUtils.isEmpty(subscriberStr)){
             subscriberTXT.setError("enter subscriber id");
             subscriberTXT.setErrorEnabled(true);
             return true;
-        }else if(TextUtils.isEmpty(operatorSpn.getText().toString().trim())){
+        }else if(TextUtils.isEmpty(operatorStr)){
             operatorTXT.setError("select operator");
             operatorTXT.setErrorEnabled(true);
             return true;
-        }else if(TextUtils.isEmpty(amount.getText().toString().trim())){
+        }else if(TextUtils.isEmpty(amountStr)){
             amountTXT.setError("enter amount");
             amountTXT.setErrorEnabled(true);
             return true;
