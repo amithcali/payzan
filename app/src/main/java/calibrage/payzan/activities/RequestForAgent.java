@@ -69,9 +69,10 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_as_agent);
-        PostAgentRequest();
+
         setViews();
         getStates();
+        PostAgentRequest();
       /*  getDistricts();*/
 
 
@@ -154,7 +155,7 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
 
         MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
 
-        String URL = "http://192.168.1.147/PayZanAPI/api/AgentRequestInfo/AddUpdateAgentRequestInfo";/*ApiConstants.STATES +"1" ;*/
+        String URL = "http://192.168.1.147/PayZanAPI/api/States/GetStateInfo/1";/*ApiConstants.STATES +"1" ;*/
         mGetStatesSubscription = service.getStates(URL)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -329,6 +330,7 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
 
 
     private void PostAgentRequest() {
+        String URL = "http://192.168.1.147/PayZanAPI/api/AgentRequestInfo/AddUpdateAgentRequestInfo";
         JsonObject object = getAgentObject();
         MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
         mRegisterSubscription = (Subscription) service.agentRequest(object)
@@ -357,7 +359,7 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
                     }
 
                     @Override
-                    public void onNext(AgentResponseModel loginResponseModel) {
+                    public void onNext(AgentResponseModel AgentResponseModel) {
 
                         Toast.makeText(RequestForAgent.this, "sucess", Toast.LENGTH_SHORT).show();
                       /*  CommonConstants.USERID = loginResponseModel.getData().getUser().getId();

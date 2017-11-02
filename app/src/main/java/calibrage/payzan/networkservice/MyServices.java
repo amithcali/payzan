@@ -43,6 +43,7 @@ public interface MyServices {
     Observable<OperatorModel> getOperator(@Url String url);
     @POST(ApiConstants.AGENT_REQUEST)
     Observable<calibrage.payzan.model.AgentResponseModel> agentRequest(@Body JsonObject data);
-
+    @GET
+    Observable<calibrage.payzan.model.AgentResponseModel> getAgentinfoById(@Url String url);
 
 }
