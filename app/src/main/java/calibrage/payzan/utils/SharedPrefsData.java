@@ -16,6 +16,8 @@ public class SharedPrefsData {
     private static final String PICHIT_DATA = "payzan";
     private static String MY_INT_PREF = "myintpref";
     private SharedPreferences payZanSharedPrefs = null;
+    private  static final String USER_ID = "user_id";
+    private static final String WALLET_ID = "wallet_id";
 
 
     public static SharedPrefsData getInstance(Context context) {
@@ -50,6 +52,46 @@ public class SharedPrefsData {
 
     public int getIntFromSharedPrefs(String key) {
         return payZanSharedPrefs.getInt(key, DEFAULTVALUINT);
+    }
+
+    public void saveUserId(Context context, String userId) {
+        if (context != null) {
+            SharedPreferences profilePref = context.getSharedPreferences(PICHIT_DATA,
+                    Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = profilePref.edit();
+            editor.putString(USER_ID, userId);
+
+            // Commit the edits!
+            editor.apply();
+
+        }
+    }
+
+    public String getUserId(Context context) {
+        SharedPreferences profilePref = context.getSharedPreferences(PICHIT_DATA,
+                Context.MODE_PRIVATE);
+        return profilePref.getString(USER_ID, "");
+
+    }
+
+    public void saveWalletId(Context context, String walletId) {
+        if (context != null) {
+            SharedPreferences profilePref = context.getSharedPreferences(PICHIT_DATA,
+                    Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = profilePref.edit();
+            editor.putString(WALLET_ID, walletId);
+
+            // Commit the edits!
+            editor.apply();
+
+        }
+    }
+
+    public String getWalletId(Context context) {
+        SharedPreferences profilePref = context.getSharedPreferences(PICHIT_DATA,
+                Context.MODE_PRIVATE);
+        return profilePref.getString(WALLET_ID, "");
+
     }
 
     public void updateMultiValue(Context context, List<SharedPrefsBean> sharedPrefsBeans) {
