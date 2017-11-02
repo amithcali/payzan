@@ -2,8 +2,10 @@ package calibrage.payzan.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +27,7 @@ import calibrage.payzan.adapters.SingleLineDropDownAdapter;
 import calibrage.payzan.adapters.SingleLineDropDownAdapterMandals;
 import calibrage.payzan.adapters.SingleLineDropDownAdapterVillages;
 import calibrage.payzan.adapters.SingleLineDropDownAdapterdistrict;
+import calibrage.payzan.controls.CommonEditText;
 import calibrage.payzan.fragments.PayDTHFragment;
 import calibrage.payzan.model.AgentModel;
 import calibrage.payzan.model.AgentResponseModel;
@@ -39,6 +42,7 @@ import calibrage.payzan.networkservice.ApiConstants;
 import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonConstants;
+import calibrage.payzan.utils.NCBTextInputLayout;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 import rx.Subscription;
@@ -54,8 +58,8 @@ import static calibrage.payzan.R.id.operatorSpn;
 
 public class RequestForAgent extends AppCompatActivity implements SingleLineDropDownAdapter.AdapterOnClick, SingleLineDropDownAdapterdistrict.AdapterDistOnClick, SingleLineDropDownAdapterMandals.AdapterMandalOnClick, SingleLineDropDownAdapterVillages.AdapterVillageOnClick {
 
-    private TextInputLayout stateTIl, districtTIl, mandalTIl, villageTIl, firstNameTIl, middleNameTIL, lastNameTIL, mobileTIL, emailTIL, address1TIL, address2TIL, landmarkTIL, commentTIL;
-    private EditText commentsEdt, landmarkEdt, address2Edt, address1Edt, emailEdt, mobileEdt, lastNameEdt, middleNameEdt, firstNameEdt;
+    private NCBTextInputLayout stateTIl, districtTIl, mandalTIl, villageTIl, firstNameTIl, middleNameTIL, lastNameTIL, mobileTIL, emailTIL, address1TIL, address2TIL, landmarkTIL, commentTIL;
+    private CommonEditText commentsEdt, landmarkEdt, address2Edt, address1Edt, emailEdt, mobileEdt, lastNameEdt, middleNameEdt, firstNameEdt;
     private AutoCompleteTextView villageSpn, mandalSpn, districtSpn, stateSpn;
     private Subscription mGetStatesSubscription, mGetDistrictSubscription, getmGetDistrictSubscription;
     private MandalModel mandalModellist;
@@ -65,6 +69,9 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
     private Button btn_submit;
     private Subscription mRegisterSubscription;
 
+    private String firstNameStr,middleNameStr,lastNameStr,mobileStr,emailStr,stateStr,districtStr,mandalStr,villageStr,address1Str,
+            address2Str,landmarkStr,commentsStr ;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,40 +79,42 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
 
         setViews();
         getStates();
-        PostAgentRequest();
+        initViews();
+     //   PostAgentRequest();
       /*  getDistricts();*/
 
 
     }
 
     private void setViews() {
-        stateTIl = (TextInputLayout) findViewById(R.id.stateTIl);
-        districtTIl = (TextInputLayout) findViewById(R.id.districtTIl);
-        villageTIl = (TextInputLayout) findViewById(R.id.villageTIl);
-        firstNameTIl = (TextInputLayout) findViewById(R.id.firstNameTIl);
-        middleNameTIL = (TextInputLayout) findViewById(R.id.middleNameTIL);
-        lastNameTIL = (TextInputLayout) findViewById(R.id.lastNameTIL);
-        mobileTIL = (TextInputLayout) findViewById(R.id.mobileTIL);
-        emailTIL = (TextInputLayout) findViewById(R.id.emailTIL);
-        address1TIL = (TextInputLayout) findViewById(R.id.address1TIL);
-        address2TIL = (TextInputLayout) findViewById(R.id.address2TIL);
-        landmarkTIL = (TextInputLayout) findViewById(R.id.landmarkTIL);
-        commentTIL = (TextInputLayout) findViewById(R.id.commentTIL);
-        commentTIL = (TextInputLayout) findViewById(R.id.commentTIL);
-        commentsEdt = (EditText) findViewById(R.id.commentsEdt);
-        landmarkEdt = (EditText) findViewById(R.id.landmarkEdt);
-        address2Edt = (EditText) findViewById(R.id.address2Edt);
-        address1Edt = (EditText) findViewById(R.id.address1Edt);
-        emailEdt = (EditText) findViewById(R.id.emailEdt);
-        mobileEdt = (EditText) findViewById(R.id.mobileEdt);
-        lastNameEdt = (EditText) findViewById(R.id.lastNameEdt);
-        middleNameEdt = (EditText) findViewById(R.id.middleNameEdt);
-        firstNameEdt = (EditText) findViewById(R.id.firstNameEdt);
+        stateTIl = (NCBTextInputLayout) findViewById(R.id.stateTIl);
+        districtTIl = (NCBTextInputLayout) findViewById(R.id.districtTIl);
+        villageTIl = (NCBTextInputLayout) findViewById(R.id.villageTIl);
+        firstNameTIl = (NCBTextInputLayout) findViewById(R.id.firstNameTIl);
+        middleNameTIL = (NCBTextInputLayout) findViewById(R.id.middleNameTIL);
+        lastNameTIL = (NCBTextInputLayout) findViewById(R.id.lastNameTIL);
+        mobileTIL = (NCBTextInputLayout) findViewById(R.id.mobileTIL);
+        emailTIL = (NCBTextInputLayout) findViewById(R.id.emailTIL);
+        address1TIL = (NCBTextInputLayout) findViewById(R.id.address1TIL);
+        address2TIL = (NCBTextInputLayout) findViewById(R.id.address2TIL);
+        landmarkTIL = (NCBTextInputLayout) findViewById(R.id.landmarkTIL);
+        commentTIL = (NCBTextInputLayout) findViewById(R.id.commentTIL);
+        commentTIL = (NCBTextInputLayout) findViewById(R.id.commentTIL);
+        commentsEdt = (CommonEditText) findViewById(R.id.commentsEdt);
+        landmarkEdt = (CommonEditText) findViewById(R.id.landmarkEdt);
+        address2Edt = (CommonEditText) findViewById(R.id.address2Edt);
+        address1Edt = (CommonEditText) findViewById(R.id.address1Edt);
+        emailEdt = (CommonEditText) findViewById(R.id.emailEdt);
+        mobileEdt = (CommonEditText) findViewById(R.id.mobileEdt);
+        lastNameEdt = (CommonEditText) findViewById(R.id.lastNameEdt);
+        middleNameEdt = (CommonEditText) findViewById(R.id.middleNameEdt);
+        firstNameEdt = (CommonEditText) findViewById(R.id.firstNameEdt);
         villageSpn = (AutoCompleteTextView) findViewById(R.id.villageSpn);
         mandalSpn = (AutoCompleteTextView) findViewById(R.id.mandalSpn);
         districtSpn = (AutoCompleteTextView) findViewById(R.id.districtSpn);
         stateSpn = (AutoCompleteTextView) findViewById(R.id.stateSpn);
         btn_submit = (Button) findViewById(R.id.submit);
+        mandalTIl=(NCBTextInputLayout) findViewById(R.id.mandalTIl);
 
         stateSpn.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -325,7 +334,348 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
 
 
     private void initViews() {
+        firstNameEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    firstNameTIl.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        middleNameEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    middleNameTIL.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        lastNameEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    lastNameTIL.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+        mobileEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    mobileTIL.setErrorEnabled(false);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        emailEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    emailTIL.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        stateSpn.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0)
+                    stateTIl.setErrorEnabled(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        districtSpn.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    districtTIl.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        mandalSpn.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    mandalTIl.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+        villageSpn.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                  villageTIl.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        address1Edt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                  address1TIL.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        address2Edt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                   address2TIL.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        landmarkEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    landmarkTIL.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        commentsEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    commentTIL.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (validateUi())
+                {
+
+                }
+            }
+        });
+    }
+
+    private boolean validateUi()
+    {
+
+        firstNameStr=firstNameEdt.getText().toString().trim();
+        middleNameStr= middleNameEdt.getText().toString().trim();
+        lastNameStr= lastNameEdt.getText().toString().trim();
+        mobileStr=mobileEdt.getText().toString().trim();
+        emailStr=emailEdt.getText().toString().trim();
+        stateStr=stateSpn.getText().toString().trim();
+        districtStr=districtSpn.getText().toString().trim();
+        mandalStr=mandalSpn.getText().toString().trim();
+        villageStr=villageSpn.getText().toString().trim();
+        address1Str=address1Edt.getText().toString().trim();
+        address2Str=address2Edt.getText().toString().trim();
+        landmarkStr=landmarkEdt.getText().toString().trim();
+        commentsStr=commentsEdt.getText().toString().trim();
+        if (TextUtils.isEmpty(firstNameStr)) {
+            firstNameTIl.setError("enter first name");
+            firstNameTIl.setErrorEnabled(true);
+            return false;
+        }
+        else if (TextUtils.isEmpty(middleNameStr)){
+            middleNameTIL.setError("enter middle name");
+            middleNameTIL.setErrorEnabled(true);
+            return false;
+        }
+        else if (TextUtils.isEmpty(lastNameStr)){
+            lastNameTIL.setError("enter last name");
+            lastNameTIL.setErrorEnabled(true);
+            return false;
+        }
+        else if (TextUtils.isEmpty(mobileStr))
+        {
+            mobileTIL.setErrorEnabled(true);
+            mobileTIL.setError("enter mobile no");
+            return false;
+        }
+        else if (TextUtils.isEmpty(emailStr))
+        {
+            emailTIL.setError("enter email id");
+            emailTIL.setErrorEnabled(true);
+            return false;
+        }
+        else if (TextUtils.isEmpty(stateStr))
+        {
+            stateTIl.setErrorEnabled(true);
+            stateTIl.setError("enter state name");
+            return false;
+        }
+        else  if (TextUtils.isEmpty(districtStr))
+        {
+            districtTIl.setErrorEnabled(true);
+            districtTIl.setError("enter district name");
+            return false;
+        }
+        else  if (TextUtils.isEmpty(mandalStr))
+        {
+            mandalTIl.setError("enter mandal name");
+            mandalTIl.setErrorEnabled(true);
+            return  false;
+        }
+        else if (TextUtils.isEmpty(villageStr))
+        {
+            villageTIl.setErrorEnabled(true);
+            villageTIl.setError("enter village name");
+        }
+        else if (TextUtils.isEmpty(address1Str))
+        {
+            address1TIL.setError("enter address1 ");
+            address1TIL.setErrorEnabled(true);
+            return false;
+        }
+        else if (TextUtils.isEmpty(address2Str))
+        {
+            address2TIL.setError("enter address2 ");
+            address2TIL.setErrorEnabled(true);
+            return false;
+        }
+        else if (TextUtils.isEmpty(landmarkStr))
+        {
+            landmarkTIL.setErrorEnabled(true);
+            landmarkTIL.setError("enter landmark");
+            return false;
+        }
+        else if (TextUtils.isEmpty(commentsStr))
+        {
+            commentTIL.setErrorEnabled(true);
+            commentTIL.setError("enter comments");
+            return false;
+        }
+        return true;
     }
 
 
