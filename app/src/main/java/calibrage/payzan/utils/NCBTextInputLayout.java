@@ -70,7 +70,7 @@ public class NCBTextInputLayout extends TextInputLayout {
             getEditText().getBackground().setColorFilter(colorFilter);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    getEditText().setBackground(getResources().getDrawable(R.drawable.border_accentcolor_button, null));
+                    getEditText().setBackground(getResources().getDrawable(R.drawable.border_error, null));
                 }
             }
         }else if(getEditText() != null && getEditText().getBackground() != null&& state==1){

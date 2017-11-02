@@ -13,5 +13,7 @@ public interface ApiConstants {
     String VILLAGE ="api/Villages/GetVillages/";
     String WALLET ="api/UserWallet/AddMoneyToUserWallet";
     String MOBILE_SERVICES = "api/ServiceProvider/GetServiceProvidersByServiceType/";
+    String AGENT_REQUEST = "api/AgentRequestInfo/AddUpdateAgentRequestInfo";
+    String SEND_MONEY_WALLET = "api/UserWallet/SendMoneyToUserWallet";
   //  String LOGIN = "API
 }

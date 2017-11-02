@@ -21,11 +21,17 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import calibrage.payzan.R;
+import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.activities.RequestForAgent;
 import calibrage.payzan.activities.SendMoney;
 import calibrage.payzan.adapters.BannerAdapter;
 import calibrage.payzan.adapters.RechargeAdapter;
 import calibrage.payzan.adapters.WalletAdapter;
+import calibrage.payzan.controls.BaseFragment;
+import calibrage.payzan.interfaces.CommunicateFragments;
+import calibrage.payzan.interfaces.OnChildFragmentInteractionListener;
+import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
+import calibrage.payzan.interfaces.OnFragmentInteractionListener;
 import calibrage.payzan.interfaces.RechargeClickListiner;
 import calibrage.payzan.interfaces.TransctionClickListiner;
 import calibrage.payzan.utils.CommonConstants;
@@ -36,18 +42,22 @@ import calibrage.payzan.utils.CommonUtil;
  * Created by Calibrage11 on 9/23/2017.
  */
 
-public class HomeFragment extends Fragment implements RechargeClickListiner,TransctionClickListiner{
+public class HomeFragment extends BaseFragment implements RechargeClickListiner,TransctionClickListiner,CommunicateFragments {
+    public static final String TAG = HomeFragment.class.getSimpleName();
     private View  view;
     private RecyclerView recharge_recylerview,recylerviewbanner,recylerviewbook,recylerviewpay;
     private ArrayList<Pair<Integer,String>> rechargePairList = new ArrayList<>();
     private ArrayList<Pair<Integer,String>> payPairList = new ArrayList<>();
     private Context context;
     public static TextView AgentRequestTxt,walletTxt;
+   // private CommunicateFragments communicateFragments;
+    private OnChildFragmentToActivityInteractionListener mListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        // setHasOptionsMenu(true);
+        CommonUtil.adjustSoftKeyboard(getActivity().getWindow());
     }
 
     @Nullable
@@ -75,7 +85,7 @@ public class HomeFragment extends Fragment implements RechargeClickListiner,Tran
         rechargePairList.add(Pair.create(R.drawable.ic_mobile, "Mobile"));
         rechargePairList.add(Pair.create(R.drawable.ic_landline, "Landline"));
         rechargePairList.add(Pair.create(R.drawable.ic_dth, "DTH"));
-        rechargePairList.add(Pair.create(R.drawable.ic_internet, "Internet"));
+        rechargePairList.add(Pair.create(R.drawable.ic_internet, "Broadband"));
         rechargePairList.add(Pair.create(R.drawable.ic_television, "Cable TV"));
         rechargePairList.add(Pair.create(R.drawable.ic_electricity, "Electricity"));
         rechargePairList.add(Pair.create(R.drawable.ic_water_tap, "Water"));
@@ -123,51 +133,72 @@ public class HomeFragment extends Fragment implements RechargeClickListiner,Tran
     public void onAdapterClickListiner(int pos) {
         switch (pos){
             case 0:{
-
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                /*final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.add(R.id.content_frame, new MobileRecharge(), "mobileTag");
                 //ft.addToBackStack("mobileTag");
-                ft.commit();
+                ft.commit();*/
+               /* addFragment(getActivity(), MAIN_CONTAINER, new MobileRecharge(), TAG, MobileRecharge.TAG);
+*/
+
+                replaceFragment(getActivity(), MAIN_CONTAINER, new MobileRecharge(), TAG, TestFragment.TAG);
+
                 break;
             }case 1:{
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                /*final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.add(R.id.content_frame, new PayLandLineBill(), "landlineTag");
                 //ft.addToBackStack("mobileTag");
-                ft.commit();
+                ft.commit();*/
+
+                replaceFragment(getActivity(), MAIN_CONTAINER, new PayLandLineBill(), TAG, PayLandLineBill.TAG);
                 break;
             }case 2:{
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                /*final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.add(R.id.content_frame, new PayDTHFragment(), "dthTag");
                 //ft.addToBackStack("mobileTag");
-                ft.commit();
+                ft.commit();*/
+
+                replaceFragment(getActivity(), MAIN_CONTAINER, new PayDTHFragment(), TAG, PayDTHFragment.TAG);
                 break;
             }case 3:{
-               // startActivity(new Intent(context, PayLandLineBill.class));
+              /* // startActivity(new Intent(context, PayLandLineBill.class));broadbandTag
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.add(R.id.content_frame, new BroadbandFragment(), "broadbandTag");
+                //ft.addToBackStack("mobileTag");
+                ft.commit();*/
+
+                replaceFragment(getActivity(), MAIN_CONTAINER, new BroadbandFragment(), TAG, BroadbandFragment.TAG);
                 break;
             }case 4:{
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+              /*  final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.add(R.id.content_frame, new PayCableFragment(), "cableTag");
                 //ft.addToBackStack("mobileTag");
-                ft.commit();
+                ft.commit();*/
+
+                replaceFragment(getActivity(), MAIN_CONTAINER, new PayCableFragment(), TAG, PayCableFragment.TAG);
 
                 break;
             }case 5:{
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                /*final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.add(R.id.content_frame, new PayElectrictyFragment(), "elctricityTag");
                 //ft.addToBackStack("mobileTag");
-                ft.commit();
+                ft.commit();*/
+
+                replaceFragment(getActivity(), MAIN_CONTAINER, new PayElectrictyFragment(), TAG, PayElectrictyFragment.TAG);
                 break;
             }case 6:{
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+               /* final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.add(R.id.content_frame, new PayWaterFragment(), "waterTag");
                 //ft.addToBackStack("mobileTag");
-                ft.commit();
+                ft.commit();*/
+
+                replaceFragment(getActivity(), MAIN_CONTAINER, new PayWaterFragment(), TAG, PayWaterFragment.TAG);
                 break;
             }case 7:{
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+               /* final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.add(R.id.content_frame, new DataCardFragment(), "datacardTag");
                 //ft.addToBackStack("mobileTag");
-                ft.commit();
+                ft.commit();*/
+                replaceFragment(getActivity(), MAIN_CONTAINER, new DataCardFragment(), TAG, DataCardFragment.TAG);
                 break;
             }
             default:
@@ -247,12 +278,15 @@ public class HomeFragment extends Fragment implements RechargeClickListiner,Tran
     public void onResume() {
         super.onResume();
         walletTxt.setText(CommonConstants.WALLETMONEY);
+
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
         walletTxt.setText(CommonConstants.WALLETMONEY);
+
     }
 
     @Override
@@ -261,14 +295,14 @@ public class HomeFragment extends Fragment implements RechargeClickListiner,Tran
         Bundle bundle = new Bundle();
         bundle.putInt("position", pos);
         transactionMainFragment.setArguments(bundle);
+      //  transactionMainFragment.setFragmentCommunication(HomeFragment.this);
 
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.add(R.id.content_frame, transactionMainFragment, "walletTag");
+        mListener.messageFromChildFragmentToActivity("moveTowallet");
         //ft.addToBackStack("mobileTag");
         ft.commit();
         if(pos==0){
-
-
 
         }else if(pos==1){
 
@@ -277,6 +311,40 @@ public class HomeFragment extends Fragment implements RechargeClickListiner,Tran
         }
 
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnChildFragmentToActivityInteractionListener) {
+            mListener = (OnChildFragmentToActivityInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+
+//    public void setFragmentCommunication(CommunicateFragments  fragmentCommunication){
+//        this.communicateFragments = fragmentCommunication;
+//    }
+
+    @Override
+    public void onFragmentInteraction(String id) {
+        //  communicateFragments.onFragmentInteraction(id);
+    }
+
+//    @Override
+//    public void messageFromChildToParent(String myString) {
+//
+//    }
+
+
 
     public static class SpacesItemDecoration extends RecyclerView.ItemDecoration {
         private int space;

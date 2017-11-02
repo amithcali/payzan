@@ -1,6 +1,356 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/lyt_margin_left"
+    android:layout_marginRight="@dimen/lyt_margin_right"
+    android:orientation="vertical">
 
-</android.support.design.widget.CoordinatorLayout>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/img_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/user" />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <calibrage.payzan.controls.CommonTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/txt_height"
+                    android:gravity="bottom"
+                    android:text="User Name"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/txt_FontSize" />
+
+                <calibrage.payzan.controls.CommonTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/txt_height"
+                    android:gravity="center_vertical"
+                    android:text="useremail@gmail.com" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/lyt_margin">
+
+                    <calibrage.payzan.controls.CommonTextView
+                        android:layout_width="1dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_marginRight="15dp"
+                        android:layout_weight="0.5"
+                        android:background="@color/green"
+                        android:gravity="center"
+                        android:text="10"
+                        android:textColor="@color/White" />
+
+                    <calibrage.payzan.controls.CommonButton
+                        android:layout_width="1dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_weight="1"
+                        android:background="@color/Maroon"
+                        android:text="+ Add Money"
+                        android:textAllCaps="false"
+                        android:textColor="@color/White" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+
+                android:layout_width="0dp"
+                android:layout_height="@dimen/img_height"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/lyt_margin_bottom"
+                android:layout_marginTop="1dp"
+                android:layout_weight="0.5"
+                android:src="@drawable/edit" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lyt_margin_left"
+                android:layout_marginRight="@dimen/lyt_margin_right"
+                android:orientation="vertical">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_saved_cards" />
+
+                    <calibrage.payzan.controls.CommonTextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
+                        android:text="Saved Cards" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@color/cardview_dark_background" />
+
+                </LinearLayout>
+
+                <view
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"></view>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lyt_margin_left"
+                android:layout_marginRight="@dimen/lyt_margin_right"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_order_history" />
+
+                    <calibrage.payzan.controls.CommonTextView
+                        android:id="@+id/commonTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
+                        android:text="Order History" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@color/cardview_dark_background" />
+
+                </LinearLayout>
+
+                <view
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"></view>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lyt_margin_left"
+                android:layout_marginRight="@dimen/lyt_margin_right"
+                android:orientation="vertical">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_change_password" />
+
+                    <calibrage.payzan.controls.CommonTextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
+                        android:text="Change password" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@color/cardview_dark_background" />
+
+                </LinearLayout>
+
+                <view
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"></view>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lyt_margin_left"
+                android:layout_marginRight="@dimen/lyt_margin_right"
+                android:orientation="vertical">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_about_us" />
+
+                    <calibrage.payzan.controls.CommonTextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
+                        android:text="About Us" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@color/cardview_dark_background" />
+
+                </LinearLayout>
+
+                <view
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"></view>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lyt_margin_left"
+                android:layout_marginRight="@dimen/lyt_margin_right"
+                android:orientation="vertical">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_about_us" />
+
+                    <calibrage.payzan.controls.CommonTextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
+                        android:text="Support" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@color/cardview_dark_background" />
+
+                </LinearLayout>
+
+                <view
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"></view>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lyt_margin_left"
+                android:layout_marginRight="@dimen/lyt_margin_right"
+                android:orientation="vertical">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_about_us" />
+
+                    <calibrage.payzan.controls.CommonTextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
+                        android:text="Terms Of Services" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/txt_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@color/cardview_dark_background" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

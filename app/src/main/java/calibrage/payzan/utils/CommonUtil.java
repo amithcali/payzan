@@ -23,6 +23,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -183,6 +185,11 @@ public class CommonUtil {
         }
     }
 
+    public static void adjustSoftKeyboard(Window window){
+        window.setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+    }
+
     public static LinkedHashMap<String, Object> toMap(JSONObject object) throws JSONException {
         LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
 
@@ -335,6 +342,7 @@ public class CommonUtil {
             if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
                 return true;
             } else {
+                Toast.makeText(ctx, "internet not available", Toast.LENGTH_SHORT).show();
                 return false;
             }
         } catch (Exception e) {

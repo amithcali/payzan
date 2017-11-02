@@ -21,19 +21,26 @@ import java.util.List;
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.activities.MyorderActivity;
+import calibrage.payzan.controls.BaseFragment;
+import calibrage.payzan.interfaces.CommunicateFragments;
+import calibrage.payzan.interfaces.OnChildFragmentInteractionListener;
+import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
 
 /**
  * Created by Calibrage11 on 10/20/2017.
  */
 
-public class TransactionMainFragment extends Fragment {
-
+public class TransactionMainFragment extends BaseFragment {
+    public static final String TAG = TransactionMainFragment.class.getSimpleName();
     private TabLayout tabs;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
     private Context context;
     private View rootview;
     private int currentItem;
+  //  private CommunicateFragments  communicateFragments;
+    private OnChildFragmentToActivityInteractionListener mActivityListener;
+    private OnChildFragmentInteractionListener mParentListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -137,14 +144,46 @@ public class TransactionMainFragment extends Fragment {
 
     }
 
-    private void closeTab(){
-        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("walletTag");
+//    public void setFragmentCommunication(CommunicateFragments  fragmentCommunication){
+//        this.communicateFragments = fragmentCommunication;
+//    }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // check if Activity implements listener
+        if (context instanceof OnChildFragmentToActivityInteractionListener) {
+            mActivityListener = (OnChildFragmentToActivityInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnChildFragmentToActivityInteractionListener");
+        }
+
+        // check if parent Fragment implements listener
+//        if (getActivity().getSupportFragmentManager().findFragmentByTag("walletTag") instanceof OnChildFragmentInteractionListener) {
+//
+//            mParentListener = (OnChildFragmentInteractionListener) getParentFragment();
+//        } else {
+//            throw new RuntimeException("The parent fragment must implement OnChildFragmentInteractionListener");
+//        }
+    }
+
+    private void closeTab(){
+
+
+        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("walletTag");
+       // communicateFragments.onFragmentInteraction("");
+
+        mActivityListener.messageFromChildFragmentToActivity("handleBottomNavigation");
 
         if (fragment != null)
+        {
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+            HomeActivity.toolbar.setNavigationIcon(null);
+            HomeActivity.toolbar.setTitle("");
 
-        HomeActivity.toolbar.setNavigationIcon(null);
-        HomeActivity.toolbar.setTitle("");
+        }
+
     }
 }

@@ -8,7 +8,14 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/recylerview">
+          android:id="@+id/recylerview_transaction"
+            android:layout_marginBottom="4dp">
+        </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recylerview"
+            android:layout_below="@+id/recylerview_transaction">
         </android.support.v7.widget.RecyclerView>
 
 

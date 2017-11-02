@@ -12,103 +12,182 @@ import java.util.List;
 
 
 
-    public class VillageModel {
+public class VillageModel {
 
-        @SerializedName("StatusCode")
+    @SerializedName("ListResult")
+    @Expose
+    private List<Data> listResult = null;
+    @SerializedName("IsSuccess")
+    @Expose
+    private Boolean isSuccess;
+    @SerializedName("AffectedRecords")
+    @Expose
+    private Integer affectedRecords;
+    @SerializedName("EndUserMessage")
+    @Expose
+    private String endUserMessage;
+    @SerializedName("ValidationErrors")
+    @Expose
+    private List<Object> validationErrors = null;
+    @SerializedName("Exception")
+    @Expose
+    private Object exception;
+
+    public List<Data> getListResult() {
+        return listResult;
+    }
+
+    public void setListResult(List<Data> listResult) {
+        this.listResult = listResult;
+    }
+
+    public Boolean getIsSuccess() {
+        return isSuccess;
+    }
+
+    public void setIsSuccess(Boolean isSuccess) {
+        this.isSuccess = isSuccess;
+    }
+
+    public Integer getAffectedRecords() {
+        return affectedRecords;
+    }
+
+    public void setAffectedRecords(Integer affectedRecords) {
+        this.affectedRecords = affectedRecords;
+    }
+
+    public String getEndUserMessage() {
+        return endUserMessage;
+    }
+
+    public void setEndUserMessage(String endUserMessage) {
+        this.endUserMessage = endUserMessage;
+    }
+
+    public List<Object> getValidationErrors() {
+        return validationErrors;
+    }
+
+    public void setValidationErrors(List<Object> validationErrors) {
+        this.validationErrors = validationErrors;
+    }
+
+    public Object getException() {
+        return exception;
+    }
+
+    public void setException(Object exception) {
+        this.exception = exception;
+    }
+    public class Data {
+
+        @SerializedName("CountryName")
         @Expose
-        private Integer statusCode;
-        @SerializedName("StatusMessage")
+        private String countryName;
+        @SerializedName("CountryId")
         @Expose
-        private String statusMessage;
-        @SerializedName("data")
+        private Integer countryId;
+        @SerializedName("StateName")
         @Expose
-        private List<Datum> data = null;
-
-        public Integer getStatusCode() {
-            return statusCode;
-        }
-
-        public void setStatusCode(Integer statusCode) {
-            this.statusCode = statusCode;
-        }
-
-        public String getStatusMessage() {
-            return statusMessage;
-        }
-
-        public void setStatusMessage(String statusMessage) {
-            this.statusMessage = statusMessage;
-        }
-
-        public List<Datum> getData() {
-            return data;
-        }
-
-        public void setData(List<Datum> data) {
-            this.data = data;
-        }
-
-
-    public class Datum {
-
-        @SerializedName("Id")
+        private String stateName;
+        @SerializedName("StateId")
         @Expose
-        private Integer id;
+        private Integer stateId;
+        @SerializedName("DistrictName")
+        @Expose
+        private String districtName;
+        @SerializedName("DistrictId")
+        @Expose
+        private Integer districtId;
+        @SerializedName("MandalName")
+        @Expose
+        private String mandalName;
         @SerializedName("Code")
         @Expose
         private String code;
         @SerializedName("Name")
         @Expose
         private String name;
-        @SerializedName("PostCode")
-        @Expose
-        private Integer postCode;
         @SerializedName("MandalId")
         @Expose
         private Integer mandalId;
-        @SerializedName("MandalName")
+        @SerializedName("PostCode")
         @Expose
-        private String mandalName;
-        @SerializedName("DistrictId")
+        private Integer postCode;
+        @SerializedName("Id")
         @Expose
-        private Integer districtId;
-        @SerializedName("DistrictName")
-        @Expose
-        private String districtName;
-        @SerializedName("StateId")
-        @Expose
-        private Integer stateId;
-        @SerializedName("StateName")
-        @Expose
-        private String stateName;
-        @SerializedName("CountryId")
-        @Expose
-        private Integer countryId;
-        @SerializedName("CountryName")
-        @Expose
-        private String countryName;
+        private Integer id;
         @SerializedName("IsActive")
         @Expose
         private Boolean isActive;
-        @SerializedName("CreatedByUserId")
+        @SerializedName("CreatedBy")
         @Expose
-        private String createdByUserId;
-        @SerializedName("CreatedDate")
+        private String createdBy;
+        @SerializedName("ModifiedBy")
         @Expose
-        private String createdDate;
-        @SerializedName("UpdatedByUserId")
+        private String modifiedBy;
+        @SerializedName("Created")
         @Expose
-        private String updatedByUserId;
-        @SerializedName("UpdatedDate")
+        private String created;
+        @SerializedName("Modified")
         @Expose
-        private String updatedDate;
+        private String modified;
 
-        public Integer getId() {
-            return id;
+        public String getCountryName() {
+            return countryName;
         }
 
-        public void setId(Integer id) {
-            this.id = id;
+        public void setCountryName(String countryName) {
+            this.countryName = countryName;
+        }
+
+        public Integer getCountryId() {
+            return countryId;
+        }
+
+        public void setCountryId(Integer countryId) {
+            this.countryId = countryId;
+        }
+
+        public String getStateName() {
+            return stateName;
+        }
+
+        public void setStateName(String stateName) {
+            this.stateName = stateName;
+        }
+
+        public Integer getStateId() {
+            return stateId;
+        }
+
+        public void setStateId(Integer stateId) {
+            this.stateId = stateId;
+        }
+
+        public String getDistrictName() {
+            return districtName;
+        }
+
+        public void setDistrictName(String districtName) {
+            this.districtName = districtName;
+        }
+
+        public Integer getDistrictId() {
+            return districtId;
+        }
+
+        public void setDistrictId(Integer districtId) {
+            this.districtId = districtId;
+        }
+
+        public String getMandalName() {
+            return mandalName;
+        }
+
+        public void setMandalName(String mandalName) {
+            this.mandalName = mandalName;
         }
 
         public String getCode() {
@@ -127,14 +206,6 @@ import java.util.List;
             this.name = name;
         }
 
-        public Integer getPostCode() {
-            return postCode;
-        }
-
-        public void setPostCode(Integer postCode) {
-            this.postCode = postCode;
-        }
-
         public Integer getMandalId() {
             return mandalId;
         }
@@ -143,60 +214,20 @@ import java.util.List;
             this.mandalId = mandalId;
         }
 
-        public String getMandalName() {
-            return mandalName;
+        public Integer getPostCode() {
+            return postCode;
         }
 
-        public void setMandalName(String mandalName) {
-            this.mandalName = mandalName;
+        public void setPostCode(Integer postCode) {
+            this.postCode = postCode;
         }
 
-        public Integer getDistrictId() {
-            return districtId;
+        public Integer getId() {
+            return id;
         }
 
-        public void setDistrictId(Integer districtId) {
-            this.districtId = districtId;
-        }
-
-        public String getDistrictName() {
-            return districtName;
-        }
-
-        public void setDistrictName(String districtName) {
-            this.districtName = districtName;
-        }
-
-        public Integer getStateId() {
-            return stateId;
-        }
-
-        public void setStateId(Integer stateId) {
-            this.stateId = stateId;
-        }
-
-        public String getStateName() {
-            return stateName;
-        }
-
-        public void setStateName(String stateName) {
-            this.stateName = stateName;
-        }
-
-        public Integer getCountryId() {
-            return countryId;
-        }
-
-        public void setCountryId(Integer countryId) {
-            this.countryId = countryId;
-        }
-
-        public String getCountryName() {
-            return countryName;
-        }
-
-        public void setCountryName(String countryName) {
-            this.countryName = countryName;
+        public void setId(Integer id) {
+            this.id = id;
         }
 
         public Boolean getIsActive() {
@@ -207,39 +238,37 @@ import java.util.List;
             this.isActive = isActive;
         }
 
-        public String getCreatedByUserId() {
-            return createdByUserId;
+        public String getCreatedBy() {
+            return createdBy;
         }
 
-        public void setCreatedByUserId(String createdByUserId) {
-            this.createdByUserId = createdByUserId;
+        public void setCreatedBy(String createdBy) {
+            this.createdBy = createdBy;
         }
 
-        public String getCreatedDate() {
-            return createdDate;
+        public String getModifiedBy() {
+            return modifiedBy;
         }
 
-        public void setCreatedDate(String createdDate) {
-            this.createdDate = createdDate;
+        public void setModifiedBy(String modifiedBy) {
+            this.modifiedBy = modifiedBy;
         }
 
-        public String getUpdatedByUserId() {
-            return updatedByUserId;
+        public String getCreated() {
+            return created;
         }
 
-        public void setUpdatedByUserId(String updatedByUserId) {
-            this.updatedByUserId = updatedByUserId;
+        public void setCreated(String created) {
+            this.created = created;
         }
 
-        public String getUpdatedDate() {
-            return updatedDate;
+        public String getModified() {
+            return modified;
         }
 
-        public void setUpdatedDate(String updatedDate) {
-            this.updatedDate = updatedDate;
+        public void setModified(String modified) {
+            this.modified = modified;
         }
 
     }
-
-    }
-
+}

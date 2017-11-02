@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/operatorTXT">
 
-                <calibrage.payzan.controls.CommonEditText
+                <AutoCompleteTextView
                     android:id="@+id/operatorEdt"
                     style="@style/EditTextStyle"
                     android:hint="@string/operator" />

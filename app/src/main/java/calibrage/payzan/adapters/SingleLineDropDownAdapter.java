@@ -17,6 +17,8 @@ import java.util.List;
 
 
 import calibrage.payzan.R;
+import calibrage.payzan.activities.RequestForAgent;
+import calibrage.payzan.model.DistrictModel;
 import calibrage.payzan.model.StatesModel;
 
 /**
@@ -39,6 +41,8 @@ public class SingleLineDropDownAdapter extends ArrayAdapter<StatesModel.Data> {
         this.data = (ArrayList<StatesModel.Data>) data;
     }
 
+
+
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -56,6 +60,7 @@ public class SingleLineDropDownAdapter extends ArrayAdapter<StatesModel.Data> {
                     adapterOnClick.adapterOnClick(position);
                 }
             });
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,7 +69,7 @@ public class SingleLineDropDownAdapter extends ArrayAdapter<StatesModel.Data> {
 
     @Override
     public int getCount() {
-        return data.size();
+     return data.size();
     }
 
     @Nullable

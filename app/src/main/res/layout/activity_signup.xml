@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:fitsSystemWindows="false"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
     <!--  Header  Starts-->
     <LinearLayout
         android:visibility="gone"
@@ -52,7 +58,8 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/sixty"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical"
+        android:visibility="gone"></LinearLayout>
     <!-- Footer Ends -->
     <ImageView
         android:layout_marginTop="@dimen/btn_margin_top"
@@ -68,13 +75,14 @@
         android:src="@mipmap/home_logo" />
     <!-- Registration Form -->
     <LinearLayout
-android:layout_marginTop="@dimen/lyt_margin_top"
+        android:layout_marginTop="@dimen/lyt_margin_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/img_headerimg"
         android:layout_marginLeft="@dimen/fifteen"
         android:layout_marginRight="@dimen/fifteen"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/bottom_nav_height">
         <!-- Full Name Label -->
 
 
@@ -82,8 +90,8 @@ android:layout_marginTop="@dimen/lyt_margin_top"
             android:id="@+id/reg_mobile_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            app:hintEnabled="false">
+            app:errorEnabled="false"
+            app:hintEnabled="true">
 
             <calibrage.payzan.controls.CommonEditText
                 android:id="@+id/reg_mobile"
@@ -100,8 +108,8 @@ android:layout_marginTop="@dimen/lyt_margin_top"
         <calibrage.payzan.utils.NCBTextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            app:hintEnabled="false">
+            app:errorEnabled="false"
+            app:hintEnabled="true">
 
             <calibrage.payzan.controls.CommonEditText
                 android:id="@+id/reg_email"
@@ -115,11 +123,11 @@ android:layout_marginTop="@dimen/lyt_margin_top"
                 android:textSize="@dimen/edt_FontSize" />
         </calibrage.payzan.utils.NCBTextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <calibrage.payzan.utils.NCBTextInputLayout
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:hintEnabled="false"
+            app:hintEnabled="true"
             app:passwordToggleEnabled="true">
 
             <calibrage.payzan.controls.CommonEditText
@@ -133,7 +141,28 @@ android:layout_marginTop="@dimen/lyt_margin_top"
                 android:inputType="textPassword"
                 android:paddingLeft="@dimen/edt_text_pading_left"
                 android:textSize="@dimen/edt_FontSize" />
-        </android.support.design.widget.TextInputLayout>
+        </calibrage.payzan.utils.NCBTextInputLayout>
+
+
+        <calibrage.payzan.utils.NCBTextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:hintEnabled="true"
+            app:passwordToggleEnabled="true">
+
+            <calibrage.payzan.controls.CommonEditText
+                android:id="@+id/reg_confirm_password"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/edt_height"
+                android:layout_marginBottom="@dimen/edt_bottom_margin"
+                android:background="@drawable/roundededittext"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/edt_text_pading_left"
+                android:textSize="@dimen/edt_FontSize"
+                app:passwordToggleEnabled="true"/>
+        </calibrage.payzan.utils.NCBTextInputLayout>
 
 
         <calibrage.payzan.controls.CommonTextView
@@ -143,7 +172,9 @@ android:layout_marginTop="@dimen/lyt_margin_top"
             android:layout_marginBottom="@dimen/txt_margin"
             android:gravity="center"
             android:textColor="#263631"
-            android:textSize="@dimen/txt_FontSize" />
+            android:text=""
+            android:textSize="@dimen/tenSP"
+            android:visibility="visible"/>
 
         <calibrage.payzan.controls.CommonButton
             android:id="@+id/btnRegister"
@@ -159,7 +190,7 @@ android:layout_marginTop="@dimen/lyt_margin_top"
             android:id="@+id/linkToLogin"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/twentyDP"
-            android:layout_marginTop="@dimen/txt_margin"
+            android:layout_marginTop="4dp"
             android:gravity="center"
             android:textColor="#263631"
             android:textSize="@dimen/txt_FontSize" />
@@ -210,4 +241,4 @@ android:layout_marginTop="@dimen/lyt_margin_top"
     <!-- Registration Form Ends -->
 </RelativeLayout>
 
-
+</android.support.v4.widget.NestedScrollView>

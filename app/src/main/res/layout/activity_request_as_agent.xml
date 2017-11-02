@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/lyt_margin">
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,17 +15,84 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
+        <calibrage.payzan.utils.NCBTextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/firstNameTIl">
+            <calibrage.payzan.controls.CommonEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/EditTextStyle"
+                android:hint="First Name"
+                android:inputType="textPersonName"
+                android:id="@+id/firstNameEdt"/>
+
+        </calibrage.payzan.utils.NCBTextInputLayout>
+        <calibrage.payzan.utils.NCBTextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/middleNameTIL">
+            <calibrage.payzan.controls.CommonEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/EditTextStyle"
+                android:inputType="textPersonName"
+                android:hint="Middle Name"
+                android:id="@+id/middleNameEdt"/>
+
+        </calibrage.payzan.utils.NCBTextInputLayout>
+        <calibrage.payzan.utils.NCBTextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lastNameTIL">
+            <calibrage.payzan.controls.CommonEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/EditTextStyle"
+                android:hint="Last Name"
+                android:inputType="textPersonName"
+                android:id="@+id/lastNameEdt"/>
+
+        </calibrage.payzan.utils.NCBTextInputLayout>
+        <calibrage.payzan.utils.NCBTextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mobileTIL">
+            <calibrage.payzan.controls.CommonEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/EditTextStyle"
+                android:hint="Mobile No."
+                android:inputType="phone"
+                android:id="@+id/mobileEdt"/>
+
+        </calibrage.payzan.utils.NCBTextInputLayout>
+        <calibrage.payzan.utils.NCBTextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/emailTIL">
+            <calibrage.payzan.controls.CommonEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/EditTextStyle"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:id="@+id/emailEdt"/>
+
+        </calibrage.payzan.utils.NCBTextInputLayout>
+
         <calibrage.payzan.utils.NCBTextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/stateTIl"
-            android:visibility="gone"
+            android:visibility="visible"
             >
         <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/EditTextStyle"
-            android:hint="Select State"
+            android:hint="Select Province"
             android:id="@+id/stateSpn"/>
 
         </calibrage.payzan.utils.NCBTextInputLayout>
@@ -68,71 +136,8 @@
             android:id="@+id/villageSpn"/>
 
     </calibrage.payzan.utils.NCBTextInputLayout>
-        <calibrage.payzan.utils.NCBTextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-            android:id="@+id/firstNameTIl">
-        <calibrage.payzan.controls.CommonEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/EditTextStyle"
-            android:hint="First Name"
-            android:inputType="textPersonName"
-            android:id="@+id/firstNameEdt"/>
 
-    </calibrage.payzan.utils.NCBTextInputLayout>
-        <calibrage.payzan.utils.NCBTextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-            android:id="@+id/middleNameTIL">
-        <calibrage.payzan.controls.CommonEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/EditTextStyle"
-            android:inputType="textPersonName"
-            android:hint="Middle Name"
-            android:id="@+id/middleNameEdt"/>
 
-    </calibrage.payzan.utils.NCBTextInputLayout>
-        <calibrage.payzan.utils.NCBTextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-            android:id="@+id/lastNameTIL">
-        <calibrage.payzan.controls.CommonEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/EditTextStyle"
-            android:hint="Last Name"
-            android:inputType="textPersonName"
-            android:id="@+id/lastNameEdt"/>
-
-    </calibrage.payzan.utils.NCBTextInputLayout>
-        <calibrage.payzan.utils.NCBTextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-            android:id="@+id/mobileTIL">
-        <calibrage.payzan.controls.CommonEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/EditTextStyle"
-            android:hint="Mobile No."
-            android:inputType="phone"
-            android:id="@+id/mobileEdt"/>
-
-    </calibrage.payzan.utils.NCBTextInputLayout>
-        <calibrage.payzan.utils.NCBTextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-            android:id="@+id/emailTIL">
-        <calibrage.payzan.controls.CommonEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/EditTextStyle"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:id="@+id/emailEdt"/>
-
-    </calibrage.payzan.utils.NCBTextInputLayout>
         <calibrage.payzan.utils.NCBTextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

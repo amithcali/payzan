@@ -17,36 +17,59 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
+import calibrage.payzan.adapters.GenericAdapter;
+import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.controls.CommonEditText;
 import calibrage.payzan.interfaces.DrawableClickListener;
+import calibrage.payzan.model.OperatorModel;
+import calibrage.payzan.networkservice.ApiConstants;
+import calibrage.payzan.networkservice.MyServices;
+import calibrage.payzan.networkservice.ServiceFactory;
+import calibrage.payzan.utils.CommonConstants;
+import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.NCBTextInputLayout;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Calibrage11 on 9/28/2017.
  */
 
-public class PayLandLineBill extends Fragment {
-
+public class PayLandLineBill extends BaseFragment implements GenericAdapter.AdapterOnClick {
+    public static final String TAG = PayLandLineBill.class.getSimpleName();
     private View rootView;
     private Context context;
-    private NCBTextInputLayout operatorTXT,numberTXT,circleTXT,amountTXT;
-    private calibrage.payzan.controls.CommonEditText  operatorEdt,mobilenoEdt,amount;
-    private AutoCompleteTextView circleEdt;
+    private NCBTextInputLayout operatorTXT, numberTXT, circleTXT, amountTXT;
+    private calibrage.payzan.controls.CommonEditText mobilenoEdt, amount;
+    private AutoCompleteTextView circleEdt, operatorEdt;
     static final int PICK_CONTACT = 1;
+    private Subscription operatorSubscription;
+    private ArrayList<OperatorModel.ListResult> listResults;
+    private Button submit;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-    ;}
-
+        CommonUtil.adjustSoftKeyboard(getActivity().getWindow());
+        ;
+    }
 
 
     @Nullable
@@ -56,8 +79,10 @@ public class PayLandLineBill extends Fragment {
         context = this.getActivity();
         setViews();
         initViews();
-        return  rootView;
+        getOperator(CommonConstants.SERVICE_PROVIDER_ID_LANDLINE);
+        return rootView;
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -77,6 +102,13 @@ public class PayLandLineBill extends Fragment {
     }
 
     private void initViews() {
+        operatorEdt.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                operatorEdt.showDropDown();
+                return false;
+            }
+        });
         operatorEdt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -92,7 +124,8 @@ public class PayLandLineBill extends Fragment {
             public void afterTextChanged(Editable editable) {
 
             }
-        });mobilenoEdt.addTextChangedListener(new TextWatcher() {
+        });
+        mobilenoEdt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -100,7 +133,7 @@ public class PayLandLineBill extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.length()>0){
+                if (charSequence.length() > 0) {
                     numberTXT.setErrorEnabled(false);
                 }
 
@@ -110,7 +143,8 @@ public class PayLandLineBill extends Fragment {
             public void afterTextChanged(Editable editable) {
 
             }
-        });circleEdt.addTextChangedListener(new TextWatcher() {
+        });
+        circleEdt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -125,10 +159,11 @@ public class PayLandLineBill extends Fragment {
             public void afterTextChanged(Editable editable) {
 
             }
-        });amount.addTextChangedListener(new TextWatcher() {
+        });
+        amount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.length()>0){
+                if (charSequence.length() > 0) {
                     amountTXT.setErrorEnabled(false);
                 }
 
@@ -163,34 +198,44 @@ public class PayLandLineBill extends Fragment {
             }
 
         });
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isValidateUi()){
+
+                }
+            }
+        });
     }
 
     private void setViews() {
 
         setHasOptionsMenu(true);
 
-
-        ((AppCompatActivity)getActivity()).setSupportActionBar(HomeActivity.toolbar);
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
         HomeActivity.toolbar.setTitle(getResources().getString(R.string.landline_sname));
-        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
-        HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        /*((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
+        HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
+        HomeActivity.toolbar.setTitle(getResources().getString(R.string.landline_sname));
+        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));*/
+       /* HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 closeTab();
             }
-        });
-        operatorTXT = (NCBTextInputLayout)rootView.findViewById(R.id.operatorTXT);
-        numberTXT = (NCBTextInputLayout)rootView.findViewById(R.id.numberTXT);
-        circleTXT = (NCBTextInputLayout)rootView.findViewById(R.id.circleTXT);
-        amountTXT = (NCBTextInputLayout)rootView.findViewById(R.id.amountTXT);
+        });*/
+        operatorTXT = (NCBTextInputLayout) rootView.findViewById(R.id.operatorTXT);
+        numberTXT = (NCBTextInputLayout) rootView.findViewById(R.id.numberTXT);
+        circleTXT = (NCBTextInputLayout) rootView.findViewById(R.id.circleTXT);
+        amountTXT = (NCBTextInputLayout) rootView.findViewById(R.id.amountTXT);
 
-        operatorEdt = (CommonEditText) rootView.findViewById(R.id.operatorEdt);
+        operatorEdt = (AutoCompleteTextView) rootView.findViewById(R.id.operatorEdt);
         mobilenoEdt = (CommonEditText) rootView.findViewById(R.id.mobilenoEdt);
         circleEdt = (AutoCompleteTextView) rootView.findViewById(R.id.circleEdt);
         amount = (CommonEditText) rootView.findViewById(R.id.amount);
-        rootView.setFocusableInTouchMode(true);
+        submit = (Button) rootView.findViewById(R.id.submit);
+        /*rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
         rootView.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -204,33 +249,79 @@ public class PayLandLineBill extends Fragment {
                     return false;
                 }
             }
-        });
+        });*/
     }
-    private void closeTab(){
-        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("landlineTag");
+
+    private void getOperator(String providerType) {
+        if (CommonUtil.isNetworkAvailable(context)) {
+            MyServices service = ServiceFactory.createRetrofitService(context, MyServices.class);
+            operatorSubscription = service.getOperator(ApiConstants.MOBILE_SERVICES + providerType)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Subscriber<OperatorModel>() {
+                        @Override
+                        public void onCompleted() {
+                            Toast.makeText(context, "check", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            if (e instanceof HttpException) {
+                                ((HttpException) e).code();
+                                ((HttpException) e).message();
+                                ((HttpException) e).response().errorBody();
+                                try {
+                                    ((HttpException) e).response().errorBody().string();
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+                                e.printStackTrace();
+                            }
+                            Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onNext(OperatorModel operatorModel) {
+
+                            listResults = (ArrayList<OperatorModel.ListResult>) operatorModel.getListResult();
+//                        ArrayAdapter<OperatorModel.ListResult> listResultArrayAdapter = new ArrayAdapter<OperatorModel.ListResult>(context,android.R.layout.simple_dropdown_item_1line,listResults);
+//                        currentOperator.setAdapter(listResultArrayAdapter);
 
 
-        if (fragment != null)
+                            GenericAdapter genericAdapter = new GenericAdapter(context, operatorModel.getListResult(), R.layout.adapter_single_item);
+                            genericAdapter.setAdapterOnClick(PayLandLineBill.this);
+                            operatorEdt.setAdapter(genericAdapter);
+                        }
+                    });
+        }
+    }
+    private void closeTab() {
+        /*Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("landlineTag");
+
+
+        if (fragment != null) {
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-        HomeActivity.toolbar.setTitle("");
-        HomeActivity.toolbar.setNavigationIcon(null);
+            HomeActivity.toolbar.setNavigationIcon(null);
+            HomeActivity.toolbar.setTitle("");
+            CommonUtil.hideSoftKeyboard((AppCompatActivity) getActivity());
+        }*/
     }
 
-    private boolean isValidateUi(){
+    private boolean isValidateUi() {
 
-        if(TextUtils.isEmpty(operatorEdt.getText().toString().trim())){
+        if (TextUtils.isEmpty(operatorEdt.getText().toString().trim())) {
             operatorTXT.setErrorEnabled(true);
             operatorTXT.setError("please select operator");
             return false;
-        }else if(TextUtils.isEmpty(mobilenoEdt.getText().toString().trim())){
+        } else if (TextUtils.isEmpty(mobilenoEdt.getText().toString().trim())) {
             numberTXT.setError("enter number");
             numberTXT.setErrorEnabled(true);
             return false;
-        }else if(TextUtils.isEmpty(circleEdt.getText().toString().trim())){
+        } else if (TextUtils.isEmpty(circleEdt.getText().toString().trim())) {
             circleTXT.setError("select cicle");
             circleTXT.setErrorEnabled(true);
             return false;
-        }else if(TextUtils.isEmpty(amount.getText().toString().trim())){
+        } else if (TextUtils.isEmpty(amount.getText().toString().trim())) {
             amountTXT.setError("enter amount");
             amountTXT.setErrorEnabled(true);
             return false;
@@ -238,5 +329,9 @@ public class PayLandLineBill extends Fragment {
         return true;
     }
 
+    @Override
+    public void adapterOnClick(int position) {
+        operatorEdt.setText(listResults.get(position).getName());
+    }
 }
 

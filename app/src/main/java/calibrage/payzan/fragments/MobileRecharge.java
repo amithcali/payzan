@@ -45,6 +45,7 @@ import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.activities.LoginActivity;
 import calibrage.payzan.adapters.GenericAdapter;
 import calibrage.payzan.adapters.SingleLineDropDownAdapter;
+import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.controls.CommonEditText;
 import calibrage.payzan.interfaces.DrawableClickListener;
 import calibrage.payzan.model.LoginResponseModel;
@@ -53,6 +54,7 @@ import calibrage.payzan.networkservice.ApiConstants;
 import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonConstants;
+import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.NCBTextInputLayout;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
@@ -67,8 +69,8 @@ import static calibrage.payzan.utils.CommonUtil.buildCounterDrawable;
  * Created by Calibrage11 on 10/2/2017.
  */
 
-public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOnClick {
-
+public class MobileRecharge extends BaseFragment implements GenericAdapter.AdapterOnClick {
+    public static final String TAG = MobileRecharge.class.getSimpleName();
     private RadioButton prepaidRB, postpaidRB;
     private Button
             talktimeRB, specialRB, submit;
@@ -194,6 +196,10 @@ public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOn
             @Override
             public void afterTextChanged(Editable editable) {
 
+
+
+
+
             }
         });
         amount.addTextChangedListener(new TextWatcher() {
@@ -218,7 +224,7 @@ public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOn
         // currentOperator.setAdapter();
 
 
-        rootview.setFocusableInTouchMode(true);
+       /* rootview.setFocusableInTouchMode(true);
         rootview.requestFocus();
         rootview.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -232,7 +238,7 @@ public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOn
                     return false;
                 }
             }
-        });
+        });*/
 
         talktimeRB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -269,17 +275,20 @@ public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOn
     private void setViews() {
         setHasOptionsMenu(true);
         listResults = new ArrayList<OperatorModel.ListResult>();
-        ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
+        HomeActivity.toolbar.setTitle(getResources().getString(R.string.mobile_recharge_sname));
+        HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
+        /*((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
         HomeActivity.toolbar.setTitle(getResources().getString(R.string.mobile_recharge_sname));
-        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
-        HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));*/
+       /* HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                closeTab();
+                closeTab(TAG);
+               *//* closeTab();*//*
             }
-        });
+        });*/
         mobileNumber = (ImageView) rootview.findViewById(R.id.mobileNumber);
         mobileEdt = (CommonEditText) rootview.findViewById(R.id.mobileEdt);
         amount = (CommonEditText) rootview.findViewById(R.id.amount);
@@ -306,48 +315,48 @@ public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOn
     }
 
     private void getOperator(String providerType) {
-
-        MyServices service = ServiceFactory.createRetrofitService(context, MyServices.class);
-        operatorSubscription = service.getOperator(ApiConstants.MOBILE_SERVICES + providerType)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<OperatorModel>() {
-                    @Override
-                    public void onCompleted() {
-                        Toast.makeText(context, "check", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        if (e instanceof HttpException) {
-                            ((HttpException) e).code();
-                            ((HttpException) e).message();
-                            ((HttpException) e).response().errorBody();
-                            try {
-                                ((HttpException) e).response().errorBody().string();
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-                            e.printStackTrace();
+        if (CommonUtil.isNetworkAvailable(context)) {
+            MyServices service = ServiceFactory.createRetrofitService(context, MyServices.class);
+            operatorSubscription = service.getOperator(ApiConstants.MOBILE_SERVICES + providerType)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Subscriber<OperatorModel>() {
+                        @Override
+                        public void onCompleted() {
+                            Toast.makeText(context, "check", Toast.LENGTH_SHORT).show();
                         }
-                        Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
-                    }
 
-                    @Override
-                    public void onNext(OperatorModel operatorModel) {
+                        @Override
+                        public void onError(Throwable e) {
+                            if (e instanceof HttpException) {
+                                ((HttpException) e).code();
+                                ((HttpException) e).message();
+                                ((HttpException) e).response().errorBody();
+                                try {
+                                    ((HttpException) e).response().errorBody().string();
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+                                e.printStackTrace();
+                            }
+                            Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
+                        }
 
-                        listResults = (ArrayList<OperatorModel.ListResult>) operatorModel.getListResult();
+                        @Override
+                        public void onNext(OperatorModel operatorModel) {
+
+                            listResults = (ArrayList<OperatorModel.ListResult>) operatorModel.getListResult();
 //                        ArrayAdapter<OperatorModel.ListResult> listResultArrayAdapter = new ArrayAdapter<OperatorModel.ListResult>(context,android.R.layout.simple_dropdown_item_1line,listResults);
 //                        currentOperator.setAdapter(listResultArrayAdapter);
 
 
-                        GenericAdapter genericAdapter = new GenericAdapter(context, operatorModel.getListResult(), R.layout.adapter_single_item);
-                        genericAdapter.setAdapterOnClick(MobileRecharge.this);
-                        currentOperator.setAdapter(genericAdapter);
-                    }
-                });
+                            GenericAdapter genericAdapter = new GenericAdapter(context, operatorModel.getListResult(), R.layout.adapter_single_item);
+                            genericAdapter.setAdapterOnClick(MobileRecharge.this);
+                            currentOperator.setAdapter(genericAdapter);
+                        }
+                    });
+        }
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -359,7 +368,7 @@ public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOn
                     Cursor c = context.getContentResolver().query(contactData, null, null, null, null);
                     if (c.moveToFirst()) {
                         String hasPhone = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        mobileEdt.setText(hasPhone);
+                        mobileEdt.setText(hasPhone.replaceAll("\\s",""));
                     }
 
                 }
@@ -373,14 +382,15 @@ public class MobileRecharge extends Fragment implements GenericAdapter.AdapterOn
     }
 
     private void closeTab() {
-        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("mobileTag");
+        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(TAG);
 
 
-        if (fragment != null)
+        if (fragment != null){
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-
-        HomeActivity.toolbar.setNavigationIcon(null);
-        HomeActivity.toolbar.setTitle("");
+            HomeActivity.toolbar.setNavigationIcon(null);
+            HomeActivity.toolbar.setTitle("");
+            CommonUtil.hideSoftKeyboard((AppCompatActivity)getActivity());
+        }
     }
 
     private boolean validateUI() {

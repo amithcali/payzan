@@ -6,15 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -29,6 +25,7 @@ import calibrage.payzan.networkservice.ApiConstants;
 import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonConstants;
+import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.NCBTextInputLayout;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
@@ -40,7 +37,8 @@ import rx.schedulers.Schedulers;
  * Created by Calibrage11 on 10/23/2017.
  */
 
-public class  PayWaterFragment extends Fragment implements GenericAdapter.AdapterOnClick {
+public class PayWaterFragment extends Fragment implements GenericAdapter.AdapterOnClick {
+    public static final String TAG = PayWaterFragment.class.getSimpleName();
     private View rootView;
     private Context context;
     private AutoCompleteTextView boardSpn;
@@ -48,8 +46,6 @@ public class  PayWaterFragment extends Fragment implements GenericAdapter.Adapte
     private NCBTextInputLayout consNoTXT, boardTXT, amountTXT;
     private ArrayList<OperatorModel.ListResult> listResults;
     private Subscription operatorSubscription;
-    private  Button submit;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,24 +70,24 @@ public class  PayWaterFragment extends Fragment implements GenericAdapter.Adapte
 
         setHasOptionsMenu(true);
         listResults = new ArrayList<OperatorModel.ListResult>();
-        ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
+        /*((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
+      /*  HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);*/
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
         HomeActivity.toolbar.setTitle(getResources().getString(R.string.water_sname));
         HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
-        HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+       /* HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 closeTab();
             }
-        });
+        });*/
         consumerNEdt = (CommonEditText) rootView.findViewById(R.id.consumerNEdt);
         amountEdt = (CommonEditText) rootView.findViewById(R.id.amountEdt);
         boardSpn = (AutoCompleteTextView) rootView.findViewById(R.id.boardSpn);
         boardTXT = (NCBTextInputLayout) rootView.findViewById(R.id.boardTXT);
         consNoTXT = (NCBTextInputLayout) rootView.findViewById(R.id.consNoTXT);
         amountTXT = (NCBTextInputLayout) rootView.findViewById(R.id.amountTXT);
-        submit=(Button)rootView.findViewById(R.id.submit);
 
         getOperator(CommonConstants.SERVICE_PROVIDER_ID_WATER);
 
@@ -103,48 +99,6 @@ public class  PayWaterFragment extends Fragment implements GenericAdapter.Adapte
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 boardSpn.showDropDown();
                 return false;
-            }
-        });
-        consumerNEdt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        amountEdt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.length()>0){
-                    amountTXT.setErrorEnabled(false);
-                }
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isValidateUi();
-
             }
         });
 
@@ -197,11 +151,12 @@ public class  PayWaterFragment extends Fragment implements GenericAdapter.Adapte
         Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("waterTag");
 
 
-        if (fragment != null)
+        if (fragment != null){
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-
-        HomeActivity.toolbar.setNavigationIcon(null);
-        HomeActivity.toolbar.setTitle("");
+            HomeActivity.toolbar.setNavigationIcon(null);
+            HomeActivity.toolbar.setTitle("");
+            CommonUtil.hideSoftKeyboard((AppCompatActivity)getActivity());
+        }
     }
 
 
@@ -209,26 +164,4 @@ public class  PayWaterFragment extends Fragment implements GenericAdapter.Adapte
     public void adapterOnClick(int position) {
         boardSpn.setText(listResults.get(position).getName());
     }
-
-    private boolean isValidateUi(){
-
-        if(TextUtils.isEmpty(boardSpn.getText().toString().trim())){
-            boardTXT.setErrorEnabled(true);
-            boardTXT.setError("please select board");
-            return false;
-        }else if(TextUtils.isEmpty(consumerNEdt.getText().toString().trim())){
-            consNoTXT.setError("enter consumer number");
-            consNoTXT.setErrorEnabled(true);
-            return false;
-        }
-
-        else if(TextUtils.isEmpty(amountEdt.getText().toString().trim())){
-            amountTXT.setError("enter amount");
-            amountTXT.setErrorEnabled(true);
-            return false;
-        }
-        return true;
-    }
-
-
 }

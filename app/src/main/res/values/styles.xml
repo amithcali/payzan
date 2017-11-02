@@ -139,7 +139,7 @@
         <item name="android:textSize">@dimen/txt_money_size</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/border_accent</item>
+        <item name="android:background">@drawable/add_money_bcg</item>
 
     </style>
 </resources>

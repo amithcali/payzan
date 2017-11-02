@@ -9,12 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import calibrage.payzan.R;
+import calibrage.payzan.controls.BaseFragment;
 
 /**
  * Created by Calibrage11 on 10/16/2017.
  */
 
-public class SelectOperatorFragment extends Fragment {
+public class SelectOperatorFragment extends BaseFragment {
+    public static final String TAG = SelectOperatorFragment.class.getSimpleName();
     private View rootView;
     private RecyclerView recyclerView;
 

@@ -7,13 +7,14 @@
     android:orientation="vertical">
 
 
+
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_img_height"
-        android:background="@drawable/home_logo"
-        android:scaleType="center"
         android:gravity="center"
-        android:src="@drawable/home_logo"
+        android:src="@mipmap/home_logo"
+        android:background="@mipmap/home_logo"
         android:layout_marginBottom="-10dp"
        />
 

@@ -7,6 +7,7 @@ import calibrage.payzan.model.DistrictModel;
 import calibrage.payzan.model.LoginResponseModel;
 import calibrage.payzan.model.MandalModel;
 import calibrage.payzan.model.OperatorModel;
+import calibrage.payzan.model.SendMoneyResponseModel;
 import calibrage.payzan.model.StatesModel;
 import calibrage.payzan.model.VillageModel;
 import calibrage.payzan.model.WalletResponse;
@@ -41,6 +42,11 @@ public interface MyServices {
     Observable<VillageModel> getVillages(@Url String url);
     @GET
     Observable<OperatorModel> getOperator(@Url String url);
+    @POST(ApiConstants.AGENT_REQUEST)
+    Observable<calibrage.payzan.model.AgentResponseModel> agentRequest(@Body JsonObject data);
+
+    @POST(ApiConstants.SEND_MONEY_WALLET)
+    Observable<SendMoneyResponseModel> sendMoneyRequest(@Body JsonObject data);
 
 
 }

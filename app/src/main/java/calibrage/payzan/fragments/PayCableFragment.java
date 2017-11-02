@@ -12,25 +12,46 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
+import calibrage.payzan.adapters.GenericAdapter;
+import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.controls.CommonEditText;
+import calibrage.payzan.model.OperatorModel;
+import calibrage.payzan.networkservice.ApiConstants;
+import calibrage.payzan.networkservice.MyServices;
+import calibrage.payzan.networkservice.ServiceFactory;
+import calibrage.payzan.utils.CommonConstants;
+import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.NCBTextInputLayout;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Calibrage11 on 10/13/2017.
  */
 
-public class PayCableFragment extends Fragment {
+public class PayCableFragment extends BaseFragment implements GenericAdapter.AdapterOnClick {
+    public static final String TAG = PayCableFragment.class.getSimpleName();
     private View rootView;
     private Context context;
     private NCBTextInputLayout operatorTXT, amountTXT, accontNoTXT;
     private AutoCompleteTextView operatorSpn;
     private CommonEditText accontNoEdt, amountEdt;
+    private Subscription operatorSubscription;
+    private ArrayList<OperatorModel.ListResult> listResults;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +67,7 @@ public class PayCableFragment extends Fragment {
         context = this.getActivity();
         setViews();
         initViews();
+        getOperator(CommonConstants.SERVICE_PROVIDER_ID_CABLEBILL);
 
         return rootView;
     }
@@ -57,11 +79,11 @@ public class PayCableFragment extends Fragment {
         amountEdt = (CommonEditText) rootView.findViewById(R.id.amountEdt);
         amountTXT = (NCBTextInputLayout) rootView.findViewById(R.id.amountTXT);
         operatorSpn = (AutoCompleteTextView) rootView.findViewById(R.id.operatorSpn);
-        setHasOptionsMenu(true);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);
+       /* setHasOptionsMenu(true);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(HomeActivity.toolbar);*/
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
         HomeActivity.toolbar.setTitle(getResources().getString(R.string.cabletv_sname));
-        HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
+        /*HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
         HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +105,7 @@ public class PayCableFragment extends Fragment {
                     return false;
                 }
             }
-        });
+        });*/
     }
 
 
@@ -143,6 +165,15 @@ public class PayCableFragment extends Fragment {
 
             }
         });
+        operatorSpn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                operatorSpn.showDropDown();
+
+
+                return false;
+            }
+        });
     }
 
     private boolean isValidateUi() {
@@ -162,6 +193,51 @@ public class PayCableFragment extends Fragment {
         return true;
     }
 
+    private void getOperator(String providerType) {
+if(CommonUtil.isNetworkAvailable(context)){
+
+
+        MyServices service = ServiceFactory.createRetrofitService(context, MyServices.class);
+        operatorSubscription = service.getOperator(ApiConstants.MOBILE_SERVICES + providerType)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<OperatorModel>() {
+                    @Override
+                    public void onCompleted() {
+                        Toast.makeText(context, "check", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (e instanceof HttpException) {
+                            ((HttpException) e).code();
+                            ((HttpException) e).message();
+                            ((HttpException) e).response().errorBody();
+                            try {
+                                ((HttpException) e).response().errorBody().string();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNext(OperatorModel operatorModel) {
+
+                        listResults = (ArrayList<OperatorModel.ListResult>) operatorModel.getListResult();
+//                        ArrayAdapter<OperatorModel.ListResult> listResultArrayAdapter = new ArrayAdapter<OperatorModel.ListResult>(context,android.R.layout.simple_dropdown_item_1line,listResults);
+//                        currentOperator.setAdapter(listResultArrayAdapter);
+
+
+                        GenericAdapter genericAdapter = new GenericAdapter(context, operatorModel.getListResult(), R.layout.adapter_single_item);
+                        genericAdapter.setAdapterOnClick(PayCableFragment.this);
+                        operatorSpn.setAdapter(genericAdapter);;
+                    }
+                });
+    }}
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -174,11 +250,18 @@ public class PayCableFragment extends Fragment {
         Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("cableTag");
 
 
-        if (fragment != null)
+        if (fragment != null){
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+            HomeActivity.toolbar.setNavigationIcon(null);
+            HomeActivity.toolbar.setTitle("");
+            CommonUtil.hideSoftKeyboard((AppCompatActivity)getActivity());
+        }
+    }
 
-        HomeActivity.toolbar.setNavigationIcon(null);
-        HomeActivity.toolbar.setTitle("");
+    @Override
+    public void adapterOnClick(int position) {
+        operatorSpn.setText(listResults.get(position).getName());
+
     }
 }
 

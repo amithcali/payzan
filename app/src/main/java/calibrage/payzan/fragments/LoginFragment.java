@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -51,11 +52,15 @@ import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.activities.LoginActivity;
 import calibrage.payzan.activities.signup;
 import calibrage.payzan.adapters.MyAdapter;
+import calibrage.payzan.controls.BaseFragment;
+import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
 import calibrage.payzan.model.LoginModel;
 import calibrage.payzan.model.LoginResponseModel;
 import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonConstants;
+import calibrage.payzan.utils.CommonUtil;
+import calibrage.payzan.utils.PayZanEnums;
 import calibrage.payzan.utils.SmsListener;
 import calibrage.payzan.utils.SmsReceiver;
 import retrofit2.adapter.rxjava.HttpException;
@@ -63,9 +68,12 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import calibrage.payzan.utils.SharedPrefsData;
 
 
-public class LoginFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener, MyAdapter.AdapterOnClick {
+
+public class LoginFragment extends BaseFragment implements GoogleApiClient.OnConnectionFailedListener, MyAdapter.AdapterOnClick {
+    public static final String TAG = LoginFragment.class.getSimpleName();
     private View rootView;
     private Context context;
     private CallbackManager callbackManager;
@@ -77,12 +85,13 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
     private Button fbBtn, btnLogin;
     private EditText txt_Email, txt_password;
     private AlertDialog alertDialog;
+    private OnChildFragmentToActivityInteractionListener mActivityListener;
 
 
     private GoogleApiClient mGoogleApiClient;
     private SignInButton button;
     private Subscription mRegisterSubscription;
-    public  static Toolbar toolbar;
+    public static Toolbar toolbar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,13 +119,13 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
         HomeActivity.toolbar.setNavigationIcon(R.drawable.ic_stat_arrow_back);
         HomeActivity.toolbar.setTitle(getResources().getString(R.string.login_sname));
         HomeActivity.toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.white_new));
-        HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        /*HomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 closeTab();
             }
-        });
+        });*/
         SpannableString ss = new SpannableString(getResources().getString(R.string.terms_and_conditions));
         ClickableSpan clickableSpan1 = new ClickableSpan() {
             @Override
@@ -169,12 +178,12 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
         ClickableSpan clickableSpan_s1 = new ClickableSpan() {
             @Override
             public void onClick(View textView) {
-             //   startActivity(new Intent(getActivity(), signup.class));
+                //   startActivity(new Intent(getActivity(), signup.class));
                 Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
 
                 // display frgamnet
-               getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, new SignupFragment(),"SignupTag")
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, new SignupFragment(), "SignupTag")
                         .commit();
 
             }
@@ -185,7 +194,7 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
                 ds.setUnderlineText(false);
             }
         };
-       // ss_signup.setSpan(clickableSpan_s, 1, 19, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        // ss_signup.setSpan(clickableSpan_s, 1, 19, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         ss_signup.setSpan(clickableSpan_s1, 21, 27, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
@@ -210,8 +219,7 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isValidateUi()) {
-
+                if (isValidateUi()&& CommonUtil.isNetworkAvailable(context)) {
 
                     login();
                 }
@@ -280,13 +288,36 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
 
     private void closeTab() {
         Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("LoginTag");
+        mActivityListener.messageFromChildFragmentToActivity("handleBottomNavigation");
 
-
-        if (fragment != null)
+        if (fragment != null) {
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+            HomeActivity.toolbar.setNavigationIcon(null);
+            HomeActivity.toolbar.setTitle("");
+            CommonUtil.hideSoftKeyboard((AppCompatActivity) getActivity());
+        }
 
-        HomeActivity.toolbar.setNavigationIcon(null);
-        HomeActivity.toolbar.setTitle("");
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // check if Activity implements listener
+        if (context instanceof OnChildFragmentToActivityInteractionListener) {
+            mActivityListener = (OnChildFragmentToActivityInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnChildFragmentToActivityInteractionListener");
+        }
+
+        // check if parent Fragment implements listener
+//        if (getActivity().getSupportFragmentManager().findFragmentByTag("walletTag") instanceof OnChildFragmentInteractionListener) {
+//
+//            mParentListener = (OnChildFragmentInteractionListener) getParentFragment();
+//        } else {
+//            throw new RuntimeException("The parent fragment must implement OnChildFragmentInteractionListener");
+//        }
     }
 
     private void IntiateGoogleApi() {
@@ -323,8 +354,28 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
         super.onResume();
         // IntiateGoogleApi();
     }
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(mGoogleApiClient !=null  &&   mGoogleApiClient.isConnected())
+        {
+            mGoogleApiClient.stopAutoManage(getActivity());
+            mGoogleApiClient.disconnect();
+        }
+
+    }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mGoogleApiClient !=null  &&   mGoogleApiClient.isConnected())
+        {
+            mGoogleApiClient.stopAutoManage(getActivity());
+            mGoogleApiClient.disconnect();
+        }
+
+    }
 
     private void login() {
         JsonObject object = getLoginObject();
@@ -336,6 +387,7 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
                     @Override
                     public void onCompleted() {
                         Toast.makeText(getActivity(), "check", Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
@@ -357,8 +409,20 @@ public class LoginFragment extends Fragment implements GoogleApiClient.OnConnect
                     @Override
                     public void onNext(LoginResponseModel loginResponseModel) {
                         Toast.makeText(getActivity(), "sucess", Toast.LENGTH_SHORT).show();
-                        CommonConstants.USERID = loginResponseModel.getData().getUser().getId();
-                        CommonConstants.WALLETID = String.valueOf(loginResponseModel.getData().getUserWallet().getWalletId());
+                        String TOke=loginResponseModel.getdata().getAccessToken();
+                        Toast.makeText(getActivity(), "Token :"+loginResponseModel.getdata().getAccessToken(), Toast.LENGTH_SHORT).show();
+
+                     /*   CommonConstants.USERID = loginResponseModel.getData().getUser().getId();
+                        CommonConstants.WALLETID = String.valueOf(loginResponseModel.getData().getUserWallet().getWalletId());*/
+                        /*  if user successfully login savig success  Object */
+
+                        SharedPrefsData.getInstance(getActivity()).updateIntValue(getActivity(),CommonConstants.ISLOGIN, CommonConstants.Login);
+                        SharedPrefsData.getInstance(getActivity()).saveUserId(getActivity(),loginResponseModel.getdata().getUser().getId());
+                        SharedPrefsData.getInstance(getActivity()).saveWalletId(getActivity(),loginResponseModel.getdata().getUserWallet().getWalletId());
+
+                        Intent i = new Intent(getContext(), HomeActivity.class);
+                        startActivity(i);
+
                         //finish();
                     }
                 });
