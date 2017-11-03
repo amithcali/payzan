@@ -20,6 +20,7 @@ import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import calibrage.payzan.R;
 import calibrage.payzan.adapters.GenericAdapter;
@@ -71,6 +72,10 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
 
     private String firstNameStr,middleNameStr,lastNameStr,mobileStr,emailStr,stateStr,districtStr,mandalStr,villageStr,address1Str,
             address2Str,landmarkStr,commentsStr ;
+
+    public final Pattern EMAIL_ADDRESS_PATTERN=Pattern.compile
+            ("[a-zA-Z0-9+._%-+]{1,256}"+"@"+"[a-zA-Z0-9][a-zA-Z0-9-]{0,64}"+"("+"."+"[a-zA-Z0-9][a-zA-Z0-9-]{0,25}"+")+");
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -420,7 +425,9 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                 if (charSequence.length() > 0) {
                     emailTIL.setErrorEnabled(false);
+
                 }
+
             }
 
             @Override
@@ -577,8 +584,11 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validateUi())
-                {
+                if (validateUi()) {
+                  //  Toast.makeText(RequestForAgent.this, "Valid Email Addresss", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                 //   Toast.makeText(RequestForAgent.this,"Invalid Email Addresss", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -619,12 +629,24 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
         else if (TextUtils.isEmpty(mobileStr))
         {
             mobileTIL.setErrorEnabled(true);
-            mobileTIL.setError("enter mobile no");
+            mobileTIL.setError("enter  mobile no");
+            return false;
+        }
+        else if (!isValidPhone())
+        {
+            mobileTIL.setErrorEnabled(true);
+            mobileTIL.setError("enter valid mobile no");
             return false;
         }
         else if (TextUtils.isEmpty(emailStr))
         {
             emailTIL.setError("enter email id");
+            emailTIL.setErrorEnabled(true);
+           // return EMAIL_ADDRESS_PATTERN.matcher(emailStr).matches();
+            return false;
+        }
+        else if(!checkEmail()){
+            emailTIL.setError("enter valid email ");
             emailTIL.setErrorEnabled(true);
             return false;
         }
@@ -676,6 +698,20 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
             return false;
         }
         return true;
+    }
+
+    private boolean checkEmail() {
+        String email=emailEdt.getText().toString().trim();
+        return EMAIL_ADDRESS_PATTERN.matcher(email).matches();
+    }
+    private boolean isValidPhone()
+    {
+        String target=mobileEdt.getText().toString().trim();
+        if (target.length()!=10) {
+            return false;
+        } else {
+            return android.util.Patterns.PHONE.matcher(target).matches();
+        }
     }
 
 
