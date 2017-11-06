@@ -127,6 +127,7 @@ public class AddMoneyToWallet extends BaseFragment {
                     addWallet();
                 }
 
+
             }
         });
         enterMoneyEdt.addTextChangedListener(new TextWatcher() {
