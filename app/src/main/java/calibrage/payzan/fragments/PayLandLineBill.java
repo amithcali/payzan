@@ -118,7 +118,9 @@ public class PayLandLineBill extends BaseFragment implements GenericAdapter.Adap
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                if (charSequence.length() > 0) {
+                    operatorTXT.setErrorEnabled(false);
+                }
             }
 
             @Override
@@ -153,7 +155,9 @@ public class PayLandLineBill extends BaseFragment implements GenericAdapter.Adap
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                if (charSequence.length() > 0) {
+                    circleTXT.setErrorEnabled(false);
+                }
             }
 
             @Override
@@ -322,7 +326,7 @@ public class PayLandLineBill extends BaseFragment implements GenericAdapter.Adap
             numberTXT.setErrorEnabled(true);
             return false;
         } else if (TextUtils.isEmpty(circleStr)) {
-            circleTXT.setError("select cicle");
+            circleTXT.setError("select circle");
             circleTXT.setErrorEnabled(true);
             return false;
         } else if (TextUtils.isEmpty(amountStr)) {
