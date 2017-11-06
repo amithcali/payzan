@@ -94,6 +94,7 @@ public class AddMoneyToWallet extends BaseFragment {
 
     }
 
+
     private void initViews() {
 
         addHundTxt.setOnClickListener(new View.OnClickListener() {
