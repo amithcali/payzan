@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/payzan.iml" filepath="$PROJECT_DIR$/payzan.iml" />
+      <module fileurl="file://E:\Mahesh\Work\PAYZAN_consumer\payzan_consumer\payzan.iml" filepath="E:\Mahesh\Work\PAYZAN_consumer\payzan_consumer\payzan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payzan_consumer.iml" filepath="$PROJECT_DIR$/payzan_consumer.iml" />
     </modules>
   </component>
 </project>

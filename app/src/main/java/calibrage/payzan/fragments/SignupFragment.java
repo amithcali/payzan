@@ -56,14 +56,17 @@ import java.io.IOException;
 
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
+import calibrage.payzan.activities.SplashActivity;
 import calibrage.payzan.activities.signup;
 import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
 import calibrage.payzan.model.RegisterModel;
 import calibrage.payzan.model.ResponseModel;
+import calibrage.payzan.networkservice.ApiConstants;
 import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonUtil;
+import calibrage.payzan.utils.PayZanEnums;
 import calibrage.payzan.utils.SmsListener;
 import calibrage.payzan.utils.SmsReceiver;
 import retrofit2.adapter.rxjava.HttpException;
@@ -316,12 +319,24 @@ public class SignupFragment extends BaseFragment implements GoogleApiClient.OnCo
                             }
                             e.printStackTrace();
                         }
+                        Log.d(TAG, "Register onError: "+ e.toString());
                         Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(ResponseModel registerResponseModel) {
-                        Toast.makeText(getActivity(), "sucess", Toast.LENGTH_SHORT).show();
+
+
+                        if(registerResponseModel.getIsSuccess() == true)
+                        {
+                            Toast.makeText(getActivity(), "Please Login", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getContext(), HomeActivity.class);
+                            startActivity(i);
+
+                            // close this activity
+
+                        }
+
                         // finish();
                     }
                 });
@@ -366,6 +381,7 @@ public class SignupFragment extends BaseFragment implements GoogleApiClient.OnCo
         registerModel.setPassword(reg_password.getText().toString().trim());
         registerModel.setEmail(reg_email.getText().toString().trim());
         registerModel.setConfirmPassword(confirm_password.getText().toString().trim());
+        registerModel.setRoleId(PayZanEnums.RoleIdEnum.Consumer.RID());
         return new Gson().toJsonTree(registerModel)
                 .getAsJsonObject();
     }
