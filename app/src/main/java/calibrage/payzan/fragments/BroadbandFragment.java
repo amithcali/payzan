@@ -119,14 +119,14 @@ public class BroadbandFragment extends BaseFragment {
         ServiceNEdt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
-                if (charSequence.length() > 0) {
-                    serviceNoTXT.setErrorEnabled(false);
-                }
+
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    serviceNoTXT.setErrorEnabled(false);
+                }
             }
 
             @Override
@@ -137,14 +137,14 @@ public class BroadbandFragment extends BaseFragment {
         amountEdt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
-                if (charSequence.length() > 0) {
-                    amountTXT.setErrorEnabled(false);
-                }
+
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    amountTXT.setErrorEnabled(false);
+                }
             }
 
             @Override
