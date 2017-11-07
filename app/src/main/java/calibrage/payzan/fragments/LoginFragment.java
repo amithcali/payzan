@@ -6,14 +6,19 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.text.TextUtilsCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
@@ -53,6 +58,7 @@ import calibrage.payzan.activities.LoginActivity;
 import calibrage.payzan.activities.signup;
 import calibrage.payzan.adapters.MyAdapter;
 import calibrage.payzan.controls.BaseFragment;
+import calibrage.payzan.controls.CommonEditText;
 import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
 import calibrage.payzan.model.LoginModel;
 import calibrage.payzan.model.LoginResponseModel;
@@ -60,6 +66,7 @@ import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.CommonUtil;
+import calibrage.payzan.utils.NCBTextInputLayout;
 import calibrage.payzan.utils.PayZanEnums;
 import calibrage.payzan.utils.SmsListener;
 import calibrage.payzan.utils.SmsReceiver;
@@ -83,15 +90,16 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
     private static final int RC_SIGN_IN = 007;
     String get_id, get_name, get_gender, get_email, get_birthday, get_locale, get_location;
     private Button fbBtn, btnLogin;
-    private EditText txt_Email, txt_password;
+
     private AlertDialog alertDialog;
     private OnChildFragmentToActivityInteractionListener mActivityListener;
-
-
+   private NCBTextInputLayout inp_email,inp_password;
+    private CommonEditText  txt_password,txt_Email;
     private GoogleApiClient mGoogleApiClient;
     private SignInButton button;
     private Subscription mRegisterSubscription;
     public static Toolbar toolbar;
+    private String inp_emailStr,inp_passwordStr;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,8 +118,10 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
         fbBtn = (Button) rootView.findViewById(R.id.fbBtn);
         btnLogin = (Button) rootView.findViewById(R.id.btnLogin);
         button = (SignInButton) rootView.findViewById(R.id.btn_sign_in);
-        txt_password = (EditText) rootView.findViewById(R.id.txt_password);
-        txt_Email = (EditText) rootView.findViewById(R.id.txt_Email);
+        txt_password = (CommonEditText) rootView.findViewById(R.id.txt_password);
+        txt_Email = (CommonEditText) rootView.findViewById(R.id.txt_Email);
+        inp_email= (NCBTextInputLayout) rootView.findViewById(R.id.inp_email);
+        inp_password= (NCBTextInputLayout) rootView.findViewById(R.id.inp_password);
 //        dummy = (TextView) findViewById(R.id.dummy);
         link_to_register = (TextView) rootView.findViewById(R.id.link_to_register);
         IntiateGoogleApi();
@@ -216,13 +226,49 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
 
             }
         });
+
+        txt_Email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    inp_email.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        txt_password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    inp_password.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isValidateUi()&& CommonUtil.isNetworkAvailable(context)) {
-
-                    login();
-                }
+              if (isValidateUi()) {
+                  login();
+              }
 
             }
         });
@@ -433,9 +479,39 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+
     private boolean isValidateUi() {
 
+       inp_emailStr=txt_Email.getText().toString().trim();
+       inp_passwordStr=txt_password.getText().toString().trim();
+       if (TextUtils.isEmpty(inp_emailStr))
+       {
+           inp_email.setError("enter mobile number");
+           inp_email.setErrorEnabled(true);
+           return false;
+       }
+       else if (!isValidPhone())
+       {
+           inp_email.setErrorEnabled(true);
+           inp_email.setError("enter valid mobile no");
+           return false;
+       }
+       else if (TextUtils.isEmpty(inp_passwordStr))
+       {
+           inp_password.setError("enter password");
+           inp_password.setErrorEnabled(true);
+           return false;
+       }
         return true;
+    }
+    private boolean isValidPhone()
+    {
+        String target=txt_Email.getText().toString().trim();
+        if (target.length()!=10) {
+            return false;
+        } else {
+            return android.util.Patterns.PHONE.matcher(target).matches();
+        }
     }
 
     private void setProfileToView(JSONObject jsonObject) {

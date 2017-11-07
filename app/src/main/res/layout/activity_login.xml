@@ -52,7 +52,7 @@
                android:layout_marginBottom="@dimen/btn_margin_bottom"
                 android:src="@mipmap/home_logo" />
 
-            <android.support.design.widget.TextInputLayout
+            <calibrage.payzan.utils.NCBTextInputLayout
                 android:layout_marginTop="@dimen/lyt_margin_top"
                 android:id="@+id/inp_email"
                 android:layout_width="match_parent"
@@ -71,9 +71,9 @@
                     android:inputType="textEmailAddress"
                     android:paddingLeft="@dimen/edt_text_pading_left"
                     android:textSize="@dimen/edt_FontSize" />
-            </android.support.design.widget.TextInputLayout>
+            </calibrage.payzan.utils.NCBTextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <calibrage.payzan.utils.NCBTextInputLayout
                 android:id="@+id/inp_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
                     android:paddingLeft="@dimen/edt_text_pading_left"
                     android:textSize="@dimen/edt_FontSize" />
 
-            </android.support.design.widget.TextInputLayout>
+            </calibrage.payzan.utils.NCBTextInputLayout>
 
             <calibrage.payzan.controls.CommonTextView
                 android:layout_width="wrap_content"
