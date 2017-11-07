@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import calibrage.payzan.BuildConfig;
 import calibrage.payzan.R;
 import calibrage.payzan.adapters.GenericAdapter;
 import calibrage.payzan.adapters.SingleLineDropDownAdapter;
@@ -169,8 +170,9 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
 
         MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
 
-        String URL = "http://192.168.1.147/PayZanAPI/api/States/GetStateInfo/1";/*ApiConstants.STATES +"1" ;*/
-        mGetStatesSubscription = service.getStates(URL)
+       String BaseUrl= BuildConfig.AZURE_URL+"api/States/GetStateInfo/1";
+       /* String URL = "http://192.168.1.147/PayZanAPI/api/States/GetStateInfo/1";*//*ApiConstants.STATES +"1" ;*/
+        mGetStatesSubscription = service.getStates(BaseUrl)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<StatesModel>() {
@@ -209,9 +211,10 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
 
 
     private void getDistricts(int id) {
-        String URL = "http://192.168.1.147/PayZanAPI/api/Districts/GetDistrictsInfo/" + id;  /*ApiConstants.DISTRICTS + "1"*/
+        String BaseUrl= BuildConfig.AZURE_URL+"api/Districts/GetDistrictsInfo/"+id;
+       /* String URL = "http://192.168.1.147/PayZanAPI/api/Districts/GetDistrictsInfo/" + id;  *//*ApiConstants.DISTRICTS + "1"*/
         MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
-        mGetDistrictSubscription = service.getDistricts(URL)
+        mGetDistrictSubscription = service.getDistricts(BaseUrl)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<DistrictModel>() {
@@ -251,9 +254,10 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
 
 
     private void getMandals(int Id) {
-        String Url = "http://192.168.1.147/PayZanAPI/api/Mandals/GetMandalInfo/" + Id;  /*ApiConstants.MANDALS + "1"*/
+        String BaseUrl= BuildConfig.AZURE_URL+"api/Mandals/GetMandalInfo/"+Id;
+       /* String Url = "http://192.168.1.147/PayZanAPI/api/Mandals/GetMandalInfo/" + Id;  *//*ApiConstants.MANDALS + "1"*/
         MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
-        mGetDistrictSubscription = service.getMandals(Url)
+        mGetDistrictSubscription = service.getMandals(BaseUrl)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<MandalModel>() {
@@ -294,9 +298,12 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
     }
 
     private void getVillages(int id) {
+
+        /*String Url = "http://192.168.1.147/PayZanAPI/api/Villages/GetVillageInfo/" + id;*/
+        String BaseUrl= BuildConfig.AZURE_URL+"api/Villages/GetVillageInfo/"+id;
         MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
-        String Url = "http://192.168.1.147/PayZanAPI/api/Villages/GetVillageInfo/" + id; /* ApiConstants.VILLAGE + "1"*/
-        mGetDistrictSubscription = service.getVillages(Url)
+       /* ApiConstants.VILLAGE + "1"*/
+        mGetDistrictSubscription = service.getVillages(BaseUrl)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<VillageModel>() {
@@ -716,7 +723,9 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
 
 
     private void PostAgentRequest() {
-        String URL = "http://192.168.1.147/PayZanAPI/api/AgentRequestInfo/AddUpdateAgentRequestInfo";
+
+      /*  String BaseUrl= BuildConfig.AZURE_URL+"api/AgentRequestInfo/AddUpdateAgentRequestInfo";
+        String URL = "http://192.168.1.147/PayZanAPI/api/AgentRequestInfo/AddUpdateAgentRequestInfo";*/
         JsonObject object = getAgentObject();
         MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
         mRegisterSubscription = (Subscription) service.agentRequest(object)

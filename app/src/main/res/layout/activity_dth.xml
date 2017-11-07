@@ -58,7 +58,7 @@
             <calibrage.payzan.utils.NCBTextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/OperatorTXT">
+                android:id="@+id/operatorTXT">
             <AutoCompleteTextView
                 android:layout_marginBottom="@dimen/edt_bottom_margin"
                 android:layout_width="match_parent"
