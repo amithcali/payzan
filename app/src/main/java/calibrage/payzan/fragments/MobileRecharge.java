@@ -404,7 +404,15 @@ public class MobileRecharge extends BaseFragment implements GenericAdapter.Adapt
         if (TextUtils.isEmpty(mobileStr)) {
             mobileNumberTXT.setErrorEnabled(true);
             mobileNumberTXT.setError("enter mobile number");
-        } else if (TextUtils.isEmpty(currentOperatorStr)) {
+
+        }
+        else if (!isValidPhone())
+        {
+            mobileNumberTXT.setErrorEnabled(true);
+            mobileNumberTXT.setError("enter valid mobile no");
+            return false;
+        }
+        else if (TextUtils.isEmpty(currentOperatorStr)) {
             operatorTXT.setErrorEnabled(true);
             operatorTXT.setError("select operator ");
         } else if (!isProvider) {
@@ -416,6 +424,15 @@ public class MobileRecharge extends BaseFragment implements GenericAdapter.Adapt
         }
         return true;
 
+    }
+    private boolean isValidPhone()
+    {
+        String target=mobileEdt.getText().toString().trim();
+        if (target.length()!=10) {
+            return false;
+        } else {
+            return android.util.Patterns.PHONE.matcher(target).matches();
+        }
     }
 
     private void isProviderExists() {
