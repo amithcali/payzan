@@ -81,7 +81,7 @@ import static calibrage.payzan.utils.CommonUtil.isValidEmail;
  * Created by Calibrage19 on 20-10-2017.
  */
 
-public class SignupFragment extends BaseFragment implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+public class  SignupFragment extends BaseFragment implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
     public static final String TAG = SignupFragment.class.getSimpleName();
     private EditText reg_mobile, reg_email, reg_password, confirm_password;
     private LoginButton loginButton;
