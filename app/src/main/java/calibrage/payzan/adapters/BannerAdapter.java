@@ -20,24 +20,25 @@ import calibrage.payzan.R;
 public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.MyHolder> {
     private Context context;
     private ArrayList<Integer> bannerArrayList;
-    public BannerAdapter(Context context, ArrayList<Integer> bannerArrayList){
+
+    public BannerAdapter(Context context, ArrayList<Integer> bannerArrayList) {
         this.context = context;
         this.bannerArrayList = bannerArrayList;
 
     }
+
     @Override
     public BannerAdapter.MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.adapter_banner, null);
+
         BannerAdapter.MyHolder mh = new BannerAdapter.MyHolder(v);
         return mh;
     }
 
     @Override
     public void onBindViewHolder(BannerAdapter.MyHolder holder, final int position) {
-       holder.imageView.setImageResource(bannerArrayList.get(position));
-
-
+        holder.imageView.setImageResource(bannerArrayList.get(position));
 
 
     }
@@ -47,11 +48,12 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.MyHolder> 
         return bannerArrayList.size();
     }
 
-    public class MyHolder extends RecyclerView.ViewHolder{
+    public class MyHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
+
         public MyHolder(View itemView) {
             super(itemView);
-            imageView = (ImageView)itemView.findViewById(R.id.image);
+            imageView = (ImageView) itemView.findViewById(R.id.image);
 
         }
     }
