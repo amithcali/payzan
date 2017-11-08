@@ -44,6 +44,8 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 /**
  * Created by Calibrage11 on 10/20/2017.
  */
@@ -138,10 +140,17 @@ public class SendMoneyToWallet extends BaseFragment {
         mobileStr=mobileEdt.getText().toString().trim();
         amountStr=amount.getText().toString().trim();
         commentStr=commentEdt.getText().toString().trim();
+        String s = amount.getText().toString().trim();
 
         if (TextUtils.isEmpty(mobileStr)){
             mobileNumberTXT.setErrorEnabled(true);
             mobileNumberTXT.setError("enter mobile no");
+            return false;
+        }
+        else if (!isValidPhone())
+        {
+            mobileNumberTXT.setErrorEnabled(true);
+            mobileNumberTXT.setError("enter valid mobile no");
             return false;
         }
         else if (TextUtils.isEmpty(amountStr))
@@ -150,9 +159,38 @@ public class SendMoneyToWallet extends BaseFragment {
             amountTXT.setError("enter amount");
             return false;
         }
+       else if (!TextUtils.isEmpty(s)  )
+        {
+            Double d = Double.parseDouble(s);
+            try {
+                if (s.length() < 1 || s.length() <= 15) {
+                    Toast.makeText(getApplicationContext(), " amount is valid", Toast.LENGTH_SHORT).show();
+                    return false;
+                } else {
+                    Toast.makeText(getApplicationContext(), " amount is not valid", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            } catch (NumberFormatException nfe) {
+                amount.setText(" ");
+                Toast.makeText(getApplicationContext(), "Bad format for number!", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "field must not be empty or null", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
 
         return true;
+    }
+    private boolean isValidPhone()
+    {
+        String target=mobileEdt.getText().toString().trim();
+        if (target.length()!=10) {
+            return false;
+        } else {
+            return android.util.Patterns.PHONE.matcher(target).matches();
+        }
     }
 
     private void sendMoneyRequest() {
