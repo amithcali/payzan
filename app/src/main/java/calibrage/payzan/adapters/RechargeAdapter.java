@@ -59,6 +59,7 @@ public class RechargeAdapter extends RecyclerView.Adapter<RechargeAdapter.MyHold
         TextView textView;
         public MyHolder(View itemView) {
             super(itemView);
+
             imageView=(ImageView)itemView.findViewById(R.id.image);
             textView=(TextView) itemView.findViewById(R.id.text);
         }

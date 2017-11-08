@@ -215,7 +215,7 @@ public class LoginResponseModel {
            private String walletId;
            @SerializedName("Balance")
            @Expose
-           private Integer balance;
+           private Long balance;
            @SerializedName("Id")
            @Expose
            private Integer id;
@@ -251,11 +251,11 @@ public class LoginResponseModel {
                this.walletId = walletId;
            }
 
-           public Integer getBalance() {
+           public Long getBalance() {
                return balance;
            }
 
-           public void setBalance(Integer balance) {
+           public void setBalance(Long balance) {
                this.balance = balance;
            }
 

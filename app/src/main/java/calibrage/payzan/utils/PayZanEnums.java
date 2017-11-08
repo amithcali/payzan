@@ -30,6 +30,20 @@ public class PayZanEnums {
             return Id;
         }
     }
+    public enum TransactionsEnum {
+        Deposit("29"),
+        WithDrawal("30"),
+        Transfer("31");
+        private String Id;
+
+        TransactionsEnum(String Id) {
+            this.Id = Id;
+        }
+
+        public String TID() {
+            return Id;
+        }
+    }
 
 
 }

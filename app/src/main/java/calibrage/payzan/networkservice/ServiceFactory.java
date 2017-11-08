@@ -55,7 +55,7 @@ public class ServiceFactory implements Authenticator {
     private static OkHttpClient getHttpClient(final Context context) {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(50, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS);
 

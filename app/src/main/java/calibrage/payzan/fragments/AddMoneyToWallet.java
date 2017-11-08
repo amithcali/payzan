@@ -40,6 +40,7 @@ import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.NCBTextInputLayout;
+import calibrage.payzan.utils.SharedPrefsData;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 import rx.Subscription;
@@ -47,6 +48,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 import static calibrage.payzan.fragments.HomeFragment.walletTxt;
+import static calibrage.payzan.fragments.TransactionMainFragment.walletBalanceTxt;
 
 /**
  * Created by Calibrage11 on 9/25/2017.
@@ -124,6 +126,7 @@ public class AddMoneyToWallet extends BaseFragment {
 
 
                 if(validateUi()) {
+                    showDialog(getActivity(),"Please Wait Loading");
                     addWallet();
                 }
 
@@ -206,16 +209,19 @@ public class AddMoneyToWallet extends BaseFragment {
                             }
                             e.printStackTrace();
                         }
+                        hideDialog();
                         Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(WalletResponse walletResponse) {
+                        hideDialog();
                         Toast.makeText(context, "sucess", Toast.LENGTH_SHORT).show();
                         // finish();
                         CommonConstants.WALLETMONEY = String.valueOf(walletResponse.getResult().getBalance());
                         CommonUtil.displayDialogWindow("Wallet is Updated Sucessfully", alertDialog, context);
                         walletTxt.setText(CommonConstants.WALLETMONEY);
+                        walletBalanceTxt.setText("Wallet Balance :"+CommonConstants.WALLETMONEY);
                         //  closeTab();
                     }
                 });
@@ -224,9 +230,9 @@ public class AddMoneyToWallet extends BaseFragment {
     private JsonObject postWalletObject() {
         PostWalletModel postWalletModel = new PostWalletModel();
         postWalletModel.setAmount(Integer.parseInt(enterMoneyEdt.getText().toString()));
-        postWalletModel.setUpdatedByUserId(CommonConstants.USERID);
-        postWalletModel.setCreatedByUserId(CommonConstants.USERID);
-        postWalletModel.setWalletId(CommonConstants.WALLETID);
+        postWalletModel.setUpdatedByUserId(SharedPrefsData.getInstance(context).getUserId(context));
+        postWalletModel.setCreatedByUserId(SharedPrefsData.getInstance(context).getUserId(context));
+        postWalletModel.setWalletId(SharedPrefsData.getInstance(context).getWalletId(context));
         postWalletModel.setReasonTypeId(20);
         postWalletModel.setTransactionTypeId(18);
 

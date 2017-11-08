@@ -18,6 +18,7 @@ public class SharedPrefsData {
     private SharedPreferences payZanSharedPrefs = null;
     private  static final String USER_ID = "user_id";
     private static final String WALLET_ID = "wallet_id";
+    private static final String WALLET_MONEY = "wallet_money";
 
 
     public static SharedPrefsData getInstance(Context context) {
@@ -91,6 +92,25 @@ public class SharedPrefsData {
         SharedPreferences profilePref = context.getSharedPreferences(PICHIT_DATA,
                 Context.MODE_PRIVATE);
         return profilePref.getString(WALLET_ID, "");
+
+    }
+    public void saveWalletIdMoney(Context context, long walletMoney) {
+        if (context != null) {
+            SharedPreferences profilePref = context.getSharedPreferences(PICHIT_DATA,
+                    Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = profilePref.edit();
+            editor.putLong(WALLET_MONEY, walletMoney);
+
+            // Commit the edits!
+            editor.apply();
+
+        }
+    }
+
+    public long getWalletIdMoney(Context context) {
+        SharedPreferences profilePref = context.getSharedPreferences(PICHIT_DATA,
+                Context.MODE_PRIVATE);
+        return profilePref.getLong(WALLET_MONEY, 0);
 
     }
 

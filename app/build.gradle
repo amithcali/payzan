@@ -12,7 +12,6 @@ android {
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    flavorDimensions "default"
     buildTypes {
         release {
             minifyEnabled false
@@ -23,9 +22,13 @@ android {
         dev {
             buildConfigField "String", "SERVER_URL", '" "'
             buildConfigField "String", "AZURE_URL", '"http://payzandev1.azurewebsites.net/"'
-            buildConfigField "String", "LOCAL_URL", '"http://192.168.1.157/PayZanAPI/"'
+            buildConfigField "String", "LOCAL_URL", '"http://192.168.1.15' +
+                    '' +
+                    '' +
+                    '7/PayZanAPI/"'
         }
     }
+    flavorDimensions "default"
 }
 
 dependencies {

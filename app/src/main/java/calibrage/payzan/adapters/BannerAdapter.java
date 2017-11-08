@@ -5,7 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,7 +20,6 @@ import calibrage.payzan.R;
 public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.MyHolder> {
     private Context context;
     private ArrayList<Integer> bannerArrayList;
-
     public BannerAdapter(Context context, ArrayList<Integer> bannerArrayList){
         this.context = context;
         this.bannerArrayList = bannerArrayList;
@@ -33,8 +34,12 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.MyHolder> 
     }
 
     @Override
-    public void onBindViewHolder(BannerAdapter.MyHolder holder, int position) {
- holder.imageView.setImageResource(bannerArrayList.get(position));
+    public void onBindViewHolder(BannerAdapter.MyHolder holder, final int position) {
+       holder.imageView.setImageResource(bannerArrayList.get(position));
+
+
+
+
     }
 
     @Override
@@ -47,6 +52,9 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.MyHolder> 
         public MyHolder(View itemView) {
             super(itemView);
             imageView = (ImageView)itemView.findViewById(R.id.image);
+
         }
     }
+
+
 }
