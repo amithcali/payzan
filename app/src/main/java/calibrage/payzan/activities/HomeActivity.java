@@ -1,5 +1,6 @@
 package calibrage.payzan.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -293,7 +294,8 @@ public class HomeActivity extends AppCompatActivity implements OnFragmentInterac
             public void onClick(View v) {
                 if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
 
-
+                    toolbar.setNavigationIcon(null);
+                    toolbar.setTitle("");
                     getSupportFragmentManager().popBackStackImmediate();
                 }
             }
@@ -334,6 +336,7 @@ public class HomeActivity extends AppCompatActivity implements OnFragmentInterac
 
 
     public class BottomNavigationViewHelper {
+
         public void disableShiftMode(BottomNavigationView view) {
             BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
             try {
