@@ -127,6 +127,7 @@ public class SendMoneyToWallet extends BaseFragment {
             @Override
             public void onClick(View view) {
                 if(validateUi())
+                    showDialog(getActivity(),"Please Wait Loading");
                 sendMoneyRequest();
             }
         });
@@ -185,11 +186,13 @@ public class SendMoneyToWallet extends BaseFragment {
                             }
                             e.printStackTrace();
                         }
+                        hideDialog();
                         Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(SendMoneyResponseModel sendMoneyResponseModel) {
+                        hideDialog();
                         Toast.makeText(getActivity(), "sucess", Toast.LENGTH_SHORT).show();
 
                     }

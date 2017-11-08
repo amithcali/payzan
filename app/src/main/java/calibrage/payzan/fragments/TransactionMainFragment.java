@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.interfaces.CommunicateFragments;
 import calibrage.payzan.interfaces.OnChildFragmentInteractionListener;
 import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
+import calibrage.payzan.utils.SharedPrefsData;
 
 /**
  * Created by Calibrage11 on 10/20/2017.
@@ -38,6 +40,7 @@ public class TransactionMainFragment extends BaseFragment {
     private Context context;
     private View rootview;
     private int currentItem;
+    public static TextView walletBalanceTxt;
   //  private CommunicateFragments  communicateFragments;
     private OnChildFragmentToActivityInteractionListener mActivityListener;
     private OnChildFragmentInteractionListener mParentListener;
@@ -68,10 +71,12 @@ public class TransactionMainFragment extends BaseFragment {
             }
         });
         tabs = (TabLayout)rootview.findViewById(R.id.tabs);
+        walletBalanceTxt = (TextView) rootview.findViewById(R.id.walletBalanceTxt);
+        walletBalanceTxt.setText(("Wallet Balance: ")+String.valueOf(SharedPrefsData.getInstance(context).getWalletIdMoney(context)));
        // tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
         viewPager = (ViewPager)rootview.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-     //   viewPager.setOffscreenPageLimit(4);
+        viewPager.setOffscreenPageLimit(3);
         viewPager.setCurrentItem(currentItem, true);
         tabs.setupWithViewPager(viewPager);
 

@@ -9,6 +9,7 @@ import calibrage.payzan.model.MandalModel;
 import calibrage.payzan.model.OperatorModel;
 import calibrage.payzan.model.SendMoneyResponseModel;
 import calibrage.payzan.model.StatesModel;
+import calibrage.payzan.model.TransactionResponseModel;
 import calibrage.payzan.model.VillageModel;
 import calibrage.payzan.model.WalletResponse;
 import retrofit2.http.GET;
@@ -28,25 +29,36 @@ public interface MyServices {
     // @Headers("Accept: application/json")
     @POST(ApiConstants.REGISTER)
     Observable<calibrage.payzan.model.ResponseModel> userRegister(@Body JsonObject data);
+
     @POST(ApiConstants.LOGIN)
     Observable<LoginResponseModel> UserLogin(@Body JsonObject data);
+
     @POST(ApiConstants.WALLET)
     Observable<WalletResponse> UserAddWallet(@Body JsonObject data);
+
     @GET
     Observable<StatesModel> getStates(@Url String url);
+
     @GET
     Observable<DistrictModel> getDistricts(@Url String url);
+
     @GET
     Observable<MandalModel> getMandals(@Url String url);
+
     @GET
     Observable<VillageModel> getVillages(@Url String url);
+
     @GET
     Observable<OperatorModel> getOperator(@Url String url);
+
     @POST(ApiConstants.AGENT_REQUEST)
     Observable<calibrage.payzan.model.AgentResponseModel> agentRequest(@Body JsonObject data);
 
     @POST(ApiConstants.SEND_MONEY_WALLET)
     Observable<SendMoneyResponseModel> sendMoneyRequest(@Body JsonObject data);
+
+    @GET
+    Observable<TransactionResponseModel> myTransactions(@Url String url);
 
 
 }

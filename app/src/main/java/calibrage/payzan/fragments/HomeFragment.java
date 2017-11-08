@@ -36,6 +36,7 @@ import calibrage.payzan.interfaces.RechargeClickListiner;
 import calibrage.payzan.interfaces.TransctionClickListiner;
 import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.CommonUtil;
+import calibrage.payzan.utils.SharedPrefsData;
 
 
 /**
@@ -277,7 +278,7 @@ public class HomeFragment extends BaseFragment implements RechargeClickListiner,
     @Override
     public void onResume() {
         super.onResume();
-        walletTxt.setText(CommonConstants.WALLETMONEY);
+        walletTxt.setText(String.valueOf(SharedPrefsData.getInstance(context).getWalletIdMoney(context)));
 
 
     }
@@ -285,7 +286,7 @@ public class HomeFragment extends BaseFragment implements RechargeClickListiner,
     @Override
     public void onPause() {
         super.onPause();
-        walletTxt.setText(CommonConstants.WALLETMONEY);
+        walletTxt.setText(String.valueOf(SharedPrefsData.getInstance(context).getWalletIdMoney(context)));
 
     }
 
