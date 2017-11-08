@@ -340,6 +340,8 @@ public class HomeFragment extends BaseFragment implements RechargeClickListiner,
         //  communicateFragments.onFragmentInteraction(id);
     }
 
+
+
 //    @Override
 //    public void messageFromChildToParent(String myString) {
 //

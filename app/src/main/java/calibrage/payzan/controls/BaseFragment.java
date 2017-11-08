@@ -148,4 +148,40 @@ public class BaseFragment extends Fragment {
             CommonUtil.hideSoftKeyboard((AppCompatActivity)getActivity());*/
         }
     }
+
+    public void ShowImagePopUp(String Img_url,String msg_str,String TAG)
+    {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        dialog.setContentView(R.layout.alert_image_alert);
+
+//        Button ok_btn = (Button) dialog.findViewById(R.id.ok_btn);
+//        Button cancel_btn = (Button) dialog.findViewById(R.id.cancel_btn);
+
+
+//        ok_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //
+//                Intent intent = new Intent(Intent.ACTION_MAIN);
+//                intent.addCategory(Intent.CATEGORY_HOME);
+//                startActivity(intent);
+//                getActivity().finish();
+//            }
+//        });
+//        cancel_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+
+        //dialog.setCancelable(false);
+        dialog.show();
+
+    }
+
 }
