@@ -469,6 +469,8 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
                         SharedPrefsData.getInstance(getActivity()).saveUserId(getActivity(),loginResponseModel.getdata().getUser().getId());
                         SharedPrefsData.getInstance(getActivity()).saveWalletId(getActivity(),loginResponseModel.getdata().getUserWallet().getWalletId());
                         SharedPrefsData.getInstance(getActivity()).saveWalletIdMoney(getActivity(),loginResponseModel.getdata().getUserWallet().getBalance());
+                        SharedPrefsData.getInstance(getActivity()).saveUserName(getActivity(),loginResponseModel.getdata().getUser().getUserName());
+
 
                         Intent i = new Intent(getContext(), HomeActivity.class);
                         startActivity(i);

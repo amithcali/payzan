@@ -16,9 +16,10 @@ public class SharedPrefsData {
     private static final String PICHIT_DATA = "payzan";
     private static String MY_INT_PREF = "myintpref";
     private SharedPreferences payZanSharedPrefs = null;
-    private  static final String USER_ID = "user_id";
+    private static final String USER_ID = "user_id";
     private static final String WALLET_ID = "wallet_id";
     private static final String WALLET_MONEY = "wallet_money";
+    private static final String USER_NAME = "user_name";
 
 
     public static SharedPrefsData getInstance(Context context) {
@@ -75,6 +76,26 @@ public class SharedPrefsData {
 
     }
 
+    public void saveUserName(Context context, String userName) {
+        if (context != null) {
+            SharedPreferences profilePref = context.getSharedPreferences(PICHIT_DATA,
+                    Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = profilePref.edit();
+            editor.putString(USER_NAME, userName);
+
+            // Commit the edits!
+            editor.apply();
+
+        }
+    }
+
+    public String getUserName(Context context) {
+        SharedPreferences profilePref = context.getSharedPreferences(PICHIT_DATA,
+                Context.MODE_PRIVATE);
+        return profilePref.getString(USER_NAME, "");
+
+    }
+
     public void saveWalletId(Context context, String walletId) {
         if (context != null) {
             SharedPreferences profilePref = context.getSharedPreferences(PICHIT_DATA,
@@ -94,6 +115,7 @@ public class SharedPrefsData {
         return profilePref.getString(WALLET_ID, "");
 
     }
+
     public void saveWalletIdMoney(Context context, long walletMoney) {
         if (context != null) {
             SharedPreferences profilePref = context.getSharedPreferences(PICHIT_DATA,
@@ -146,7 +168,7 @@ public class SharedPrefsData {
     public void ClearData(Context context) {
         //getPitchItSharedPrefs(context);
         SharedPreferences.Editor editor = this.payZanSharedPrefs.edit();
-       editor.clear();
+        editor.clear();
         editor.commit();
     }
 

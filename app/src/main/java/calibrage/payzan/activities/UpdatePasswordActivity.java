@@ -1,14 +1,34 @@
 package calibrage.payzan.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import java.io.IOException;
 
 import calibrage.payzan.R;
 import calibrage.payzan.controls.CommonEditText;
+import calibrage.payzan.model.ChangePasswordModel;
+import calibrage.payzan.model.ChangePasswordResponseModel;
+import calibrage.payzan.model.LoginModel;
+import calibrage.payzan.model.LoginResponseModel;
+import calibrage.payzan.networkservice.MyServices;
+import calibrage.payzan.networkservice.ServiceFactory;
+import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.NCBTextInputLayout;
+import calibrage.payzan.utils.SharedPrefsData;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Calibrage11 on 11/8/2017.
@@ -18,6 +38,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
     private CommonEditText oldPsdEdt,newPsdEdt,confirmPsdEdt;
     private NCBTextInputLayout oldPsdTIL,newPsdTIL,confirmPsdTIL;
     private Button saveBtn;
+    private Subscription passwordSubscription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +53,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(isValidateUi()){
+                    login();
 
                 }
 
@@ -52,5 +74,53 @@ public class UpdatePasswordActivity extends AppCompatActivity {
 
     private boolean isValidateUi(){
         return true;
+    }
+
+    private void login() {
+        JsonObject object = getPassword();
+        MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
+        passwordSubscription = service.changePassword(object)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ChangePasswordResponseModel>() {
+                    @Override
+                    public void onCompleted() {
+                        Toast.makeText(UpdatePasswordActivity.this, "check", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (e instanceof HttpException) {
+                            ((HttpException) e).code();
+                            ((HttpException) e).message();
+                            ((HttpException) e).response().errorBody();
+                            try {
+                                ((HttpException) e).response().errorBody().string();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onNext(ChangePasswordResponseModel changePasswordResponseModel) {
+
+                        Toast.makeText(UpdatePasswordActivity.this, "sucess", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+    }
+
+    private JsonObject getPassword() {
+        ChangePasswordModel changePasswordModel = new ChangePasswordModel();
+        changePasswordModel.setUserName(SharedPrefsData.getInstance(this).getUserName(this));
+        changePasswordModel.setOldPassword(oldPsdEdt.getText().toString().trim());
+        changePasswordModel.setNewPassword(newPsdEdt.getText().toString().trim());
+        changePasswordModel.setConfirmPassword(confirmPsdEdt.getText().toString().trim());
+        return new Gson().toJsonTree(changePasswordModel)
+                .getAsJsonObject();
     }
 }
