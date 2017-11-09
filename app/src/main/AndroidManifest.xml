@@ -182,6 +182,10 @@
         <!--/>-->
         <!--</activity>-->
 
+        <activity android:name=".activities.UpdatePasswordActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize">
+        </activity>
+
     </application>
 
 </manifest>

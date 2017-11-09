@@ -3,6 +3,7 @@ package calibrage.payzan.networkservice;
 import com.google.gson.JsonObject;
 
 
+import calibrage.payzan.model.ChangePasswordResponseModel;
 import calibrage.payzan.model.DistrictModel;
 import calibrage.payzan.model.LoginResponseModel;
 import calibrage.payzan.model.MandalModel;
@@ -53,6 +54,9 @@ public interface MyServices {
 
     @POST(ApiConstants.AGENT_REQUEST)
     Observable<calibrage.payzan.model.AgentResponseModel> agentRequest(@Body JsonObject data);
+
+    @POST(ApiConstants.CHANGE_PASSWORD)
+    Observable<ChangePasswordResponseModel> changePassword(@Body JsonObject data);
 
     @POST(ApiConstants.SEND_MONEY_WALLET)
     Observable<SendMoneyResponseModel> sendMoneyRequest(@Body JsonObject data);

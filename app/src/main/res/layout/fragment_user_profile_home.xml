@@ -111,7 +111,8 @@ android:scrollbars="none"
 
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/btn_height"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:id="@+id/saveCardLyt">
 
                         <ImageView
                             android:layout_width="0dp"
@@ -155,7 +156,8 @@ android:scrollbars="none"
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/btn_height"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:id="@+id/orderHistoryLyt">
 
                         <ImageView
                             android:layout_width="0dp"
@@ -200,7 +202,8 @@ android:scrollbars="none"
 
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/btn_height"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:id="@+id/changePsdLyt">
 
                         <ImageView
                             android:layout_width="0dp"

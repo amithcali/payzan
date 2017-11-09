@@ -11,10 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
+import calibrage.payzan.activities.RequestForAgent;
+import calibrage.payzan.activities.UpdatePasswordActivity;
 import calibrage.payzan.controls.BaseFragment;
 import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
 import calibrage.payzan.utils.CommonConstants;
@@ -24,8 +28,10 @@ import calibrage.payzan.utils.SharedPrefsData;
 
 public class UserProfileHome extends BaseFragment {
     public static final String TAG = UserProfileHome.class.getSimpleName();
-    private Button btn_logOut,btn_Share;
+    private Button btn_logOut, btn_Share;
     private OnChildFragmentToActivityInteractionListener mActivityListener;
+    private LinearLayout changePsdLyt;
+    private Context context;
 
 
     @Override
@@ -40,16 +46,27 @@ public class UserProfileHome extends BaseFragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_user_profile_home, container, false);
         btn_logOut = (Button) v.findViewById(R.id.btn_sign_out);
-        btn_Share= (Button) v.findViewById(R.id.btn_share);
+        btn_Share = (Button) v.findViewById(R.id.btn_share);
+        changePsdLyt = (LinearLayout) v.findViewById(R.id.changePsdLyt);
+        context = this.getActivity();
+
+        changePsdLyt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, UpdatePasswordActivity.class));
+
+            }
+        });
+
         btn_logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPrefsData.getInstance(getActivity()).ClearData(getActivity());
 
-               // Toast.makeText(getActivity(), "DATA Cleared", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), "DATA Cleared", Toast.LENGTH_SHORT).show();
 //                Intent i = new Intent(getContext(), HomeActivity.class);
 //                startActivity(i);
-               // getActivity().finish();
+                // getActivity().finish();
 
                 closeTab();
 
@@ -58,7 +75,7 @@ public class UserProfileHome extends BaseFragment {
         btn_Share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Ishare=new Intent(Intent.ACTION_SEND);
+                Intent Ishare = new Intent(Intent.ACTION_SEND);
                 Ishare.setType("text/plain");
                 Ishare.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 
@@ -94,7 +111,7 @@ public class UserProfileHome extends BaseFragment {
         mActivityListener.messageFromChildFragmentToActivity("signout");
 
         if (fragment != null) {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new LoginFragment()).commit();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new LoginFragment()).commit();
             HomeActivity.toolbar.setNavigationIcon(null);
             HomeActivity.toolbar.setTitle("");
             CommonUtil.hideSoftKeyboard((AppCompatActivity) getActivity());
