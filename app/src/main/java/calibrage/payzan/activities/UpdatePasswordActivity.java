@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -41,6 +44,7 @@ public class UpdatePasswordActivity extends BaseActivity {
     private Button saveBtn;
     private Subscription passwordSubscription;
     private Toolbar toolbar;
+    private String oldPsdStr,newPsdStr,confirmPsdStr;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +55,62 @@ public class UpdatePasswordActivity extends BaseActivity {
     }
 
     private void initView() {
+
+        oldPsdEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    oldPsdTIL.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        newPsdEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    newPsdTIL.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        confirmPsdEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    confirmPsdTIL.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +139,28 @@ public class UpdatePasswordActivity extends BaseActivity {
     }
 
     private boolean isValidateUi() {
+        oldPsdStr=oldPsdEdt.getText().toString().trim();
+        newPsdStr=newPsdEdt.getText().toString().trim();
+        confirmPsdStr=confirmPsdEdt.getText().toString().trim();
+
+        if (TextUtils.isEmpty(oldPsdStr))
+        {
+            oldPsdTIL.setError("please enter old password");
+            oldPsdTIL.setErrorEnabled(true);
+            return false;
+        }
+        else if (TextUtils.isEmpty(newPsdStr))
+        {
+            newPsdTIL.setErrorEnabled(true);
+            newPsdTIL.setError("enter new Password");
+            return false;
+        }
+        else if (TextUtils.isEmpty(confirmPsdStr))
+        {
+            confirmPsdTIL.setError("enter confirm password");
+            confirmPsdTIL.setErrorEnabled(true);
+            return false;
+        }
         return true;
     }
 
