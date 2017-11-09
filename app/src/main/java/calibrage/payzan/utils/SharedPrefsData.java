@@ -20,6 +20,7 @@ public class SharedPrefsData {
     private static final String WALLET_ID = "wallet_id";
     private static final String WALLET_MONEY = "wallet_money";
     private static final String USER_NAME = "user_name";
+    private static final String USER_DETAILS = "user_details";
 
 
     public static SharedPrefsData getInstance(Context context) {
@@ -93,6 +94,25 @@ public class SharedPrefsData {
         SharedPreferences profilePref = context.getSharedPreferences(PICHIT_DATA,
                 Context.MODE_PRIVATE);
         return profilePref.getString(USER_NAME, "");
+
+    }
+    public void saveUserDetails(Context context, String userDetails) {
+        if (context != null) {
+            SharedPreferences profilePref = context.getSharedPreferences(PICHIT_DATA,
+                    Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = profilePref.edit();
+            editor.putString(USER_DETAILS, userDetails);
+
+            // Commit the edits!
+            editor.apply();
+
+        }
+    }
+
+    public String getUserDetails(Context context) {
+        SharedPreferences profilePref = context.getSharedPreferences(PICHIT_DATA,
+                Context.MODE_PRIVATE);
+        return profilePref.getString(USER_DETAILS, "");
 
     }
 

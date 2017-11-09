@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -34,11 +35,12 @@ import rx.schedulers.Schedulers;
  * Created by Calibrage11 on 11/8/2017.
  */
 
-public class UpdatePasswordActivity extends AppCompatActivity {
-    private CommonEditText oldPsdEdt,newPsdEdt,confirmPsdEdt;
-    private NCBTextInputLayout oldPsdTIL,newPsdTIL,confirmPsdTIL;
+public class UpdatePasswordActivity extends BaseActivity {
+    private CommonEditText oldPsdEdt, newPsdEdt, confirmPsdEdt;
+    private NCBTextInputLayout oldPsdTIL, newPsdTIL, confirmPsdTIL;
     private Button saveBtn;
     private Subscription passwordSubscription;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,8 +54,9 @@ public class UpdatePasswordActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isValidateUi()){
-                    login();
+                if (isValidateUi()) {
+                    showProgressDialog();
+                    changePassword();
 
                 }
 
@@ -63,20 +66,23 @@ public class UpdatePasswordActivity extends AppCompatActivity {
     }
 
     private void setView() {
-        oldPsdEdt = (CommonEditText)findViewById(R.id.oldPsdEdt);
-        newPsdEdt = (CommonEditText)findViewById(R.id.newPsdEdt);
-        confirmPsdEdt = (CommonEditText)findViewById(R.id.confirmPsdEdt);
-        oldPsdTIL = (NCBTextInputLayout)findViewById(R.id.oldPsdTIL);
-        newPsdTIL = (NCBTextInputLayout)findViewById(R.id.newPsdTIL);
-        confirmPsdTIL = (NCBTextInputLayout)findViewById(R.id.confirmPsdTIL);
+        oldPsdEdt = (CommonEditText) findViewById(R.id.oldPsdEdt);
+        newPsdEdt = (CommonEditText) findViewById(R.id.newPsdEdt);
+        confirmPsdEdt = (CommonEditText) findViewById(R.id.confirmPsdEdt);
+        oldPsdTIL = (NCBTextInputLayout) findViewById(R.id.oldPsdTIL);
+        newPsdTIL = (NCBTextInputLayout) findViewById(R.id.newPsdTIL);
+        confirmPsdTIL = (NCBTextInputLayout) findViewById(R.id.confirmPsdTIL);
         saveBtn = (Button) findViewById(R.id.saveBtn);
+//        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        toolbar.setTitle(getResources().getString(R.string.Update_Password));
+
     }
 
-    private boolean isValidateUi(){
+    private boolean isValidateUi() {
         return true;
     }
 
-    private void login() {
+    private void changePassword() {
         JsonObject object = getPassword();
         MyServices service = ServiceFactory.createRetrofitService(this, MyServices.class);
         passwordSubscription = service.changePassword(object)
@@ -86,7 +92,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted() {
                         Toast.makeText(UpdatePasswordActivity.this, "check", Toast.LENGTH_SHORT).show();
-
+                        hideProgressDialog();
                     }
 
                     @Override
@@ -102,6 +108,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
                             }
                             e.printStackTrace();
                         }
+                        hideProgressDialog();
 
                     }
 
