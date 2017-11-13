@@ -52,10 +52,14 @@ public class ServiceFactory implements Authenticator {
 //        return retrofit.create(clazz);
 //    }
 
-    private static OkHttpClient getHttpClient(final Context context) {
+    private static OkHttpClient
+
+
+
+    getHttpClient(final Context context) {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(50, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS);
 

@@ -65,5 +65,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="data_card_number">Data Card Number</string>
     <string name="confirm_password">confirm password</string>
+    <string name="Update_Password">Update Password</string>
 
 </resources>

@@ -28,6 +28,7 @@
             android:layout_gravity="center|bottom"
             android:layout_marginBottom="16dp"
             android:text="Wallet Balance : "
+            android:id="@+id/walletBalanceTxt"
             />
     </FrameLayout>
         <android.support.design.widget.TabLayout

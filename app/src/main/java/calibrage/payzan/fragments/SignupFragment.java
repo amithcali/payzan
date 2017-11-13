@@ -219,6 +219,7 @@ public class  SignupFragment extends BaseFragment implements GoogleApiClient.OnC
             @Override
             public void onClick(View view) {
                 if (isValidateUi()) {
+                    showDialog(getActivity(),"Please Wait Loading");
                     registerUser();
                 }
 
@@ -319,14 +320,15 @@ public class  SignupFragment extends BaseFragment implements GoogleApiClient.OnC
                             }
                             e.printStackTrace();
                         }
-                        Log.d(TAG, "Register onError: "+ e.toString());
+                      //  Log.d(TAG, "Register onError: "+ e.toString());
+                        hideDialog();
                         Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(ResponseModel registerResponseModel) {
 
-
+hideDialog();
                         if(registerResponseModel.getIsSuccess() == true)
                         {
                             Toast.makeText(getActivity(), "Please Login", Toast.LENGTH_SHORT).show();

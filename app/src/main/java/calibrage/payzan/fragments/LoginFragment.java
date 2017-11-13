@@ -267,6 +267,7 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
             @Override
             public void onClick(View view) {
               if (isValidateUi()) {
+                  showDialog(getActivity(),"Please Wait loading");
                   login();
               }
 
@@ -449,14 +450,16 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
                             }
                             e.printStackTrace();
                         }
-                        Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
+                        hideDialog();
+                       // Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(LoginResponseModel loginResponseModel) {
+                        hideDialog();
                         Toast.makeText(getActivity(), "sucess", Toast.LENGTH_SHORT).show();
                         String TOke=loginResponseModel.getdata().getAccessToken();
-                        Toast.makeText(getActivity(), "Token :"+loginResponseModel.getdata().getAccessToken(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity(), "Token :"+loginResponseModel.getdata().getAccessToken(), Toast.LENGTH_SHORT).show();
 
                      /*   CommonConstants.USERID = loginResponseModel.getData().getUser().getId();
                         CommonConstants.WALLETID = String.valueOf(loginResponseModel.getData().getUserWallet().getWalletId());*/
@@ -465,6 +468,10 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
                         SharedPrefsData.getInstance(getActivity()).updateIntValue(getActivity(),CommonConstants.ISLOGIN, CommonConstants.Login);
                         SharedPrefsData.getInstance(getActivity()).saveUserId(getActivity(),loginResponseModel.getdata().getUser().getId());
                         SharedPrefsData.getInstance(getActivity()).saveWalletId(getActivity(),loginResponseModel.getdata().getUserWallet().getWalletId());
+                        SharedPrefsData.getInstance(getActivity()).saveWalletIdMoney(getActivity(),loginResponseModel.getdata().getUserWallet().getBalance());
+                        SharedPrefsData.getInstance(getActivity()).saveUserName(getActivity(),loginResponseModel.getdata().getUser().getUserName());
+                        SharedPrefsData.getInstance(getActivity()).saveUserDetails(getActivity(),new Gson().toJson(loginResponseModel));
+
 
                         Intent i = new Intent(getContext(), HomeActivity.class);
                         startActivity(i);
