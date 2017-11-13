@@ -198,11 +198,11 @@ public class PayCableFragment extends BaseFragment implements GenericAdapter.Ada
             operatorTXT.setErrorEnabled(true);
             return true;
         } else if (TextUtils.isEmpty(accontNoStr)) {
-            accontNoTXT.setError("enter account no");
+            accontNoTXT.setError("Enter account no");
             accontNoTXT.setErrorEnabled(true);
             return true;
         } else if (TextUtils.isEmpty(amountStr)) {
-            amountTXT.setError("enter amount");
+            amountTXT.setError("Enter amount");
             amountTXT.setErrorEnabled(true);
             return true;
         }

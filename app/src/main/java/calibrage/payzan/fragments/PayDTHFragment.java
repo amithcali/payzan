@@ -181,7 +181,7 @@ public class PayDTHFragment extends BaseFragment implements GenericAdapter.Adapt
         operatorStr= operatorSpn.getText().toString().trim();
         amountStr =amount.getText().toString().trim();
         if(TextUtils.isEmpty(subscriberStr)){
-            subscriberTXT.setError("enter subscriber id");
+            subscriberTXT.setError("Enter subscriber id");
             subscriberTXT.setErrorEnabled(true);
             return true;
         }else if(TextUtils.isEmpty(operatorStr)){
@@ -189,7 +189,7 @@ public class PayDTHFragment extends BaseFragment implements GenericAdapter.Adapt
             operatorTXT.setErrorEnabled(true);
             return true;
         }else if(TextUtils.isEmpty(amountStr)){
-            amountTXT.setError("enter amount");
+            amountTXT.setError("Enter amount");
             amountTXT.setErrorEnabled(true);
             return true;
         }

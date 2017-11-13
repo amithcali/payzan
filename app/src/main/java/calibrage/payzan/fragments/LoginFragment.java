@@ -114,7 +114,7 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
 
         context = this.getActivity();
         callbackManager = CallbackManager.Factory.create();
-        loginButton = (LoginButton) rootView.findViewById(R.id.login);
+        loginButton = (LoginButton ) rootView.findViewById(R.id.login);
         fbBtn = (Button) rootView.findViewById(R.id.fbBtn);
         btnLogin = (Button) rootView.findViewById(R.id.btnLogin);
         button = (SignInButton) rootView.findViewById(R.id.btn_sign_in);
@@ -514,7 +514,7 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
     private boolean isValidPhone()
     {
         String target=txt_Email.getText().toString().trim();
-        if (target.length()!=10) {
+        if (target.length()!=13) {
             return false;
         } else {
             return android.util.Patterns.PHONE.matcher(target).matches();

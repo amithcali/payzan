@@ -75,17 +75,6 @@
                         android:layout_height="@dimen/img_wallet1_width"
                         android:src="@drawable/bank_icon" />
 
-                    <calibrage.payzan.controls.CommonTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="4dp"
-                        android:fontFamily="serif"
-                        android:gravity="bottom"
-                        android:text="Bank"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/edt_FontSize"
-                        android:textStyle="bold" />
-
                 </LinearLayout>
 
                 <calibrage.payzan.controls.CommonEditText
@@ -205,6 +194,17 @@
                         android:layout_gravity="right|center_vertical"
                         android:layout_marginRight="@dimen/img_wallet_margin"
                         android:src="@drawable/prepaid_contacts_icon" />
+
+                    <calibrage.payzan.controls.CommonTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="4dp"
+                        android:fontFamily="serif"
+                        android:gravity="bottom"
+                        android:text="Bank"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/edt_FontSize"
+                        android:textStyle="bold" />
                 </FrameLayout>
 
                 <calibrage.payzan.controls.CommonEditText

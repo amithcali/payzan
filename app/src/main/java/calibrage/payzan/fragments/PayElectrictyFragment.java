@@ -195,11 +195,11 @@ public class PayElectrictyFragment extends BaseFragment implements GenericAdapte
             districtTXT.setErrorEnabled(true);
             return false;
         } else if (TextUtils.isEmpty(ServiceStr)) {
-            serviceNoTXT.setError("enter service no");
+            serviceNoTXT.setError("Enter service no");
             serviceNoTXT.setErrorEnabled(true);
             return false;
         } else if (TextUtils.isEmpty(amountStr)) {
-            amountTXT.setError("enter amount");
+            amountTXT.setError("Enter amount");
             amountTXT.setErrorEnabled(true);
             return false;
         }

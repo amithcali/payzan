@@ -14,7 +14,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -312,7 +314,22 @@ public class HomeFragment extends BaseFragment implements RechargeClickListiner,
         }
 
     }
+    private void showPopup(BannerAdapter.MyHolder view) {
 
+
+        View popView=LayoutInflater.from(context).inflate(R.layout.alert_image_alert,null);
+        final PopupWindow popupWindow=new PopupWindow(popView, WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+        TextView textView= (TextView) popView.findViewById(R.id.txt);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                popupWindow.dismiss();
+            }
+        });
+        popupWindow.showAsDropDown(popView,0,0);
+    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

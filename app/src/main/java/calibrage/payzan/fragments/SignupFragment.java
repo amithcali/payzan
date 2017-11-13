@@ -394,7 +394,7 @@ hideDialog();
 //            reg_mobile_til.setErrorEnabled(true);
 //            reg_mobile_til.setError("Please enter mobile no.");
             return false;
-        } else if (!TextUtils.isEmpty(reg_mobile.getText().toString().trim()) && (reg_mobile.getText().toString().length() > 14 || reg_mobile.getText().toString().length() < 10)) {
+        } else if (!TextUtils.isEmpty(reg_mobile.getText().toString().trim()) && (reg_mobile.getText().toString().length() > 10 || reg_mobile.getText().toString().length() < 10)) {
             CommonUtil.displayDialogWindow("Please enter valid mobile no.", alertDialog, getActivity());
             return false;
         } else if (!isValidEmail(reg_email.getText().toString())) {

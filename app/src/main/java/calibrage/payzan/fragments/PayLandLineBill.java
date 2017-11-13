@@ -322,7 +322,7 @@ public class PayLandLineBill extends BaseFragment implements GenericAdapter.Adap
             operatorTXT.setError("please select operator");
             return false;
         } else if (TextUtils.isEmpty(mobilenoStr)) {
-            numberTXT.setError("enter number");
+            numberTXT.setError("Enter number");
             numberTXT.setErrorEnabled(true);
             return false;
         } else if (TextUtils.isEmpty(circleStr)) {
@@ -330,7 +330,7 @@ public class PayLandLineBill extends BaseFragment implements GenericAdapter.Adap
             circleTXT.setErrorEnabled(true);
             return false;
         } else if (TextUtils.isEmpty(amountStr)) {
-            amountTXT.setError("enter amount");
+            amountTXT.setError("Enter amount");
             amountTXT.setErrorEnabled(true);
             return false;
         }
