@@ -59,6 +59,7 @@ import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.activities.SplashActivity;
 import calibrage.payzan.activities.signup;
 import calibrage.payzan.controls.BaseFragment;
+import calibrage.payzan.controls.CommonEditText;
 import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
 import calibrage.payzan.model.RegisterModel;
 import calibrage.payzan.model.ResponseModel;
@@ -66,6 +67,7 @@ import calibrage.payzan.networkservice.ApiConstants;
 import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonUtil;
+import calibrage.payzan.utils.NCBTextInputLayout;
 import calibrage.payzan.utils.PayZanEnums;
 import calibrage.payzan.utils.SmsListener;
 import calibrage.payzan.utils.SmsReceiver;
@@ -83,7 +85,7 @@ import static calibrage.payzan.utils.CommonUtil.isValidEmail;
 
 public class  SignupFragment extends BaseFragment implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
     public static final String TAG = SignupFragment.class.getSimpleName();
-    private EditText reg_mobile, reg_email, reg_password, confirm_password;
+    private CommonEditText reg_mobile, reg_email, reg_password, reg_confirm_password;
     private LoginButton loginButton;
     private Button fbBtn, btnRegister;
     private CallbackManager callbackManager;
@@ -92,13 +94,14 @@ public class  SignupFragment extends BaseFragment implements GoogleApiClient.OnC
     private static final int RC_SIGN_IN = 007;
     private AlertDialog alertDialog;
     // private Subscription mRegisterSubscription;
-    private TextInputLayout reg_mobile_til;
+    private NCBTextInputLayout reg_mobile_til,reg_email_til,reg_password_til,reg_confirm_password_til;
     private Subscription mRegisterSubscription;
     private View rootView;
     private Context context;
     public static Toolbar toolbar;
     private TextView terms_comditions,linkToLogin;
     private OnChildFragmentToActivityInteractionListener mActivityListener;
+    private String reg_mobileStr, reg_emailStr, reg_passwordStr, reg_confirm_passwordStr;
 
     @Nullable
     @Override
@@ -111,11 +114,14 @@ public class  SignupFragment extends BaseFragment implements GoogleApiClient.OnC
         fbBtn = (Button) rootView.findViewById(R.id.fbBtn);
         btnRegister = (Button) rootView.findViewById(R.id.btnRegister);
         button = (SignInButton) rootView.findViewById(R.id.btn_sign_in);
-        reg_mobile = (EditText) rootView.findViewById(R.id.reg_mobile);
-        reg_email = (EditText) rootView.findViewById(R.id.reg_email);
-        reg_password = (EditText) rootView.findViewById(R.id.reg_password);
-        confirm_password = (EditText) rootView.findViewById(R.id.reg_confirm_password);
-        reg_mobile_til = (TextInputLayout) rootView.findViewById(R.id.reg_mobile_til);
+        reg_mobile = (CommonEditText) rootView.findViewById(R.id.reg_mobile);
+        reg_email = (CommonEditText) rootView.findViewById(R.id.reg_email);
+        reg_password = (CommonEditText) rootView.findViewById(R.id.reg_password);
+        reg_confirm_password = (CommonEditText) rootView.findViewById(R.id.reg_confirm_password);
+        reg_mobile_til = (NCBTextInputLayout) rootView.findViewById(R.id.reg_mobile_til);
+        reg_email_til=(NCBTextInputLayout)rootView.findViewById(R.id.reg_email_til);
+        reg_password_til=(NCBTextInputLayout)rootView.findViewById(R.id.reg_password_til);
+        reg_confirm_password_til=(NCBTextInputLayout)rootView.findViewById(R.id.reg_confirm_password_til);
         terms_comditions = (TextView) rootView.findViewById(R.id.terms_comditions);
         linkToLogin = (TextView) rootView.findViewById(R.id.linkToLogin);
         IntiateGoogleApi();
@@ -199,11 +205,67 @@ public class  SignupFragment extends BaseFragment implements GoogleApiClient.OnC
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                if (charSequence.length() > 0) {
+                    reg_mobile_til.setErrorEnabled(false);
+                }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        reg_email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    reg_email_til.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        reg_password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    reg_password_til.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        reg_confirm_password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    reg_confirm_password_til.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });
@@ -382,33 +444,63 @@ hideDialog();
         registerModel.setMobileNumber(reg_mobile.getText().toString().trim());
         registerModel.setPassword(reg_password.getText().toString().trim());
         registerModel.setEmail(reg_email.getText().toString().trim());
-        registerModel.setConfirmPassword(confirm_password.getText().toString().trim());
+        registerModel.setConfirmPassword(reg_confirm_password.getText().toString().trim());
         registerModel.setRoleId(PayZanEnums.RoleIdEnum.Consumer.RID());
         return new Gson().toJsonTree(registerModel)
                 .getAsJsonObject();
     }
 
     private boolean isValidateUi() {
-        if (TextUtils.isEmpty(reg_mobile.getText().toString().trim())) {
-            CommonUtil.displayDialogWindow("Please enter mobile no.", alertDialog, getActivity());
-//            reg_mobile_til.setErrorEnabled(true);
-//            reg_mobile_til.setError("Please enter mobile no.");
+
+        reg_mobileStr=reg_mobile.getText().toString().trim();
+        reg_emailStr=reg_email.getText().toString().trim();
+        reg_passwordStr=reg_password.getText().toString().trim();
+        reg_confirm_passwordStr=reg_confirm_password.getText().toString().trim();
+        String password=reg_password.getText().toString().trim();
+        String confirmPassword=reg_confirm_password.getText().toString().trim();
+
+
+        if (TextUtils.isEmpty(reg_mobileStr)) {
+
+              reg_mobile_til.setErrorEnabled(true);
+               reg_mobile_til.setError("Please enter mobile no.");
             return false;
-        } else if (!TextUtils.isEmpty(reg_mobile.getText().toString().trim()) && (reg_mobile.getText().toString().length() > 10 || reg_mobile.getText().toString().length() < 10)) {
-            CommonUtil.displayDialogWindow("Please enter valid mobile no.", alertDialog, getActivity());
-            return false;
-        } else if (!isValidEmail(reg_email.getText().toString())) {
-            CommonUtil.displayDialogWindow("Please enter valid email ", alertDialog, getActivity());
-            return false;
-        } else if (TextUtils.isEmpty(reg_password.getText().toString().trim())) {
-            CommonUtil.displayDialogWindow("Please enter password ", alertDialog, getActivity());
-            return false;
-        } else if (TextUtils.isEmpty(confirm_password.getText().toString().trim())) {
-            CommonUtil.displayDialogWindow("Please enter confirm password ", alertDialog, getActivity());
+        }else if (!isValidPhone())
+        {
+            reg_mobile_til.setErrorEnabled(true);
+            reg_mobile_til.setError("Enter valid mobile no");
             return false;
         }
+         else if (!isValidEmail(reg_emailStr)) {
+            reg_email_til.setErrorEnabled(true);
+            reg_email_til.setError("Enter valid email id");
 
+            return false;
+        } else if (TextUtils.isEmpty(reg_passwordStr)) {
+           reg_password_til.setErrorEnabled(true);
+           reg_password_til.setError("Enter password");
+            return false;
+        } else if (TextUtils.isEmpty(reg_confirm_passwordStr)) {
+            reg_confirm_password_til.setErrorEnabled(true);
+          reg_confirm_password_til.setError("Please enter confirm password ");
+            return false;
+        }
+        else if (!(password.length() > 4 && confirmPassword.length() > 4
+                && password.length() <= 20 && confirmPassword.length() <=20)) {
+            reg_password_til.setErrorEnabled(true);
+            reg_password_til.setError("Please enter min 4 && max 20 character,1 uppercase character,1 number,1 special character");
+            return false;
+        }
         return true;
+    }
+    private boolean isValidPhone()
+    {
+        String target=reg_mobile.getText().toString().trim();
+        if (target.length()!=10) {
+            return false;
+        } else {
+            return android.util.Patterns.PHONE.matcher(target).matches();
+        }
     }
 
     private void setProfileToView(JSONObject jsonObject) {

@@ -67,7 +67,7 @@
                     android:layout_marginBottom="@dimen/edt_bottom_margin"
                     android:background="@drawable/roundededittext"
                     android:gravity="center_vertical"
-                    android:hint="@string/mobile_or_email"
+                    android:hint="@string/mobile"
                     android:inputType="textEmailAddress"
                     android:paddingLeft="@dimen/edt_text_pading_left"
                     android:textSize="@dimen/edt_FontSize" />
