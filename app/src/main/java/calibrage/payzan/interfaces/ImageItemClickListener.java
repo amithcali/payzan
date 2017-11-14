@@ -5,5 +5,5 @@ package calibrage.payzan.interfaces;
  */
 
 public interface ImageItemClickListener {
-    void onImageClickListiner(int position);
+    void setbannerOnAdapterListener(int pos);
 }

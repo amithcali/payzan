@@ -27,7 +27,7 @@ import calibrage.payzan.interfaces.ImageItemClickListener;
 public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.MyHolder> {
     private Context context;
     private ArrayList<Integer> bannerArrayList;
-    private ImageItemClickListener imageItemClickListener;
+    private ImageItemClickListener itemClickListener;
 
     public BannerAdapter(Context context, ArrayList<Integer> bannerArrayList){
         this.context = context;
@@ -44,8 +44,13 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.MyHolder> 
 
     @Override
     public void onBindViewHolder(final BannerAdapter.MyHolder holder, int position) {
-       holder.imageView.setImageResource(bannerArrayList.get(position));
-
+        holder.imageView.setImageResource(Integer.parseInt(bannerArrayList.get(position).toString()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClickListener.setbannerOnAdapterListener(holder.getAdapterPosition());
+            }
+        });
     }
 
 
@@ -55,27 +60,22 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.MyHolder> 
         return bannerArrayList.size();
     }
 
+
+
     public class MyHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
-        private ImageItemClickListener imageItemClickListener;
-
-
         public MyHolder(View itemView) {
             super(itemView);
             imageView = (ImageView)itemView.findViewById(R.id.image);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                }
-            });
         }
 
 
-        public  void setOnAdapterListener(ImageItemClickListener onAdapterListener)
-        {
-            this.imageItemClickListener=onAdapterListener;
-        }
+    }
+
+    public  void setbannerOnAdapterListener(ImageItemClickListener onAdapterListener)
+    {
+        this.itemClickListener=onAdapterListener;
     }
 
 

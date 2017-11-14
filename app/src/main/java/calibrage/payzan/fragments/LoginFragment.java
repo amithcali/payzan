@@ -248,12 +248,12 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
             @Override
             public void afterTextChanged(Editable s) {
 
-                if (!s.toString().startsWith("+94")) {
+              /*  if (!s.toString().startsWith("+94")) {
                     txt_Email.setText("+94");
                     Selection.setSelection(txt_Email.getText(), txt_Email
                             .getText().length());
 
-                }
+                }*/
 
             }
         });
@@ -547,7 +547,7 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
     private boolean isValidPhone()
     {
         String target=txt_Email.getText().toString().trim();
-        if (target.length()!=13) {
+        if (target.length()!=10) {
             return false;
         } else {
             return android.util.Patterns.PHONE.matcher(target).matches();

@@ -30,10 +30,10 @@
     <color name="new_back">#EAEAEA</color>
     <color name="new_status">#7A7A7A</color>
     <color name="white_new">#FFFFFF</color>
-
-
+    <color name="new_blue">#FFA678EF</color>
+    <color name="new_green">#FB4EDF6D</color>
     <color name="accent">#8d2029</color>
-
+    <color name="new_yellow">#FFECBE09</color>
 
     <color name="FireBrick">#B22222</color>
     <color name="DarkRed">#8B0000</color>

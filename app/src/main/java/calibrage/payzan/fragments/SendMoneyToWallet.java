@@ -107,12 +107,12 @@ public class SendMoneyToWallet extends BaseFragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!editable.toString().startsWith("+94")) {
+               /* if (!editable.toString().startsWith("+94")) {
                     mobileEdt.setText("+94");
                     Selection.setSelection(mobileEdt.getText(), mobileEdt
                             .getText().length());
 
-                }
+                }*/
             }
         });
 
@@ -193,7 +193,7 @@ public class SendMoneyToWallet extends BaseFragment {
     private boolean isValidPhone()
     {
         String target=mobileEdt.getText().toString().trim();
-        if (target.length()!=13) {
+        if (target.length()!=10) {
             return false;
         } else {
             return android.util.Patterns.PHONE.matcher(target).matches();
