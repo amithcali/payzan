@@ -547,7 +547,7 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
     private boolean isValidPhone()
     {
         String target=txt_Email.getText().toString().trim();
-        if (target.length()!=10) {
+        if (target.length()!=13) {
             return false;
         } else {
             return android.util.Patterns.PHONE.matcher(target).matches();
