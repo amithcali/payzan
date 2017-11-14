@@ -218,7 +218,7 @@ public class PayWaterFragment extends Fragment implements GenericAdapter.Adapter
         if (TextUtils.isEmpty(boardStr))
         {
             boardTXT.setErrorEnabled(true);
-            boardTXT.setError("select board");
+            boardTXT.setError("Select board");
             return  false;
         }
         else if (TextUtils.isEmpty(consumerStr))

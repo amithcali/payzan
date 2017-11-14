@@ -45,12 +45,7 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.MyHolder> 
     @Override
     public void onBindViewHolder(final BannerAdapter.MyHolder holder, int position) {
        holder.imageView.setImageResource(bannerArrayList.get(position));
-       holder.itemView.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               imageItemClickListener.onImageClickListiner(holder.getAdapterPosition());
-           }
-       });
+
     }
 
 

@@ -172,19 +172,19 @@ public class BroadbandFragment extends BaseFragment {
         if (TextUtils.isEmpty(operatorStr))
         {
             operatorTXT.setErrorEnabled(true);
-            operatorTXT.setError("please select operator");
+            operatorTXT.setError("Please select operator");
             return false;
         }
         else if (TextUtils.isEmpty(servicesnoStr))
         {
             serviceNoTXT.setErrorEnabled(true);
-            serviceNoTXT.setError("please enter serviceno");
+            serviceNoTXT.setError("Please enter serviceno");
             return false;
         }
         else if (TextUtils.isEmpty(amountStr))
         {
             amountTXT.setErrorEnabled(true);
-            amountTXT.setError("please enter amount");
+            amountTXT.setError("Please enter amount");
             return  false;
         }
 

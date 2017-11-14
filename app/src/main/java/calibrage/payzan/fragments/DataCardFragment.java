@@ -195,7 +195,7 @@ public class DataCardFragment extends BaseFragment implements GenericAdapter.Ada
         datCardStr= datCardNoEdt.getText().toString().trim();
         amountStr= amountEdt.getText().toString().trim();
         if (TextUtils.isEmpty(operatorStr)) {
-            operatorTXT.setError("please select operator");
+            operatorTXT.setError("Please select operator");
             operatorTXT.setErrorEnabled(true);
             return false;
         } else if (TextUtils.isEmpty(datCardStr)) {

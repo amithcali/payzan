@@ -414,7 +414,7 @@ public class MobileRecharge extends BaseFragment implements GenericAdapter.Adapt
         }
         else if (TextUtils.isEmpty(currentOperatorStr)) {
             operatorTXT.setErrorEnabled(true);
-            operatorTXT.setError("select operator ");
+            operatorTXT.setError("Select operator ");
         } else if (!isProvider) {
             operatorTXT.setErrorEnabled(true);
             operatorTXT.setError("your  operator is not valid ");

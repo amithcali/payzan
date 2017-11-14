@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.Selection;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -246,6 +247,13 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                if (!s.toString().startsWith("+94")) {
+                    txt_Email.setText("+94");
+                    Selection.setSelection(txt_Email.getText(), txt_Email
+                            .getText().length());
+
+                }
 
             }
         });
@@ -512,12 +520,12 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
            inp_email.setError("Enter valid mobile no");
            return false;
        }
-       else if (!(email.length()<=20))
-       {
-           inp_email.setErrorEnabled(true);
-          inp_email.setError("Enter user name");
-           return  false;
-       }
+    //   else if (!(email.length()<=20))
+      // {
+        //   inp_email.setErrorEnabled(true);
+          //inp_email.setError("Enter user name");
+           //return  false;
+      // }
        else if (TextUtils.isEmpty(inp_passwordStr))
        {
            inp_password.setError("Enter password");

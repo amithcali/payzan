@@ -185,7 +185,7 @@ public class PayDTHFragment extends BaseFragment implements GenericAdapter.Adapt
             subscriberTXT.setErrorEnabled(true);
             return true;
         }else if(TextUtils.isEmpty(operatorStr)){
-            operatorTXT.setError("select operator");
+            operatorTXT.setError("Select operator");
             operatorTXT.setErrorEnabled(true);
             return true;
         }else if(TextUtils.isEmpty(amountStr)){

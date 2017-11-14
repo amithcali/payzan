@@ -194,7 +194,7 @@ public class PayCableFragment extends BaseFragment implements GenericAdapter.Ada
         accontNoStr =accontNoEdt.getText().toString().trim();
         amountStr=amountEdt.getText().toString().trim();
         if (TextUtils.isEmpty(operatorStr)) {
-            operatorTXT.setError("select operator");
+            operatorTXT.setError("Select operator");
             operatorTXT.setErrorEnabled(true);
             return true;
         } else if (TextUtils.isEmpty(accontNoStr)) {
