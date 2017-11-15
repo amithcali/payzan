@@ -319,18 +319,18 @@ public class PayLandLineBill extends BaseFragment implements GenericAdapter.Adap
         amountStr=  amount.getText().toString().trim();
         if (TextUtils.isEmpty(operatorStr)) {
             operatorTXT.setErrorEnabled(true);
-            operatorTXT.setError("please select operator");
+            operatorTXT.setError("Please select operator");
             return false;
         } else if (TextUtils.isEmpty(mobilenoStr)) {
-            numberTXT.setError("enter number");
+            numberTXT.setError("Enter number");
             numberTXT.setErrorEnabled(true);
             return false;
         } else if (TextUtils.isEmpty(circleStr)) {
-            circleTXT.setError("select circle");
+            circleTXT.setError("Select circle");
             circleTXT.setErrorEnabled(true);
             return false;
         } else if (TextUtils.isEmpty(amountStr)) {
-            amountTXT.setError("enter amount");
+            amountTXT.setError("Enter amount");
             amountTXT.setErrorEnabled(true);
             return false;
         }

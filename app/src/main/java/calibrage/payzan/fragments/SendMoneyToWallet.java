@@ -10,6 +10,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -106,7 +107,12 @@ public class SendMoneyToWallet extends BaseFragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
+               /* if (!editable.toString().startsWith("+94")) {
+                    mobileEdt.setText("+94");
+                    Selection.setSelection(mobileEdt.getText(), mobileEdt
+                            .getText().length());
 
+                }*/
             }
         });
 
@@ -145,19 +151,19 @@ public class SendMoneyToWallet extends BaseFragment {
 
         if (TextUtils.isEmpty(mobileStr)){
             mobileNumberTXT.setErrorEnabled(true);
-            mobileNumberTXT.setError("enter mobile no");
+            mobileNumberTXT.setError("Enter mobile no");
             return false;
         }
         else if (!isValidPhone())
         {
             mobileNumberTXT.setErrorEnabled(true);
-            mobileNumberTXT.setError("enter valid mobile no");
+            mobileNumberTXT.setError("Enter valid mobile no");
             return false;
         }
         else if (TextUtils.isEmpty(amountStr))
         {
             amountTXT.setErrorEnabled(true);
-            amountTXT.setError("enter amount");
+            amountTXT.setError("Enter amount");
             return false;
         }
        else if (!TextUtils.isEmpty(s)  )

@@ -218,19 +218,19 @@ public class PayWaterFragment extends Fragment implements GenericAdapter.Adapter
         if (TextUtils.isEmpty(boardStr))
         {
             boardTXT.setErrorEnabled(true);
-            boardTXT.setError("select board");
+            boardTXT.setError("Select board");
             return  false;
         }
         else if (TextUtils.isEmpty(consumerStr))
         {
             consNoTXT.setErrorEnabled(true);
-            consNoTXT.setError("enter consumer no");
+            consNoTXT.setError("Enter consumer no");
             return  false;
         }
         else if (TextUtils.isEmpty(amountStr))
         {
             amountTXT.setErrorEnabled(true);
-            amountTXT.setError("enter amount");
+            amountTXT.setError("Enter amount");
             return false;
         }
 

@@ -403,24 +403,24 @@ public class MobileRecharge extends BaseFragment implements GenericAdapter.Adapt
 
         if (TextUtils.isEmpty(mobileStr)) {
             mobileNumberTXT.setErrorEnabled(true);
-            mobileNumberTXT.setError("enter mobile number");
+            mobileNumberTXT.setError("Enter mobile number");
 
         }
         else if (!isValidPhone())
         {
             mobileNumberTXT.setErrorEnabled(true);
-            mobileNumberTXT.setError("enter valid mobile no");
+            mobileNumberTXT.setError("Enter valid mobile no");
             return false;
         }
         else if (TextUtils.isEmpty(currentOperatorStr)) {
             operatorTXT.setErrorEnabled(true);
-            operatorTXT.setError("select operator ");
+            operatorTXT.setError("Select operator ");
         } else if (!isProvider) {
             operatorTXT.setErrorEnabled(true);
             operatorTXT.setError("your  operator is not valid ");
         } else if (amountStr.equalsIgnoreCase("")) {
             amountTXT.setErrorEnabled(true);
-            amountTXT.setError("enter amount");
+            amountTXT.setError("Enter amount");
         }
         return true;
 

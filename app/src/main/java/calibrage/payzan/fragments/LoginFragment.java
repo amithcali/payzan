@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.Selection;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -51,6 +52,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import calibrage.payzan.R;
 import calibrage.payzan.activities.HomeActivity;
@@ -100,7 +103,9 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
     private Subscription mRegisterSubscription;
     public static Toolbar toolbar;
     private String inp_emailStr,inp_passwordStr;
-
+    Pattern pattern;
+    Matcher matcher;
+    final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,20}$";
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +119,7 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
 
         context = this.getActivity();
         callbackManager = CallbackManager.Factory.create();
-        loginButton = (LoginButton) rootView.findViewById(R.id.login);
+        loginButton = (LoginButton ) rootView.findViewById(R.id.login);
         fbBtn = (Button) rootView.findViewById(R.id.fbBtn);
         btnLogin = (Button) rootView.findViewById(R.id.btnLogin);
         button = (SignInButton) rootView.findViewById(R.id.btn_sign_in);
@@ -242,6 +247,13 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
 
             @Override
             public void afterTextChanged(Editable s) {
+
+              /*  if (!s.toString().startsWith("+94")) {
+                    txt_Email.setText("+94");
+                    Selection.setSelection(txt_Email.getText(), txt_Email
+                            .getText().length());
+
+                }*/
 
             }
         });
@@ -491,25 +503,46 @@ public class LoginFragment extends BaseFragment implements GoogleApiClient.OnCon
 
        inp_emailStr=txt_Email.getText().toString().trim();
        inp_passwordStr=txt_password.getText().toString().trim();
+        String password=txt_password.getText().toString().trim();
+        String email=txt_Email.getText().toString().trim();
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
        if (TextUtils.isEmpty(inp_emailStr))
        {
-           inp_email.setError("enter mobile number");
+           inp_email.setError("Enter mobile number");
            inp_email.setErrorEnabled(true);
            return false;
        }
        else if (!isValidPhone())
        {
            inp_email.setErrorEnabled(true);
-           inp_email.setError("enter valid mobile no");
+           inp_email.setError("Enter valid mobile no");
            return false;
        }
+    //   else if (!(email.length()<=20))
+      // {
+        //   inp_email.setErrorEnabled(true);
+          //inp_email.setError("Enter user name");
+           //return  false;
+      // }
        else if (TextUtils.isEmpty(inp_passwordStr))
        {
-           inp_password.setError("enter password");
+           inp_password.setError("Enter password");
            inp_password.setErrorEnabled(true);
            return false;
        }
-        return true;
+       else if (password.length() > 4 && password.length() <= 20 ) {
+
+           inp_password.setError("valid password");
+            return matcher.matches();
+        }
+
+  else {
+           inp_password.setError("Not valid password");
+    }
+      return  true;
+
     }
     private boolean isValidPhone()
     {

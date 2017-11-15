@@ -109,6 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="false"
+            android:id="@+id/reg_email_til"
             app:hintEnabled="true">
 
             <calibrage.payzan.controls.CommonEditText
@@ -128,6 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:hintEnabled="true"
+            android:id="@+id/reg_password_til"
             app:passwordToggleEnabled="true">
 
             <calibrage.payzan.controls.CommonEditText
@@ -149,6 +151,7 @@
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:hintEnabled="true"
+            android:id="@+id/reg_confirm_password_til"
             app:passwordToggleEnabled="true">
 
             <calibrage.payzan.controls.CommonEditText

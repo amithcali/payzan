@@ -203,7 +203,7 @@
                             style="@android:style/Widget.Holo.Button.Borderless.Small"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/btn1_height"
-                            android:text="@string/special_rechartge"
+                            android:text="@string/special_recharge"
                             android:textSize="@dimen/btn1_font" />
                     </LinearLayout>
 

@@ -176,17 +176,15 @@ public class TransactionMainFragment extends BaseFragment {
 
     private void closeTab(){
 
-
         HomeActivity.toolbar.setNavigationIcon(null);
         HomeActivity.toolbar.setTitle("");
-        replaceFragment(getActivity(), MAIN_CONTAINER, new HomeFragment(), TAG, TestFragment.TAG);
-
-       /* Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(TAG);
+        replaceFragment(getActivity(), MAIN_CONTAINER, new HomeFragment(), TAG, TransactionMainFragment.TAG);
+       /* Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("walletTag");
        // communicateFragments.onFragmentInteraction("");
 
-        mActivityListener.messageFromChildFragmentToActivity("handleBottomNavigation");*/
-      /*  getActivity().getSupportFragmentManager().popBackStackImmediate();*/
-      /*  if (fragment != null)
+        mActivityListener.messageFromChildFragmentToActivity("handleBottomNavigation");
+
+        if (fragment != null)
         {
             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
             HomeActivity.toolbar.setNavigationIcon(null);

@@ -35,6 +35,7 @@ import calibrage.payzan.fragments.LoginFragment;
 import calibrage.payzan.fragments.MobileRecharge;
 import calibrage.payzan.fragments.TransactionMainFragment;
 import calibrage.payzan.fragments.UserProfileHome;
+import calibrage.payzan.fragments.agent.Agent_Home_Fragment;
 import calibrage.payzan.interfaces.CommunicateFragments;
 import calibrage.payzan.interfaces.OnChildFragmentInteractionListener;
 import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
@@ -95,11 +96,19 @@ public class HomeActivity extends AppCompatActivity implements OnFragmentInterac
                         switch (item.getItemId()) {
                             case R.id.action_home:
 
-                                getSupportFragmentManager().beginTransaction()
+                              /*  getSupportFragmentManager().beginTransaction()
                                         .replace(R.id.content_frame, new HomeFragment())
                                         .commit();
                                 toolbar.setNavigationIcon(null);
+                                toolbar.setTitle("");*/
+
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.content_frame, new Agent_Home_Fragment())
+                                        .commit();
+                                toolbar.setNavigationIcon(null);
                                 toolbar.setTitle("");
+
+
 //                                SpannableString s = new SpannableString(item.getTitle());
 //                                s.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.accent,null)), 0, s.length(), 0);
 //                                item.setTitle(s);

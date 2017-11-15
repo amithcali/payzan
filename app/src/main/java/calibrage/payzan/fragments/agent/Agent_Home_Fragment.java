@@ -1,8 +1,9 @@
-package calibrage.payzan.fragments;
+package calibrage.payzan.fragments.agent;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,36 +19,35 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import calibrage.payzan.R;
-import calibrage.payzan.activities.HomeActivity;
 import calibrage.payzan.activities.RequestForAgent;
-import calibrage.payzan.activities.SendMoney;
 import calibrage.payzan.adapters.BannerAdapter;
 import calibrage.payzan.adapters.RechargeAdapter;
 import calibrage.payzan.adapters.WalletAdapter;
 import calibrage.payzan.controls.BaseFragment;
+import calibrage.payzan.fragments.BroadbandFragment;
+import calibrage.payzan.fragments.DataCardFragment;
+import calibrage.payzan.fragments.HomeFragment;
+import calibrage.payzan.fragments.MobileRecharge;
+import calibrage.payzan.fragments.PayCableFragment;
+import calibrage.payzan.fragments.PayDTHFragment;
+import calibrage.payzan.fragments.PayElectrictyFragment;
+import calibrage.payzan.fragments.PayLandLineBill;
+import calibrage.payzan.fragments.PayWaterFragment;
+import calibrage.payzan.fragments.TestFragment;
+import calibrage.payzan.fragments.TransactionMainFragment;
 import calibrage.payzan.interfaces.CommunicateFragments;
 import calibrage.payzan.interfaces.ImageItemClickListener;
-import calibrage.payzan.interfaces.OnChildFragmentInteractionListener;
 import calibrage.payzan.interfaces.OnChildFragmentToActivityInteractionListener;
-import calibrage.payzan.interfaces.OnFragmentInteractionListener;
 import calibrage.payzan.interfaces.RechargeClickListiner;
 import calibrage.payzan.interfaces.TransctionClickListiner;
-import calibrage.payzan.utils.CommonConstants;
 import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.SharedPrefsData;
 
-
-/**
- * Created by Calibrage11 on 9/23/2017.
- */
-
-public class HomeFragment extends BaseFragment implements RechargeClickListiner,TransctionClickListiner,CommunicateFragments, ImageItemClickListener {
+public class Agent_Home_Fragment extends BaseFragment implements RechargeClickListiner,TransctionClickListiner,CommunicateFragments, ImageItemClickListener {
     public static final String TAG = HomeFragment.class.getSimpleName();
     private View  view;
     private RecyclerView recharge_recylerview,recylerviewbanner,recylerviewbook,recylerviewpay;
@@ -55,7 +55,7 @@ public class HomeFragment extends BaseFragment implements RechargeClickListiner,
     private ArrayList<Pair<Integer,String>> payPairList = new ArrayList<>();
     private Context context;
     public static TextView AgentRequestTxt,walletTxt;
-   // private CommunicateFragments communicateFragments;
+    // private CommunicateFragments communicateFragments;
     private OnChildFragmentToActivityInteractionListener mListener;
     private  ArrayList<Integer> bannerArrayList;
 
@@ -63,17 +63,17 @@ public class HomeFragment extends BaseFragment implements RechargeClickListiner,
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setHasOptionsMenu(true);
+        // setHasOptionsMenu(true);
         CommonUtil.adjustSoftKeyboard(getActivity().getWindow());
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_home_screen,container,false);
+        view = inflater.inflate(R.layout.fragment_agent__home,container,false);
         context =this.getActivity();
 
-      //  Toast.makeText(context, "testing in fragment", Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(context, "testing in fragment", Toast.LENGTH_SHORT).show();
 
 
 //        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
@@ -102,27 +102,27 @@ public class HomeFragment extends BaseFragment implements RechargeClickListiner,
         payPairList.add(Pair.create(R.drawable.ic_add_withdraw,"Add/Withdrawal"));
         payPairList.add(Pair.create(R.drawable.ic_mytransactions,"My transctions"));
 
-        WalletAdapter walletAdapter = new WalletAdapter(context,payPairList);
-        recylerviewpay.setAdapter(walletAdapter);
-        walletAdapter.setOnAdapterListener(HomeFragment.this);
-        recylerviewpay.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
+//        WalletAdapter walletAdapter = new WalletAdapter(context,payPairList);
+//        recylerviewpay.setAdapter(walletAdapter);
+//        walletAdapter.setOnAdapterListener(Agent_Home_Fragment.this);
+//        recylerviewpay.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
 
 
         RechargeAdapter rechargeAdapter = new RechargeAdapter(context,rechargePairList);
-         rechargeAdapter.setOnAdapterListener(HomeFragment.this);
+        rechargeAdapter.setOnAdapterListener(Agent_Home_Fragment.this);
         recharge_recylerview.setAdapter(rechargeAdapter);
         recharge_recylerview.setLayoutManager(new GridLayoutManager(context,4));
 
         recylerviewbook.setAdapter(rechargeAdapter);
         recylerviewbook.setLayoutManager(new GridLayoutManager(context,4));
-         rechargeAdapter.setOnAdapterListener(HomeFragment.this);
-       bannerArrayList = new ArrayList<>();
+        rechargeAdapter.setOnAdapterListener(Agent_Home_Fragment.this);
+        bannerArrayList = new ArrayList<>();
         bannerArrayList.add(R.drawable.bant);
         bannerArrayList.add(R.drawable.bans);
         bannerArrayList.add(R.drawable.ban);
         bannerArrayList.add(R.drawable.banf);
         BannerAdapter bannerAdapter = new BannerAdapter(context,bannerArrayList);
-        bannerAdapter.setbannerOnAdapterListener(HomeFragment.this);
+        bannerAdapter.setbannerOnAdapterListener(Agent_Home_Fragment.this);
         recylerviewbanner.setAdapter(bannerAdapter);
         recylerviewbanner.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
 
@@ -331,7 +331,7 @@ public class HomeFragment extends BaseFragment implements RechargeClickListiner,
         Bundle bundle = new Bundle();
         bundle.putInt("position", pos);
         transactionMainFragment.setArguments(bundle);
-      //  transactionMainFragment.setFragmentCommunication(HomeFragment.this);
+        //  transactionMainFragment.setFragmentCommunication(HomeFragment.this);
 
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.add(R.id.content_frame, transactionMainFragment, "walletTag");

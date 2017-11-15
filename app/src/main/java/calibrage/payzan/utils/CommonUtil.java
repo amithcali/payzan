@@ -56,7 +56,7 @@ public class CommonUtil {
     static Matcher matcher;
 
     public static final Pattern VEHICLE_NUMBER_PATTERN = Pattern.compile("^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$");
-    private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-zA-Z]).{6,20})";
+    private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-zA-Z]).{4,20})";
     public static DecimalFormat twoDForm = new DecimalFormat("#.##");
     public static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +

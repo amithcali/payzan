@@ -159,7 +159,7 @@ public class AddMoneyToWallet extends BaseFragment {
         if (TextUtils.isEmpty(addMoneyStr))
         {
             addMoneyTxt.setErrorEnabled(true);
-            addMoneyTxt.setError("enter amount");
+            addMoneyTxt.setError("Enter amount");
             return  false;
         }
         return true;

@@ -58,7 +58,7 @@ import static calibrage.payzan.R.id.operatorSpn;
  * Created by Calibrage11 on 10/5/2017.
  */
 
-public class RequestForAgent extends AppCompatActivity implements SingleLineDropDownAdapter.AdapterOnClick, SingleLineDropDownAdapterdistrict.AdapterDistOnClick, SingleLineDropDownAdapterMandals.AdapterMandalOnClick, SingleLineDropDownAdapterVillages.AdapterVillageOnClick {
+public class  RequestForAgent extends AppCompatActivity implements SingleLineDropDownAdapter.AdapterOnClick, SingleLineDropDownAdapterdistrict.AdapterDistOnClick, SingleLineDropDownAdapterMandals.AdapterMandalOnClick, SingleLineDropDownAdapterVillages.AdapterVillageOnClick {
 
     private NCBTextInputLayout stateTIl, districtTIl, mandalTIl, villageTIl, firstNameTIl, middleNameTIL, lastNameTIL, mobileTIL, emailTIL, address1TIL, address2TIL, landmarkTIL, commentTIL;
     private CommonEditText commentsEdt, landmarkEdt, address2Edt, address1Edt, emailEdt, mobileEdt, lastNameEdt, middleNameEdt, firstNameEdt;
@@ -619,89 +619,89 @@ public class RequestForAgent extends AppCompatActivity implements SingleLineDrop
         landmarkStr=landmarkEdt.getText().toString().trim();
         commentsStr=commentsEdt.getText().toString().trim();
         if (TextUtils.isEmpty(firstNameStr)) {
-            firstNameTIl.setError("enter first name");
+            firstNameTIl.setError("Enter first name");
             firstNameTIl.setErrorEnabled(true);
             return false;
         }
         else if (TextUtils.isEmpty(middleNameStr)){
-            middleNameTIL.setError("enter middle name");
+            middleNameTIL.setError("Enter middle name");
             middleNameTIL.setErrorEnabled(true);
             return false;
         }
         else if (TextUtils.isEmpty(lastNameStr)){
-            lastNameTIL.setError("enter last name");
+            lastNameTIL.setError("Enter last name");
             lastNameTIL.setErrorEnabled(true);
             return false;
         }
         else if (TextUtils.isEmpty(mobileStr))
         {
             mobileTIL.setErrorEnabled(true);
-            mobileTIL.setError("enter  mobile no");
+            mobileTIL.setError("Enter  mobile no");
             return false;
         }
         else if (!isValidPhone())
         {
             mobileTIL.setErrorEnabled(true);
-            mobileTIL.setError("enter valid mobile no");
+            mobileTIL.setError("Enter valid mobile no");
             return false;
         }
         else if (TextUtils.isEmpty(emailStr))
         {
-            emailTIL.setError("enter email id");
+            emailTIL.setError("Enter email id");
             emailTIL.setErrorEnabled(true);
            // return EMAIL_ADDRESS_PATTERN.matcher(emailStr).matches();
             return false;
         }
         else if(!checkEmail()){
-            emailTIL.setError("enter valid email ");
+            emailTIL.setError("Enter valid email ");
             emailTIL.setErrorEnabled(true);
             return false;
         }
         else if (TextUtils.isEmpty(stateStr))
         {
             stateTIl.setErrorEnabled(true);
-            stateTIl.setError("enter state name");
+            stateTIl.setError("Enter state name");
             return false;
         }
         else  if (TextUtils.isEmpty(districtStr))
         {
             districtTIl.setErrorEnabled(true);
-            districtTIl.setError("enter district name");
+            districtTIl.setError("Enter district name");
             return false;
         }
         else  if (TextUtils.isEmpty(mandalStr))
         {
-            mandalTIl.setError("enter mandal name");
+            mandalTIl.setError("Enter mandal name");
             mandalTIl.setErrorEnabled(true);
             return  false;
         }
         else if (TextUtils.isEmpty(villageStr))
         {
             villageTIl.setErrorEnabled(true);
-            villageTIl.setError("enter village name");
+            villageTIl.setError("Enter village name");
         }
         else if (TextUtils.isEmpty(address1Str))
         {
-            address1TIL.setError("enter address1 ");
+            address1TIL.setError("Enter address1 ");
             address1TIL.setErrorEnabled(true);
             return false;
         }
         else if (TextUtils.isEmpty(address2Str))
         {
-            address2TIL.setError("enter address2 ");
+            address2TIL.setError("Enter address2 ");
             address2TIL.setErrorEnabled(true);
             return false;
         }
         else if (TextUtils.isEmpty(landmarkStr))
         {
             landmarkTIL.setErrorEnabled(true);
-            landmarkTIL.setError("enter landmark");
+            landmarkTIL.setError("Enter landmark");
             return false;
         }
         else if (TextUtils.isEmpty(commentsStr))
         {
             commentTIL.setErrorEnabled(true);
-            commentTIL.setError("enter comments");
+            commentTIL.setError("Enter comments");
             return false;
         }
         return true;
