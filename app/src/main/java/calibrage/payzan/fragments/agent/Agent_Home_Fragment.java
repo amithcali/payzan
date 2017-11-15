@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.util.Pair;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -48,12 +49,14 @@ import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.SharedPrefsData;
 
 public class Agent_Home_Fragment extends BaseFragment implements RechargeClickListiner,TransctionClickListiner,CommunicateFragments, ImageItemClickListener {
-    public static final String TAG = HomeFragment.class.getSimpleName();
+
+    public static final String TAG = Agent_Home_Fragment.class.getSimpleName();
     private View  view;
     private RecyclerView recharge_recylerview,recylerviewbanner,recylerviewbook,recylerviewpay;
     private ArrayList<Pair<Integer,String>> rechargePairList = new ArrayList<>();
     private ArrayList<Pair<Integer,String>> payPairList = new ArrayList<>();
     private Context context;
+    private CardView crv_transaction,crv_commissions;
     public static TextView AgentRequestTxt,walletTxt;
     // private CommunicateFragments communicateFragments;
     private OnChildFragmentToActivityInteractionListener mListener;
@@ -88,6 +91,8 @@ public class Agent_Home_Fragment extends BaseFragment implements RechargeClickLi
         recylerviewpay = (RecyclerView) view.findViewById(R.id.recylerviewpay);
         AgentRequestTxt = (TextView) view.findViewById(R.id.AgentRequestTxt);
         walletTxt = (TextView) view.findViewById(R.id.walletTxt);
+        crv_transaction=(CardView)view.findViewById(R.id.crv_transaction);
+        crv_commissions=(CardView)view.findViewById(R.id.crv_commissions);
         //  pay_recylerview = (RecyclerView)findViewById(R.id.pay_recylerview);
         rechargePairList.add(Pair.create(R.drawable.ic_mobile, "Mobile"));
         rechargePairList.add(Pair.create(R.drawable.ic_landline, "Landline"));
@@ -133,6 +138,18 @@ public class Agent_Home_Fragment extends BaseFragment implements RechargeClickLi
             }
         });
 
+        crv_commissions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(getActivity(), MAIN_CONTAINER, new Agent_Commission_Fragment(), TAG, TestFragment.TAG);
+            }
+        });
+        crv_transaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(getActivity(), MAIN_CONTAINER, new Agent_Transaction_Fragment(), TAG, TestFragment.TAG);
+            }
+        });
         return view;
     }
 
