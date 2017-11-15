@@ -392,6 +392,7 @@ public class HomeActivity extends AppCompatActivity implements OnFragmentInterac
             Toast.makeText(this, "OB BACK", Toast.LENGTH_SHORT).show();
 
             getSupportFragmentManager().popBackStackImmediate();
+
         } else {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             final Dialog dialog = new Dialog(HomeActivity.this);

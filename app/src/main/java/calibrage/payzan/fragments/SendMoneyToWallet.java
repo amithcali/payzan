@@ -37,6 +37,7 @@ import calibrage.payzan.model.UserWalletHistory;
 import calibrage.payzan.networkservice.MyServices;
 import calibrage.payzan.networkservice.ServiceFactory;
 import calibrage.payzan.utils.CommonConstants;
+import calibrage.payzan.utils.CommonUtil;
 import calibrage.payzan.utils.NCBTextInputLayout;
 import calibrage.payzan.utils.SharedPrefsData;
 import retrofit2.adapter.rxjava.HttpException;
@@ -166,10 +167,14 @@ public class SendMoneyToWallet extends BaseFragment {
             amountTXT.setError("Enter amount");
             return false;
         }
-       else if (!TextUtils.isEmpty(s)  )
+       else if (!CommonUtil.isValidAmout(s)  )
         {
-            Double d = Double.parseDouble(s);
+
+            Toast.makeText(getApplicationContext(), " amount is not valid", Toast.LENGTH_SHORT).show();
+            return false;
+           /* Double d = Double.parseDouble(s);
             try {
+
                 if (s.length() < 1 || s.length() <= 15) {
                     Toast.makeText(getApplicationContext(), " amount is valid", Toast.LENGTH_SHORT).show();
                     return false;
@@ -184,7 +189,7 @@ public class SendMoneyToWallet extends BaseFragment {
         }
         else {
             Toast.makeText(getApplicationContext(), "field must not be empty or null", Toast.LENGTH_SHORT).show();
-            return false;
+            return false;*/
         }
 
 

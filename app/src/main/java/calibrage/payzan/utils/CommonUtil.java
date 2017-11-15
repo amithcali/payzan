@@ -54,7 +54,7 @@ public class CommonUtil {
     private static String LOG_TAG = "";
     static Pattern pattern = null;
     static Matcher matcher;
-
+    public static String regExpValidMoney = "[0-9]+([,.][0-9]{1,2})?";
     public static final Pattern VEHICLE_NUMBER_PATTERN = Pattern.compile("^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$");
     private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-zA-Z]).{4,20})";
     public static DecimalFormat twoDForm = new DecimalFormat("#.##");
@@ -80,6 +80,13 @@ public class CommonUtil {
     };
     public static final int PERMISSION_CODE = 100;
 
+    public static  boolean isValidAmout(String amout)
+    {
+        /* check amount is valid */
+         final Pattern pattern = Pattern.compile(regExpValidMoney);
+         Matcher matcher = pattern.matcher(amout);
+        return matcher.matches();
+    }
     public final static boolean isValidEmail(CharSequence target) {
         return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
