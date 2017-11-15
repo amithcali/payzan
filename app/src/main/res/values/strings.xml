@@ -66,5 +66,7 @@
     <string name="data_card_number">Data Card Number</string>
     <string name="confirm_password">confirm password</string>
     <string name="Update_Password">Update Password</string>
+    
+    <string name="search_transactionid">Search Transaction id,Mobile No...</string>
 
 </resources>

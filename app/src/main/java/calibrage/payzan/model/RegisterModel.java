@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 
-public class RegisterModel {
+public class  RegisterModel {
 
     @SerializedName("mobileNumber")
     @Expose
