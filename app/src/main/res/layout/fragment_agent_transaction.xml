@@ -1,0 +1,35 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="calibrage.payzan.fragments.agent.Agent_Transaction_Fragment"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <calibrage.payzan.utils.NCBTextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mobileNumberTXT">
+            <!--style="@style/EditTextStyle"-->
+            <calibrage.payzan.controls.CommonEditText
+                android:paddingLeft="15dp"
+                android:id="@+id/mobileEdt"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/edt_height"
+                android:background="@drawable/roundededittext"
+                android:gravity="center_vertical"
+                android:hint="@string/mobile_number"
+                android:inputType="numberDecimal"
+                />
+        </calibrage.payzan.utils.NCBTextInputLayout>
+
+
+
+    </LinearLayout>
+
+</FrameLayout>
