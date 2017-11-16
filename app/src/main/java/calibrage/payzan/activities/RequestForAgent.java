@@ -618,9 +618,15 @@ public class  RequestForAgent extends AppCompatActivity implements SingleLineDro
         address2Str=address2Edt.getText().toString().trim();
         landmarkStr=landmarkEdt.getText().toString().trim();
         commentsStr=commentsEdt.getText().toString().trim();
+
         if (TextUtils.isEmpty(firstNameStr)) {
             firstNameTIl.setError("Enter first name");
             firstNameTIl.setErrorEnabled(true);
+            return false;
+        }
+        else if (!(firstNameStr.length() > 3 && firstNameStr.length() <= 30 )) {
+            firstNameTIl.setErrorEnabled(true);
+            firstNameTIl.setError("Please enter min 3 && max 30 character");
             return false;
         }
         else if (TextUtils.isEmpty(middleNameStr)){
@@ -628,11 +634,22 @@ public class  RequestForAgent extends AppCompatActivity implements SingleLineDro
             middleNameTIL.setErrorEnabled(true);
             return false;
         }
+        else if (!(middleNameStr.length() > 3 && middleNameStr.length() <= 30 )) {
+            middleNameTIL.setErrorEnabled(true);
+            middleNameTIL.setError("Please enter min 3 && max 30 character");
+            return false;
+        }
         else if (TextUtils.isEmpty(lastNameStr)){
             lastNameTIL.setError("Enter last name");
             lastNameTIL.setErrorEnabled(true);
             return false;
         }
+        else if (!(lastNameStr.length() > 3 && lastNameStr.length() <= 30 )) {
+            lastNameTIL.setErrorEnabled(true);
+            lastNameTIL.setError("Please enter min 3 && max 30 character");
+            return false;
+        }
+
         else if (TextUtils.isEmpty(mobileStr))
         {
             mobileTIL.setErrorEnabled(true);
@@ -686,10 +703,20 @@ public class  RequestForAgent extends AppCompatActivity implements SingleLineDro
             address1TIL.setErrorEnabled(true);
             return false;
         }
+        else if (!(address1Str.length() > 2 && address1Str.length() <= 10 )) {
+            address1TIL.setErrorEnabled(true);
+            address1TIL.setError("Please enter min 2 && max 10 character");
+            return false;
+        }
         else if (TextUtils.isEmpty(address2Str))
         {
             address2TIL.setError("Enter address2 ");
             address2TIL.setErrorEnabled(true);
+            return false;
+        }
+        else if (!(address2Str.length() > 2 && address2Str.length() <= 10 )) {
+            address2TIL.setErrorEnabled(true);
+            address2TIL.setError("Please enter min 2 && max 10 character");
             return false;
         }
         else if (TextUtils.isEmpty(landmarkStr))
@@ -698,10 +725,20 @@ public class  RequestForAgent extends AppCompatActivity implements SingleLineDro
             landmarkTIL.setError("Enter landmark");
             return false;
         }
+        else if (!(landmarkStr.length() > 2 && landmarkStr.length() <= 10 )) {
+            landmarkTIL.setErrorEnabled(true);
+            landmarkTIL.setError("Please enter min 2 && max 10 character");
+            return false;
+        }
         else if (TextUtils.isEmpty(commentsStr))
         {
             commentTIL.setErrorEnabled(true);
             commentTIL.setError("Enter comments");
+            return false;
+        }
+        else if (!(commentsStr.length() > 2 && landmarkStr.length() <= 10 )) {
+            commentTIL.setErrorEnabled(true);
+            commentTIL.setError("Please enter min 2 && max 10 character");
             return false;
         }
         return true;
